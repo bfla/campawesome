@@ -1,3 +1,19 @@
 // Place all the styles related to the Campsites controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+// Page-level styles
+html {
+  background: rgb(234, 232, 228);
+}
+#main {
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+// Footer styles
+#footer {
+  background:none;
+  border:none;
+  box-shadow:none;
+}

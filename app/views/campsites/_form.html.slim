@@ -1,10 +1,12 @@
 = form_for @campsite do |f|
   - if @campsite.errors.any?
-    #error_explanation
-      h2 = "#{pluralize(@campsite.errors.count, "error")} prohibited this campsite from being saved:"
-      ul
-        - @campsite.errors.full_messages.each do |message|
-          li = message
+    .panel.panel-danger
+      .panel-heading Bummer! Something went wrong
+      #error_explanation.panel-body
+        h2 = "#{pluralize(@campsite.errors.count, "error")} prohibited this campsite from being saved:"
+        ul
+          - @campsite.errors.full_messages.each do |message|
+            li = message
 
   .field
     = f.label :name
@@ -27,4 +29,10 @@
   .field
     = f.label :camp_url
     = f.text_field :camp_url
+  .field
+    = f.label :reservable
+    = f.check_box :reservable
+  .field
+    = f.label :walkin
+    = f.check_box :walkin
   .actions = f.submit 'Save'

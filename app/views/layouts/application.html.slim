@@ -13,5 +13,7 @@ html
     / Top navbar goes here
     == render 'layouts/navbar'
     / Body goes here
-    == yield
+    #main
+      == yield
     / Footer goes here
+    == render 'layouts/footer'

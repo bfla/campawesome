@@ -1,10 +1,15 @@
-#main.main-colored
-  .container
+#main.background
+  .container.background
     .row
-      - if notice
-        p#notice = notice
       / Content area
-      .col-md-10.col-md-offset-1.well.well-white
+      .col-md-10.col-md-offset-1.well.white
+        - if notice
+          .panel.panel-warning
+            .panel-heading 
+              | Notice
+              #panelClose.button.close type="button" data-dismiss="panel" aria-hidden="true" &times;
+            .panel-body
+              p#notice = notice
         /Left content
         .col-md-9
           / Headline
@@ -16,7 +21,22 @@
                 = @campsite.org 
                 |  campground in Michigan
           / Check reservations
-          button.btn.btn-success.btn-lg data-toggle="modal" data-target="#reserveModal" Check Reservations
+          p.lead 
+            | Bookings &nbsp; &nbsp;
+            - if @campsite.reservable
+              button.btn.btn-success.btn-sm data-toggle="modal" data-target="#reserveModal" Check Reservations
+            ul
+              - if @campsite.reservable
+                li This campsite allows reservations.
+              - else
+                li This campsite doesn't allow reservations.
+              - if @campsite.walkin
+                li This campsite allows walkins
+              - else
+                li This campsite doesn't allow walkins
+            hr
+
+            
 
         /Right content
         .col-md-3
@@ -49,3 +69,7 @@
 
     / Include modal partials and initialize with js
     == render 'reserveModal'
+    javascript:
+      $('#panelClose').click( function () {
+        $('.panel').hide();
+      });

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140128151529) do
+ActiveRecord::Schema.define(version: 20140128182041) do
 
   create_table "campsites", force: true do |t|
     t.string   "name"
@@ -23,6 +23,8 @@ ActiveRecord::Schema.define(version: 20140128151529) do
     t.string   "camp_url"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "reservable"
+    t.boolean  "walkin"
   end
 
 end
