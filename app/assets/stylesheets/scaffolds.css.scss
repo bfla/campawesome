@@ -1,0 +1,58 @@
+body {
+}
+
+p, ol, ul, td {
+}
+
+pre {
+}
+
+a {
+  color:;
+  &:visited {
+    color:;
+  }
+  &:hover {
+    color:;
+    background-color:;
+  }
+}
+
+div {
+  &.field, &.actions {
+    margin-bottom:;
+  }
+}
+
+#notice {
+  color:;
+}
+
+.field_with_errors {
+  padding:;
+  background-color:;
+  display:;
+}
+
+#error_explanation {
+  width: ;
+  border: ;
+  padding: ;
+  padding-bottom: ;
+  margin-bottom: ;
+  background-color: ;
+  h2 {
+    text-align: ;
+    font-weight: ;
+    padding: ;
+    font-size: ;
+    margin: ;
+    margin-bottom: ;
+    background-color: ;
+    color: ;
+  }
+  ul li {
+    font-size: ;
+    list-style: ;
+  }
+}

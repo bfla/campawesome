@@ -1,0 +1,27 @@
+p#notice = notice
+
+p
+  strong Name:
+  = @campsite.name
+p
+  strong Description:
+  = @campsite.description
+p
+  strong Org:
+  = @campsite.org
+p
+  strong Res phone:
+  = @campsite.res_phone
+p
+  strong Camp phone:
+  = @campsite.camp_phone
+p
+  strong Res url:
+  = @campsite.res_url
+p
+  strong Camp url:
+  = @campsite.camp_url
+
+= link_to 'Edit', edit_campsite_path(@campsite)
+'|
+= link_to 'Back', campsites_path
