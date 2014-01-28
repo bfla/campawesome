@@ -1,27 +1,40 @@
-p#notice = notice
+#main.container
+  .row
+    / Content area
+      .col-md-10.col-offset-1
+      /Left content
+        .col-md-9
+          .page-header
+            h1 = @campsite.name
+      /Right content
+        .col-md-3
 
-p
-  strong Name:
-  = @campsite.name
-p
-  strong Description:
-  = @campsite.description
-p
-  strong Org:
-  = @campsite.org
-p
-  strong Res phone:
-  = @campsite.res_phone
-p
-  strong Camp phone:
-  = @campsite.camp_phone
-p
-  strong Res url:
-  = @campsite.res_url
-p
-  strong Camp url:
-  = @campsite.camp_url
 
-= link_to 'Edit', edit_campsite_path(@campsite)
-'|
-= link_to 'Back', campsites_path
+
+  p#notice = notice
+
+  p
+    strong Name:
+    
+  p
+    strong Description:
+    = @campsite.description
+  p
+    strong Org:
+    = @campsite.org
+  p
+    strong Res phone:
+    = @campsite.res_phone
+  p
+    strong Camp phone:
+    = @campsite.camp_phone
+  p
+    strong Res url:
+    = @campsite.res_url
+  p
+    strong Camp url:
+    = @campsite.camp_url
+
+  = link_to 'Edit', edit_campsite_path(@campsite)
+  '|
+  = link_to 'Back', campsites_path

@@ -1,4 +1,15 @@
 @import "compass";
 @import "bootstrap";
 
-h1 {color:red;}
+.brand {
+  font-family:'Neucha';
+  color:red;
+
+  &:visited {
+    color:red;
+  }
+
+  &:hover {
+    color:red;
+  }
+}
