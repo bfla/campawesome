@@ -1,0 +1,23 @@
+/ Modal for checking reservation availability
+#reserveModal.modal.fade tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
+  .modal-dialog
+    .modal-content
+      .modal-header
+        button.close type="button" data-dismiss="modal" aria-hidden="true" &times
+        h4#reserveModalTitle.modal-title 
+          | Reservations for
+          = @campsite.name
+      .modal-body
+        p
+          | Competition: 
+          | High
+          br
+          | Reservation phone: 
+          = @campsite.res_phone
+          br
+          | Reservation url: 
+          = @campsite.res_url
+          br
+      .modal-footer
+        button.btn.btn-default type="button" data-dismiss="modal" Close
+        button.btn.btn-primary type="button" Check their website

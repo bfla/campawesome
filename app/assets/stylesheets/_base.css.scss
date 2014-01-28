@@ -5,8 +5,12 @@
   padding-top: 70px;
 }
 
+.main-colored {
+  background: #e1e1e1;
+}
+
 .brand {
-  font-family:'Neucha';
+  font-family:'Voltaire';
   color:red;
 
   &:visited {
@@ -16,4 +20,9 @@
   &:hover {
     color:red;
   }
+}
+
+.white-well {
+  background:#ffffff;
+  opacity:1.0;
 }

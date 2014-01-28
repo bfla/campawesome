@@ -6,22 +6,12 @@ html
     = javascript_include_tag "application", "data-turbolinks-track" => true
     = csrf_meta_tags
     / Google Font for brand
-    link href='http://fonts.googleapis.com/css?family=Neucha' rel='stylesheet' type='text/css'
+    link href='http://fonts.googleapis.com/css?family=Voltaire' rel='stylesheet' type='text/css'
     / Add viewport line to ensure proper Bootstrap rendering on mobile devices
     meta name="viewport" content="width=device-width, initial-scale=1.0"
   body
-    nav.navbar.navbar-default.navbar-fixed-top role="navigation"
-      a.navbar-brand.brand href="#" campAwesome
-      .collapse.navbar-collapse
-         / Left Navbar section
-         ul.nav.navbar-nav
-           li
-             a href="#" Link
-           li
-             a href="#" Link
-         / Navbar pulled right
-         ul.nav.navbar-nav.navbar-right
-           li
-            a href='#' Sign in
-
+    / Top navbar goes here
+    == render 'layouts/navbar'
+    / Body goes here
     == yield
+    / Footer goes here

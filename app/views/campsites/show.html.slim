@@ -1,43 +1,51 @@
-#main.container
-  .row
-    - if notice
-      p#notice = notice
-    / Content area
-    .col-md-10.col-md-offset-1
-      /Left content
-      .col-md-9
-        / Headline
-        .page-header
-          h1 
-            = @campsite.name
-            br
-            small 
-              = @campsite.org 
-              |  campground in Michigan
-        / Description
-        p.lead = @campsite.description
+#main.main-colored
+  .container
+    .row
+      - if notice
+        p#notice = notice
+      / Content area
+      .col-md-10.col-md-offset-1.well.well-white
+        /Left content
+        .col-md-9
+          / Headline
+          .page-header
+            h1 
+              = @campsite.name
+              br
+              small 
+                = @campsite.org 
+                |  campground in Michigan
+          / Check reservations
+          button.btn.btn-success.btn-lg data-toggle="modal" data-target="#reserveModal" Check Reservations
 
-      /Right content
-      .col-md-3
-        p.lead Contact
-        p
-          Contact
-          strong Res phone:
-          = @campsite.res_phone
-          <br>
+        /Right content
+        .col-md-3
+          p.lead 
+          p
+            strong Description: 
+            small = @campsite.description
+          p.lead Contact
+          p
+            Contact
+            strong Res phone:
+            = @campsite.res_phone
+            <br>
 
-          strong Camp phone:
-          = @campsite.camp_phone
-          <br>
+            strong Camp phone:
+            = @campsite.camp_phone
+            <br>
 
-          strong Res url:
-          = @campsite.res_url
-          <br>
+            strong Res url:
+            = @campsite.res_url
+            <br>
 
-          strong Camp url:
-          = @campsite.camp_url
-          <br>
+            strong Camp url:
+            = @campsite.camp_url
+            <br>
 
-  = link_to 'Edit', edit_campsite_path(@campsite)
-  '|
-  = link_to 'Back', campsites_path
+    / = link_to 'Edit', edit_campsite_path(@campsite)
+    / '|
+    / = link_to 'Back', campsites_path
+
+    / Include modal partials and initialize with js
+    == render 'reserveModal'
