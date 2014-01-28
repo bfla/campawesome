@@ -9,7 +9,7 @@ gem 'sqlite3'
 # Use SLIM markup for html
 gem 'slim-rails'
 
-# Use SCSS for stylesheets
+# Use SCSS and Compass for stylesheets
 gem 'sass-rails', '~> 4.0.0'
 
 # Use Uglifier as compressor for JavaScript assets
