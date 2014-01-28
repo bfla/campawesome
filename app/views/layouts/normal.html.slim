@@ -1,0 +1,12 @@
+#main.background
+  .container
+    .row
+      / Content area
+      .col-md-10.col-md-offset-1.well.white
+      - if notice
+        .panel.panel-warning
+          .panel-heading 
+            | Notice
+            #panelClose.button.close type="button" data-dismiss="panel" aria-hidden="true" &times;
+          .panel-body
+            p#notice = notice
