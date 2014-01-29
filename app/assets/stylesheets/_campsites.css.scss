@@ -4,11 +4,11 @@
 
 // Page-level styles
 html {
-  background: rgb(234, 232, 228);
+  background: $backgroundColor;
 }
 #main {
-  padding-top: 50px;
-  padding-bottom: 50px;
+  padding-top: $mainPadding;
+  padding-bottom: $mainPadding;
 }
 
 // Footer styles

@@ -227,7 +227,9 @@ Devise.setup do |config|
   # ==> OmniAuth
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
-  # config.omniauth :github, 'APP_ID', 'APP_SECRET', :scope => 'user,public_repo'
+  require "omniauth-facebook"
+  OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE if Rails.env.development? # Disable ca_certificate in dev environment
+  config.omniauth :facebook, '580709415350750', '113f44a21d117fb649a944d69166a19c', {:scope => 'email, user_location'}
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or

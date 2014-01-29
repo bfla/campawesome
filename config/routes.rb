@@ -1,5 +1,5 @@
 Blog::Application.routes.draw do
-  devise_for :users
+  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
   resources :campsites
 
   # The priority is based upon order of creation: first created -> highest priority.
@@ -8,6 +8,11 @@ Blog::Application.routes.draw do
   # You can have the root of your site routed with "root"
   #root 'welcome#index'
   root to: 'campsites#index', as: 'home'
+
+  # Devise sign_out needs a special path because OmniAuth is now included:
+  #devise_scope :user do
+     #get 'sign_out', :to => 'devise/sessions#destroy', :as => :destroy_user_session
+  #end
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

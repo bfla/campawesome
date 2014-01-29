@@ -37,8 +37,9 @@ group :doc do
   gem 'sdoc', require: false
 end
 
-# User Authentification
+# User auth
 gem 'devise'
+gem 'omniauth-facebook'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
