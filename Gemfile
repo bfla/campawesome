@@ -41,6 +41,9 @@ end
 gem 'devise'
 gem 'omniauth-facebook'
 
+# Geocoding
+gem 'geocoder'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
