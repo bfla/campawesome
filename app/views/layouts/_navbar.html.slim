@@ -5,10 +5,17 @@ nav.navbar.navbar-default.navbar-fixed-top role="navigation"
      / Left Navbar section
      ul.nav.navbar-nav
        li
-         a href="/campsites/" Link
-       li
-         a href="#" Link
+         a href="/campsites/" Index
+
      / Navbar pulled right
      ul.nav.navbar-nav.navbar-right
-       li
-        a href='#' Sign in
+      - if user_signed_in?
+        li.dropdown
+          a.dropdown-toggle href="#" data-toggle="dropdown" 
+            = current_user.email
+            b.caret
+          ul.dropdown-menu
+            li = link_to 'Sign out', destroy_user_session_path, :method => :delete
+      - else
+        li = link_to 'Sign up', new_user_registration_path
+        li = link_to 'Sign In', new_user_session_path

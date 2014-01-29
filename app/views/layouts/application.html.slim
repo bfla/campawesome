@@ -10,10 +10,13 @@ html
     / Add viewport line to ensure proper Bootstrap rendering on mobile devices
     meta name="viewport" content="width=device-width, initial-scale=1.0"
   body
+    - if alert
+      = alert
+    - if notice
+      = notice
     / Top navbar goes here
     == render 'layouts/navbar'
     / Body goes here
-    #main
-      == yield
+    == yield
     / Footer goes here
     == render 'layouts/footer'

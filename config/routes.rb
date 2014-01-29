@@ -1,4 +1,5 @@
 Blog::Application.routes.draw do
+  devise_for :users
   resources :campsites
 
   # The priority is based upon order of creation: first created -> highest priority.
@@ -6,7 +7,7 @@ Blog::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   #root 'welcome#index'
-  root 'campsites#index', as: 'home'
+  root to: 'campsites#index', as: 'home'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

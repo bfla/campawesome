@@ -1,5 +1,9 @@
-@import "compass";
-@import "bootstrap";
+// Color variables
+$vibrantGreen: rgb(125,168,23);
+$brandColor: $vibrantGreen;
+$foursquareBackground: rgb(234, 232, 228);
+$backgroundColor: $foursquareBackground;
+
 
 // Page-level styles
 
@@ -9,19 +13,19 @@
 }
 
 .background { 
-  background: rgb(234, 232, 228);
+  background: $backgroundColor;
 }
 
 // Banner styles
 .brand {
   font-family: 'Voltaire';
-  color: red;
+  color: $brandColor;
 
   &:visited {
-    color: red;
+    color: $brandColor;
   }
 
   &:hover {
-    color: red;
+    color: $brandColor;
   }
 }
