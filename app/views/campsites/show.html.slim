@@ -2,6 +2,7 @@
   .container.background
     .row
       / Content area
+      / Notice area
       .col-md-10.col-md-offset-1.well.white
         - if notice
           .panel.panel-warning
@@ -10,6 +11,8 @@
               #panelClose.button.close type="button" data-dismiss="panel" aria-hidden="true" &times;
             .panel-body
               p#notice = notice
+        /Breadcrumb nav
+        = render 'breadcrumb'
         /Left content
         .col-md-9
           / Headline
@@ -44,6 +47,14 @@
           p
             strong Description: 
             small = @campsite.description
+          
+          p.lead Location
+          p 
+            |(
+            = @campsite.latitude
+            |,
+            = @campsite.longitude
+            |)
           p.lead Contact
           p
             Contact
