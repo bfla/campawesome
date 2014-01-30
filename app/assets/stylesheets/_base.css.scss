@@ -1,17 +1,38 @@
-// Color variables
+// Spacing variables
 $mainPadding: 70px;
 $mediumPadding: 20px;
 $topNavbarHeight: 50px;
 $footerHeight: 50px;
+// Color variables
 $vibrantGreen: rgb(125,168,23);
-$brandColor: $vibrantGreen;
+$darkGreen: rgb(56,99,81);
+$grassyGreen: rgb(71, 164, 71);
+$darkCyan: rgb(0,143,170);
 $foursquareBackground: rgb(234, 232, 228);
-$backgroundColor: $foursquareBackground;
 $lightGray: #808080;
+$brandColor: white;
+$backgroundColor: $foursquareBackground;
+// Font variables
+$brandFont: 'Monda';
 
 
+.navbar-color {
+  background: $darkGreen;
+  .nav-link {
+    color: white;
+    &:visited {
+      color: white;
+    }
+
+    &:hover {
+      color: #e1e1e1;
+    }
+  }
+}
+.navbar {
+  border:none;
+}
 // Page-level styles
-
 .white {
   background:#ffffff;
   opacity:1.0;
@@ -27,7 +48,7 @@ $lightGray: #808080;
 
 // Banner styles
 .brand {
-  font-family: 'Fjalla+One';
+  font-family: $brandFont;
   color: $brandColor;
 
   &:visited {

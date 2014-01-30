@@ -1,5 +1,5 @@
 / This isn't really done properly for mobile.  Should be fixed later.
-nav.navbar.navbar-default.navbar-fixed-top role="navigation"
+nav.navbar.navbar-fixed-top.navbar-inverse.navbar-color role="navigation"
   .container
     / Brand and toggle get grouped for better mobile display
     .navbar-header
@@ -14,7 +14,7 @@ nav.navbar.navbar-default.navbar-fixed-top role="navigation"
        / Left Navbar section
        ul.nav.navbar-nav
          li
-           a href=campsites_path Index
+           a.nav-link href=campsites_path Index
 
        / Navbar pulled right
        = render 'layouts/search_nav'
@@ -22,5 +22,5 @@ nav.navbar.navbar-default.navbar-fixed-top role="navigation"
         - if user_signed_in?
           = render 'layouts/dropdown'
         - else
-          li = link_to 'Sign up', new_user_registration_path
-          li = link_to 'Sign in', new_user_session_path
+          li = link_to 'Sign up', new_user_registration_path, class:"nav-link"
+          li = link_to 'Sign in', new_user_session_path, class:"nav-link"

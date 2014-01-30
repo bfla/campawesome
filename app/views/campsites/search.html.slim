@@ -1,21 +1,49 @@
 - render 'search_map'
 
 script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"
-javascript: 
+/ Parse rails instance variables into javascript
+script type="text/javascript"
+  | var centerLat = 
+  = @center[0]
+  | ;
+  | var centerLon = 
+  = @center[1]
+  | ;
+  | var markers = [];
+  - @campsites.each do |campsite|
+      | var campsiteMarker = [
+      = campsite.latitude
+      | , 
+      = campsite.longitude
+      | , "
+      = campsite.name
+      | "];
+      | markers.push(campsiteMarker);
+
+javascript:
   var map;
   function initialize() {
     var mapOptions = {
-      zoom: 8,
-      center: new google.maps.LatLng(-34.397, 150.644),
+      zoom: 9,
+      center: new google.maps.LatLng(centerLat, centerLon),
       panControl: false,
       streetViewControl: false,
       zoomControlOptions: {position: google.maps.ControlPosition.RIGHT_CENTER,},
 
     };
+
     map = new google.maps.Map(document.getElementById('resultsMap'),
         mapOptions);
-  }
+    for (var i=0;i<markers.length;i++) {
+      var apiMarker = new google.maps.Marker({
+          position: new google.maps.LatLng(markers[i][0], markers[i][1]),
+          map: map,
+          title: markers[i][2],
+      });
+    }
+  } // End initialize()
   google.maps.event.addDomListener(window, 'load', initialize);
+  alert(markers);
 
 style 
   | html, body, #resultsMap, .resultsContent {height:100%; padding:0px; margin:0px;}
@@ -24,6 +52,10 @@ style
 
 .col-md-4.well.white.left-content
   .result-list
+    - if notice
+      .panel.panel-success
+        .panel-heading Bam! Found 'em.
+        .panel-body = notice
     - @campsites.each do |campsite|
       p.lead.col-md-12
         small = link_to campsite.name, campsite_path(campsite)

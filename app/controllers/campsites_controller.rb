@@ -10,9 +10,9 @@ class CampsitesController < ApplicationController
   def search
     my_distance = 20
     @campsites = Campsite.search(params[:keywords], my_distance)
-    def parse_markers
-      @campsites.each do |campsite|
-      end
+    @center = Geocoder::Calculations.geographic_center(@campsites)
+    respond_to do |format|
+      format.html { render action: 'search', notice: 'I found 2 campsites that look perfect for you.' }
     end
   end
   
