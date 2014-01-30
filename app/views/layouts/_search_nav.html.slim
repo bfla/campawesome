@@ -1,4 +1,5 @@
-- form_tag "/search", method: "get", html:{class:'navbar-form'} do
+= form_tag search_campsites_path, method: "get", class: "navbar-form navbar-left", role: "search" do
   .form-group
-    = text_field_tag :q, html:{class:"form-control", placeholder:"Detroit, MI"}
-    = submit_tag "Search", class:'btn btn-success'
+    = label_tag :keywords, 'Find campgrounds near', class: 'sr-only'
+    = text_field_tag :keywords, params[:keywords], class: "form-control", placeholder: "Detroit, MI"
+  = button_tag "Search", type:'submit', class: "btn btn-success"

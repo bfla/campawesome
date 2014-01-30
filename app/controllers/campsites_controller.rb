@@ -7,6 +7,10 @@ class CampsitesController < ApplicationController
     @campsites = Campsite.all
   end
 
+  def search
+    @campsites = Campsite.search(params[:keywords])
+  end
+
   # GET /campsites/1
   # GET /campsites/1.json
   def show
