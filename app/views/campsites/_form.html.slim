@@ -1,4 +1,5 @@
-= form_for @campsite do |f|
+
+= form_for @campsite, html: {class:"col-offset-md-1 col-md-4"} do |f|
   - if @campsite.errors.any?
     .panel.panel-danger
       .panel-heading Bummer! Something went wrong
@@ -7,44 +8,52 @@
         ul
           - @campsite.errors.full_messages.each do |message|
             li = message
-
-  .field
-    = f.label :name
-    = f.text_field :name
-  .field
-    = f.label :description
-    = f.text_area :description
-  .field
-    = f.label 'State'
-    = f.radio_button :org, 'State' 
-    = f.label 'Federal'
-    = f.radio_button :org, 'Federal' 
-    = f.label 'Local'
-    = f.radio_button :org, 'Local'
-    = f.label 'Private'
-    = f.radio_button :org, 'Private'
-  .field
-    = f.label :res_phone
-    = f.telephone_field :res_phone
-  .field
-    = f.label :camp_phone
-    = f.telephone_field :camp_phone
-  .field
-    = f.label :res_url
-    = f.url_field :res_url
-  .field
-    = f.label :camp_url
-    = f.url_field :camp_url
-  .field
-    = f.label :reservable
-    = f.check_box :reservable
-  .field
-    = f.label :walkin
-    = f.check_box :walkin
-  .field
-    = f.label :latitude
-    = f.text_field :latitude
-  .field
-    = f.label :longitude
-    = f.text_field :longitude
-  .actions = f.submit 'Save'
+  .field.form-group
+    = f.label :name, class:'control-label '
+    = f.text_field :name, class:'form-control'
+  .row
+    .field.col-md-3
+      = f.label 'State', class:'control-label'
+      = f.radio_button :org, 'State', class:'form-control'
+    .field.col-md-3
+      = f.label 'Federal', class:'control-label'
+      = f.radio_button :org, 'Federal', class:'form-control'
+    .field.col-md-3
+      = f.label 'Local', class:'control-label'
+      = f.radio_button :org, 'Local', class:'form-control'
+    .field.col-md-3
+      = f.label 'Private', class:'control-label'
+      = f.radio_button :org, 'Private', class:'form-control'
+  .row
+    .field.form-group.col-md-2
+      = f.label :state_id, class:'control-label '
+      = f.text_field :state_id, class:'form-control'
+    .field.form-group.col-md-5
+      = f.label :latitude, class:'control-label '
+      = f.text_field :latitude, class:'form-control'
+    .field.form-group.col-md-5
+      = f.label :longitude, class:'control-label '
+      = f.text_field :longitude, class:'form-control'
+  .field.form-group
+    = f.label :description, class:'control-label '
+    = f.text_area :description, class:'form-control'
+  .field.form-group
+    = f.label :res_phone, class:'control-label '
+    = f.telephone_field :res_phone, class:'form-control'
+  .field.form-group
+    = f.label :camp_phone, class:'control-label '
+    = f.telephone_field :camp_phone, class:'form-control'
+  .field.form-group
+    = f.label :res_url, class:'control-label '
+    = f.url_field :res_url, class:'form-control'
+  .field.form-group
+    = f.label :camp_url, class:'control-label '
+    = f.url_field :camp_url, class:'form-control'
+  .row
+    .field.form-group.col-md-6
+      = f.label :reservable, class:'control-label '
+      = f.check_box :reservable, class:'form-control'
+    .field.form-group.col-md-6
+      = f.label :walkin, class:'control-label '
+      = f.check_box :walkin, class:'form-control'
+  .row.actions = f.submit 'Save', class:'btn btn-success'

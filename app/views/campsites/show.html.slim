@@ -22,7 +22,8 @@
               br
               small 
                 = @campsite.org 
-                |  campground in Michigan
+                |  campground in 
+                = @campsite.state_name
           / Check reservations
           p.lead 
             | Bookings &nbsp; &nbsp;
@@ -58,21 +59,23 @@
           p.lead Contact
           p
             Contact
-            strong Res phone:
-            = @campsite.res_phone
-            <br>
-
-            strong Camp phone:
-            = @campsite.camp_phone
-            <br>
-
-            strong Res url:
-            = @campsite.res_url
-            <br>
-
-            strong Camp url:
-            = @campsite.camp_url
-            <br>
+            - if @campsite.res_phone?
+              | Reservation phone:
+              br
+              = number_to_phone(@campsite.res_phone)
+              <br>
+            - if @campsite.camp_phone?
+              strong Campground phone: &nbsp;
+              = number_to_phone(@campsite.camp_phone)
+              <br>
+            - if @campsite.res_url?
+              small
+                a href=@campsite.res_url Online reservations
+              <br>
+            - if @campsite.camp_url?
+              small
+                a href=@campsite.camp_url Official website
+              <br>
 
     / = link_to 'Edit', edit_campsite_path(@campsite)
     / '|

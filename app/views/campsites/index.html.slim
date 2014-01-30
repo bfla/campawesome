@@ -1,31 +1,33 @@
-h1 Listing campsites
+#main.container
+  .row
+    h1.heading.col-md-12 Listing campsites
 
-table
-  tr
-    th Name
-    th Description
-    th Org
-    th Res phone
-    th Camp phone
-    th Res url
-    th Camp url
-    th
-    th
-    th
-
-  - @campsites.each do |campsite|
+  table.table
     tr
-      td = campsite.name
-      td = campsite.description
-      td = campsite.org
-      td = campsite.res_phone
-      td = campsite.camp_phone
-      td = campsite.res_url
-      td = campsite.camp_url
-      td = link_to 'Show', campsite
-      td = link_to 'Edit', edit_campsite_path(campsite)
-      td = link_to 'Destroy', campsite, data: {:confirm => 'Are you sure?'}, :method => :delete
+      th Name
+      th Description
+      th Org
+      th Res phone
+      th Camp phone
+      th Res url
+      th Camp url
+      th
+      th
+      th
 
-br
+    - @campsites.each do |campsite|
+      tr
+        td = campsite.name
+        td = campsite.description
+        td = campsite.org
+        td = campsite.res_phone
+        td = campsite.camp_phone
+        td = campsite.res_url
+        td = campsite.camp_url
+        td = link_to 'Show', campsite
+        td = link_to 'Edit', edit_campsite_path(campsite)
+        td = link_to 'Destroy', campsite, data: {:confirm => 'Are you sure?'}, :method => :delete
 
-= link_to 'New Campsite', new_campsite_path
+  br
+
+  = link_to 'New Campsite', new_campsite_path

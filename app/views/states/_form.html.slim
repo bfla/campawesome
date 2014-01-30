@@ -1,0 +1,12 @@
+= form_for @state do |f|
+  - if @state.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@state.errors.count, "error")} prohibited this state from being saved:"
+      ul
+        - @state.errors.full_messages.each do |message|
+          li = message
+
+  .field.form-group
+    = f.label :name
+    = f.text_field :name
+  .actions = f.submit 'Save'

@@ -1,8 +1,10 @@
-h1 Editing campsite
-
-== render 'form'
-
-= link_to 'Show', @campsite
-'|
-= link_to 'Back', campsites_path
+#main.container
+  .row
+    h1.heading.col-md-12 Editing campsite
+  == render 'form'
+  .row
+    .col-md-12
+      = link_to 'Show', @campsite
+      '|
+      = link_to 'Back', campsites_path
 

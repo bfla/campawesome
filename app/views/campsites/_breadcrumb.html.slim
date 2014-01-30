@@ -1,4 +1,4 @@
 .col-md-12
   ol.breadcrumb.white
-    li = link_to 'Michigan Camping', campsites_path
+    li = link_to @campsite.state_name+' Camping', @campsite.state
     li = link_to 'Near city', campsites_path
