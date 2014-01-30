@@ -7,13 +7,17 @@ class Campsite < ActiveRecord::Base
   reverse_geocoded_by :latitude, :longitude
   after_validation :reverse_geocode #auto-fetch address
 
+  # This returns the name of the Campsite's state
   def state_name
     self.state.name if self.state.name?
   end
 
-  def self.search(search)
+  # This takes a search query and distance, codes it into a coordinates, 
+  # and returns nearby campgrounds
+  def self.search(search, distance)
     if search
-      find(:all, :conditions => ['name LIKE ?', "%#{search}%"])
+      coordinates = Geocoder.coordinates(search)
+      campsites = Campsite.near(coordinates, distance)
     else
       find(:all)
     end

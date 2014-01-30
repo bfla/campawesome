@@ -1,33 +1,91 @@
-#main.container
-  .row
-      h1.heading.col-md-12 Listing campsites
+- render 'search_map'
 
-      table.table
-        tr
-          th Name
-          th Description
-          th Org
-          th Res phone
-          th Camp phone
-          th Res url
-          th Camp url
-          th
-          th
-          th
+script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"
+javascript: 
+  var map;
+  function initialize() {
+    var mapOptions = {
+      zoom: 8,
+      center: new google.maps.LatLng(-34.397, 150.644),
+      panControl: false,
+      streetViewControl: false,
+      zoomControlOptions: {position: google.maps.ControlPosition.RIGHT_CENTER,},
 
+    };
+    map = new google.maps.Map(document.getElementById('resultsMap'),
+        mapOptions);
+  }
+  google.maps.event.addDomListener(window, 'load', initialize);
+
+style 
+  | html, body, #resultsMap, .resultsContent {height:100%; padding:0px; margin:0px;}
+  | .left-content {min-height:100%;}
+  | .result-list {padding-top:50px;}
+
+.col-md-4.well.white.left-content
+  .result-list
+    - @campsites.each do |campsite|
+      p.lead.col-md-12
+        small = link_to campsite.name, campsite_path(campsite)
+        br
+        small
+          small.subtle-text
+            = campsite.org
+            |  campground in&nbsp;
+            = campsite.state_name
+      - if campsite.description?
+        p.col-md-12 
+           = campsite.description
+      .col-md-12
+        .btn-group
+          button.btn.btn-default.btn-sm.subtle-text
+            span.glyphicon.glyphicon-bookmark
+            |  Save
+          button.btn.btn-default.btn-sm.subtle-text
+            span.glyphicon.glyphicon-check
+            |  Been Here
+          button.btn.btn-default.btn-sm.subtle-text
+            span.glyphicon.glyphicon-star
+            |  Want to go
+          button.btn.btn-default.btn-sm.subtle-text
+            span.glyphicon.glyphicon-usd
+            |  Review it
+      hr.col-md-12
+
+.resultsContent.col-md-8
+  #resultsMap style="width:100%;"
+
+/!
+  .background style='padding-top:50px; min-height:100%;'
+    .row
+      .col-md-4.well.white style='min-height:100%;'
         - @campsites.each do |campsite|
-          tr
-            td = campsite.name
-            td = campsite.description
-            td = campsite.org
-            td = campsite.res_phone
-            td = campsite.camp_phone
-            td = campsite.res_url
-            td = campsite.camp_url
-            td = link_to 'Show', campsite
-            td = link_to 'Edit', edit_campsite_path(campsite)
-            td = link_to 'Destroy', campsite, data: {:confirm => 'Are you sure?'}, :method => :delete
+          p.lead.col-md-12
+            small = link_to campsite.name, campsite_path(campsite)
+            br
+            small
+              small.subtle-text
+                = campsite.org
+                |  campground in&nbsp;
+                = campsite.state_name
+          - if campsite.description?
+            p.col-md-12 
+               = campsite.description
+          .col-md-12
+            .btn-group
+              button.btn.btn-default.btn-sm.subtle-text
+                span.glyphicon.glyphicon-bookmark
+                |  Save
+              button.btn.btn-default.btn-sm.subtle-text
+                span.glyphicon.glyphicon-check
+                |  Been Here
+              button.btn.btn-default.btn-sm.subtle-text
+                span.glyphicon.glyphicon-star
+                |  Want to go
+              button.btn.btn-default.btn-sm.subtle-text
+                span.glyphicon.glyphicon-usd
+                |  Review it
+          hr.col-md-12
+      .col-md-12
+        
 
-      br
-
-      = link_to 'New Campsite', new_campsite_path

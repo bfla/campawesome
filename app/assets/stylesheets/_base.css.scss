@@ -1,9 +1,13 @@
 // Color variables
+$mainPadding: 70px;
+$mediumPadding: 20px;
+$topNavbarHeight: 50px;
+$footerHeight: 50px;
 $vibrantGreen: rgb(125,168,23);
 $brandColor: $vibrantGreen;
 $foursquareBackground: rgb(234, 232, 228);
 $backgroundColor: $foursquareBackground;
-$mainPadding: 70px;
+$lightGray: #808080;
 
 
 // Page-level styles
@@ -17,9 +21,13 @@ $mainPadding: 70px;
   background: $backgroundColor;
 }
 
+.subtle-text {
+  color: $lightGray;
+}
+
 // Banner styles
 .brand {
-  font-family: 'Voltaire';
+  font-family: 'Fjalla+One';
   color: $brandColor;
 
   &:visited {
@@ -29,4 +37,11 @@ $mainPadding: 70px;
   &:hover {
     color: $brandColor;
   }
+}
+
+#resultsMap {
+  height:400px;
+  width:400px;
+  padding:70px;
+  position:absolute;
 }

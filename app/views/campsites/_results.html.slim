@@ -1,0 +1,33 @@
+.background style='padding-top:50px; min-height:100%;'
+  .container
+    .row
+      .col-md-4.well.white style='min-height:100%;'
+        - @campsites.each do |campsite|
+          p.lead.col-md-12
+            = link_to campsite.name, campsite_path(campsite)
+            br
+            small
+              small
+                = campsite.org
+                |  campground in&nbsp;
+                = campsite.state_name
+          - if campsite.description?
+            p.col-md-12 
+               = campsite.description
+          .col-md-12
+            .btn-group
+              button.btn.btn-default.btn-sm.subtle-text
+                span.glyphicon.glyphicon-bookmark
+                |  Save
+              button.btn.btn-default.btn-sm.subtle-text
+                span.glyphicon.glyphicon-check
+                |  Been Here
+              button.btn.btn-default.btn-sm.subtle-text
+                span.glyphicon.glyphicon-star
+                |  Want to go
+              button.btn.btn-default.btn-sm.subtle-text
+                span.glyphicon.glyphicon-usd
+                |  Review it
+        hr.col-md-12
+      #resultsMap.col-md-8
+      

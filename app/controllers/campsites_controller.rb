@@ -8,9 +8,14 @@ class CampsitesController < ApplicationController
   end
 
   def search
-    @campsites = Campsite.search(params[:keywords])
+    my_distance = 20
+    @campsites = Campsite.search(params[:keywords], my_distance)
+    def parse_markers
+      @campsites.each do |campsite|
+      end
+    end
   end
-
+  
   # GET /campsites/1
   # GET /campsites/1.json
   def show
