@@ -1,89 +1,37 @@
-#main.background
-  .container.background
-    .row
-      / Content area
-      / Notice area
-      .col-md-10.col-md-offset-1.well.white
-        - if notice
-          .panel.panel-warning
-            .panel-heading 
-              | Notice
-              #panelClose.button.close type="button" data-dismiss="panel" aria-hidden="true" &times;
-            .panel-body
-              p#notice = notice
-        /Breadcrumb nav
-        = render 'breadcrumb'
-        /Left content
-        .col-md-9
-          / Headline
-          .page-header
-            h1 
-              = @campsite.name
-              br
-              small 
-                = @campsite.org 
-                |  campground in 
-                = @campsite.state_name
-          / Check reservations
-          p.lead 
-            | Bookings &nbsp; &nbsp;
-            - if @campsite.reservable
-              button.btn.btn-success.btn-sm data-toggle="modal" data-target="#reserveModal" Check Reservations
-            ul
-              - if @campsite.reservable
-                li This campsite allows reservations.
-              - else
-                li This campsite doesn't allow reservations.
-              - if @campsite.walkin
-                li This campsite allows walkins
-              - else
-                li This campsite doesn't allow walkins
-            hr
-
-            
-
-        /Right content
-        .col-md-3
-          p.lead 
-          p
-            strong Description: 
-            small = @campsite.description
+#wrap
+  #main.background
+    .container.background
+      .row
+        / Content area
+        .col-md-10.col-md-offset-1.well.white
           
-          p.lead Location
-          p 
-            |(
-            = @campsite.latitude
-            |,
-            = @campsite.longitude
-            |)
-          p.lead Contact
-          p
-            Contact
-            - if @campsite.res_phone?
-              | Reservation phone:
-              br
-              = number_to_phone(@campsite.res_phone)
-              <br>
-            - if @campsite.camp_phone?
-              strong Campground phone: &nbsp;
-              = number_to_phone(@campsite.camp_phone)
-              <br>
-            - if @campsite.res_url?
-              small
-                a href=@campsite.res_url Online reservations
-              <br>
-            - if @campsite.camp_url?
-              small
-                a href=@campsite.camp_url Official website
-              <br>
+          / Notice area
+          - if notice
+            .panel.panel-warning
+              .panel-heading 
+                | Notice
+                #panelClose.button.close type="button" data-dismiss="panel" aria-hidden="true" &times;
+              .panel-body
+                p#notice = notice
 
-    / = link_to 'Edit', edit_campsite_path(@campsite)
-    / '|
-    / = link_to 'Back', campsites_path
+          /Breadcrumb nav
+          = render 'breadcrumb'
 
-    / Include modal partials and initialize with js
-    == render 'reserveModal'
-    javascript:
-      $('#panelClose').click( function () {
-        $('.panel').hide();
-      });
+          /Left content
+          .col-md-9
+            = render 'left_content'
+
+          /Right content
+          .col-md-3
+            = render 'right_content'
+
+      / = link_to 'Edit', edit_campsite_path(@campsite)
+      / '|
+      / = link_to 'Back', campsites_path
+
+/ Include modal partials and initialize with js
+== render 'reserveModal'
+javascript:
+  $('#panelClose').click( function () {
+    $('.panel').hide();
+  });

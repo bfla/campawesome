@@ -1,4 +1,9 @@
 // Page-level styles
+
+html  {
+  background: $backgroundColor;
+}
+
 #main {
   padding-top: $mainPadding;
   padding-bottom: $mainPadding;
