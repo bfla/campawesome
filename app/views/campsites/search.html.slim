@@ -48,72 +48,72 @@ style
   script src='https://api.tiles.mapbox.com/mapbox.js/v1.6.1/mapbox.js'
   #resultsMap
 
-/ Makeshift json data
+/ Makeshift json data. Yuck but it works. 
 script
-  | var center = [
-  =@center[0]
-  | ,
-  =@center[1]
-  | ]
-
+  | var center = 
+  = @center.to_json
+  | ;
 
 javascript:
-  var geoJson = {
-      type: 'FeatureCollection',
-      features: [{
-          type: 'Feature',
-          properties: {
-              title: 'Unicorn Campground',
-              url: 'http://localhost:3000/',
-              'marker-color': '#09b',
-              'marker-size': 'large',
-              'marker-symbol': 'campsite',
-          },
-          geometry: {
-              type: 'Point',
-              coordinates: [-85.8, 44.831]
-          }
-      },
-      {
-          type: 'Feature',
-          properties: {
-              title: 'Hynonym Campground',
-              url: 'http://localhost:3000/',
-              'marker-color': '#09b',
-              'marker-size': 'large',
-              'marker-symbol': 'campsite',
-          },
-          geometry: {
-              type: 'Point',
-              coordinates: [-86.01, 44.831]
-          }
-      }]
-  };
-  // initializes and centers map
-  var map = L.mapbox.map('resultsMap', 'campawesome.h4ojiee7').setView(center, 9);
-  // set control position
-  map.zoomControl.setPosition('bottomright');
+  makeSearchMap();
+  function makeSearchMap() {
+    var geoJson = {
+        type: 'FeatureCollection',
+        features: [{
+            type: 'Feature',
+            properties: {
+                title: 'Unicorn Campground',
+                url: 'http://localhost:3000/',
+                'marker-color': '#09b',
+                'marker-size': 'large',
+                'marker-symbol': 'campsite',
+            },
+            geometry: {
+                type: 'Point',
+                coordinates: [-85.8, 44.831]
+            }
+        },
+        {
+            type: 'Feature',
+            properties: {
+                title: 'Hynonym Campground',
+                url: 'http://localhost:3000/',
+                'marker-color': '#09b',
+                'marker-size': 'large',
+                'marker-symbol': 'campsite',
+            },
+            geometry: {
+                type: 'Point',
+                coordinates: [-86.01, 44.831]
+            }
+        }]
+    };
+    // initializes and centers map
+    var map = L.mapbox.map('resultsMap', 'campawesome.h4ojiee7').setView(center, 9);
+    // set control position
+    map.zoomControl.setPosition('bottomright');
 
-  // create marker layer
-  map.markerLayer.setGeoJSON(geoJson);
-  // set markerLayer click behaviors
-  map.markerLayer.on('click', function(e) {
-    e.layer.openPopup();
-  });
-  // set marker layer mouseover behavior
-  map.markerLayer.on('mouseover', function(e) {
-      // activate tooltip
-      e.layer.closePopup();
+    // create marker layer
+    map.markerLayer.setGeoJSON(geoJson);
+    // set markerLayer click behaviors
+    map.markerLayer.on('click', function(e) {
       e.layer.openPopup();
-  });
-  // set markerLayer mouseout behaviors
-  map.markerLayer.on('mouseout', function(e) {
-      //e.layer.closePopup();
-  });
-  // Fit map to markers
-  //markerLayer.on('ready', function() {
-    //map.fitBounds(markerLayer.getBounds());
-  //});
+    });
+    // set marker layer mouseover behavior
+    map.markerLayer.on('mouseover', function(e) {
+        // activate tooltip
+        e.layer.closePopup();
+        e.layer.openPopup();
+    });
+    // set markerLayer mouseout behaviors
+    map.markerLayer.on('mouseout', function(e) {
+        //e.layer.closePopup();
+    });
+    // Fit map to markers
+    //markerLayer.on('ready', function() {
+      //map.fitBounds(markerLayer.getBounds());
+    //});
+  }
 
   // Reset the map bounds and markers when the right thingee is clicked
   $('#reset').click(function() { 

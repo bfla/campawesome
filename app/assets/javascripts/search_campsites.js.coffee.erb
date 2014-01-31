@@ -1,8 +1,57 @@
-#initialize = ->
-  #mapOptions =
-    #zoom: 8
-    #center: new google.maps.LatLng(-34.397, 150.644)
+geoJsonify = ->
+  geoJson =
+    type: "FeatureCollection"
+    features: [
+      type: "Feature"
+      properties:
+        title: @campsites[1].title
+        url: "http://localhost:3000/"
+        "marker-color": "#09b"
+        "marker-size": "large"
+        "marker-symbol": "campsite"
 
-  #map = new google.maps.Map(document.getElementById("resultsMap"), mapOptions)
+      geometry:
+        type: "Point"
+        coordinates: [-85.8, 44.831]
+    ,
+      type: "Feature"
+      properties:
+        title: "Hynonym Campground"
+        url: "http://localhost:3000/"
+        "marker-color": "#09b"
+        "marker-size": "large"
+        "marker-symbol": "campsite"
 
-#google.maps.event.addDomListener window, "load", initialize
+      geometry:
+        type: "Point"
+        coordinates: [-86.01, 44.831]
+    ]
+
+
+makeSearchMap = ->
+  geoJsonify
+  
+  # initializes and centers map
+  map = L.mapbox.map("resultsMap", "campawesome.h4ojiee7").setView(center, 9)
+  
+  # set control position
+  map.zoomControl.setPosition "bottomright"
+  
+  # create marker layer
+  map.markerLayer.setGeoJSON geoJson
+  
+  # set markerLayer click behaviors
+  map.markerLayer.on "click", (e) ->
+    e.layer.openPopup()
+
+  
+  # set marker layer mouseover behavior
+  map.markerLayer.on "mouseover", (e) ->
+    
+    # activate tooltip
+    e.layer.closePopup()
+    e.layer.openPopup()
+
+  
+  # set markerLayer mouseout behaviors
+  map.markerLayer.on "mouseout", (e) ->
