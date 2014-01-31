@@ -2,11 +2,17 @@ doctype html
 html
   head
     title Blog
+    / Stylesheets
+    / Rails asset pipeline
     = stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true
+    / Mapbox
+    link href='//api.tiles.mapbox.com/mapbox.js/v1.6.1/mapbox.css' rel='stylesheet'
+    / Google Fonts
+    link href='http://fonts.googleapis.com/css?family=Monda' rel='stylesheet' type='text/css'
     = javascript_include_tag "application", "data-turbolinks-track" => true
     = csrf_meta_tags
     / Google Font for brand
-    link href='http://fonts.googleapis.com/css?family=Monda' rel='stylesheet' type='text/css'
+    
     / Add viewport line to ensure proper Bootstrap rendering on mobile devices
     meta name="viewport" content="width=device-width, initial-scale=1.0"
   body

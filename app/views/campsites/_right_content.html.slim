@@ -6,7 +6,12 @@
 
 / Map
 .thumbnail
-  #campsiteMap style="height:150px; width:100%;"
+  / Google Map
+  / #campsiteMap style="height:150px; width:100%;"
+  script src='//api.tiles.mapbox.com/mapbox.js/v1.6.1/mapbox.js'
+  #mapBoxed style="height:150px; width:100%;"
+  javascript:
+    var map = L.mapbox.map('mapBoxed', 'examples.map-9ijuk24y').setView([<%= @campsite.latitude %>, <%= @campsite.longitude %>], 9);
 / GPS
 p.lead 
   small
@@ -44,3 +49,17 @@ p
   - if @campsite.camp_url?
     small
       a href=@campsite.camp_url Official website
+
+
+  
+
+
+
+
+
+
+
+
+
+
+

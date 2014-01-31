@@ -1,52 +1,8 @@
 - render 'search_map'
 
-script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"
-/ Parse rails instance variables into javascript
-script type="text/javascript"
-  | var centerLat = 
-  = @center[0]
-  | ;
-  | var centerLon = 
-  = @center[1]
-  | ;
-  | var markers = [];
-  - @campsites.each do |campsite|
-      | var campsiteMarker = [
-      = campsite.latitude
-      | , 
-      = campsite.longitude
-      | , "
-      = campsite.name
-      | "];
-      | markers.push(campsiteMarker);
-
-javascript:
-  var map;
-  function initialize() {
-    var mapOptions = {
-      zoom: 9,
-      center: new google.maps.LatLng(centerLat, centerLon),
-      panControl: false,
-      streetViewControl: false,
-      zoomControlOptions: {position: google.maps.ControlPosition.RIGHT_CENTER,},
-
-    };
-
-    map = new google.maps.Map(document.getElementById('resultsMap'),
-        mapOptions);
-    for (var i=0;i<markers.length;i++) {
-      var apiMarker = new google.maps.Marker({
-          position: new google.maps.LatLng(markers[i][0], markers[i][1]),
-          map: map,
-          title: markers[i][2],
-      });
-    }
-  } // End initialize()
-  google.maps.event.addDomListener(window, 'load', initialize);
-  alert(markers);
-
 style 
-  | html, body, #resultsMap, .resultsContent {height:100%; padding:0px; margin:0px;}
+  | html, body, .mapColumn {height:100%; padding:0px; margin:0px;}
+  | #resultsMap {height:100%; width:100%}
   | .left-content {min-height:100%;}
   | .result-list {padding-top:50px;}
 
@@ -84,40 +40,10 @@ style
             |  Review it
       hr.col-md-12
 
-.resultsContent.col-md-8
-  #resultsMap style="width:100%;"
-
-/!
-  .background style='padding-top:50px; min-height:100%;'
-    .row
-      .col-md-4.well.white style='min-height:100%;'
-        - @campsites.each do |campsite|
-          p.lead.col-md-12
-            small = link_to campsite.name, campsite_path(campsite)
-            br
-            small
-              small.subtle-text
-                = campsite.org
-                |  campground in&nbsp;
-                = campsite.state_name
-          - if campsite.description?
-            p.col-md-12 
-               = campsite.description
-          .col-md-12
-            .btn-group
-              button.btn.btn-default.btn-sm.subtle-text
-                span.glyphicon.glyphicon-bookmark
-                |  Save
-              button.btn.btn-default.btn-sm.subtle-text
-                span.glyphicon.glyphicon-check
-                |  Been Here
-              button.btn.btn-default.btn-sm.subtle-text
-                span.glyphicon.glyphicon-star
-                |  Want to go
-              button.btn.btn-default.btn-sm.subtle-text
-                span.glyphicon.glyphicon-usd
-                |  Review it
-          hr.col-md-12
-      .col-md-12
-        
+/ MapBox ===============================
+.col-md-8.mapColumn
+  script src='https://api.tiles.mapbox.com/mapbox.js/v1.6.1/mapbox.js'
+  #resultsMap
+  javascript:
+    var map = L.mapbox.map('resultsMap', 'examples.map-9ijuk24y').setView([40, -74.50], 9);
 
