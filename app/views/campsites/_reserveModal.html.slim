@@ -13,11 +13,12 @@
           | High
           br
           | Reservation phone: 
-          = @campsite.res_phone
+          = number_to_phone(@campsite.res_phone)
           br
           | Reservation url: 
           = @campsite.res_url
           br
       .modal-footer
         button.btn.btn-default type="button" data-dismiss="modal" Close
-        button.btn.btn-primary type="button" Check their website
+        a href=@campsite.res_url
+          button.btn.btn-primary type="button"  Check their website

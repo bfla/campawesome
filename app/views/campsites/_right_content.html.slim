@@ -1,11 +1,17 @@
-p
-  strong Description: 
-  small = @campsite.description
+- if @campsite.description?
+  p
+    strong Description: 
+    small = @campsite.description
+  hr
 
-h4 Location
+/ Map
+.thumbnail
+  #campsiteMap style="height:150px; width:100%;"
+/ GPS
 p.lead 
   small
-    | 
+    small 
+      small GPS:  
     = @campsite.latitude
     |,
     = @campsite.longitude

@@ -1,0 +1,47 @@
+// Variables and mixins are inherited from _base.css.scss
+.navbar-color {
+  background: $navColor;
+  .nav-link {
+    color: $navLink;
+    &:visited {
+      color: $navLink;
+    }
+
+    &:hover {
+      color: $navLinkHover;
+    }
+  }
+}
+.navbar-border {
+  border:none;
+}
+
+.navbar-input-group {
+  @media (min-width: $screen-sm) {
+    font-size: 0px; /*removes whitespace between button and input*/
+    padding-right:2px;
+    margin-right:2px;
+    input {
+      border-top-right-radius: 0px;
+      border-bottom-right-radius: 0px;
+    }
+    .btn {
+      border-top-left-radius: 0px;
+      border-bottom-left-radius: 0px;
+      border-left: 0px;
+    }
+  }
+  @media (max-width: $screen-xs-max) {
+    margin-top:0px;
+    margin-bottom:0px;
+
+    .btn {
+      width:100%;
+    }
+  }
+}
+
+.help-marker {
+  padding-left:2px;
+  margin-left:2px;
+}

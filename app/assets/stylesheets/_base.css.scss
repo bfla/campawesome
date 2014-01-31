@@ -3,35 +3,29 @@ $mainPadding: 70px;
 $mediumPadding: 20px;
 $topNavbarHeight: 50px;
 $footerHeight: 50px;
-// Color variables
+// Color pallette
 $vibrantGreen: rgb(125,168,23);
-$darkGreen: rgb(56,99,81);
+$forestyGreen: rgb(56,99,81);
 $grassyGreen: rgb(71, 164, 71);
+$seaGreen: rgb(72,144,72);
 $darkCyan: rgb(0,143,170);
 $foursquareBackground: rgb(234, 232, 228);
 $lightGray: #808080;
+$extraLightGray: #e1e1e1;
+// Set colors
 $brandColor: white;
+$navColor: $darkCyan;
+$navLink: $extraLightGray;
+$navLinkHover: white;
 $backgroundColor: $foursquareBackground;
+$iconBackground: $vibrantGreen;
 // Font variables
 $brandFont: 'Monda';
 
 
-.navbar-color {
-  background: $darkGreen;
-  .nav-link {
-    color: white;
-    &:visited {
-      color: white;
-    }
+// Import navbar styles
+@import 'navbar';
 
-    &:hover {
-      color: #e1e1e1;
-    }
-  }
-}
-.navbar {
-  border:none;
-}
 // Page-level styles
 .white {
   background:#ffffff;
