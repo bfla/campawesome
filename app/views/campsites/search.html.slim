@@ -50,9 +50,14 @@ style
 
 / Makeshift json data
 script
+  | var center = [
+  =@center[0]
+  | ,
+  =@center[1]
+  | ]
+
 
 javascript:
-  var center = [44.831, -85.8]
   var geoJson = {
       type: 'FeatureCollection',
       features: [{
