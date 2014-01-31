@@ -6,12 +6,15 @@ style
   | .left-content {min-height:100%;}
   | .result-list {padding-top:50px;}
 
+/ Remove this later
 .col-md-4.well.white.left-content
   .result-list
     - if notice
       .panel.panel-success
         .panel-heading Bam! Found 'em.
         .panel-body = notice
+    p.col-md-12
+      #reset.btn.btn-default Search this area
     - @campsites.each do |campsite|
       p.lead.col-md-12
         small = link_to campsite.name, campsite_path(campsite)
@@ -44,6 +47,79 @@ style
 .col-md-8.mapColumn
   script src='https://api.tiles.mapbox.com/mapbox.js/v1.6.1/mapbox.js'
   #resultsMap
-  javascript:
-    var map = L.mapbox.map('resultsMap', 'examples.map-9ijuk24y').setView([40, -74.50], 9);
+
+/ Makeshift json data
+script
+
+javascript:
+  var center = [44.831, -85.8]
+  var geoJson = {
+      type: 'FeatureCollection',
+      features: [{
+          type: 'Feature',
+          properties: {
+              title: 'Unicorn Campground',
+              url: 'http://localhost:3000/',
+              'marker-color': '#09b',
+              'marker-size': 'large',
+              'marker-symbol': 'campsite',
+          },
+          geometry: {
+              type: 'Point',
+              coordinates: [-85.8, 44.831]
+          }
+      },
+      {
+          type: 'Feature',
+          properties: {
+              title: 'Hynonym Campground',
+              url: 'http://localhost:3000/',
+              'marker-color': '#09b',
+              'marker-size': 'large',
+              'marker-symbol': 'campsite',
+          },
+          geometry: {
+              type: 'Point',
+              coordinates: [-86.01, 44.831]
+          }
+      }]
+  };
+  // initializes and centers map
+  var map = L.mapbox.map('resultsMap', 'campawesome.h4ojiee7').setView(center, 9);
+  // set control position
+  map.zoomControl.setPosition('bottomright');
+
+  // create marker layer
+  map.markerLayer.setGeoJSON(geoJson);
+  // set markerLayer click behaviors
+  map.markerLayer.on('click', function(e) {
+    e.layer.openPopup();
+  });
+  // set marker layer mouseover behavior
+  map.markerLayer.on('mouseover', function(e) {
+      // activate tooltip
+      e.layer.closePopup();
+      e.layer.openPopup();
+  });
+  // set markerLayer mouseout behaviors
+  map.markerLayer.on('mouseout', function(e) {
+      //e.layer.closePopup();
+  });
+  // Fit map to markers
+  //markerLayer.on('ready', function() {
+    //map.fitBounds(markerLayer.getBounds());
+  //});
+
+  // Reset the map bounds and markers when the right thingee is clicked
+  $('#reset').click(function() { 
+    var mapCenter = map.getCenter(); // Gets the current center of the map as an Leaflet LatLng 
+    var mapBounds = map.getBounds(); // Gets the SW and NE corners of the map as a Leaflet LatLngBound 
+    var southWest = map.getBounds().getSouthWest(); // Returns the SW corner
+    var distanceInMeters = mapCenter.distanceTo(southWest); // Returns the distance in meters
+    var distanceInMiles = distanceInMeters * .000621371 // Calculates the distance in miles
+    alert("Center:" + mapCenter + 'SW:' + southWest + 'Distance:' + distanceInMiles);
+    var myUrl = 'http://localhost:3000/campsites/search?utf8=✓&keywords=' + mapCenter.lat + '%2C+' + mapCenter.lng
+    window.location.replace(myUrl);
+  });
+    
 
