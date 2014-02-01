@@ -22,13 +22,16 @@ class CampsitesController < ApplicationController
         },
         properties: {
           title: campsite.name,
-          url: campsite_path(campsite),
-          :'marker-color' => '#09b',
+          url: 'http://example.com',
+          :'marker-color' => "\#09b",
           :'marker-symbol' => 'campsite',
           :'marker-size' => 'large'
         }
       }
     end
+    gon.campsites = @campsites
+    gon.geoJson = @geojson
+    gon.center = @center
 
     respond_to do |format|
       format.html { render action: 'search', notice: 'I found 2 campsites that look perfect for you.' }

@@ -57,6 +57,9 @@ GEM
       multipart-post (>= 1.2, < 3)
     fssm (0.2.10)
     geocoder (1.1.9)
+    gon (5.0.1)
+      actionpack (>= 2.3.0)
+      json
     hashie (2.0.5)
     hike (1.2.3)
     i18n (0.6.9)
@@ -166,6 +169,7 @@ DEPENDENCIES
   compass-rails
   devise
   geocoder
+  gon
   jbuilder (~> 1.2)
   jquery-rails
   omniauth-facebook

@@ -55,8 +55,13 @@ style
   #resultsMap
 
 / Makeshift json data. Yuck but it works. 
-script
-  | searchTest();
+- content_for :end
+  javascript:
+    makeSearchMap();
+    //attemptHandoff();
+    $('#reset').click( function() {
+      resetSearchMap();
+    });
 
 
 
