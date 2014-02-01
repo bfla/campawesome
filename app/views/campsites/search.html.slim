@@ -20,7 +20,7 @@ style
         .panel-body = notice
     p.col-md-12
       #reset.btn.btn-default Search this area
-      = tag :input, id: 'geoJson', type: 'hidden', value: 'test', data: {center: 'hello'}
+      = tag :input, id: 'searchJson', type: 'hidden', value: 'test', data: {center: @center, geoJson: @campsites.to_json}
     - @campsites.each do |campsite|
       p.lead.col-md-12
         small = link_to campsite.name, campsite_path(campsite)
