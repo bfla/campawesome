@@ -1,0 +1,91 @@
+/ Headline
+.row
+  .page-header.col-md-12
+    h1
+      = @campsite.name
+      br
+      small 
+        small
+          = @campsite.org 
+          |  campground in 
+          = @campsite.state_name
+/ Ratings
+.row
+  .col-md-2
+    p.lead
+      span.glyphicon.glyphicon-certificate
+  .col-md-10
+    p.lead
+      |  Ranked #1 of 23 
+      small
+        small
+          a 
+            | campsites near Empire, 
+            = @campsite.state_name
+      br
+      span.glyphicon.glyphicon-fire.rating-color
+      | &nbsp;
+      span.glyphicon.glyphicon-fire.rating-color
+      | &nbsp;
+      span.glyphicon.glyphicon-fire.rating-color
+      | &nbsp;
+      span.glyphicon.glyphicon-fire.rating-color
+      | &nbsp;
+      span.glyphicon.glyphicon-fire.subtle-text
+      | &nbsp;
+      small
+        small
+          small.subtle-text 3 Reviews
+hr
+
+
+/ Check reservations
+.row
+  .col-md-2
+    p.lead
+      span.glyphicon.glyphicon-certificate
+  .col-md-10
+    p.lead 
+      | Booking It &nbsp; &nbsp;
+      - if @campsite.reservable
+        button.btn.btn-success.btn-sm data-toggle="modal" data-target="#reserveModal" Check Reservations
+      ul
+        - if @campsite.reservable
+          li This campsite allows reservations.
+        - else
+          li This campsite doesn't allow reservations.
+        - if @campsite.walkin
+          li This campsite allows walkins
+        - else
+          li This campsite doesn't allow walkins
+    p.subtle-text
+      - if @campsite.res_phone?
+        .col-md-6.subtle-text
+          span.glyphicon.glyphicon-earphone 
+          | Reservations:  
+          = number_to_phone(@campsite.res_phone)
+      - if @campsite.camp_phone? && @campsite.camp_phone != @campsite.res_phone
+        .col-md-6.subtle-text
+          span.glyphicon.glyphicon-earphone
+          |  Campground:  
+          = number_to_phone(@campsite.camp_phone)
+      br
+      - if @campsite.res_url?
+        .col-md-6
+          a href=@campsite.res_url 
+            span.glyphicon.glyphicon-globe
+            |  Online reservations
+      - if @campsite.camp_url?
+        .col-md-6
+          a href=@campsite.camp_url
+            span.glyphicon.glyphicon-globe
+            |  Official site
+hr
+
+/ Tribes who like it
+.row
+  .col-md-12
+    p.lead Tribes who like this place
+hr
+
+.row

@@ -12,6 +12,7 @@ $darkCyan: rgb(0,143,170);
 $foursquareBackground: rgb(234, 232, 228);
 $lightGray: #808080;
 $extraLightGray: #e1e1e1;
+$orange: rgb(255,136,51);
 // Set colors
 $brandColor: white;
 $navColor: $darkCyan;
@@ -19,6 +20,7 @@ $navLink: $extraLightGray;
 $navLinkHover: white;
 $backgroundColor: $foursquareBackground;
 $iconBackground: $vibrantGreen;
+$ratingColor: $orange;
 // Font variables
 $brandFont: 'Monda';
 
@@ -30,6 +32,10 @@ $brandFont: 'Monda';
 .white {
   background:#ffffff;
   opacity:1.0;
+}
+
+.rating-color {
+  color:$ratingColor;
 }
 
 .background { 

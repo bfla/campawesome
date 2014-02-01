@@ -1,6 +1,6 @@
 - content_for :head
   title Search
-  description Find campsites by location
+  meta name="desctiption" content="Find campsites by location"
 
 - content_for :extra_stylesheets
   link href='//api.tiles.mapbox.com/mapbox.js/v1.6.1/mapbox.css' rel='stylesheet'
@@ -20,6 +20,7 @@ style
         .panel-body = notice
     p.col-md-12
       #reset.btn.btn-default Search this area
+      = tag :input, id: 'geoJson', type: 'hidden', value: 'test', data: {center: 'hello'}
     - @campsites.each do |campsite|
       p.lead.col-md-12
         small = link_to campsite.name, campsite_path(campsite)
@@ -55,17 +56,13 @@ style
 
 / Makeshift json data. Yuck but it works. 
 script
-  | var center =
-  = @center
-  | ;
-  | var geoJson = $.parseJSON(
-  = @geojson
-  | );
-  | for (obj in geoJson) { alert(obj.type); }
+  | searchTest();
+
+
 
 javascript:
-  var map = L.mapbox.map('resultsMap', 'campawesome.h5d0p7ea').setView(center, 10);
-  map.markerLayer.setGeoJSON(geoJson);
+  // var map = L.mapbox.map('resultsMap', 'campawesome.h5d0p7ea').setView(center, 10);
+  // map.markerLayer.setGeoJSON(geoJson);
   /*makeSearchMap();
   function makeSearchMap() {
     var geoJson = {
@@ -134,8 +131,5 @@ javascript:
         alert "Center:" + mapCenter + "SW:" + southWest + "Distance:" + distanceInMiles
         myUrl = "http://localhost:3000/campsites/search?utf8=✓&keywords=" + mapCenter.lat + "%2C+" + mapCenter.lng
         window.location.replace myUrl
-
-    
   });*/
     
-

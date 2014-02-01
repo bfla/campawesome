@@ -32,9 +32,9 @@ html
                   .panel-body
                     p#notice = notice
 
-              ol.breadcrumb.white
-                == yield :breadcrumb
-
+              == yield :breadcrumb
+              == yield :tabs
+              
               /Left content
               .col-md-8
                 == yield :left
