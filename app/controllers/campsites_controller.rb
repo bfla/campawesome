@@ -12,14 +12,34 @@ class CampsitesController < ApplicationController
     @campsites = Campsite.search(params[:keywords], my_distance)
     @center = Geocoder::Calculations.geographic_center(@campsites)
 
+    @geojson = Array.new
+    @campsites.each do |campsite|
+      @geojson << {
+        type: 'Feature',
+        geometry: {
+          type: 'Point',
+          coordinates: [campsite.longitude, campsite.latitude]
+        },
+        properties: {
+          title: campsite.name,
+          url: campsite_path(campsite),
+          :'marker-color' => '#09b',
+          :'marker-symbol' => 'campsite',
+          :'marker-size' => 'large'
+        }
+      }
+    end
+
     respond_to do |format|
       format.html { render action: 'search', notice: 'I found 2 campsites that look perfect for you.' }
+      format.json { render json: @geojson }  # respond with geoJSON object
     end
   end
   
   # GET /campsites/1
   # GET /campsites/1.json
   def show
+    render(layout: "layouts/normal")
   end
 
   # GET /campsites/new

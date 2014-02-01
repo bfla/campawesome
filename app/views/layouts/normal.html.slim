@@ -1,12 +1,48 @@
-#main.background
-  .container
-    .row
-      / Content area
-      .col-md-10.col-md-offset-1.well.white
-      - if notice
-        .panel.panel-warning
-          .panel-heading 
-            | Notice
-            #panelClose.button.close type="button" data-dismiss="panel" aria-hidden="true" &times;
-          .panel-body
-            p#notice = notice
+doctype html
+html
+  head
+    / meta tags
+    == yield :head
+
+    / styles
+    == render 'layouts/headstyles'
+    == yield :extra_stylesheets
+
+    / scripts
+    == render 'layouts/headscripts'
+    == yield :head_javascripts
+    
+  body
+    / Top navbar goes here
+    == render 'layouts/navbar'
+    / Body goes here
+    #wrap
+      #main.background
+        .container.background
+          .row
+            / Content area
+            .col-md-10.col-md-offset-1.well.white
+              
+              / Notice area
+              - if notice
+                .panel.panel-warning
+                  .panel-heading 
+                    | Notice
+                    #panelClose.button.close type="button" data-dismiss="panel" aria-hidden="true" &times;
+                  .panel-body
+                    p#notice = notice
+
+              ol.breadcrumb.white
+                == yield :breadcrumb
+
+              /Left content
+              .col-md-8
+                == yield :left
+
+              /Right content
+              .col-md-4
+                == yield :right
+
+    / Footer goes here
+    == render 'layouts/footer'
+    == yield :end

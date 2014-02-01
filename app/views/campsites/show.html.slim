@@ -1,75 +1,49 @@
-#wrap
-  #main.background
-    .container.background
-      .row
-        / Content area
-        .col-md-10.col-md-offset-1.well.white
-          
-          / Notice area
-          - if notice
-            .panel.panel-warning
-              .panel-heading 
-                | Notice
-                #panelClose.button.close type="button" data-dismiss="panel" aria-hidden="true" &times;
-              .panel-body
-                p#notice = notice
+- content_for :breadcrumb
+  = render 'breadcrumb'
+- content_for :left
+  = render 'left_content'
+- content_for :right
+  = render 'right_content'
 
-          /Breadcrumb nav
-          = render 'breadcrumb'
-
-          /Left content
-          .col-md-8
-            = render 'left_content'
-
-          /Right content
-          .col-md-4
-            = render 'right_content'
-
-      / = link_to 'Edit', edit_campsite_path(@campsite)
-      / '|
-      / = link_to 'Back', campsites_path
-
-/ Include modal partials and initialize with js
-== render 'reserveModal'
-javascript:
-  $('#panelClose').click( function () {
-    $('.panel').hide();
-  });
-
-/ Parse coordinate for Google Map
-script
-  | var campsiteLat =
-  = @campsite.latitude
-  | ;
-  | var campsiteLon = 
-  = @campsite.longitude
-  | ;
-  | var campsiteName = "
-  = @campsite.name
-  | ";
-
-/ Google Map
-script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"
-javascript:
-  var map;
-  function initialize() {
-    var mapOptions = {
-      zoom: 9,
-      center: new google.maps.LatLng(campsiteLat, campsiteLon),
-      panControl: false,
-      streetViewControl: false,
-      mapTypeControl: false,
-      zoomControlOptions: {position: google.maps.ControlPosition.RIGHT_CENTER,},
-
-    };
-
-    map = new google.maps.Map(document.getElementById('campsiteMap'),
-        mapOptions);
-    var apiMarker = new google.maps.Marker({
-          position: new google.maps.LatLng(campsiteLat, campsiteLon),
-          map: map,
-          title: campsiteName,
+- content_for :end
+  == render 'reserveModal'
+  javascript:
+    $('#panelClose').click( function () {
+      $('.panel').hide();
     });
-  } // End initialize()
-  google.maps.event.addDomListener(window, 'load', initialize);
 
+  / Parse coordinate for Google Map
+  script
+    | var campsiteLat =
+    = @campsite.latitude
+    | ;
+    | var campsiteLon = 
+    = @campsite.longitude
+    | ;
+    | var campsiteName = "
+    = @campsite.name
+    | ";
+
+  / Google Map
+  script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"
+  javascript:
+    var map;
+    function initialize() {
+      var mapOptions = {
+        zoom: 9,
+        center: new google.maps.LatLng(campsiteLat, campsiteLon),
+        panControl: false,
+        streetViewControl: false,
+        mapTypeControl: false,
+        zoomControlOptions: {position: google.maps.ControlPosition.RIGHT_CENTER,},
+
+      };
+
+      map = new google.maps.Map(document.getElementById('campsiteMap'),
+          mapOptions);
+      var apiMarker = new google.maps.Marker({
+            position: new google.maps.LatLng(campsiteLat, campsiteLon),
+            map: map,
+            title: campsiteName,
+      });
+    } // End initialize()

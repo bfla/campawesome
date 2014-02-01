@@ -1,4 +1,9 @@
-- render 'search_map'
+- content_for :head
+  title Search
+  description Find campsites by location
+
+- content_for :extra_stylesheets
+  link href='//api.tiles.mapbox.com/mapbox.js/v1.6.1/mapbox.css' rel='stylesheet'
 
 style 
   | html, body, .mapColumn {height:100%; padding:0px; margin:0px;}
@@ -50,12 +55,18 @@ style
 
 / Makeshift json data. Yuck but it works. 
 script
-  | var center = 
-  = @center.to_json
+  | var center =
+  = @center
   | ;
+  | var geoJson = $.parseJSON(
+  = @geojson
+  | );
+  | for (obj in geoJson) { alert(obj.type); }
 
 javascript:
-  makeSearchMap();
+  var map = L.mapbox.map('resultsMap', 'campawesome.h5d0p7ea').setView(center, 10);
+  map.markerLayer.setGeoJSON(geoJson);
+  /*makeSearchMap();
   function makeSearchMap() {
     var geoJson = {
         type: 'FeatureCollection',
@@ -89,7 +100,7 @@ javascript:
         }]
     };
     // initializes and centers map
-    var map = L.mapbox.map('resultsMap', 'campawesome.h4ojiee7').setView(center, 9);
+    var map = L.mapbox.map('resultsMap', 'campawesome.h5d0p7ea').setView(center, 10);
     // set control position
     map.zoomControl.setPosition('bottomright');
 
@@ -109,22 +120,22 @@ javascript:
     map.markerLayer.on('mouseout', function(e) {
         //e.layer.closePopup();
     });
-    // Fit map to markers
-    //markerLayer.on('ready', function() {
-      //map.fitBounds(markerLayer.getBounds());
-    //});
-  }
+  }*/
 
   // Reset the map bounds and markers when the right thingee is clicked
-  $('#reset').click(function() { 
-    var mapCenter = map.getCenter(); // Gets the current center of the map as an Leaflet LatLng 
-    var mapBounds = map.getBounds(); // Gets the SW and NE corners of the map as a Leaflet LatLngBound 
-    var southWest = map.getBounds().getSouthWest(); // Returns the SW corner
-    var distanceInMeters = mapCenter.distanceTo(southWest); // Returns the distance in meters
-    var distanceInMiles = distanceInMeters * .000621371 // Calculates the distance in miles
-    alert("Center:" + mapCenter + 'SW:' + southWest + 'Distance:' + distanceInMiles);
-    var myUrl = 'http://localhost:3000/campsites/search?utf8=✓&keywords=' + mapCenter.lat + '%2C+' + mapCenter.lng
-    window.location.replace(myUrl);
-  });
+  /*$('#reset').click(function() { 
+      searchMapArea(map);
+      searchMapArea = (map) ->
+        mapCenter = map.getCenter() # Gets the current center of the map as an Leaflet LatLng
+        mapBounds = map.getBounds() # Gets the SW and NE corners of the map as a Leaflet LatLngBound
+        southWest = map.getBounds().getSouthWest() # Returns the SW corner
+        distanceInMeters = mapCenter.distanceTo(southWest) # Returns the distance in meters
+        distanceInMiles = distanceInMeters * .000621371 # Calculates the distance in miles
+        alert "Center:" + mapCenter + "SW:" + southWest + "Distance:" + distanceInMiles
+        myUrl = "http://localhost:3000/campsites/search?utf8=✓&keywords=" + mapCenter.lat + "%2C+" + mapCenter.lng
+        window.location.replace myUrl
+
+    
+  });*/
     
 
