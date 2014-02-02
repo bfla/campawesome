@@ -4,6 +4,11 @@ class Campsite < ActiveRecord::Base
   # res_phone:string, camp_phone:string, res_url:string, camp_url:string, 
   # reservable:boolean, walkin:boolean
   belongs_to :state
+  #has_many :tribe_associations
+  validates :name, :org, :state_id, :latitude, :longitude, presence: { message:'is required' }
+  validates :res_phone, :camp_phone, numericality: { message:'must be a number' }
+  validates :latitude, numericality: { greater_than: 0, message:'must be a positive' }
+  validates :longitude, numericality: { less_than: 0, message:'must be a negative number' }
   reverse_geocoded_by :latitude, :longitude
   after_validation :reverse_geocode #auto-fetch address
 
@@ -21,6 +26,27 @@ class Campsite < ActiveRecord::Base
     else
       find(:all)
     end
+  end
+
+  def geojsonify
+    geojson = {
+      type: 'Feature',
+      geometry: {
+        type: 'Point',
+        coordinates: [self.longitude, self.latitude]
+      },
+      properties: {
+        title: self.name,
+        url: 'http://example.com',
+        :'marker-color' => "\#09b",
+        :'marker-symbol' => 'campsite',
+        :'marker-size' => 'large'
+      }
+    }
+  end
+
+  def self.to_s
+    self.name
   end
 
 end

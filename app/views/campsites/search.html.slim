@@ -15,39 +15,51 @@ style
 .col-md-4.well.white.left-content
   .result-list
     - if notice
-      .panel.panel-success
-        .panel-heading Bam! Found 'em.
-        .panel-body = notice
-    p.col-md-12
-      #reset.btn.btn-default Search this area
-      = tag :input, id: 'searchJson', type: 'hidden', value: 'test', data: {center: @center, geoJson: @campsites.to_json}
-    - @campsites.each do |campsite|
-      p.lead.col-md-12
-        small = link_to campsite.name, campsite_path(campsite)
-        br
-        small
-          small.subtle-text
-            = campsite.org
-            |  campground in&nbsp;
-            = campsite.state_name
-      - if campsite.description?
-        p.col-md-12 
-           = campsite.description
-      .col-md-12
-        .btn-group
-          button.btn.btn-default.btn-sm.subtle-text
-            span.glyphicon.glyphicon-bookmark
-            |  Save
-          button.btn.btn-default.btn-sm.subtle-text
-            span.glyphicon.glyphicon-check
-            |  Been Here
-          button.btn.btn-default.btn-sm.subtle-text
-            span.glyphicon.glyphicon-star
-            |  Want to go
-          button.btn.btn-default.btn-sm.subtle-text
-            span.glyphicon.glyphicon-usd
-            |  Review it
-      hr.col-md-12
+      .row
+        .col-md-12
+          .panel.panel-success
+            .panel-heading Bam! Found 'em.
+            .panel-body = notice
+    .row
+      .input-group.col-md-6
+        span.input-group-addon 
+          span.glyphicon.glyphicon-calendar
+          | When
+        input#fromDate.form-control type="text" placeholder="Monday"
+      .input-group.col-md-6
+        span.input-group-addon to
+        input#toDate.form-control type="text" placeholder="Monday"
+    .row
+      p.col-md-12
+        #reset.btn.btn-default Search this area
+        = tag :input, id: 'searchJson', type: 'hidden', value: 'test', data: {center: @center, geoJson: @campsites.to_json}
+      - @campsites.each do |campsite|
+        p.lead.col-md-12
+          small = link_to campsite.name, campsite_path(campsite)
+          br
+          small
+            small.subtle-text
+              = campsite.org
+              |  campground in&nbsp;
+              = campsite.state_name
+        - if campsite.description?
+          p.col-md-12 
+             = campsite.description
+        .col-md-12
+          .btn-group
+            button.btn.btn-default.btn-sm.subtle-text
+              span.glyphicon.glyphicon-bookmark
+              |  Save
+            button.btn.btn-default.btn-sm.subtle-text
+              span.glyphicon.glyphicon-check
+              |  Been Here
+            button.btn.btn-default.btn-sm.subtle-text
+              span.glyphicon.glyphicon-star
+              |  Want to go
+            button.btn.btn-default.btn-sm.subtle-text
+              span.glyphicon.glyphicon-usd
+              |  Review it
+        hr.col-md-12
 
 / MapBox ===============================
 .col-md-8.mapColumn

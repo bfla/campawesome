@@ -11,24 +11,8 @@ class CampsitesController < ApplicationController
     my_distance = 20
     @campsites = Campsite.search(params[:keywords], my_distance)
     @center = Geocoder::Calculations.geographic_center(@campsites)
-
     @geojson = Array.new
-    @campsites.each do |campsite|
-      @geojson << {
-        type: 'Feature',
-        geometry: {
-          type: 'Point',
-          coordinates: [campsite.longitude, campsite.latitude]
-        },
-        properties: {
-          title: campsite.name,
-          url: 'http://example.com',
-          :'marker-color' => "\#09b",
-          :'marker-symbol' => 'campsite',
-          :'marker-size' => 'large'
-        }
-      }
-    end
+    @campsites.each { |campsite| @geojson << campsite.geojsonify}
     gon.campsites = @campsites
     gon.geoJson = @geojson
     gon.center = @center
