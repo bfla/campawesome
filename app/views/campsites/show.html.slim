@@ -14,7 +14,7 @@
       small
         small
           span.hashtag &nbsp;##{@campsite.hashtag}&nbsp;
-          span.glyphicon.glyphicon-info-sign.extra-subtle.add-tooltip  data-toggle="tooltip" data-placement="right" title="Tag your tweets and posts with ##{@campsite.hashtag} Why?  Because it's awesome."
+          span.glyphicon.glyphicon-info-sign.extra-subtle.add-tooltip  data-toggle="tooltip" data-placement="right" title="Tag your Twitter & Facebook posts with ##{@campsite.hashtag} Why?  Because it'll make them awesomer."
       br
       small 
         small #{@campsite.org} campground in #{@campsite.state_name}&nbsp;
@@ -24,9 +24,9 @@
 
 
 - content_for :left
-  = render 'campsiteLeft'
+    = render 'campsiteLeft'
 - content_for :right
-  = render 'campsiteRight'
+    = render 'campsiteRight'
 
 - content_for :end
   == render 'reserveModal'

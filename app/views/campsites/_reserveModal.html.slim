@@ -5,18 +5,15 @@
       .modal-header
         button.close type="button" data-dismiss="modal" aria-hidden="true" &times
         h4#reserveModalTitle.modal-title 
-          | Reservations for
-          = @campsite.name
+          | Reservations for #{@campsite.name}
       .modal-body
         p
           | Competition: 
           | High
           br
-          | Reservation phone: 
-          = number_to_phone(@campsite.res_phone)
+          | Reservation phone: #{number_to_phone(@campsite.res_phone)}
           br
-          | Reservation url: 
-          = @campsite.res_url
+          | Reservation url: #{@campsite.res_url}
           br
       .modal-footer
         button.btn.btn-default type="button" data-dismiss="modal" Close
