@@ -11,18 +11,18 @@ nav.navbar.navbar-fixed-top.navbar-inverse.navbar-color.navbar-border role="navi
       a.navbar-brand.brand href=home_path camp&Lambda;wesome
     / Collect the nav links, forms, and other content for toggling
     #bs-collapsable.collapse.navbar-collapse
-       / Left Navbar section
-       ul.nav.navbar-nav
-         li
-           a.nav-link href=campsites_path Index
-
-       / Navbar pulled right
-       = render 'layouts/searchNav'
-       ul.nav.navbar-nav.navbar-left.help-marker
+      / Left Navbar section
+      = render 'layouts/searchNav'
+      ul.nav.navbar-nav.navbar-left.help-marker
         li
           a
-            span.glyphicon.glyphicon-info-sign
-       ul.nav.navbar-nav.navbar-right
+            span.glyphicon.glyphicon-info-sign.nav-link
+      ul.nav.navbar-nav
+        li = link_to 'Campsites', campsites_path, class:'nav-link'
+        li = link_to 'States', states_path, class:'nav-link'
+        li = link_to 'Search', search_campsites_path, class:'nav-link'
+      / Navbar pulled right
+      ul.nav.navbar-nav.navbar-right
         - if user_signed_in?
           = render 'layouts/dropdown'
         - else

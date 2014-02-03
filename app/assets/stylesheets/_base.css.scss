@@ -1,22 +1,23 @@
-// Spacing variables
+// Spacing variables ======================
 $mainPadding: 70px;
 $mediumPadding: 20px;
 $topNavbarHeight: 50px;
 $footerHeight: 50px;
-// Color pallette
+// Color pallette =============================
 $vibrantGreen: rgb(125,168,23);
 $forestyGreen: rgb(56,99,81);
 $grassyGreen: rgb(71, 164, 71);
 $seaGreen: rgb(72,144,72);
 $darkCyan: rgb(0,143,170);
 $foursquareBackground: rgb(234, 232, 228);
-$lightGray: #808080;
-$extraLightGray: #b2b2b2;
+$lightGray: #b2b2b2;
+$extraLightGray: #E1E1E1;
 $orange: rgb(255,136,51);
-// Set colors
+
+// Custom colors
 $brandColor: white;
 $navColor: $darkCyan;
-$navLink: $extraLightGray;
+$navLinkColor: $extraLightGray;
 $navLinkHover: white;
 $backgroundColor: $foursquareBackground;
 $iconBackground: $vibrantGreen;
@@ -26,10 +27,10 @@ $hashtagColor: $orange;
 $brandFont: 'Monda';
 
 
-// Import navbar styles
+// Import navbar styles======================
 @import 'navbar';
 
-// Universal styles
+// Universal styles=================================
 .white {
   background:#ffffff;
   opacity:1.0;
@@ -41,11 +42,11 @@ $brandFont: 'Monda';
 
 .subtle-text { color: $lightGray; }
 
-.extra-subtle { color: $extraLightGray; }
+.extra-subtle { color: $lightGray; }
 
 .hashtag { color: $hashtagColor; }
 
-// Banner styles
+// Banner styles=================================
 .brand {
   font-family: $brandFont;
   color: $brandColor;
@@ -53,6 +54,8 @@ $brandFont: 'Monda';
   &:visited { color: $brandColor; }
   &:hover { color: $brandColor; }
 }
+
+//=======================================================
 
 #resultsMap {
   height:400px;

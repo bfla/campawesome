@@ -2,9 +2,9 @@
 .navbar-color {
   background: $navColor;
   .nav-link {
-    color: $navLink;
+    color: $navLinkColor;
     &:visited {
-      color: $navLink;
+      color: $navLinkColor;
     }
 
     &:hover {
