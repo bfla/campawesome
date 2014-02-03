@@ -39,9 +39,7 @@ style
           br
           small
             small.subtle-text
-              = campsite.org
-              |  campground in&nbsp;
-              = campsite.state_name
+              | #{campsite.org} campground in #{campsite.state_name}
         - if campsite.description?
           p.col-md-12 
              = campsite.description

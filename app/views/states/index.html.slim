@@ -1,19 +1,27 @@
-h1 Listing states
+- content_for :head
+  title States Admin
 
-table
-  tr
-    th Name
-    th
-    th
-    th
+#main.container
+  h1 States Admin
+  .row
+      h1.heading.col-md-12 Listing states
 
-  - @states.each do |state|
-    tr
-      td = state.name
-      td = link_to 'Show', state
-      td = link_to 'Edit', edit_state_path(state)
-      td = link_to 'Destroy', state, data: {:confirm => 'Are you sure?'}, :method => :delete
+      table.table
+        tr
+          th Name
+          th Description
+          th
+          th
+          th
 
-br
+        - @states.each do |state|
+          tr
+            td = state.name
+            td = state.description
+            td = link_to 'Show', state
+            td = link_to 'Edit', edit_state_path(state)
+            td = link_to 'Destroy', state, data: {:confirm => 'Are you sure?'}, :method => :delete
 
-= link_to 'New State', new_state_path
+  br
+
+  = link_to 'New State', new_state_path

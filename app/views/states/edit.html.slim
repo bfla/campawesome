@@ -1,8 +1,10 @@
-h1 Editing state
-
-== render 'form'
-
-= link_to 'Show', @state
-'|
-= link_to 'Back', states_path
+#main.container
+  .row
+    h1.heading.col-md-12 Editing state
+  == render 'form'
+  .row
+    .col-md-12
+      = link_to 'Show', @state
+      '|
+      = link_to 'Back', states_path
 

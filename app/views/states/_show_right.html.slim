@@ -1,0 +1,20 @@
+.row
+  h1.col-md-12
+  p.col-md-12
+    small
+      | Description - 
+      = @state.description
+  hr
+  .col-md-12
+    a.thumbnail
+      #stateMap style="height:150px; padding:0px; margin:0px;"
+  p.col-md-12
+    small
+      a itemprop='map'
+        span.glyphicon.glyphicon-zoom-in
+        | Explore map of all #{@state.name} camping places
+  .row
+    hr
+
+  #test
+    button.btn.btn-danger Test

@@ -15,39 +15,3 @@
     $('#panelClose').click( function () {
       $('.panel').hide();
     });
-
-  / Parse coordinate for Google Map
-  script
-    | var campsiteLat =
-    = @campsite.latitude
-    | ;
-    | var campsiteLon = 
-    = @campsite.longitude
-    | ;
-    | var campsiteName = "
-    = @campsite.name
-    | ";
-
-  / Google Map
-  script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"
-  javascript:
-    var map;
-    function initialize() {
-      var mapOptions = {
-        zoom: 9,
-        center: new google.maps.LatLng(campsiteLat, campsiteLon),
-        panControl: false,
-        streetViewControl: false,
-        mapTypeControl: false,
-        zoomControlOptions: {position: google.maps.ControlPosition.RIGHT_CENTER,},
-
-      };
-
-      map = new google.maps.Map(document.getElementById('campsiteMap'),
-          mapOptions);
-      var apiMarker = new google.maps.Marker({
-            position: new google.maps.LatLng(campsiteLat, campsiteLon),
-            map: map,
-            title: campsiteName,
-      });
-    } // End initialize()

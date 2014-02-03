@@ -6,9 +6,7 @@
       br
       small 
         small
-          = @campsite.org 
-          |  campground in 
-          = @campsite.state_name
+          | #{@campsite.org} campground in #{@campsite.state_name}
 / Ratings
 .row
   .col-md-2
@@ -20,8 +18,7 @@
       small
         small
           a 
-            | campsites near Empire, 
-            = @campsite.state_name
+            | campsites near Empire #{@campsite.state_name}
       br
       span.glyphicon.glyphicon-fire.rating-color
       | &nbsp;
@@ -62,13 +59,12 @@ hr
       - if @campsite.res_phone?
         .col-md-6.subtle-text
           span.glyphicon.glyphicon-earphone 
-          | Reservations:  
-          = number_to_phone(@campsite.res_phone)
+          | Reservations: #{number_to_phone(@campsite.res_phone)}
+
       - if @campsite.camp_phone? && @campsite.camp_phone != @campsite.res_phone
         .col-md-6.subtle-text
           span.glyphicon.glyphicon-earphone
-          |  Campground:  
-          = number_to_phone(@campsite.camp_phone)
+          |  Campground: #{number_to_phone(@campsite.camp_phone)}
       br
       - if @campsite.res_url?
         .col-md-6

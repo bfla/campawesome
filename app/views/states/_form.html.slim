@@ -5,8 +5,23 @@
       ul
         - @state.errors.full_messages.each do |message|
           li = message
-
-  .field.form-group
-    = f.label :name
-    = f.text_field :name
-  .actions = f.submit 'Save'
+  .row
+    .field.form-group
+      = f.label :name, class:'control-label'
+      = f.text_field :name, class:'form-control'
+  .row
+    .field.form-group
+      = f.label :description, class:'control-label'
+      = f.text_area :description, class:'form-control'
+  .row
+    .field.form-group.col-md-4
+      = f.label :map_latitude, class:'control-label'
+      = f.text_field :map_latitude, class:'form-control'
+    .field.form-group.col-md-4
+      = f.label :map_longitude, class:'control-label'
+      = f.text_field :map_longitude, class:'form-control'
+    .field.form-group.col-md-4
+      = f.label :map_distance, class:'control-label'
+      = f.text_field :map_distance, class:'form-control'
+  .row
+    .actions = f.submit 'Save', class:'btn btn-success'

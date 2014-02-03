@@ -1,9 +1,38 @@
-p#notice = notice
+- content_for :head
+  title 
+    =@state.name
+    |  camping
+  meta name="description" content=""
+  script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB9mHzeQJxtkMkn_UkKAOs00Hkg2Y9qKds&sensor=false"
 
-p
-  strong Name:
-  = @state.name
+- content_for :breadcrumb
+  ol.breadcrumb.white
+    li = link_to @state.name+' Camping', @state
 
-= link_to 'Edit', edit_state_path(@state)
-'|
-= link_to 'Back', states_path
+- content_for :tabs
+  ul.nav.nav-tabs
+    li.active 
+      a href=state_path(@state)
+        = @state.name
+        |  camping
+    li
+      a Destinations
+
+- content_for :left
+  = render 'show_left'
+- content_for :right
+  = render "show_right"
+
+  /!
+    .col-md-9
+      div itemscope itemtype="http://schema.org/Photograph"
+        img.img-thumbnail.img-responsive src="http://wikitravel.org/upload/en/thumb/b/bd/SleepingBearDunes.jpg/350px-SleepingBearDunes.jpg" itemprop='image' alt='' description='' caption='' title=''
+    .col-md-3.hidden-xs
+      div itemscope itemtype="http://schema.org/Photograph"
+        img.img-thumbnail src="http://wikitravel.org/upload/en/thumb/b/bd/SleepingBearDunes.jpg/350px-SleepingBearDunes.jpg" itemprop='image' alt='' description='' caption='' title=''
+      div itemscope itemtype="http://schema.org/Photograph"
+        img.img-thumbnail src="http://wikitravel.org/upload/en/thumb/b/bd/SleepingBearDunes.jpg/350px-SleepingBearDunes.jpg" itemprop='image' alt='' description='' caption='' title=''
+      div itemscope itemtype="http://schema.org/Photograph"
+        img.img-thumbnail src="http://wikitravel.org/upload/en/thumb/b/bd/SleepingBearDunes.jpg/350px-SleepingBearDunes.jpg" itemprop='image' alt='' description='' caption='' title=''
+
+- content_for :end

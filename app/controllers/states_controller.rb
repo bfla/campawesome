@@ -10,6 +10,10 @@ class StatesController < ApplicationController
   # GET /states/1
   # GET /states/1.json
   def show
+    render(layout: "layouts/normal")
+    gon.mapDistance = @state.map_distance
+    gon.mapCenterLat = @state.map_latitude
+    gon.mapCenterLng = @state.map_longitude
   end
 
   # GET /states/new
@@ -69,6 +73,6 @@ class StatesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def state_params
-      params.require(:state).permit(:name)
+      params.require(:state).permit(:name, :description, :map_longitude, :map_latitude, :map_distance)
     end
 end
