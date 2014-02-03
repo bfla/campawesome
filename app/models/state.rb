@@ -6,9 +6,6 @@ class State < ActiveRecord::Base
   has_many :campsites
   has_many :destinations
 
-  # scopes
-  # scope :top_destinations, joins(:destinations).where(destinations: {state_id: state.id}).limit(1)
-
   def self.to_s
     self.name
   end
