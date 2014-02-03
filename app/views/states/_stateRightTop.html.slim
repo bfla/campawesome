@@ -1,22 +1,15 @@
-.row
-  h1.col-md-12
-  p.col-md-12
-    small 
-      strong.extra-subtle Description:&nbsp;
-      = truncate @state.description, length:220, separator:' '
-      | &nbsp;
-      a href="#" data-toggle='modal' data-target='#descriptionModal' see more
-  hr
-  .col-md-12
-    a.thumbnail
-      #stateMap style="height:150px; padding:0px; margin:0px;"
-  p.col-md-12
-    small
-      a itemprop='map'
-        span.glyphicon.glyphicon-zoom-in
-        | Explore map of all #{@state.name} camping places
-  .row
-    hr
-
-  #test
-    button.btn.btn-danger Test
+p.col-md-12
+  small 
+    strong.extra-subtle Description:&nbsp;
+    = truncate @state.description, length:220, separator:' '
+    | &nbsp;
+    a href="#" data-toggle='modal' data-target='#descriptionModal' see more
+hr
+.col-md-12
+  a.thumbnail
+    #stateMap style="height:150px; padding:0px; margin:0px;"
+p.col-md-12
+  small
+    a itemprop='map'
+      span.glyphicon.glyphicon-zoom-in
+      | Explore map of all #{@state.name} camping places
