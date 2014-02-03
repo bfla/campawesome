@@ -5,8 +5,7 @@
 - content_for :breadcrumb
   ol.breadcrumb.white
     /li = link_to "#{@campsite.state_name} Camping", state_path(@campsite.state)
-    li 
-      a Empire
+    li = link_to @campsite.city.name, @campsite.city
     li.active = @campsite.name
 - content_for :heading
     h1.col-md-12

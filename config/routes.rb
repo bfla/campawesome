@@ -1,4 +1,6 @@
 Blog::Application.routes.draw do
+  resources :cities
+
   resources :destinations
 
   resources :states

@@ -1,0 +1,24 @@
+p#notice = notice
+
+p
+  strong Name:
+  = @city.name
+p
+  strong Desciption:
+  = @city.desciption
+p
+  strong Latitude:
+  = @city.latitude
+p
+  strong Longitude:
+  = @city.longitude
+p
+  strong Zoom:
+  = @city.zoom
+p
+  strong State:
+  = @city.state_id
+
+= link_to 'Edit', edit_city_path(@city)
+'|
+= link_to 'Back', cities_path

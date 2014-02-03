@@ -4,9 +4,10 @@ class Campsite < ActiveRecord::Base
   # res_phone:string, camp_phone:string, res_url:string, camp_url:string, 
   # reservable:boolean, walkin:boolean
   belongs_to :state
-  #has_many :tribe_associations
-  validates :name, :org, :state_id, :latitude, :longitude, presence: { message:'is required' }
-  validates :res_phone, :camp_phone, numericality: { message:'must be a number' }
+  belongs_to :city
+  #has_many :tribes
+  validates :name, :org, :state_id, :city_id, :latitude, :longitude, presence: { message:'is required' }
+  validates :res_phone, :camp_phone, numericality: { message:'must be a number', allow_blank:true }
   validates :latitude, numericality: { greater_than: 0, message:'must be a positive' }
   validates :longitude, numericality: { less_than: 0, message:'must be a negative number' }
   reverse_geocoded_by :latitude, :longitude
