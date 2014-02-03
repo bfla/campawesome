@@ -16,6 +16,9 @@ class Campsite < ActiveRecord::Base
   def state_name
     self.state.name if self.state.name?
   end
+  def hashtag
+    self.state.hashtag if self.state.hashtag?
+  end
 
   # This takes a search query and distance, codes it into a coordinates, 
   # and returns nearby campgrounds

@@ -51,13 +51,13 @@ mapStyleArray = [
 ]
 
 initialize = ->
-  alert gon.mapDistance
-  alert gon.mapCenterLat
-  alert gon.mapCenterLng
+  #alert gon.mapDistance
+  #alert gon.mapCenterLat
+  #alert gon.mapCenterLng
   mapOptions =
-    zoom: 5
+    zoom: gon.stateZoom
     #center: new google.maps.LatLng(-34.397, 150.644)
-    center: new google.maps.LatLng(gon.mapCenterLat, gon.mapCenterLng)
+    center: new google.maps.LatLng(gon.stateLat, gon.stateLng)
     mapTypeId: google.maps.MapTypeId.ROADMAP
     disableDefaultUI: true
     draggable: false

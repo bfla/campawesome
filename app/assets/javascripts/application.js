@@ -16,3 +16,5 @@
 //= require turbolinks
 //= require map_style
 //= require_tree .
+
+$('.add-tooltip').tooltip();

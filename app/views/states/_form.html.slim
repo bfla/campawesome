@@ -11,6 +11,10 @@
       = f.text_field :name, class:'form-control'
   .row
     .field.form-group
+      = f.label :hashtag, class:'control-label'
+      = f.text_field :hashtag, class:'form-control'
+  .row
+    .field.form-group
       = f.label :description, class:'control-label'
       = f.text_area :description, class:'form-control'
   .row
@@ -21,7 +25,7 @@
       = f.label :map_longitude, class:'control-label'
       = f.text_field :map_longitude, class:'form-control'
     .field.form-group.col-md-4
-      = f.label :map_distance, class:'control-label'
-      = f.text_field :map_distance, class:'form-control'
+      = f.label :zoom, class:'control-label'
+      = f.text_field :zoom, class:'form-control'
   .row
     .actions = f.submit 'Save', class:'btn btn-success'

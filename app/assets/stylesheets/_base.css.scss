@@ -11,7 +11,7 @@ $seaGreen: rgb(72,144,72);
 $darkCyan: rgb(0,143,170);
 $foursquareBackground: rgb(234, 232, 228);
 $lightGray: #808080;
-$extraLightGray: #e1e1e1;
+$extraLightGray: #b2b2b2;
 $orange: rgb(255,136,51);
 // Set colors
 $brandColor: white;
@@ -21,6 +21,7 @@ $navLinkHover: white;
 $backgroundColor: $foursquareBackground;
 $iconBackground: $vibrantGreen;
 $ratingColor: $orange;
+$hashtagColor: $orange;
 // Font variables
 $brandFont: 'Monda';
 
@@ -28,36 +29,29 @@ $brandFont: 'Monda';
 // Import navbar styles
 @import 'navbar';
 
-// Page-level styles
+// Universal styles
 .white {
   background:#ffffff;
   opacity:1.0;
 }
 
-.rating-color {
-  color:$ratingColor;
-}
+.rating-color { color:$ratingColor; }
 
-.background { 
-  background: $backgroundColor;
-}
+.background {  background: $backgroundColor; }
 
-.subtle-text {
-  color: $lightGray;
-}
+.subtle-text { color: $lightGray; }
+
+.extra-subtle { color: $extraLightGray; }
+
+.hashtag { color: $hashtagColor; }
 
 // Banner styles
 .brand {
   font-family: $brandFont;
   color: $brandColor;
 
-  &:visited {
-    color: $brandColor;
-  }
-
-  &:hover {
-    color: $brandColor;
-  }
+  &:visited { color: $brandColor; }
+  &:hover { color: $brandColor; }
 }
 
 #resultsMap {

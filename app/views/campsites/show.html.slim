@@ -3,11 +3,30 @@
   meta name="description" content="<%=campsite.name=> in <%= campsite.state_name %>: See booking information, reviews, photos and more for <%=campsite.name=>, ranked #blank for blank in blank area."
 
 - content_for :breadcrumb
-  = render 'show_breadcrumb'
+ ol.breadcrumb.white
+  li = link_to "#{@campsite.state_name} Camping", state_path(@campsite.state)
+  li 
+    a Empire
+  li.active = @campsite.name
+- content_for :heading
+    h1.col-md-12
+      = @campsite.name
+      small
+        small
+          span.hashtag &nbsp;##{@campsite.hashtag}&nbsp;
+          span.glyphicon.glyphicon-info-sign.extra-subtle.add-tooltip  data-toggle="tooltip" data-placement="right" title="Tag your tweets and posts with ##{@campsite.hashtag} Why?  Because it's awesome."
+      br
+      small 
+        small #{@campsite.org} campground in #{@campsite.state_name}&nbsp;
+      hr
+          
+          
+
+
 - content_for :left
-  = render 'show_left'
+  = render 'campsite_left'
 - content_for :right
-  = render 'show_right'
+  = render 'campsite_right'
 
 - content_for :end
   == render 'reserveModal'
@@ -15,3 +34,4 @@
     $('#panelClose').click( function () {
       $('.panel').hide();
     });
+    $('.add-tooltip').tooltip();

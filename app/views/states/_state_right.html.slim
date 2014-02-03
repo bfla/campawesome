@@ -1,9 +1,10 @@
 .row
   h1.col-md-12
   p.col-md-12
-    small
-      | Description - 
-      = @state.description
+    small 
+      strong.extra-subtle Description:
+      = truncate @state.description, length:220, separator:' '
+      a href="#" data-toggle='modal' data-target='#descriptionModal' more
   hr
   .col-md-12
     a.thumbnail
