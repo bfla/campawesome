@@ -1,10 +1,10 @@
 - content_for :head
-  title @campsite.name on campAwesome
-  meta name="description" content="<%=campsite.name=> in <%= campsite.state_name %>: See booking information, reviews, photos and more for <%=campsite.name=>, ranked #blank for blank in blank area."
+  title #{@campsite.name} on campAwesome
+  /meta name="description" content="<%=campsite.name=> in <%= campsite.state_name %>: See booking information, reviews, photos and more for <%=campsite.name=>, ranked #blank for blank in blank area."
 
 - content_for :breadcrumb
  ol.breadcrumb.white
-  li = link_to "#{@campsite.state_name} Camping", state_path(@campsite.state)
+  /li = link_to "#{@campsite.state_name} Camping", state_path(@campsite.state)
   li 
     a Empire
   li.active = @campsite.name

@@ -1,0 +1,11 @@
+/ Modal for full state description
+#descriptionModal.modal.fade tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
+  .modal-dialog
+    .modal-content
+      .modal-header
+        button.close type="button" data-dismiss="modal" aria-hidden="true" &times
+        h5#descriptionModalTitle.modal-title.text-center Description for #{@destination.name} camping
+      .modal-body
+        p = @destination.description
+      .modal-footer
+        button.btn.btn-default type="button" data-dismiss="modal" Close

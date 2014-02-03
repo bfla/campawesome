@@ -1,0 +1,36 @@
+- content_for :head
+  title #{@destination.name} camping
+  meta name="description" content=""
+  script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB9mHzeQJxtkMkn_UkKAOs00Hkg2Y9qKds&sensor=false"
+
+- content_for :breadcrumb
+  ol.breadcrumb.white
+    li = link_to "#{@destination.state.name} camping", @destination.state
+    li.active = @destination.name+' camping'
+
+  - content_for :heading
+    .headline
+      h1.heading.guide-heading.col-md-12
+        | #{@destination.name} camping
+        small 
+          small.hashtag  &nbsp;##{@destination.hashtag}&nbsp;
+        small
+          small
+              span.glyphicon.glyphicon-info-sign.extra-subtle.add-tooltip  data-toggle="tooltip" data-placement="right" title="Tag your Twitter & Facebook posts with ##{@destination.hashtag} Why?  Because it'll make them awesomer."
+    ul.nav.nav-tabs.guide-tabs
+      li.active = link_to @destination.name, @destination
+      li = link_to "Campsites near #{@destination.name}", @destination
+
+  - content_for :top_left
+    = render 'destinationTopLeft'
+  - content_for :top_right
+    = render "destinationTopRight"
+  - content_for :bottom_left
+    = render "destinationBottomLeft"
+  - content_for :bottom_right
+    = render "destinationBottomRight"
+
+  - content_for :end
+    = render "destinationDescriptionModal"
+    javascript:
+      $('.add-tooltip').tooltip();

@@ -1,0 +1,13 @@
+/ Popular Destinations
+.col-md-12
+  p.lead 
+    | Popular Destinations&nbsp;
+    small
+      small 
+        small
+          a see more
+- @state.destinations.each do |destination|
+  .col-md-4
+    .thumb
+      p = link_to destination.name, destination
+

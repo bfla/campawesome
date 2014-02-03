@@ -1,5 +1,6 @@
 class StatesController < ApplicationController
-  before_action :set_state, only: [:show, :edit, :update, :destroy]
+  before_action :set_state, only: [:edit, :update, :destroy]
+  before_action :set_state_guide, only: [:show]
 
   # GET /states
   # GET /states.json
@@ -10,10 +11,10 @@ class StatesController < ApplicationController
   # GET /states/1
   # GET /states/1.json
   def show
-    render(layout: "layouts/guide")
     gon.stateZoom = @state.zoom
     gon.stateLat = @state.map_latitude
     gon.stateLng = @state.map_longitude
+    render(layout: "layouts/guide")
   end
 
   # GET /states/new
@@ -69,6 +70,11 @@ class StatesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_state
       @state = State.find(params[:id])
+    end
+
+    def set_state_guide
+      @state = State.includes(:destinations).find(params[:id])
+      # @state = State.includes(:top_destinations).find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

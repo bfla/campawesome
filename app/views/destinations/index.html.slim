@@ -1,0 +1,33 @@
+- content_for :head
+  title Campsite admin
+#main.container
+  .row
+    h1 Listing destinations
+
+  table.table
+    tr
+      th Name
+      th Description
+      th Latitude
+      th Longitude
+      th Zoom
+      th State
+      th
+      th
+      th
+
+    - @destinations.each do |destination|
+      tr
+        td = destination.name
+        td = destination.description
+        td = destination.latitude
+        td = destination.longitude
+        td = destination.zoom
+        td = destination.state_id
+        td = link_to 'Show', destination
+        td = link_to 'Edit', edit_destination_path(destination)
+        td = link_to 'Destroy', destination, data: {:confirm => 'Are you sure?'}, :method => :delete
+
+  br
+  .row
+    = link_to 'New Destination', new_destination_path

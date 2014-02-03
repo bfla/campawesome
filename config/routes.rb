@@ -1,4 +1,6 @@
 Blog::Application.routes.draw do
+  resources :destinations
+
   resources :states
 
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
