@@ -10,7 +10,7 @@ class StatesController < ApplicationController
   # GET /states/1
   # GET /states/1.json
   def show
-    render(layout: "layouts/normal")
+    render(layout: "layouts/guide")
     gon.stateZoom = @state.zoom
     gon.stateLat = @state.map_latitude
     gon.stateLng = @state.map_longitude

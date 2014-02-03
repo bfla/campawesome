@@ -25,10 +25,14 @@
     li
       a Destinations
 
-- content_for :left
-  = render 'state_left'
-- content_for :right
-  = render "state_right"
+- content_for :top_left
+  = render 'stateLeftTop'
+- content_for :top_right
+  = render "stateRightTop"
+- content_for :bottom_left
+  = render "stateLeftBot"
+- content_for :bottom_right
+  = render "stateRightBot"
 
   /!
     .col-md-9
