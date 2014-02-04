@@ -1,5 +1,5 @@
 class TribalMembership < ActiveRecord::Base
-  has_one :tribe
-  has_one :user
+  belongs_to :tribe
+  belongs_to :user
   validates :tribe, :user, presence: true
 end

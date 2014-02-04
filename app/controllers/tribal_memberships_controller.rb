@@ -15,6 +15,7 @@ class TribalMembershipsController < ApplicationController
   # GET /tribal_memberships/new
   def new
     @tribal_membership = TribalMembership.new
+    @tribes = Tribe.all
   end
 
   # GET /tribal_memberships/1/edit

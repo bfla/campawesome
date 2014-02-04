@@ -8,3 +8,10 @@ li.dropdown
       b.caret
   ul.dropdown-menu
     li = link_to 'Sign out', destroy_user_session_path, :method => :delete
+    li = link_to 'Campsites', campsites_path
+    li = link_to 'States', states_path
+    li = link_to 'Search', search_campsites_path
+    li = link_to 'Destinations', destinations_path
+    li = link_to 'Cities', cities_path
+    li = link_to 'Tribes', tribes_path
+    li = link_to 'Join Tribe', new_tribal_membership_path

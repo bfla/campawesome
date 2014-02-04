@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140204150507) do
+ActiveRecord::Schema.define(version: 20140204154957) do
 
   create_table "campsites", force: true do |t|
     t.string   "name"
@@ -63,6 +63,13 @@ ActiveRecord::Schema.define(version: 20140204150507) do
     t.float    "map_longitude"
     t.string   "hashtag"
     t.integer  "zoom"
+  end
+
+  create_table "tribal_memberships", force: true do |t|
+    t.integer  "tribe_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "tribes", force: true do |t|

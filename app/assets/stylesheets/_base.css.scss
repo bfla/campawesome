@@ -1,6 +1,7 @@
 // Spacing variables ======================
 $mainPadding: 70px;
 $mediumPadding: 20px;
+$smallPadding: 10px;
 $topNavbarHeight: 50px;
 $footerHeight: 50px;
 // Color pallette =============================
@@ -36,17 +37,25 @@ $brandFont: 'Monda';
   opacity:1.0;
 }
 
-.rating-color { color:$ratingColor; }
+.rating-color {   color: $ratingColor; }
 
-.background {  background: $backgroundColor; }
+.background {     background: $backgroundColor; }
 
-.subtle-text { color: $lightGray; }
+.subtle-text {    color: $lightGray; }
 
-.extra-subtle { color: $lightGray; }
+.extra-subtle {   color: $lightGray; }
 
-.hashtag { color: $hashtagColor; }
+.hashtag {        color: $hashtagColor; }
 
-.pad-top-lg { padding-top: $mainPadding; }
+.margin-left-sm { margin-left:$smallPadding; }
+
+.pad-left-sm {    padding-left: $smallPadding; }
+
+.pad-top-md {     padding-top: $mediumPadding; }
+
+.pad-top-lg {     padding-top: $mainPadding; }
+
+.tribe-background { background: $navColor; }
 
 // Banner styles=================================
 .brand {

@@ -1,5 +1,25 @@
-h1 New tribal_membership
-
-== render 'form'
-
-= link_to 'Back', tribal_memberships_path
+- content_for :head
+  title Join a tribe on CampAwesome
+  meta name='description' content='Join a tribe on CampAwesome'
+.background
+  .container.background.pad-top-lg
+    .col-md-10.col-md-offset-1
+      / heading
+      .row.text-center
+        h1.col-md-12 Join a tribe
+        p.lead Get personalized recommendations & more
+        button.btn.btn-default Skip
+        button.btn.btn-success.tribeJoinSubmit Join it!
+        hr
+      / tribe thumbnails
+      .row
+      - @tribes.each do |tribe|
+        .col-md-4
+          .thumbnail.tribeThumb data-tribe-id=tribe.id
+            = image_tag 'dummies/tribePhoto500x214.jpg', class:'img'
+            p.lead.tribe-caption.col-md-offset-1.pad-top-md
+              = image_tag 'dummies/tribeIcon50x50.png', class:'img-circle tribe-background'
+              small 
+                |   #{tribe.name}
+            p.col-md-offset-1 = tribe.description
+      / bottom area
