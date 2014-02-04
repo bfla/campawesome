@@ -14,7 +14,7 @@
       / tribe thumbnails
       .row
       - @tribes.each do |tribe|
-        .col-md-4
+        .col-md-4 
           .thumbnail.tribeThumb data-tribe-id=tribe.id
             = image_tag 'dummies/tribePhoto500x214.jpg', class:'img'
             p.lead.tribe-caption.col-md-offset-1.pad-top-md
@@ -22,4 +22,4 @@
               small 
                 |   #{tribe.name}
             p.col-md-offset-1 = tribe.description
-      / bottom area
+      /hidden form
