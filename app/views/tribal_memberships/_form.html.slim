@@ -1,0 +1,15 @@
+= form_for @tribal_membership do |f|
+  - if @tribal_membership.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@tribal_membership.errors.count, "error")} prohibited this tribal_membership from being saved:"
+      ul
+        - @tribal_membership.errors.full_messages.each do |message|
+          li = message
+
+  .field
+    = f.label :tribe_id
+    = f.number_field :tribe_id
+  .field
+    = f.label :user_id
+    = f.number_field :user_id
+  .actions = f.submit 'Save'

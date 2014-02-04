@@ -1,0 +1,2 @@
+module TribalMembershipsHelper
+end

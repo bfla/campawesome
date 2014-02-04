@@ -1,0 +1,12 @@
+p#notice = notice
+
+p
+  strong Tribe:
+  = @tribal_membership.tribe_id
+p
+  strong User:
+  = @tribal_membership.user_id
+
+= link_to 'Edit', edit_tribal_membership_path(@tribal_membership)
+'|
+= link_to 'Back', tribal_memberships_path

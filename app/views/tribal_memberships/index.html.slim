@@ -1,0 +1,21 @@
+h1 Listing tribal_memberships
+
+table
+  tr
+    th Tribe
+    th User
+    th
+    th
+    th
+
+  - @tribal_memberships.each do |tribal_membership|
+    tr
+      td = tribal_membership.tribe_id
+      td = tribal_membership.user_id
+      td = link_to 'Show', tribal_membership
+      td = link_to 'Edit', edit_tribal_membership_path(tribal_membership)
+      td = link_to 'Destroy', tribal_membership, data: {:confirm => 'Are you sure?'}, :method => :delete
+
+br
+
+= link_to 'New Tribal membership', new_tribal_membership_path
