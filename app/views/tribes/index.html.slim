@@ -1,0 +1,27 @@
+- content_for :head
+  title Tribe admin
+#main.container
+  .row
+      h1.heading.col-md-12 Listing tribes
+
+  table.table
+    tr
+      th Name
+      th Description
+      th Vibe
+      th
+      th
+      th
+
+    - @tribes.each do |tribe|
+      tr
+        td = tribe.name
+        td = tribe.description
+        td = tribe.vibe
+        td = link_to 'Show', tribe
+        td = link_to 'Edit', edit_tribe_path(tribe)
+        td = link_to 'Destroy', tribe, data: {:confirm => 'Are you sure?'}, :method => :delete
+
+  br
+  .row
+    = link_to 'New Tribe', new_tribe_path

@@ -1,4 +1,6 @@
 Blog::Application.routes.draw do
+  resources :tribes
+
   resources :cities
 
   resources :destinations

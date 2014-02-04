@@ -1,0 +1,15 @@
+p#notice = notice
+
+p
+  strong Name:
+  = @tribe.name
+p
+  strong Description:
+  = @tribe.description
+p
+  strong Vibe:
+  = @tribe.vibe
+
+= link_to 'Edit', edit_tribe_path(@tribe)
+'|
+= link_to 'Back', tribes_path

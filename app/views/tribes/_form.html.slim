@@ -1,0 +1,20 @@
+= form_for @tribe, html: {class:"col-offset-md-1 col-md-4"} do |f|
+  - if @tribe.errors.any?
+    .panel.panel-danger
+      .panel-heading Bummer! Something went wrong
+      #error_explanation.panel-body
+        h2 = "#{pluralize(@tribe.errors.count, "error")} prohibited this tribe from being saved:"
+        ul
+          - @tribe.errors.full_messages.each do |message|
+            li = message
+  .field.form-group
+    = f.label :name, class:'control-label'
+    = f.text_field :name, class:'form-control'
+  .field.form-group
+    = f.label :description, class:'control-label'
+    = f.text_area :description, class:'form-control'
+  .field.form-group
+    = f.label :vibe, class:'control-label'
+    = f.text_field :vibe, class:'form-control'
+  .row
+    .actions = f.submit 'Save', class:'btn btn-success'
