@@ -22,6 +22,8 @@ nav.navbar.navbar-fixed-top.navbar-inverse.navbar-color.navbar-border role="navi
         li = link_to 'States', states_path, class:'nav-link'
         li = link_to 'Search', search_campsites_path, class:'nav-link'
         li = link_to 'Destinations', destinations_path, class:'nav-link'
+        li
+          a.nav-link href="#" data-toggle="modal" data-target="#signinModal" New signin
       / Navbar pulled right
       ul.nav.navbar-nav.navbar-right
         - if user_signed_in?
