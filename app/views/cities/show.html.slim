@@ -1,24 +1,36 @@
-p#notice = notice
+- content_for :head
+  title #{@city.name} camping
+  meta name="description" content=""
+  script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB9mHzeQJxtkMkn_UkKAOs00Hkg2Y9qKds&sensor=false"
 
-p
-  strong Name:
-  = @city.name
-p
-  strong Desciption:
-  = @city.desciption
-p
-  strong Latitude:
-  = @city.latitude
-p
-  strong Longitude:
-  = @city.longitude
-p
-  strong Zoom:
-  = @city.zoom
-p
-  strong State:
-  = @city.state_id
+- content_for :breadcrumb
+  ol.breadcrumb.white
+    li = link_to "#{@city.state.name} camping", @city.state
+    li.active = @city.name+' camping'
 
-= link_to 'Edit', edit_city_path(@city)
-'|
-= link_to 'Back', cities_path
+  - content_for :heading
+    .headline
+      h1.heading.guide-heading.col-md-12
+        | #{@city.name} camping
+        small 
+          small.hashtag  &nbsp;##{@city.hashtag}&nbsp;
+        small
+          small
+              span.glyphicon.glyphicon-info-sign.extra-subtle.add-tooltip  data-toggle="tooltip" data-placement="right" title="Tag your Twitter & Facebook posts with ##{@city.hashtag} Why?  Because it'll make them awesomer."
+    ul.nav.nav-tabs.guide-tabs
+      li.active = link_to @city.name, @city
+      li = link_to "Campsites near #{@city.name}", @city
+
+  - content_for :top_left
+    = render 'cityTopLeft'
+  - content_for :top_right
+    = render "cityTopRight"
+  - content_for :bottom_left
+    = render "cityBottomLeft"
+  - content_for :bottom_right
+    = render "cityBottomRight"
+
+  - content_for :end
+    = render "cityDescriptionModal"
+    javascript:
+      $('.add-tooltip').tooltip();

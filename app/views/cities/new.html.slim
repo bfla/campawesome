@@ -1,5 +1,9 @@
-h1 New city
+- content_for :head
+  title New city 
+#main.container
+  .row
+    h1.heading.col-md-12Editing New city
 
-== render 'form'
-
-= link_to 'Back', cities_path
+  == render 'form'
+  .row
+    .col-md-12 = link_to 'Back', cities_path

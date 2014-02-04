@@ -10,6 +10,10 @@ class CitiesController < ApplicationController
   # GET /cities/1
   # GET /cities/1.json
   def show
+    render(layout: "layouts/guide")
+    gon.zoom = @city.zoom
+    gon.lat = @city.latitude
+    gon.lng = @city.longitude
   end
 
   # GET /cities/new

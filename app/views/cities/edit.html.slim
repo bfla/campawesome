@@ -1,8 +1,13 @@
-h1 Editing city
+- content_for :head
+  title Edit city 
+#main.container
+  .row
+    h1.heading.col-md-12Editing Edit city
 
-== render 'form'
-
-= link_to 'Show', @city
-'|
-= link_to 'Back', cities_path
+  == render 'form'
+  .row
+    .col-md-12
+      = link_to 'Show', @city
+      '|
+      = link_to 'Back', cities_path
 

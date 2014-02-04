@@ -1,27 +1,31 @@
-= form_for @city do |f|
+= form_for @city, {class:"col-offset-md-1 col-md-4"} do |f|
   - if @city.errors.any?
-    #error_explanation
-      h2 = "#{pluralize(@city.errors.count, "error")} prohibited this city from being saved:"
-      ul
-        - @city.errors.full_messages.each do |message|
-          li = message
+    .panel.panel-danger
+      .panel-heading Bummer! Something went wrong
+      #error_explanation.panel-body
+        h2 = "#{pluralize(@campsite.errors.count, "error")} prohibited this campsite from being saved:"
+        ul
+          - @campsite.errors.full_messages.each do |message|
+            li = message
 
-  .field
-    = f.label :name
-    = f.text_field :name
-  .field
-    = f.label :desciption
-    = f.text_area :desciption
-  .field
-    = f.label :latitude
-    = f.text_field :latitude
-  .field
-    = f.label :longitude
-    = f.text_field :longitude
-  .field
-    = f.label :zoom
-    = f.number_field :zoom
-  .field
-    = f.label :state_id
-    = f.number_field :state_id
-  .actions = f.submit 'Save'
+  .field.field.form-group
+    = f.label :name, class:'control-label'
+    = f.text_field :name, class:'form-control'
+  .field.field.form-group
+    = f.label :desciption, class:'control-label'
+    = f.text_area :desciption, class:'form-control'
+  .row
+    .field.col-md-5
+      = f.label :latitude, class:'control-label'
+      = f.text_field :latitude, class:'form-control'
+    .field.col-md-5
+      = f.label :longitude, class:'control-label'
+      = f.text_field :longitude, class:'form-control'
+    .field.col-md-2
+      = f.label :zoom, class:'control-label'
+      = f.number_field :zoom, class:'form-control'
+  .row
+    .field.col-md-2
+      = f.label :state_id, class:'control-label'
+      = f.number_field :state_id
+  .actions = f.submit 'Save', class:'btn btn-success'
