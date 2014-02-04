@@ -6,9 +6,7 @@
         h4#signinModalTitle.modal-title 
           | Sign In
       .modal-body
-        = form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f|
-          f.label :email
-          f.email_field :email
+        / Form needs to go here
 
       .modal-footer
         button.btn.btn-default type="button" data-dismiss="modal" Close
