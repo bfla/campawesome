@@ -11,9 +11,10 @@
   initCenter = gon.center
   campsites = gon.campsites
   geoJson = gon.geoJson
+  zoom = gon.zoom
   
   # map code
-  map = L.mapbox.map("resultsMap", "campawesome.h5d0p7ea").setView(initCenter, 10) # initialize the map
+  map = L.mapbox.map("resultsMap", "campawesome.h5d0p7ea").setView(initCenter, zoom) # initialize the map
   map.zoomControl.setPosition('bottomright') # move the map zoom control
   
   map.markerLayer.setGeoJSON(geoJson) # set the markers

@@ -8,14 +8,19 @@ class CampsitesController < ApplicationController
   end
 
   def search
-    my_distance = 20
-    @campsites = Campsite.search(params[:keywords], my_distance)
+    zoom = params[:zoom] || 7
+    distance = params[:distance] || 30
+    coordinates = Geocoder.coordinates(params[:keywords])
+    @campsites = Campsite.near(coordinates, distance)
+    #@campsites = Campsite.search(params[:keywords], zoom)
+    #@campsites = Campsite.search(params[:keywords], my_distance)
     @center = Geocoder::Calculations.geographic_center(@campsites)
     @geojson = Array.new
     @campsites.each { |campsite| @geojson << campsite.geojsonify}
     gon.campsites = @campsites
     gon.geoJson = @geojson
     gon.center = @center
+    gon.zoom = zoom
 
     respond_to do |format|
       format.html { render action: 'search', notice: 'I found 2 campsites that look perfect for you.' }

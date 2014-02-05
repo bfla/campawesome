@@ -4,7 +4,7 @@
 
 - content_for :breadcrumb
   ol.breadcrumb.white
-    /li = link_to "#{@campsite.state_name} Camping", state_path(@campsite.state)
+    li = link_to "#{@campsite.state_name} Camping", state_path(@campsite.state)
     li = link_to @campsite.city.name, @campsite.city
     li.active = @campsite.name
 - content_for :heading
@@ -19,7 +19,7 @@
         small #{@campsite.org} campground in #{@campsite.state_name}&nbsp;
       hr
       - if @campsite.beens(current_user)
-        = button_to 'Been Here', @campsite.beens(current_user), method: :post, class:'btn btn-success'
+        = button_to 'Been Here', '#', method: :post, class:'btn btn-success'
       - else 
         = button_to 'Been Here', beens_path(campsite_id:@campsite, user_id:current_user), method: :post, class:'btn btn-default'
           

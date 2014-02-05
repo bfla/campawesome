@@ -1,13 +1,17 @@
 / Popular Destinations
 .col-md-12
   p.lead 
-    | Popular Destinations&nbsp;
+    | Top #{@state.name} Destinations&nbsp;
     small
       small 
         small
           a see more
-- @destinations.each do |destination|
+- @destinations.each_with_index do |destination, index|
   .col-md-4
-    .thumb
-      p = link_to destination.name, destination
+    = link_to destination_path(destination), class:'thumbnail'
+      = image_tag 'dummies/destPhoto221x221.png'
+    p.text-center
+      span.label.label-info = index + 1
+      |&nbsp;&nbsp;
+      = link_to link_to destination.name, destination
 

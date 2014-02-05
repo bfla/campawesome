@@ -6,10 +6,10 @@ p.col-md-12
     a href="#" data-toggle='modal' data-target='#descriptionModal' see more
 hr
 .col-md-12
-  a.thumbnail
+  a.thumbnail href=search_campsites_path(keywords:"#{@destination.latitude}, #{@destination.longitude}", distance:30, zoom:10)
     #destinationMap style="height:150px; padding:0px; margin:0px;"
 p.col-md-12
   small
-    a itemprop='map'
+    a itemprop='map' href=search_campsites_path(keywords:"#{@destination.latitude}, #{@destination.longitude}", distance:30, zoom:10)
       span.glyphicon.glyphicon-zoom-in
       | Explore map of all #{@destination.name} camping places

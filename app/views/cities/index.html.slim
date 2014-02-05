@@ -6,6 +6,7 @@
 
   table.table
     tr
+      th id
       th Name
       th Desciption
       th Latitude
@@ -18,6 +19,7 @@
 
     - @cities.each do |city|
       tr
+        td = city.id
         td = city.name
         td = city.desciption
         td = city.latitude
