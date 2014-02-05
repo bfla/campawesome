@@ -1,0 +1,15 @@
+= form_for @vibe do |f|
+  - if @vibe.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@vibe.errors.count, "error")} prohibited this vibe from being saved:"
+      ul
+        - @vibe.errors.full_messages.each do |message|
+          li = message
+
+  .field
+    = f.label :campsite_id
+    = f.number_field :campsite_id
+  .field
+    = f.label :tribe_id
+    = f.number_field :tribe_id
+  .actions = f.submit 'Save'

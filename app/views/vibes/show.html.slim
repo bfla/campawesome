@@ -1,0 +1,12 @@
+p#notice = notice
+
+p
+  strong Campsite:
+  = @vibe.campsite_id
+p
+  strong Tribe:
+  = @vibe.tribe_id
+
+= link_to 'Edit', edit_vibe_path(@vibe)
+'|
+= link_to 'Back', vibes_path

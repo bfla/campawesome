@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, :omniauth_providers => [:facebook]
-  has_one :tribal_membership
+  has_one :tribal_membership, dependent: :destroy
   has_one :tribe, through: :tribal_membership
   has_many :beens, dependent: :destroy
   has_many :campsites, through: :beens

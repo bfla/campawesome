@@ -1,0 +1,21 @@
+h1 Listing vibes
+
+table
+  tr
+    th Campsite
+    th Tribe
+    th
+    th
+    th
+
+  - @vibes.each do |vibe|
+    tr
+      td = vibe.campsite_id
+      td = vibe.tribe_id
+      td = link_to 'Show', vibe
+      td = link_to 'Edit', edit_vibe_path(vibe)
+      td = link_to 'Destroy', vibe, data: {:confirm => 'Are you sure?'}, :method => :delete
+
+br
+
+= link_to 'New Vibe', new_vibe_path

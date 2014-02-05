@@ -7,6 +7,9 @@ class Campsite < ActiveRecord::Base
   belongs_to :city
   has_many :beens, dependent: :destroy
   has_many :users, through: :beens
+  has_many :vibes, dependent: :destroy
+  has_many :tribes, through: :vibes
+
   #has_many :tribes
   validates :name, :org, :state_id, :city_id, :latitude, :longitude, presence: { message:'is required' }
   validates :res_phone, :camp_phone, numericality: { message:'must be a number', allow_blank:true }

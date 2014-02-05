@@ -1,4 +1,6 @@
 Blog::Application.routes.draw do
+  resources :vibes
+
   resources :beens
 
   resources :tribal_memberships
