@@ -1,0 +1,21 @@
+h1 Listing beens
+
+table
+  tr
+    th Campsite
+    th User
+    th
+    th
+    th
+
+  - @beens.each do |been|
+    tr
+      td = been.campsite_id
+      td = been.user_id
+      td = link_to 'Show', been
+      td = link_to 'Edit', edit_been_path(been)
+      td = link_to 'Destroy', been, data: {:confirm => 'Are you sure?'}, :method => :delete
+
+br
+
+= link_to 'New Been', new_been_path

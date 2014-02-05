@@ -5,6 +5,8 @@ class Campsite < ActiveRecord::Base
   # reservable:boolean, walkin:boolean
   belongs_to :state
   belongs_to :city
+  has_many :beens
+  has_many :users, through: :beens
   #has_many :tribes
   validates :name, :org, :state_id, :city_id, :latitude, :longitude, presence: { message:'is required' }
   validates :res_phone, :camp_phone, numericality: { message:'must be a number', allow_blank:true }

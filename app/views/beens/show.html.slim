@@ -1,0 +1,12 @@
+p#notice = notice
+
+p
+  strong Campsite:
+  = @been.campsite_id
+p
+  strong User:
+  = @been.user_id
+
+= link_to 'Edit', edit_been_path(@been)
+'|
+= link_to 'Back', beens_path
