@@ -1,5 +1,6 @@
 class TribalMembershipsController < ApplicationController
   before_action :set_tribal_membership, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: [:create]
 
   # GET /tribal_memberships
   # GET /tribal_memberships.json
@@ -67,7 +68,9 @@ class TribalMembershipsController < ApplicationController
     def set_tribal_membership
       @tribal_membership = TribalMembership.find(params[:id])
     end
-
+    def set_user
+      params[:user_id] = current_user
+    end
     # Never trust parameters from the scary internet, only allow the white list through.
     def tribal_membership_params
       params.require(:tribal_membership).permit(:tribe_id, :user_id)

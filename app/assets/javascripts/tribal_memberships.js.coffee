@@ -17,6 +17,9 @@ $(document).ready ->
     # Save the id of the clicked thumbnail
     tribeId = $(this).data('tribe-id') # get the tribe Id
     alert tribeId # test
+    $("#tribal_membership_tribe_id").val(tribeId)
+    alert $("#tribal_membership_tribe_id").val()
+
 
 
 

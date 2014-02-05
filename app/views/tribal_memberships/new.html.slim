@@ -1,6 +1,6 @@
 - content_for :head
-  title Join a tribe on CampAwesome
-  meta name='description' content='Join a tribe on CampAwesome'
+  title CampAwesome Tribes
+  meta name='description' content='Join a camping tribe on CampAwesome'
 .background
   .container.background.pad-top-lg
     .col-md-10.col-md-offset-1
@@ -8,8 +8,11 @@
       .row.text-center
         h1.col-md-12 Join a tribe
         p.lead Get personalized recommendations & more
-        button.btn.btn-default Skip
-        button.btn.btn-success.tribeJoinSubmit Join it!
+        = form_for @tribal_membership do |f|
+          = f.hidden_field :user_id, value:current_user.id
+          = f.hidden_field :tribe_id
+          button.btn.btn-default Skip
+          = f.submit 'Join it!', class:"btn btn-success tribeJoinSubmit"
         hr
       / tribe thumbnails
       .row
