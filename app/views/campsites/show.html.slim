@@ -18,7 +18,10 @@
       small 
         small #{@campsite.org} campground in #{@campsite.state_name}&nbsp;
       hr
-      = button_to 'Been Here', beens_path(campsite_id:@campsite, user_id:current_user), method: :post, class:'btn btn-default'
+      - if @campsite.beens(current_user)
+        = button_to 'Been Here', @campsite.beens(current_user), method: :post, class:'btn btn-success'
+      - else 
+        = button_to 'Been Here', beens_path(campsite_id:@campsite, user_id:current_user), method: :post, class:'btn btn-default'
           
           
 

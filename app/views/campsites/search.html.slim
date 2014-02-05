@@ -61,9 +61,14 @@ style
             button.btn.btn-default.btn-sm.subtle-text
               span.glyphicon.glyphicon-bookmark
               |  Save
-            = link_to beens_path(campsite_id:campsite, user_id:current_user), method: :post, class:'btn btn-default btn-sm subtle-text' do
-                span.glyphicon.glyphicon-check 
-                |  Been Here
+            - if campsite.beens(current_user)
+              = link_to been_path(campsite.beens(current_user)), method: :delete, class:'btn btn-success btn-sm' do
+                  span.glyphicon.glyphicon-check 
+                  |  Been Here
+            - else
+              = link_to beens_path(campsite_id:campsite, user_id:current_user), method: :post, class:'btn btn-default btn-sm subtle-text' do
+                  span.glyphicon.glyphicon-check 
+                  |  Been Here
             button.btn.btn-default.btn-sm.subtle-text
               span.glyphicon.glyphicon-star
               |  Want to go
