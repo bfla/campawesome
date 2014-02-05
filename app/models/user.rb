@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
          :omniauthable, :omniauth_providers => [:facebook]
   has_one :tribal_membership
   has_one :tribe, through: :tribal_membership
-  has_many :beens
+  has_many :beens, dependent: :destroy
   has_many :campsites, through: :beens
 
   def self.find_for_facebook_oauth(auth)

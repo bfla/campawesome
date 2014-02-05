@@ -6,6 +6,7 @@
 
       table.table
         tr
+          th id
           th Name
           th Description
           th Org
@@ -19,6 +20,7 @@
 
         - @campsites.each do |campsite|
           tr
+            td = campsite.id
             td = campsite.name
             td = campsite.description
             td = campsite.org

@@ -5,7 +5,7 @@ class Campsite < ActiveRecord::Base
   # reservable:boolean, walkin:boolean
   belongs_to :state
   belongs_to :city
-  has_many :beens
+  has_many :beens, dependent: :destroy
   has_many :users, through: :beens
   #has_many :tribes
   validates :name, :org, :state_id, :city_id, :latitude, :longitude, presence: { message:'is required' }

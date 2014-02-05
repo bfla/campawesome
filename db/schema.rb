@@ -11,7 +11,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140204154957) do
+ActiveRecord::Schema.define(version: 20140205144835) do
+
+  create_table "been_heres", force: true do |t|
+    t.integer  "campsite_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "been_heres", ["campsite_id"], name: "index_been_heres_on_campsite_id"
+  add_index "been_heres", ["user_id"], name: "index_been_heres_on_user_id"
+
+  create_table "beens", force: true do |t|
+    t.integer  "campsite_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "campsites", force: true do |t|
     t.string   "name"
