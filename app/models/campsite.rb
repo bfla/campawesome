@@ -30,6 +30,12 @@ class Campsite < ActiveRecord::Base
     self.vibes.each { |tribe| tribe_ids << tribe.id }
     tribe_ids = tribe_ids.to_json
   end
+  def primary_icon(style)
+    self.vibes.first.tribe.icon(style)
+  end
+  def icons
+    self.vibes.each { |tribe| icons << tribe.icon }
+  end
   def geojsonify
     geojson = {
       type: 'Feature',

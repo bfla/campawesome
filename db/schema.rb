@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140206190151) do
+ActiveRecord::Schema.define(version: 20140206202847) do
 
   create_table "been_heres", force: true do |t|
     t.integer  "campsite_id"
@@ -99,6 +99,10 @@ ActiveRecord::Schema.define(version: 20140206190151) do
     t.string   "icon_content_type"
     t.integer  "icon_file_size"
     t.datetime "icon_updated_at"
+    t.string   "join_pic_file_name"
+    t.string   "join_pic_content_type"
+    t.integer  "join_pic_file_size"
+    t.datetime "join_pic_updated_at"
   end
 
   create_table "users", force: true do |t|

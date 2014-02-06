@@ -19,9 +19,9 @@
       - @tribes.each do |tribe|
         .col-md-4 
           .thumbnail.tribeThumb data-tribe-id=tribe.id
-            = image_tag 'dummies/tribePhoto500x214.jpg', class:'img'
+            = image_tag tribe.join_pic, class:'img'
             p.lead.tribe-caption.col-md-offset-1.pad-top-md
-              = image_tag 'dummies/tribeIcon50x50.png', class:'img-circle tribe-background'
+              = image_tag tribe.icon.url(:small), class:'img-circle tribe-background'
               small 
                 |   #{tribe.name}
             p.col-md-offset-1 = tribe.description

@@ -19,6 +19,10 @@
   .field.form-group
     = f.label :icon, class:'control-label'
     = f.file_field :icon
-    p.help-block 300px by 300px png please
+    p.help-block Ratio: 300px by 300px < 1MB
+  .field.form-group
+    = f.label :join_pic, class:'control-label'
+    = f.file_field :join_pic
+    p.help-block Ratio: 500x214 jpg < 2 MB
   .row
     .actions = f.submit 'Save', class:'btn btn-success'

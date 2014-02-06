@@ -1,7 +1,7 @@
 / This requires a campsite:campsite
 .browseResult data-tribes=campsite.tribes_json
   / this next line violates the law of Demeter but I'm in a hurry so whatever
-  .col-md-2 = image_tag campsite.vibes.first.tribe.icon.url(:medium), class:"img-circle tribe-background img-responsive"
+  .col-md-2 = image_tag campsite.primary_icon(:medium), class:"img-circle tribe-background img-responsive"
   .col-md-10
     p.lead.col-md-12
       small = link_to campsite.name, campsite_path(campsite)
