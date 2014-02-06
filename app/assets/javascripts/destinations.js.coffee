@@ -63,7 +63,7 @@ initialize = ->
     draggable: false
     zoomControl: false
     scrollwheel: false
-    styles: mapStyleArray, #This is from the map_styles.js file
+    styles: mapStyleArray #This is from the map_styles.js file
 
   map = new google.maps.Map(document.getElementById("destinationMap"), mapOptions)
 

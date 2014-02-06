@@ -1,0 +1,14 @@
+.col-md-12
+  .col-md-2.filter 
+    .well.white.filterThumbnail data-tribe-id='0'
+      .col-md-12.text-center
+          = image_tag 'dummies/tribeIcon50x50.png', class:"img-circle  img-responsive tribe-background", html: {alt:"See all camping near #{@city.name} in #{@city.name}", title:"Best camping near #{@city.name}", caption:"See the best camping sites near #{@city.name}"}
+      p.text-center
+        small All (#{@city.campsites.size})
+  - @tribes.first(4).each do |tribe|
+    .col-md-2.filter 
+      .well.white.filterThumbnail data-tribe-id=tribe.id
+        .col-md-12
+          = image_tag 'dummies/tribeIcon50x50.png', class:"img-circle tribe-background img-responsive", html: {alt:"See #{tribe.vibe} camping near #{@city.name} in #{@city.name}", title:"Best #{tribe.vibe} camping near #{@city.name}", caption:"See the best #{tribe.vibe} camping sites near #{@city.name}"}
+        p.text-center
+          small #{tribe.vibe} (#{@city.campsites.size})

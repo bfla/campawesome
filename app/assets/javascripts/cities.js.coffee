@@ -63,14 +63,15 @@ initialize = ->
     draggable: false
     zoomControl: false
     scrollwheel: false
-    styles: mapStyleArray, #This is from the map_styles.js file
+    styles: mapStyleArray #This is from the map_styles.js file
 
   map = new google.maps.Map(document.getElementById("cityMap"), mapOptions)
 
 google.maps.event.addDomListener window, "load", initialize
 
-# change thumbnail style on hover for browse page filter thumbnails
+# changes thumbnail style on hover for browse page filter thumbnails
 $(document).ready ->
+  # highlights border on hover
   $(".filterThumbnail").hover ->
     unless $(this).attr("style") is "border: 2px solid #65b045; background:#d5eacb;"
       if $(this).attr("style") is "border: 1px solid #b7b7b7;"
@@ -80,19 +81,34 @@ $(document).ready ->
     return
 
   $(".filterThumbnail").click ->
+    # highlights selected thumb
     myThumbnail = $(this)
-    if $(myThumbnail).attr("style") is "border: 2px solid #65b045; background:#d5eacb;"
-      $(myThumbnail).removeAttr "style"
+    if $(this).attr("style") is "border: 2px solid #65b045; background:#d5eacb;"
+      $(this).removeAttr "style"
     else
       $(".filterThumbnail").removeAttr "style"
-      $(myThumbnail).attr "style", "border: 2px solid #65b045; background:#d5eacb;"
-    
-    filterId = myThumbnail.data('tribe-id')
-    alert filterId
-    alert gon.campsites
+      $(this).attr "style", "border: 2px solid #65b045; background:#d5eacb;"
 
+    # gets filter data
+    filterId = $(this).data('tribe-id')
+    # applies filter using jQuery to show or hide results
+    $(".browseResult").hide() # hide all the results
+    if filterId is 0 # if the filter is all campsites
+      $(".browseResult").show() # then show all
+    else
+      $(".browseResult").each -> # for each campsite result
+        targetResult = $(this)
+        tribeIds = targetResult.data("tribes") # gets tribe ids for the campsite
+        for x of tribeIds
+          targetResult.show() if tribeIds[x] is filterId
+        return
 
     return
 
   return
+
+  
+
+
+
 

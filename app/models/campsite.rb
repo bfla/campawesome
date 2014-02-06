@@ -25,18 +25,11 @@ class Campsite < ActiveRecord::Base
   def hashtag
     self.state.hashtag if self.state.hashtag?
   end
-
-  # This takes a search query and distance, codes it into a coordinates, 
-  # and returns nearby campgrounds
-  def self.search(search, distance)
-    if search
-      coordinates = Geocoder.coordinates(search)
-      campsites = Campsite.near(coordinates, distance)
-    else
-      find(:all)
-    end
+  def tribes_json
+    tribe_ids = Array.new
+    self.vibes.each { |tribe| tribe_ids << tribe.id }
+    tribe_ids = tribe_ids.to_json
   end
-
   def geojsonify
     geojson = {
       type: 'Feature',
@@ -52,6 +45,17 @@ class Campsite < ActiveRecord::Base
         :'marker-size' => 'large'
       }
     }
+  end
+
+  # This takes a search query and distance, codes it into a coordinates, 
+  # and returns nearby campgrounds
+  def self.search(search, distance)
+    if search
+      coordinates = Geocoder.coordinates(search)
+      campsites = Campsite.near(coordinates, distance)
+    else
+      find(:all)
+    end
   end
 
   def self.to_s

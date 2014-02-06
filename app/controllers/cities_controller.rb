@@ -14,6 +14,7 @@ class CitiesController < ApplicationController
     gon.zoom = @city.zoom
     gon.lat = @city.latitude
     gon.lng = @city.longitude
+    gon.initTribe = params[:tribeId] || 0
     render(layout: "layouts/guide")
   end
 
