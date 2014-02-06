@@ -3,3 +3,8 @@ p.col-md-12
     .extra-subtle Camping Description:
     = truncate @campsite.description, length:20, separator:' '
     a more
+p.col-md-12.lead Nearby campsites
+p.col-md-12
+  - @nearbys.each do |nearby_campsite|
+    = link_to nearby_campsite.name, nearby_campsite
+    br

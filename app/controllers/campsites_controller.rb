@@ -31,6 +31,7 @@ class CampsitesController < ApplicationController
   # GET /campsites/1
   # GET /campsites/1.json
   def show
+    @nearbys = @campsite.nearbys.limit(5)
     render(layout: "layouts/normal")
   end
 
