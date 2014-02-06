@@ -10,6 +10,6 @@
     .col-md-2.filter 
       .well.white.filterThumbnail data-tribe-id=tribe.id
         .col-md-12
-          = image_tag 'dummies/tribeIcon50x50.png', class:"img-circle tribe-background img-responsive", html: {alt:"See #{tribe.vibe} camping near #{place.name} in #{place.name}", title:"Best #{tribe.vibe} camping near #{place.name}", caption:"See the best #{tribe.vibe} camping sites near #{place.name}"}
+          = image_tag tribe.icon.url(:medium), class:"img-circle tribe-background img-responsive", html: {alt:"See #{tribe.vibe} camping near #{place.name} in #{place.name}", title:"Best #{tribe.vibe} camping near #{place.name}", caption:"See the best #{tribe.vibe} camping sites near #{place.name}"}
         p.text-center
           small #{tribe.vibe}

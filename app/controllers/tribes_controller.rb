@@ -69,6 +69,6 @@ class TribesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def tribe_params
-      params.require(:tribe).permit(:name, :description, :vibe)
+      params.require(:tribe).permit(:name, :description, :vibe, :icon, :header_image)
     end
 end

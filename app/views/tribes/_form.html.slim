@@ -1,4 +1,4 @@
-= form_for @tribe, html: {class:"col-offset-md-1 col-md-4"} do |f|
+= form_for @tribe, html: {class:"col-offset-md-1 col-md-4", multipart:true} do |f|
   - if @tribe.errors.any?
     .panel.panel-danger
       .panel-heading Bummer! Something went wrong
@@ -16,5 +16,9 @@
   .field.form-group
     = f.label :vibe, class:'control-label'
     = f.text_field :vibe, class:'form-control'
+  .field.form-group
+    = f.label :icon, class:'control-label'
+    = f.file_field :icon
+    p.help-block 300px by 300px png please
   .row
     .actions = f.submit 'Save', class:'btn btn-success'
