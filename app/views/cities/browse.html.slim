@@ -21,12 +21,12 @@
     li = link_to @city.name, @city
     li.active = link_to "Campsites near #{@city.name}", browse_cities_path
 
-  = render 'browseFilter'
-  
+  = render 'layouts/browseFilter', place:@city
         
 - content_for :bottom_left
   - @city.campsites.each do |campsite|
-    = render 'browseResult', campsite:campsite
+    = render 'layouts/browseResult', campsite:campsite
+    
 - content_for :bottom_right
   .col-md-12
     a.thumbnail href=search_campsites_path(keywords:"#{@city.latitude}, #{@city.longitude}", distance:30, zoom:10)
