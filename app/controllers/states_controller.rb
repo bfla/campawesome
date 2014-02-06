@@ -7,6 +7,11 @@ class StatesController < ApplicationController
     @states = State.all
   end
 
+  def browse_destinations
+    @state = State.includes(:destinations).find(params[:id])
+    render(layout: "layouts/guide")
+  end
+
   # GET /states/1
   # GET /states/1.json
   def show

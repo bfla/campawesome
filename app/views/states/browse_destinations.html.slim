@@ -1,9 +1,6 @@
 - content_for :head
-  title 
-    =@state.name
-    |  camping
+  title #{@state.name} Camping Destinations
   meta name="description" content=""
-  script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB9mHzeQJxtkMkn_UkKAOs00Hkg2Y9qKds&sensor=false"
 
 - content_for :breadcrumb
   ol.breadcrumb.white
@@ -19,20 +16,11 @@
         small
             span.glyphicon.glyphicon-info-sign.extra-subtle.add-tooltip  data-toggle="tooltip" data-placement="right" title="Tag your Twitter & Facebook posts with ##{@state.hashtag} Why?  Because it'll make them awesomer."
   ul.nav.nav-tabs.guide-tabs
-    li.active = link_to "#{@state.name} Guide", @state
-    li = link_to 'Destinations', browse_destinations_states_path(id:@state)
+    li = link_to "#{@state.name} Guide", @state
+    li.active = link_to 'Destinations', browse_destinations_states_path(id:@state)
 
-- content_for :top_left
-  = render 'stateLeftTop'
-- content_for :top_right
-  = render "stateRightTop"
-- content_for :bottom_left
-  = render "stateLeftBot"
-- content_for :bottom_right
-  = render "stateRightBot"
 
 - content_for :end
   = render "stateDescriptionModal"
   javascript:
     $('.add-tooltip').tooltip();
-    

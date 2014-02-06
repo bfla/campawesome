@@ -1,4 +1,5 @@
 Blog::Application.routes.draw do
+
   resources :vibes
 
   resources :beens
@@ -19,15 +20,21 @@ Blog::Application.routes.draw do
     #end
   end
 
-  resources :states
+  resources :states do
+    collection do
+      get 'browse_destinations'
+    end
+  end
 
-  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
-  
   resources :campsites do
     collection do
       get 'search'
     end
   end
+
+  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
+  
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
