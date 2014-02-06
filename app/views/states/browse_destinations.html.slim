@@ -19,6 +19,14 @@
     li = link_to "#{@state.name} Guide", @state
     li.active = link_to 'Destinations', browse_destinations_states_path(id:@state)
 
+  - @state.destinations.each do |destination, index|
+    .col-md-3
+      = link_to destination_path(destination)
+        = image_tag 'dummies/destPhoto221x221.png', class:'img-circle img-responsive add-hairline'
+      
+      p.text-center 
+        small = link_to destination.name, destination_path(destination)
+
 
 - content_for :end
   = render "stateDescriptionModal"
