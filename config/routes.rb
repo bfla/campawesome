@@ -7,9 +7,17 @@ Blog::Application.routes.draw do
 
   resources :tribes
 
-  resources :cities
+  resources :cities do
+    collection do
+      get 'browse'
+    end
+  end
 
-  resources :destinations
+  resources :destinations do
+    #collection do
+      #get 'campsites'
+    #end
+  end
 
   resources :states
 

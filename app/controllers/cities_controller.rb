@@ -7,6 +7,16 @@ class CitiesController < ApplicationController
     @cities = City.all
   end
 
+  def browse
+    @city = City.includes(campsites: [{vibes: :tribe}] ).find(params[:id])
+    @tribes = Tribe.all
+    gon.campsites = @city.campsites.to_json
+    gon.zoom = @city.zoom
+    gon.lat = @city.latitude
+    gon.lng = @city.longitude
+    render(layout: "layouts/guide")
+  end
+
   # GET /cities/1
   # GET /cities/1.json
   def show

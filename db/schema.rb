@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140205144835) do
+ActiveRecord::Schema.define(version: 20140205202219) do
 
   create_table "been_heres", force: true do |t|
     t.integer  "campsite_id"
@@ -117,5 +117,12 @@ ActiveRecord::Schema.define(version: 20140205144835) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+
+  create_table "vibes", force: true do |t|
+    t.integer  "campsite_id"
+    t.integer  "tribe_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end

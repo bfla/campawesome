@@ -68,3 +68,31 @@ initialize = ->
   map = new google.maps.Map(document.getElementById("cityMap"), mapOptions)
 
 google.maps.event.addDomListener window, "load", initialize
+
+# change thumbnail style on hover for browse page filter thumbnails
+$(document).ready ->
+  $(".filterThumbnail").hover ->
+    unless $(this).attr("style") is "border: 2px solid #65b045; background:#d5eacb;"
+      if $(this).attr("style") is "border: 1px solid #b7b7b7;"
+        $(this).removeAttr "style"
+      else
+        $(this).attr "style", "border: 1px solid #b7b7b7;"
+    return
+
+  $(".filterThumbnail").click ->
+    myThumbnail = $(this)
+    if $(myThumbnail).attr("style") is "border: 2px solid #65b045; background:#d5eacb;"
+      $(myThumbnail).removeAttr "style"
+    else
+      $(".filterThumbnail").removeAttr "style"
+      $(myThumbnail).attr "style", "border: 2px solid #65b045; background:#d5eacb;"
+    
+    filterId = myThumbnail.data('tribe-id')
+    alert filterId
+    alert gon.campsites
+
+
+    return
+
+  return
+
