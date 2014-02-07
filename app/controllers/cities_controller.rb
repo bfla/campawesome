@@ -23,8 +23,8 @@ class CitiesController < ApplicationController
   def show
     render(layout: "layouts/guide")
     gon.zoom = @city.zoom
-    gon.lat = @city.latitude
-    gon.lng = @city.longitude
+    gon.latitude = @city.latitude
+    gon.longitude = @city.longitude
   end
 
   # GET /cities/new

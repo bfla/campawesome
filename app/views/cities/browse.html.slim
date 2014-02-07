@@ -30,7 +30,7 @@
 - content_for :bottom_right
   .col-md-12
     a.thumbnail href=search_campsites_path(keywords:"#{@city.latitude}, #{@city.longitude}", distance:30, zoom:10)
-      #cityMap style="height:150px; padding:0px; margin:0px;"
+      #thumbMap style="height:150px; padding:0px; margin:0px;"
   p.col-md-12
     small
       a itemprop='map' href=search_campsites_path(keywords:"#{@city.latitude}, #{@city.longitude}", distance:30, zoom:10)
