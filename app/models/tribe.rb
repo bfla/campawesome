@@ -12,6 +12,7 @@ class Tribe < ActiveRecord::Base
   has_attached_file :join_pic,
                     :styles => {}, 
                     :default_url => "/images/:style/missing.png"
+                    
   validates_attachment_size :icon, less_than:2.megabytes
 
 

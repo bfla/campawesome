@@ -1,0 +1,33 @@
+p#notice = notice
+
+p
+  strong Title:
+  = @photo.title
+p
+  strong License type:
+  = @photo.license_type
+p
+  strong License text:
+  = @photo.license_text
+p
+  strong User:
+  = @photo.user_id
+p
+  strong Campsite:
+  = @photo.campsite_id
+p
+  strong City:
+  = @photo.city_id
+p
+  strong State:
+  = @photo.state_id
+p
+  strong Destination:
+  = @photo.destination_id
+p
+  strong Caption:
+  = @photo.caption
+
+= link_to 'Edit', edit_photo_path(@photo)
+'|
+= link_to 'Back', photos_path

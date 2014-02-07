@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  title: MyString
+  license_type: MyString
+  license_text: MyText
+  user_id: 1
+  campsite_id: 1
+  city_id: 1
+  state_id: 1
+  destination_id: 1
+  caption: MyText
+
+two:
+  title: MyString
+  license_type: MyString
+  license_text: MyText
+  user_id: 1
+  campsite_id: 1
+  city_id: 1
+  state_id: 1
+  destination_id: 1
+  caption: MyText

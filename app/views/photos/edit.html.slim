@@ -1,0 +1,11 @@
+#main.container
+  .row
+    h1.heading.col-md-12 Editing photo
+
+  == render 'form'
+  .row
+    .col-md-12
+      = link_to 'Show', @photo
+      '|
+      = link_to 'Back', photos_path
+

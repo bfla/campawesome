@@ -23,16 +23,16 @@
     li = link_to 'Destinations', browse_destinations_states_path(id:@state)
 
 - content_for :top_left
-  = render 'stateLeftTop'
+  = render 'layouts/guide/topLeft', place:@state
 - content_for :top_right
-  = render "stateRightTop"
+  = render "layouts/guide/topRight", place:@state
 - content_for :bottom_left
   = render "stateLeftBot"
 - content_for :bottom_right
   = render "stateRightBot"
 
 - content_for :end
-  = render "stateDescriptionModal"
+  = render "layouts/guide/descriptionModal", place:@state
   javascript:
     $('.add-tooltip').tooltip();
     

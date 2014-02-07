@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140206202847) do
+ActiveRecord::Schema.define(version: 20140206205643) do
 
   create_table "been_heres", force: true do |t|
     t.integer  "campsite_id"
@@ -69,6 +69,24 @@ ActiveRecord::Schema.define(version: 20140206202847) do
     t.integer  "state_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "photos", force: true do |t|
+    t.string   "title"
+    t.string   "license_type"
+    t.text     "license_text"
+    t.integer  "user_id"
+    t.integer  "campsite_id"
+    t.integer  "city_id"
+    t.integer  "state_id"
+    t.integer  "destination_id"
+    t.text     "caption"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "photo_file_file_name"
+    t.string   "photo_file_content_type"
+    t.integer  "photo_file_file_size"
+    t.datetime "photo_file_updated_at"
   end
 
   create_table "states", force: true do |t|

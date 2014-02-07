@@ -1,6 +1,7 @@
 class City < ActiveRecord::Base
   belongs_to :state
   has_many :campsites
+  has_many :photos
   validates :name, :latitude, :longitude, :zoom, presence: true
   validates :latitude, numericality: {greater_than: 0}
   validates :longitude, numericality: {less_than: 0}

@@ -1,0 +1,48 @@
+= form_for @photo, html: {class:"col-md-offset-1 col-md-6"} do |f|
+  - if @photo.errors.any?
+    .panel.panel-danger
+          .panel-heading Bummer! Something went wrong
+          #error_explanation.panel-body
+            h2 = "#{pluralize(@photo.errors.count, "error")} prohibited this campsite from being saved:"
+            ul
+              - @photo.errors.full_messages.each do |message|
+                li = message
+  .row
+    .field.form-group
+      = f.label :title, class:'control-label'
+      = f.text_field :title, class:'form-control'
+  .row
+    .field.col-md-3
+      = f.label "CC attribution 2", class:'control-label'
+      = f.radio_button :license_type, 'CC attribution 2', class:'form-control'
+  .row
+    .field.form-group
+      = f.label :license_text, class:'control-label'
+      = f.text_area :license_text, class:'form-control'
+  .row
+    .field.form-group.col-md-2
+      = f.label :user_id, class:'control-label'
+      = f.number_field :user_id, class:'form-control'
+    .field.form-group.col-md-2
+      = f.label :campsite_id, class:'control-label'
+      = f.number_field :campsite_id, class:'form-control'
+    .field.form-group.col-md-2
+      = f.label :city_id, class:'control-label'
+      = f.number_field :city_id, class:'form-control'
+    .field.form-group.col-md-2
+      = f.label :state_id, class:'control-label'
+      = f.number_field :state_id, class:'form-control'
+    .field.form-group.col-md-2
+      = f.label :destination_id, class:'control-label'
+      = f.number_field :destination_id, class:'form-control'
+  .row
+    .field.form-group
+      = f.label :caption, class:'control-label'
+      = f.text_area :caption, class:'form-control'
+  .row
+    .field.form-group
+      = f.label :photo_file, class:'control-label'
+      = f.file_field :photo_file
+      p.help-block < 5 MB
+  .row
+    .actions = f.submit 'Save', class:'btn btn-success'

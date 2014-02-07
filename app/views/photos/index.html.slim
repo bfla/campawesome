@@ -1,0 +1,40 @@
+- content_for :head
+  title Photo admin
+
+  #main.container
+    .row
+      h1.heading.col-md-12 Listing photos
+
+    table.table
+      tr
+        th Title
+        th License type
+        th License text
+        th User
+        th Campsite
+        th City
+        th State
+        th Destination
+        th Caption
+        th
+        th
+        th
+
+      - @photos.each do |photo|
+        tr
+          td = photo.title
+          td = photo.license_type
+          td = photo.license_text
+          td = photo.user_id
+          td = photo.campsite_id
+          td = photo.city_id
+          td = photo.state_id
+          td = photo.destination_id
+          td = photo.caption
+          td = link_to 'Show', photo
+          td = link_to 'Edit', edit_photo_path(photo)
+          td = link_to 'Destroy', photo, data: {:confirm => 'Are you sure?'}, :method => :delete
+
+    br
+
+    = link_to 'New Photo', new_photo_path

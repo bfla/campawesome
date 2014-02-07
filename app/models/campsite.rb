@@ -9,6 +9,7 @@ class Campsite < ActiveRecord::Base
   has_many :users, through: :beens
   has_many :vibes, dependent: :destroy
   has_many :tribes, through: :vibes
+  has_many :photos
 
   #has_many :tribes
   validates :name, :org, :state_id, :city_id, :latitude, :longitude, presence: { message:'is required' }

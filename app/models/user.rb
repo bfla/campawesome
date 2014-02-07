@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
   has_one :tribe, through: :tribal_membership
   has_many :beens, dependent: :destroy
   has_many :campsites, through: :beens
+  has_many :photos
 
   def self.find_for_facebook_oauth(auth)
     where(auth.slice(:provider, :uid)).first_or_initialize.tap do |user|
