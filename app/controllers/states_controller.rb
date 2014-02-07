@@ -17,8 +17,8 @@ class StatesController < ApplicationController
   def show
     @destinations = @state.destinations.limit(20)
     gon.stateZoom = @state.zoom
-    gon.stateLat = @state.map_latitude
-    gon.stateLng = @state.map_longitude
+    gon.stateLat = @state.latitude
+    gon.stateLng = @state.longitude
     render(layout: "layouts/guide")
   end
 
@@ -79,6 +79,6 @@ class StatesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def state_params
-      params.require(:state).permit(:name, :description, :map_longitude, :map_latitude, :hashtag, :zoom)
+      params.require(:state).permit(:name, :description, :longitude, :latitude, :hashtag, :zoom)
     end
 end

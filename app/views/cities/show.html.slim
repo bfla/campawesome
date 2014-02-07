@@ -22,15 +22,15 @@
       li = link_to "Campsites near #{@city.name}", browse_cities_path(id:@city)
 
   - content_for :top_left
-    = render 'layouts/guide/topLeft', place:@city, 
+    = render 'layouts/guide/topLeft', place:@city
   - content_for :top_right
-    = render "layouts/guide/topRight", place:@city, description:@city.desciption
+    = render "layouts/guide/topRight", place:@city
   - content_for :bottom_left
     = render "cityBottomLeft"
   - content_for :bottom_right
     = render "cityBottomRight"
 
   - content_for :end
-    = render "layouts/guide/descriptionModal", description:@city.desciption
+    = render "layouts/guide/descriptionModal", place:@city
     javascript:
       $('.add-tooltip').tooltip();

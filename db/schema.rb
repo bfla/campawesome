@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140206205643) do
+ActiveRecord::Schema.define(version: 20140207145739) do
 
   create_table "been_heres", force: true do |t|
     t.integer  "campsite_id"
@@ -51,7 +51,7 @@ ActiveRecord::Schema.define(version: 20140206205643) do
 
   create_table "cities", force: true do |t|
     t.string   "name"
-    t.text     "desciption"
+    t.text     "description"
     t.float    "latitude"
     t.float    "longitude"
     t.integer  "zoom"
@@ -94,8 +94,8 @@ ActiveRecord::Schema.define(version: 20140206205643) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "description"
-    t.float    "map_latitude"
-    t.float    "map_longitude"
+    t.float    "latitude"
+    t.float    "longitude"
     t.string   "hashtag"
     t.integer  "zoom"
   end

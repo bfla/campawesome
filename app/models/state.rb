@@ -1,7 +1,7 @@
 class State < ActiveRecord::Base
-  validates :name, :description, :map_latitude, :map_longitude, :zoom, :hashtag, presence: true
-  validates :map_latitude, numericality: {greater_than: 0}
-  validates :map_longitude, numericality: {less_than: 0}
+  validates :name, :description, :latitude, :longitude, :zoom, :hashtag, presence: true
+  validates :latitude, numericality: {greater_than: 0}
+  validates :longitude, numericality: {less_than: 0}
   validates :zoom, numericality: true
   has_many :cities
   has_many :destinations
