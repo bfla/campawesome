@@ -16,9 +16,9 @@ class StatesController < ApplicationController
   # GET /states/1.json
   def show
     @destinations = @state.destinations.limit(20)
-    gon.stateZoom = @state.zoom
-    gon.stateLat = @state.latitude
-    gon.stateLng = @state.longitude
+    gon.zoom = @state.zoom
+    gon.latitude = @state.latitude
+    gon.longitude = @state.longitude
     render(layout: "layouts/guide")
   end
 

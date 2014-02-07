@@ -12,8 +12,8 @@ class CitiesController < ApplicationController
     @tribes = Tribe.all
     gon.campsites = @city.campsites.to_json
     gon.zoom = @city.zoom
-    gon.lat = @city.latitude
-    gon.lng = @city.longitude
+    gon.latitude = @city.latitude
+    gon.longitude = @city.longitude
     gon.initTribe = params[:tribeId] || 0
     render(layout: "layouts/guide")
   end

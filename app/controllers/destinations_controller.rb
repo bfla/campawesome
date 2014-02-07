@@ -11,9 +11,9 @@ class DestinationsController < ApplicationController
   # GET /destinations/1.json
   def show
     render(layout: "layouts/guide")
-    gon.destinationZoom = @destination.zoom
-    gon.destinationLat = @destination.latitude
-    gon.destinationLng = @destination.longitude
+    gon.zoom = @destination.zoom
+    gon.latitude = @destination.latitude
+    gon.longitude = @destination.longitude
   end
 
   # GET /destinations/new
