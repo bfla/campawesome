@@ -14,7 +14,7 @@ class CitiesController < ApplicationController
     gon.zoom = @city.zoom
     gon.latitude = @city.latitude
     gon.longitude = @city.longitude
-    gon.initTribe = params[:tribeId] || 0
+    gon.initTribe = params[:tribe_id] || 0
     render(layout: "layouts/guide")
   end
 
@@ -85,6 +85,6 @@ class CitiesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def city_params
-      params.require(:city).permit(:name, :description, :latitude, :longitude, :zoom, :state_id)
+      params.require(:city).permit(:name, :description, :latitude, :longitude, :zoom, :state_id, :tribe_id)
     end
 end

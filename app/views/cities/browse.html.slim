@@ -40,3 +40,42 @@
 - content_for :end
   javascript:
     $('.add-tooltip').tooltip();
+    var filterId = gon.initTribe;
+    $('.filterThumbnail').each( function() {
+      if ( $(this).data('tribe-id') == filterId) {
+        highlightFilter( $(this) );
+      }
+    });
+
+    if (filterId != 0) {
+      applyFilter(filterId);
+    }
+
+    function highlightFilter(targetFilterThumb) {
+      if (targetFilterThumb.attr("style") == "border: 2px solid #65b045; background:#d5eacb;") {
+        targetFilterThumb.removeAttr("style");
+      } else {
+        $(".filterThumbnail").removeAttr("style");
+        targetFilterThumb.attr("style", "border: 2px solid #65b045; background:#d5eacb;");
+      }
+    }
+
+    function applyFilter(tribalId) {
+      $(".browseResult").hide();
+      if (tribalId == 0) {
+        $(".browseResult").show();
+      } else {
+        $(".browseResult").each( function () {
+          var targetResult = $(this);
+          var tribeIds = targetResult.data("tribes"); // gets tribe ids for the campsite
+          for (x in tribeIds) {
+            if (tribeIds[x] == tribalId) { targetResult.show(); }
+          }  
+        });
+      }
+    }
+
+    
+
+
+    
