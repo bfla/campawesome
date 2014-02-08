@@ -46,7 +46,7 @@ Blog::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   #root 'welcome#index'
-  root to: 'campsites#index', as: 'home'
+  root to: 'pages#home', as: 'home'
 
   #match '/search/:q', to: 'campsites#search', as:'search'
 
