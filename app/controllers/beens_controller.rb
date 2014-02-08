@@ -66,7 +66,6 @@ class BeensController < ApplicationController
     def set_been
       @been = Been.find(params[:id])
     end
-
     # Never trust parameters from the scary internet, only allow the white list through.
     def been_params
       #params.require(:been).permit(:campsite_id, :user_id)

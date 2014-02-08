@@ -37,6 +37,9 @@ class Campsite < ActiveRecord::Base
   def icons
     self.vibes.each { |tribe| icons << tribe.icon }
   end
+  def beened(user)
+    self.beens.find_by_user(user)
+  end
   def geojsonify
     geojson = {
       type: 'Feature',
