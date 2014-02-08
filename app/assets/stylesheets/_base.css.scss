@@ -29,7 +29,7 @@ $brandFont: 'Monda';
 
 
 // Import navbar styles======================
-@import 'navbar';
+
 
 // Universal styles=================================
 .white {
@@ -59,7 +59,10 @@ $brandFont: 'Monda';
 
 .add-hairline {border: 1px solid #e1e1e1}
 
+h1 {font-family:$brandFont;}
+
 // Banner styles=================================
+@import 'navbar';
 .brand {
   font-family: $brandFont;
   color: $brandColor;

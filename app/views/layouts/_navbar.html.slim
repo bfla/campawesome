@@ -26,5 +26,6 @@ nav.navbar.navbar-fixed-top.navbar-inverse.navbar-color.navbar-border role="navi
           = render 'layouts/dropdown'
         - else
           /li = link_to 'Sign up', new_user_registration_path, class:"nav-link"
-          button.btn.btn-success href=new_user_registration_path Sign Up
+          a href=new_user_registration_path
+            button.btn.btn-success Sign Up
           li = link_to 'Sign in', new_user_session_path, class:"nav-link"
