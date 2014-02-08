@@ -1,1 +1,50 @@
-p.lead.col-md-12 Best campsites
+.row
+  p.lead.col-md-12 
+    | Top campsites near #{place.name}
+    small.pull-right
+      small
+        = link_to ' see all', browse_cities_path(id:place)
+    br
+    hr
+  .col-md-3 = image_tag @tribes.find(1).icon.url(:medium), class:'tribe-background img-circle'
+  ol.col-md-9
+    - place.campsites.first(5).each do |campsite|
+        li = link_to campsite.name, campsite
+.row
+  p.lead.col-md-12.pad-top-lg
+    | Best rustic camping near #{place.name}
+    small.pull-right
+      small
+        = link_to ' see all', browse_cities_path(id:place, tribe_id:1)
+    br
+    hr
+  .col-md-3 = image_tag @tribes.find(1).icon.url(:medium), class:'tribe-background img-circle'
+  ol.col-md-9
+    - place.campsites.each do |campsite|
+      - campsite.vibes.each do |vibe|
+        - if vibe.tribe.id == 1
+          li = link_to campsite.name, campsite
+.row
+  p.lead.col-md-12.pad-top-lg
+    | Best RV parks near #{place.name}
+    small.pull-right
+      small
+        = link_to ' see all', browse_cities_path(id:place, tribe_id:3)
+    .col-md-3 = image_tag @tribes.find(3).icon.url(:medium), class:'tribe-background img-circle'
+    ol.col-md-9
+      - place.campsites.each do |campsite|
+        - campsite.vibes.each do |vibe|
+          - if vibe.tribe.id == 3
+            li = link_to campsite.name, campsite
+.row
+  p.lead.col-md-12.pad-top-lg
+    | Best backcountry campsites near #{place.name}
+    small.pull-right
+      small
+        = link_to ' see all', browse_cities_path(id:place, tribe_id:2)
+    .col-md-3 = image_tag @tribes.find(2).icon.url(:medium), class:'tribe-background img-circle'
+    ol.col-md-9
+      - place.campsites.each do |campsite|
+        - campsite.vibes.each do |vibe|
+          - if vibe.tribe.id == 2
+            li = link_to campsite.name, campsite

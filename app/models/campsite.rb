@@ -28,7 +28,7 @@ class Campsite < ActiveRecord::Base
   end
   def tribes_json
     tribe_ids = Array.new
-    self.vibes.each { |tribe| tribe_ids << tribe.id }
+    self.vibes.each { |vibe| tribe_ids << vibe.tribe.id }
     tribe_ids = tribe_ids.to_json
   end
   def primary_icon(style)

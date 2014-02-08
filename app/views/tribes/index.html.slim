@@ -6,6 +6,7 @@
 
   table.table
     tr
+      th id
       th Name
       th Description
       th Vibe
@@ -15,6 +16,7 @@
 
     - @tribes.each do |tribe|
       tr
+        td = tribe.id
         td = tribe.name
         td = tribe.description
         td = tribe.vibe

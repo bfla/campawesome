@@ -64,7 +64,7 @@ $(document).ready ->
 
   google.maps.event.addDomListener window, "load", initialize
 
-  # highlights border on hover
+  # highlights filter thumbnail border on hover
   $(".filterThumbnail").hover ->
     unless $(this).attr("style") is "border: 2px solid #65b045; background:#d5eacb;"
       if $(this).attr("style") is "border: 1px solid #b7b7b7;"
@@ -73,6 +73,7 @@ $(document).ready ->
         $(this).attr "style", "border: 1px solid #b7b7b7;"
     return
 
+  # determines click behavior for browse filter thumbnails
   $(".filterThumbnail").click ->
     # highlights selected thumb
     myThumbnail = $(this)

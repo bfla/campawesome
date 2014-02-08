@@ -21,6 +21,7 @@ class CitiesController < ApplicationController
   # GET /cities/1
   # GET /cities/1.json
   def show
+    @tribes = Tribe.all
     render(layout: "layouts/guide")
     gon.zoom = @city.zoom
     gon.latitude = @city.latitude
