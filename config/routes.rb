@@ -1,5 +1,7 @@
 Blog::Application.routes.draw do
 
+  resources :pages
+
   resources :photos
 
   resources :vibes
