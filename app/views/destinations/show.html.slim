@@ -29,6 +29,8 @@
     = render "destinationBottomLeft"
   - content_for :bottom_right
     = render "destinationBottomRight"
+  - content_for :licenses
+    = render "layouts/licenses", place:@destination
 
   - content_for :end
     = render "layouts/guide/descriptionModal", place:@destination

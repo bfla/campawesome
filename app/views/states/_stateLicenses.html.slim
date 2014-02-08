@@ -1,0 +1,10 @@
+/ Takes a place. Renders photo licenses if appropriate
+p.subtle-text
+  small
+    | Photo credits:
+    - @state.photos.each do |photo|
+      - if photo.license_text?
+        = photo.license_text
+    - @state.destinations.each do |destination|
+      - if destination.photos.first.license_text?
+        = destination.photos.first.license_text

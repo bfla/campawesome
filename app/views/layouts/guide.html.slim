@@ -48,6 +48,9 @@ html
               /Right content
               .col-md-4
                 == yield :bottom_right
+          .row
+            .col-md-offset-1
+              == yield :licenses
 
     / Footer goes here
     == render 'layouts/footer'

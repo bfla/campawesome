@@ -1,0 +1,7 @@
+/ Takes a place. Renders photo licenses if appropriate
+p.subtle-text
+  small
+    | Photo credits:
+    - place.photos.each do |photo|
+      - if photo.license_text?
+        = photo.license_text
