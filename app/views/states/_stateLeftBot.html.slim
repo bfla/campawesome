@@ -1,15 +1,14 @@
 / Popular Destinations
 .col-md-12
   p.lead 
-    | Top #{@state.name} Destinations&nbsp;
+    | Top #{@state.name} Camping Destinations&nbsp;
     small
       small 
-        small
-          a see more
+        small = link_to 'see more', browse_destinations_states_path(id:@state)
 - @destinations.each_with_index do |destination, index|
   .col-md-4
     = link_to destination_path(destination), class:'thumbnail'
-      = image_tag 'dummies/destPhoto221x221.png'
+      = image_tag destination.photos.first.photo_file
     p.text-center
       span.label.label-info = index + 1
       |&nbsp;&nbsp;
