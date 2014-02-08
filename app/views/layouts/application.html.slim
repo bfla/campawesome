@@ -12,7 +12,7 @@ html
     == render 'layouts/headscripts'
     == yield :head_javascripts
 
-  body
+  body.background
     - if alert
       = alert
     - if notice
