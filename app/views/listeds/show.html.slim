@@ -1,0 +1,12 @@
+p#notice = notice
+
+p
+  strong Campsite:
+  = @listed.campsite_id
+p
+  strong List:
+  = @listed.list_id
+
+= link_to 'Edit', edit_listed_path(@listed)
+'|
+= link_to 'Back', listeds_path

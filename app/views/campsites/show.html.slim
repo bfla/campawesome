@@ -20,26 +20,29 @@
       hr
     .btn-group
       - if current_user.beens(campsite_id:@campsite)
-        = link_to 'Been here', current_user.beens(campsite_id:@campsite).first, method: :delete, class:'btn btn-success', remote:true
-      = link_to 'Been here', beens_path(campsite_id:@campsite, user_id:current_user), method: :post, class:'btn btn-default'
+        = link_to 'Been here', current_user.beens(campsite_id:@campsite).first, method: :delete, class:'btn btn-success btn-sm', remote:true
+      = link_to 'Been here', beens_path(campsite_id:@campsite, user_id:current_user), method: :post, class:'btn btn-default btn-sm'
         / else if user is logged in let them add it
         / else require login first!
-      button.btn.btn-default Want to go
+      button.btn.btn-default.btn-sm Want to go
       .btn-group
-        button.btn.btn-default.dropdown-toggle data-toggle="dropdown" type="button" Save
+        button.btn.btn-default.btn-sm.dropdown-toggle data-toggle="dropdown" type="button" Save
         ul class="dropdown-menu" role="menu"
-            li
-              a My Favorites
-            li
-              a Create new list
+            - current_user.lists.each do |list|
+             li = link_to list.name, listeds_path(campsite_id:@campsite, list_id:list), method: :post
+            li.divider
+            li#newListModalTrigger
+              a href="#" data-toggle='modal' data-target='#newListModal' Create new list
+            li =link_to 'Manage Lists', lists_path
           
           
 
 
 - content_for :left
-    = render 'campsiteLeft'
+  = render 'campsiteLeft'
 - content_for :right
-    = render 'campsiteRight'
+  = render 'campsiteRight'
+  = render 'layouts/modals/newListModal', campsite:@campsite
 
 - content_for :end
   == render 'reserveModal'

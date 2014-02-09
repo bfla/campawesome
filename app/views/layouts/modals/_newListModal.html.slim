@@ -1,0 +1,19 @@
+/ Modal for full state description
+#newListModal.modal.fade tabindex="-1" role="dialog" aria-labelledby="newListModalLabel" aria-hidden="true"
+  .modal-dialog
+    .modal-content
+      .modal-header
+        button.close type="button" data-dismiss="modal" aria-hidden="true" &times
+        h5#descriptionModalTitle.modal-title.text-center Create a list
+      .modal-body
+        = form_for current_user.lists.build, remote:true do |f|
+          = f.hidden_field :campsite_id, value:campsite
+          = f.hidden_field :user_id, value:current_user.id
+          = f.label :name, class:'sr-only'
+          .input-group
+            = f.text_field :name, class:"form-control", placeholder:"Give your list a name"
+            span.input-group-btn
+              = f.submit 'Create List', class:'btn btn-success'
+
+      .modal-footer
+        button.btn.btn-default type="button" data-dismiss="modal" Close

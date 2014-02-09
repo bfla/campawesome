@@ -1,0 +1,15 @@
+= form_for @listed do |f|
+  - if @listed.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@listed.errors.count, "error")} prohibited this listed from being saved:"
+      ul
+        - @listed.errors.full_messages.each do |message|
+          li = message
+
+  .field
+    = f.label :campsite_id
+    = f.number_field :campsite_id
+  .field
+    = f.label :list_id
+    = f.number_field :list_id
+  .actions = f.submit 'Save'

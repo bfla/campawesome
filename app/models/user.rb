@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
   has_one :tribal_membership, dependent: :destroy
   has_one :tribe, through: :tribal_membership
   has_many :beens, dependent: :destroy
+  has_many :lists, dependent: :destroy
   has_many :campsites, through: :beens
   has_many :photos
 

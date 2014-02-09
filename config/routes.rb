@@ -1,5 +1,9 @@
 Blog::Application.routes.draw do
 
+  resources :listeds
+
+  resources :lists
+
   resources :pages
 
   resources :photos

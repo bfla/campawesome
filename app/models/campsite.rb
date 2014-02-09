@@ -6,6 +6,8 @@ class Campsite < ActiveRecord::Base
   belongs_to :state
   belongs_to :city
   has_many :beens, dependent: :destroy
+  has_many :listeds, dependent: :destroy
+  has_many :lists, through: :listed
   has_many :users, through: :beens
   has_many :vibes, dependent: :destroy
   has_many :tribes, through: :vibes

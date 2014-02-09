@@ -1,0 +1,21 @@
+h1 Listing listeds
+
+table
+  tr
+    th Campsite
+    th List
+    th
+    th
+    th
+
+  - @listeds.each do |listed|
+    tr
+      td = listed.campsite_id
+      td = listed.list_id
+      td = link_to 'Show', listed
+      td = link_to 'Edit', edit_listed_path(listed)
+      td = link_to 'Destroy', listed, data: {:confirm => 'Are you sure?'}, :method => :delete
+
+br
+
+= link_to 'New Listed', new_listed_path
