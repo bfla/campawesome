@@ -1,5 +1,5 @@
 doctype html
-html
+html.fill-height
   head
     / meta tags
     == yield :head
@@ -12,13 +12,12 @@ html
     == render 'layouts/headscripts'
     == yield :head_javascripts
     
-  body
+  body.fill-height.background
     / Top navbar goes here
     == render 'layouts/navbar'
     / Body goes here
-    #wrap
-      #main.background
-        .container.background
+    #wrap.background
+      #main.container.background
           .row
             / Content area
             .col-md-10.col-md-offset-1.well.white
@@ -44,6 +43,7 @@ html
                 == yield :right
 
     / Footer goes here
-    == render 'layouts/footer'
+    .flush-footer.background
+      == render 'layouts/footer'
     == render 'layouts/signinModal'
     == yield :end

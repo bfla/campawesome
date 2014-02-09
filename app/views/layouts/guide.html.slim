@@ -18,7 +18,7 @@ html
     / Body goes here
     #wrap
       #main.background
-        .container.background
+        .container.background.pad-top-md
           .row
             / Content area
             .col-md-10.col-md-offset-1.well.white
@@ -53,6 +53,7 @@ html
               == yield :licenses
 
     / Footer goes here
-    == render 'layouts/footer'
+    .flush-footer.background
+      == render 'layouts/footer'
     == render 'layouts/signinModal'
     == yield :end

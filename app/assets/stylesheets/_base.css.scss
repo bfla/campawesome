@@ -71,11 +71,34 @@ h1 {font-family:$brandFont;}
   &:hover { color: $brandColor; }
 }
 
+// Footer style====================================
+#footer {
+  background:none;
+  border:none;
+  box-shadow:none;
+  height:$footerHeight;
+}
+
+// Sticky footers==================================
+.fill-height {height:100%;} // add this to a body & html elements
+#wrap { min-height:100%;} // add this around the main page content
+  
+#main { // add this to the main content or container div
+  overflow:auto;
+  padding-bottom:$footerHeight;
+
+}
+.flush-footer { // surround footer partial with this div
+  position:relative;
+  margin-top:-$footerHeight;
+  padding-top:$mediumPadding;
+  clear:both;
+}
+
+
+
 //=======================================================
 
-#resultsMap {
-  height:400px;
-  width:400px;
-  padding:70px;
-  position:absolute;
+#placeMap {
+
 }
