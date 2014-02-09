@@ -18,24 +18,7 @@
       small 
         small #{@campsite.org} campground in #{@campsite.state_name}&nbsp;
       hr
-    .btn-group
-      - if current_user.beens(campsite_id:@campsite)
-        = link_to 'Been here', current_user.beens(campsite_id:@campsite).first, method: :delete, class:'btn btn-success btn-sm', remote:true
-      = link_to 'Been here', beens_path(campsite_id:@campsite, user_id:current_user), method: :post, class:'btn btn-default btn-sm'
-        / else if user is logged in let them add it
-        / else require login first!
-      - if current_user.wants(campsite_id:@campsite)
-        = link_to 'Want to go', current_user.wants(campsite_id:@campsite).first, method: :delete, class:'btn btn-success btn-sm', remote:true
-      = link_to 'Want to go', wants_path(campsite_id:@campsite, user_id:current_user), method: :post, class:'btn btn-default btn-sm'
-      .btn-group
-        button.btn.btn-default.btn-sm.dropdown-toggle data-toggle="dropdown" type="button" Save
-        ul class="dropdown-menu" role="menu"
-            - current_user.lists.each do |list|
-             li = link_to list.name, listeds_path(campsite_id:@campsite, list_id:list), method: :post
-            li.divider
-            li#newListModalTrigger
-              a href="#" data-toggle='modal' data-target='#newListModal' Create new list
-            li =link_to 'Manage Lists', lists_path
+    = render 'layouts/campsiteCommands', campsite:@campsite
           
           
 
