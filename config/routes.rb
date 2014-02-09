@@ -25,9 +25,9 @@ Blog::Application.routes.draw do
   end
 
   resources :destinations do
-    #collection do
-      #get 'campsites'
-    #end
+    collection do
+      get 'browse'
+    end
   end
 
   resources :states do

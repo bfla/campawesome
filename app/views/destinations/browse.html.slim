@@ -1,41 +1,41 @@
 - content_for :head
-  title #{@city.name} campsites
+  title #{@destination.name} campsites
   meta name="description" content=""
   script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB9mHzeQJxtkMkn_UkKAOs00Hkg2Y9qKds&sensor=false"
 
 - content_for :breadcrumb
   ol.breadcrumb.white
-    li = link_to "#{@city.state.name}", @city.state
-    li.active = @city.name
+    li = link_to "#{@destination.state.name}", @destination.state
+    li.active = @destination.name
 
 - content_for :heading
   .headline
     h1.heading.guide-heading.col-md-12
-      | #{@city.name} campsites
+      | #{@destination.name} campsites
       small 
-        small.hashtag  &nbsp;##{@city.hashtag}&nbsp;
+        small.hashtag  &nbsp;##{@destination.hashtag}&nbsp;
       small
         small
-            span.glyphicon.glyphicon-info-sign.extra-subtle.add-tooltip  data-toggle="tooltip" data-placement="right" title="Tag your Twitter & Facebook posts with ##{@city.hashtag} Why?  Because it'll make them awesomer."
+            span.glyphicon.glyphicon-info-sign.extra-subtle.add-tooltip  data-toggle="tooltip" data-placement="right" title="Tag your Twitter & Facebook posts with ##{@destination.hashtag} Why?  Because it'll make them awesomer."
   ul.nav.nav-tabs.guide-tabs
-    li = link_to @city.name, @city
-    li.active = link_to "Campsites near #{@city.name}", browse_cities_path(id:@city)
+    li = link_to @destination.name, @destination
+    li.active = link_to "Campsites near #{@destination.name}", browse_destinations_path(id:@destination)
 
-  = render 'layouts/guide/browseFilter', place:@city, campsites:@city.campsites
+  = render 'layouts/guide/browseFilter', place:@destination, campsites:@campsites
         
 - content_for :bottom_left
-  - @city.campsites.each do |campsite|
+  - @campsites.each do |campsite|
     = render 'layouts/guide/browseResult', campsite:campsite
     
 - content_for :bottom_right
   .col-md-12
-    a.thumbnail href=search_campsites_path(keywords:"#{@city.latitude}, #{@city.longitude}", distance:30, zoom:10)
+    a.thumbnail href=search_campsites_path(keywords:"#{@destination.latitude}, #{@destination.longitude}", distance:30, zoom:10)
       #thumbMap style="height:150px; padding:0px; margin:0px;"
   p.col-md-12
     small
-      a itemprop='map' href=search_campsites_path(keywords:"#{@city.latitude}, #{@city.longitude}", distance:30, zoom:10)
+      a itemprop='map' href=search_campsites_path(keywords:"#{@destination.latitude}, #{@destination.longitude}", distance:30, zoom:10)
         span.glyphicon.glyphicon-zoom-in
-        | Explore map of all #{@city.name} camping places
+        | Explore map of all #{@destination.name} camping places
 
 - content_for :end
   javascript:
@@ -74,8 +74,3 @@
         });
       }
     }
-
-    
-
-
-    

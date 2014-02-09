@@ -5,7 +5,7 @@
       .col-md-12.text-center
           = image_tag 'dummies/tribeIcon50x50.png', class:"img-circle  img-responsive tribe-background", html: {alt:"See all camping near #{place.name} in #{place.name}", title:"Best camping near #{place.name}", caption:"See the best camping sites near #{place.name}"}
       p.text-center
-        small All (#{place.campsites.size})
+        small All (#{campsites.size})
   - @tribes.first(4).each do |tribe|
     .col-md-2.filter 
       .well.white.filterThumbnail data-tribe-id=tribe.id

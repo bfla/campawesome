@@ -7,9 +7,23 @@ class DestinationsController < ApplicationController
     @destinations = Destination.all
   end
 
+  def browse
+    @destination = Destination.find(params[:id])
+    @campsites = Campsite.near([@destination.latitude, @destination.longitude], 30).includes(:tribes)
+    @tribes = Tribe.all
+    gon.campsites = @campsites.to_json
+    gon.zoom = @destination.zoom
+    gon.latitude = @destination.latitude
+    gon.longitude = @destination.longitude
+    gon.initTribe = params[:tribe_id] || 0
+    render(layout: "layouts/guide")
+  end
+
   # GET /destinations/1
   # GET /destinations/1.json
   def show
+    @campsites = Campsite.near([@destination.latitude, @destination.longitude], 30)
+    @tribes = Tribe.all
     render(layout: "layouts/guide")
     gon.zoom = @destination.zoom
     gon.latitude = @destination.latitude
