@@ -1,0 +1,99 @@
+doctype html
+html
+  head
+    title Search CampAwesome
+    meta name="keywords" contents='Michigan Camping, travel, Camposaurus, camp that, campgrounds, rustic camping, rv parks, budget camping, camping sites, backcountry camping, backcountry camping, rv campgrounds'
+    meta name="description" content="Camposaurus is the best site for finding information about Michigan Camping.  It has a complete listing of public campgrounds in Michigan, including rustic camping, RV campgrounds, and backcountry or backpacking camping sites."
+    == render 'layouts/headstyles'
+    link href='//api.tiles.mapbox.com/mapbox.js/v1.6.1/mapbox.css' rel='stylesheet'
+    == render 'layouts/headscripts'
+    
+    style 
+      | html, body, .mapColumn {height:100%; padding:0px; margin:0px;}
+      | #resultsMap {height:100%; width:100%}
+      | .left-content {min-height:100%;}
+      | .result-list {padding-top:50px;}
+
+  body
+    == render 'layouts/navbar'
+    #results-container.col-md-4.well.white.left-content
+      .result-list
+        - if notice
+          .row
+            .col-md-12
+              .panel.panel-success
+                .panel-heading Bam! Found 'em.
+                .panel-body = notice
+        .row
+          .input-group.col-md-6
+            span.input-group-addon 
+              span.glyphicon.glyphicon-calendar
+              | When
+            input#fromDate.form-control type="text" placeholder="Monday"
+          .input-group.col-md-6
+            span.input-group-addon to
+            input#toDate.form-control type="text" placeholder="Monday"
+        .row
+          p.col-md-12
+            #reset.btn.btn-default Search this area
+            = tag :input, id: 'searchJson', type: 'hidden', value: 'test', data: {center: @center, geoJson: @campsites.to_json}
+          - @campsites.each do |campsite|
+            p.lead.col-md-12
+              small = link_to campsite.name, campsite_path(campsite)
+              br
+              small
+                small.subtle-text
+                  | #{campsite.org} campground in #{campsite.state_name}
+            p.col-md-12 
+              small
+                strong.subtle-text Bookings:
+                - if campsite.reservable
+                  |  Accepts reservations
+                - else
+                  |  No reservations
+                |  &
+                - if campsite.walkin
+                  |  accepts walk-ins
+                - else
+                  |  no walk-ins
+
+            - if campsite.description?
+              p.col-md-12 
+                 = campsite.description
+            .col-md-12
+              .btn-group
+                button.btn.btn-default.btn-sm.subtle-text
+                  span.glyphicon.glyphicon-bookmark
+                  |  Save
+                - if campsite.beens(current_user)
+                  = link_to been_path(campsite.beens(current_user)), method: :delete, class:'btn btn-success btn-sm' do
+                      span.glyphicon.glyphicon-check 
+                      |  Been Here
+                - else
+                  = link_to beens_path(campsite_id:campsite, user_id:current_user), method: :post, class:'btn btn-default btn-sm subtle-text' do
+                      span.glyphicon.glyphicon-check 
+                      |  Been Here
+                button.btn.btn-default.btn-sm.subtle-text
+                  span.glyphicon.glyphicon-star
+                  |  Want to go
+                button.btn.btn-default.btn-sm.subtle-text
+                  span.glyphicon.glyphicon-usd
+                  |  Review it
+            hr.col-md-12
+          p.col-md-12
+            small.subtle-text 
+              | CampAwesome &copy 2014&nbsp;
+              a.nav-link Terms
+
+    / MapBox ===============================
+    .col-md-8.mapColumn
+      script src='https://api.tiles.mapbox.com/mapbox.js/v1.6.1/mapbox.js'
+      #resultsMap
+
+  / Makeshift json data. Yuck but it works. 
+  javascript:
+    makeSearchMap();
+    //attemptHandoff();
+    $('#reset').click( function() {
+      resetSearchMap();
+    });

@@ -19,3 +19,17 @@
   width:400px;
   position:absolute;
 }
+
+#results-container {
+  overflow-y: auto; 
+  overflow-x: hidden;
+  max-height:100%;
+}
+
+#results-container::-webkit-scrollbar{
+  width:5px;
+  background-color:#e1e1e1;
+}
+#results-container::-webkit-scrollbar-thumb{
+  background-color:#cccccc;
+}

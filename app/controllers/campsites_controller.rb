@@ -23,9 +23,10 @@ class CampsitesController < ApplicationController
     gon.zoom = zoom
 
     respond_to do |format|
-      format.html { render action: 'search', notice: 'I found 2 campsites that look perfect for you.' }
+      format.html { render layout:"layouts/pages/search", notice: 'I found 2 campsites that look perfect for you.' }
       format.json { render json: @geojson }  # respond with geoJSON object
     end
+
   end
   
   # GET /campsites/1
