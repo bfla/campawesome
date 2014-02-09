@@ -22,6 +22,7 @@ html
     / Body goes here
     == yield :layout
     / Footer goes here
-    == render 'layouts/footer'
+    .navbar-fixed-bottom
+        == render 'layouts/footer'
     == render 'layouts/signinModal'
     == yield :end
