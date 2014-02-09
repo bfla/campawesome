@@ -1,5 +1,7 @@
 Blog::Application.routes.draw do
 
+  resources :wants
+
   resources :listeds
 
   resources :lists

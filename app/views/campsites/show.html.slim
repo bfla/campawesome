@@ -24,7 +24,9 @@
       = link_to 'Been here', beens_path(campsite_id:@campsite, user_id:current_user), method: :post, class:'btn btn-default btn-sm'
         / else if user is logged in let them add it
         / else require login first!
-      button.btn.btn-default.btn-sm Want to go
+      - if current_user.wants(campsite_id:@campsite)
+        = link_to 'Want to go', current_user.wants(campsite_id:@campsite).first, method: :delete, class:'btn btn-success btn-sm', remote:true
+      = link_to 'Want to go', wants_path(campsite_id:@campsite, user_id:current_user), method: :post, class:'btn btn-default btn-sm'
       .btn-group
         button.btn.btn-default.btn-sm.dropdown-toggle data-toggle="dropdown" type="button" Save
         ul class="dropdown-menu" role="menu"

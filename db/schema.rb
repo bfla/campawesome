@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140209005033) do
+ActiveRecord::Schema.define(version: 20140209031620) do
 
   create_table "been_heres", force: true do |t|
     t.integer  "campsite_id"
@@ -161,6 +161,13 @@ ActiveRecord::Schema.define(version: 20140209005033) do
   create_table "vibes", force: true do |t|
     t.integer  "campsite_id"
     t.integer  "tribe_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "wants", force: true do |t|
+    t.integer  "campsite_id"
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

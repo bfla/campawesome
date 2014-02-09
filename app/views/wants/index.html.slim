@@ -1,0 +1,21 @@
+h1 Listing wants
+
+table
+  tr
+    th Campsite
+    th User
+    th
+    th
+    th
+
+  - @wants.each do |want|
+    tr
+      td = want.campsite_id
+      td = want.user_id
+      td = link_to 'Show', want
+      td = link_to 'Edit', edit_want_path(want)
+      td = link_to 'Destroy', want, data: {:confirm => 'Are you sure?'}, :method => :delete
+
+br
+
+= link_to 'New Want', new_want_path

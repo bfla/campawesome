@@ -1,0 +1,12 @@
+p#notice = notice
+
+p
+  strong Campsite:
+  = @want.campsite_id
+p
+  strong User:
+  = @want.user_id
+
+= link_to 'Edit', edit_want_path(@want)
+'|
+= link_to 'Back', wants_path

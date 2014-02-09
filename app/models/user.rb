@@ -7,8 +7,10 @@ class User < ActiveRecord::Base
   has_one :tribal_membership, dependent: :destroy
   has_one :tribe, through: :tribal_membership
   has_many :beens, dependent: :destroy
-  has_many :lists, dependent: :destroy
   has_many :campsites, through: :beens
+  has_many :wants, dependent: :destroy
+  has_many :campsites, through: :wants
+  has_many :lists, dependent: :destroy
   has_many :photos
 
   def self.find_for_facebook_oauth(auth)

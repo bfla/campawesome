@@ -5,10 +5,12 @@ class Campsite < ActiveRecord::Base
   # reservable:boolean, walkin:boolean
   belongs_to :state
   belongs_to :city
+  
   has_many :beens, dependent: :destroy
+  has_many :wants, dependent: :destroy
   has_many :listeds, dependent: :destroy
   has_many :lists, through: :listed
-  has_many :users, through: :beens
+
   has_many :vibes, dependent: :destroy
   has_many :tribes, through: :vibes
   has_many :photos
