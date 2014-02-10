@@ -1,0 +1,18 @@
+p#notice = notice
+
+p
+  strong Body:
+  = @review.body
+p
+  strong User:
+  = @review.user_id
+p
+  strong Reviewable:
+  = @review.reviewable_id
+p
+  strong Reviewable type:
+  = @review.reviewable_type
+
+= link_to 'Edit', edit_review_path(@review)
+'|
+= link_to 'Back', reviews_path

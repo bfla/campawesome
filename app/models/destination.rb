@@ -5,6 +5,7 @@ class Destination < ActiveRecord::Base
   validates :latitude, numericality: {greater_than: 0}
   validates :longitude, numericality: {less_than: 0}
   validates :zoom, numericality: true
+  has_many :reviews, as: :reviewable, dependent: :destroy
 
   def hashtag
     self.state.hashtag

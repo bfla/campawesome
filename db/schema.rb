@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140210150928) do
+ActiveRecord::Schema.define(version: 20140210172858) do
 
   create_table "been_heres", force: true do |t|
     t.integer  "campsite_id"
@@ -108,6 +108,15 @@ ActiveRecord::Schema.define(version: 20140210150928) do
     t.string   "ratable_type"
     t.float    "value"
     t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "reviews", force: true do |t|
+    t.text     "body"
+    t.integer  "user_id"
+    t.integer  "reviewable_id"
+    t.string   "reviewable_type"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

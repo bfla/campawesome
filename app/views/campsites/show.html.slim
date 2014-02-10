@@ -19,7 +19,11 @@
         small #{@campsite.org} campground in #{@campsite.state_name}&nbsp;
       hr
     = render 'layouts/campsiteCommands', campsite:@campsite
-    #rating.rateit
+    = form_for 
+      #rating.rateit
+      = f.hidden_field :campsite_id, value:@campsite
+      = f.hidden_field :user_id, value:current_user
+      = f.hidden_field :value, class:'value-to-rails'
           
           
 
@@ -38,7 +42,7 @@
     });
     $('.add-tooltip').tooltip();
   javascript:
-    $('#rating').click( function () {
+    $('.rateit').click( function () {
       var rating = $(this).rateit('value');
-      alert( rating );
+      $('.value-to-rails').value(rating);    
     });
