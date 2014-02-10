@@ -15,7 +15,7 @@ table
       td = rating.ratable_id
       td = rating.ratable_type
       td = rating.value
-      td = rating.user
+      td = rating.user_id
       td = link_to 'Show', rating
       td = link_to 'Edit', edit_rating_path(rating)
       td = link_to 'Destroy', rating, data: {:confirm => 'Are you sure?'}, :method => :delete
