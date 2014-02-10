@@ -24,11 +24,11 @@ class ReviewsController < ApplicationController
   # POST /reviews
   # POST /reviews.json
   def create
-    @campsite = Campsite.find(params[:review][:campsite_id])
-    @user = params[:user_id]
-    @body = params[:body]
-    @review = @campsite.reviews.create(body: @body, user_id:@user)
-
+    @campsite = Campsite.find(params[:campsite_id])
+    @review = @campsite.reviews.create(body: params[:body], user_id:params[:user_id])
+    unless params[:rating] == 0
+      @rating = @campsite.ratings.create(value: params[:rating], user_id:params[:user_id])
+    end
     respond_to do |format|
       if @review.save
         format.html { redirect_to @review, notice: 'Review was successfully created.' }

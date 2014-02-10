@@ -70,12 +70,8 @@ hr
   .col-md-2
   .col-md-10
     p.lead Have you been here?
-    button.btn.btn-success Review It
+    button.btn.btn-success data-toggle="modal" data-target="newReviewModal" Review It
     buttn.btn.btn-success Add photo
-    = form_for @campsite.reviews.create do |f| 
-      = f.hidden_field :user_id, value:current_user.id
-      = f.text_area :body, class:'form-control', rows:"3"
-      = f.submit 'Say it', class:"btn btn-success"
 hr
 
 / Tribes who like it

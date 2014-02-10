@@ -19,14 +19,6 @@
         small #{@campsite.org} campground in #{@campsite.state_name}&nbsp;
       hr
     = render 'layouts/campsiteCommands', campsite:@campsite
-    = form_for :rating, remote:true, url:ratings_path(campsite_id:@campsite, user_id:current_user) do |f|
-      #rating.rateit
-      = f.hidden_field :campsite_id, value:@campsite
-      = f.hidden_field :user_id, value:current_user
-      = f.hidden_field :value, class:'value-to-rails'
-          
-          
-
 
 - content_for :left
   = render 'campsiteLeft'
@@ -42,7 +34,13 @@
     });
     $('.add-tooltip').tooltip();
   javascript:
-    $('.rateit').click( function () {
+    /*$('.rateit').click( function () {
       var rating = $(this).rateit('value');
       $('.value-to-rails').value(rating);    
+    });*/
+  javascript:
+    $('.rateit').click( function() {
+      var rating = $(this).rateit('value');
+      alert(rating);
+      $('.rating').value(rating);
     });

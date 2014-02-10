@@ -1,0 +1,26 @@
+/ Needs a campsite
+#newReviewModal.modal.fade tabindex="-1" role="dialog" aria-labelledby="newReviewModalLabel" aria-hidden="true"
+  .modal-dialog
+    .modal-content
+      .modal-header
+        button.close type="button" data-dismiss="modal" aria-hidden="true" &times
+        h5#descriptionModalTitle.modal-title.text-center Review #{campsite.name}
+      .modal-body
+        = form_tag reviews_path, method: :post do
+          = hidden_field_tag :rating, params[:rating], class:'rating', value:"0"
+          = hidden_field_tag :campsite_id, params[:campsite_id], value:campsite.id
+          = hidden_field_tag :user_id, params[:user_id], value:current_user.id
+          .row
+            .col-md-8.col-md-offset-2
+              .rateit
+              p
+                small.help-block
+                  | 1 = Awful, 2 = Bad, 3 = Nothing Special, 4 = Good, 5 = Insanely Awesome
+          .row
+            .col-md-8.col-md-offset-2
+              .input-group.col-md-12
+                = text_area_tag :body, params[:body], class:'form-control', placeholder:"What should other campers know about your experience?", rows:4
+          .row
+            p.text-center.pad-top-md
+              button.btn.btn-default type="button" data-dismiss="modal" Close
+              button.btn.btn-success type="submit" Say it

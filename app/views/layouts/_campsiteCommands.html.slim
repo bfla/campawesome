@@ -1,14 +1,27 @@
 .btn-group
-  - if current_user.beens(campsite_id:campsite)
-    = link_to 'Been here', current_user.beens(campsite_id:campsite).first, method: :delete, class:'btn btn-success btn-sm', remote:true
-  = link_to 'Been here', beens_path(campsite_id:campsite, user_id:current_user), method: :post, class:'btn btn-default btn-sm'
+  - if current_user.beens(campsite_id:campsite).exists?
+    = link_to current_user.beens(campsite_id:campsite).first, method: :delete, class:'btn btn-info btn-xs', remote:true do
+      span.glyphicon.glyphicon-ok
+      |  Been here
+  - else
+    = link_to beens_path(campsite_id:campsite, user_id:current_user), method: :post, class:'btn btn-default btn-xs subtle-text' do
+      span.glyphicon.glyphicon-ok
+      |  Been here
     / else if user is logged in let them add it
     / else require login first!
-  - if current_user.wants(campsite_id:campsite)
-    = link_to 'Want to go', current_user.wants(campsite_id:campsite).first, method: :delete, class:'btn btn-success btn-sm', remote:true
-  = link_to 'Want to go', wants_path(campsite_id:campsite, user_id:current_user), method: :post, class:'btn btn-default btn-sm'
+  - if current_user.wants(campsite_id:campsite).exists?
+    = link_to current_user.wants(campsite_id:campsite).first, method: :delete, class:'btn btn-info btn-xs', remote:true do
+      span.glyphicon.glyphicon-plus-sign
+      |  Want to go
+  - else
+    = link_to wants_path(campsite_id:campsite, user_id:current_user), method: :post, class:'btn btn-default btn-xs subtle-text' do
+      span.glyphicon.glyphicon-plus-sign
+      |  Want to go
+
   .btn-group
-    button.btn.btn-default.btn-sm.dropdown-toggle data-toggle="dropdown" type="button" Save
+    button.btn.btn-default.btn-xs.dropdown-toggle.subtle-text data-toggle="dropdown" type="button" 
+      span.glyphicon.glyphicon-bookmark
+      |  Save
     ul class="dropdown-menu" role="menu"
         - current_user.lists.each do |list|
          li = link_to list.name, listeds_path(campsite_id:campsite, list_id:list), method: :post
@@ -16,3 +29,9 @@
         li#newListModalTrigger
           a href="#" data-toggle='modal' data-target='#newListModal' Create new list
         li =link_to 'Manage Lists', lists_path
+
+  a#reviewModal.btn.btn-default.btn-xs.subtle-text href="#" data-toggle='modal' data-target='#newReviewModal'
+    span.glyphicon.glyphicon-star
+    |  Review it
+
+  = render 'layouts/modals/newReviewModal', campsite:campsite
