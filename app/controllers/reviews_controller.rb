@@ -24,7 +24,10 @@ class ReviewsController < ApplicationController
   # POST /reviews
   # POST /reviews.json
   def create
-    @review = Review.new(review_params)
+    @campsite = Campsite.find(params[:review][:campsite_id])
+    @user = params[:user_id]
+    @body = params[:body]
+    @review = @campsite.reviews.create(body: @body, user_id:@user)
 
     respond_to do |format|
       if @review.save
@@ -69,6 +72,6 @@ class ReviewsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def review_params
-      params.require(:review).permit(:body, :user_id, :reviewable_id, :reviewable_type)
+      params.permit(:review, :body, :user_id, :reviewable_id, :reviewable_type)
     end
 end

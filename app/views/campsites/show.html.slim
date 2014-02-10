@@ -19,7 +19,7 @@
         small #{@campsite.org} campground in #{@campsite.state_name}&nbsp;
       hr
     = render 'layouts/campsiteCommands', campsite:@campsite
-    = form_for 
+    = form_for :rating, remote:true, url:ratings_path(campsite_id:@campsite, user_id:current_user) do |f|
       #rating.rateit
       = f.hidden_field :campsite_id, value:@campsite
       = f.hidden_field :user_id, value:current_user
