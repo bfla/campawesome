@@ -4,7 +4,7 @@ class CreateRatings < ActiveRecord::Migration
       t.integer :ratable_id
       t.string :ratable_type
       t.float :value
-      t.user_id :user
+      t.integer :user_id
 
       t.timestamps
     end
