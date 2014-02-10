@@ -1,0 +1,18 @@
+p#notice = notice
+
+p
+  strong Ratable:
+  = @rating.ratable_id
+p
+  strong Ratable type:
+  = @rating.ratable_type
+p
+  strong Value:
+  = @rating.value
+p
+  strong User:
+  = @rating.user
+
+= link_to 'Edit', edit_rating_path(@rating)
+'|
+= link_to 'Back', ratings_path

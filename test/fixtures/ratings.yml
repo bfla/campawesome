@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  ratable_id: 1
+  ratable_type: MyString
+  value: 1.5
+  user: 
+
+two:
+  ratable_id: 1
+  ratable_type: MyString
+  value: 1.5
+  user: 

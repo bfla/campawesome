@@ -12,6 +12,7 @@ class User < ActiveRecord::Base
   has_many :campsites, through: :wants
   has_many :lists, dependent: :destroy
   has_many :photos
+  has_many :ratings, dependent: :destroy
 
   def self.find_for_facebook_oauth(auth)
     where(auth.slice(:provider, :uid)).first_or_initialize.tap do |user|

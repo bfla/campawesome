@@ -10,6 +10,7 @@ class Campsite < ActiveRecord::Base
   has_many :wants, dependent: :destroy
   has_many :listeds, dependent: :destroy
   has_many :lists, through: :listed
+  has_many :ratings, as: :ratable, dependent: :destroy
 
   has_many :vibes, dependent: :destroy
   has_many :tribes, through: :vibes
