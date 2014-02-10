@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap
+//= require rateit
 //= require turbolinks
 //= require map_style
 //= require_tree .

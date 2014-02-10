@@ -19,6 +19,7 @@
         small #{@campsite.org} campground in #{@campsite.state_name}&nbsp;
       hr
     = render 'layouts/campsiteCommands', campsite:@campsite
+    #rating.rateit
           
           
 
@@ -36,3 +37,8 @@
       $('.panel').hide();
     });
     $('.add-tooltip').tooltip();
+  javascript:
+    $('#rating').click( function () {
+      var rating = $(this).rateit('value');
+      alert( rating );
+    });
