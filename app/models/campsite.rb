@@ -40,6 +40,11 @@ class Campsite < ActiveRecord::Base
   def primary_icon(style)
     self.vibes.first.tribe.icon(style)
   end
+  def has_tribe(tribe_id)
+    bool = false
+    self.tribes.each { |tribe| bool = true if tribe.id == tribe_id }
+    bool
+  end
   def icons
     self.vibes.each { |tribe| icons << tribe.icon }
   end
