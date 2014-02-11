@@ -3,14 +3,9 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 #resultsMap {
-  height:400px;
-  width:400px;
-  padding:70px;
+  height:100%;
+  width:100%;
   position:absolute;
-}
-
-.results-well {
-  padding-top: $topNavbarHeight;
 }
 
 #map {
@@ -21,6 +16,8 @@
 }
 
 #results-container {
+  min-height:100%;
+  padding-top: $topNavbarHeight;
   overflow-y: auto; 
   overflow-x: hidden;
   max-height:100%;
@@ -30,6 +27,12 @@
   width:5px;
   background-color:#e1e1e1;
 }
+
 #results-container::-webkit-scrollbar-thumb{
   background-color:#cccccc;
 }
+
+.searchFilterThumbnail {
+}
+
+.result-list {padding-top:50px;}

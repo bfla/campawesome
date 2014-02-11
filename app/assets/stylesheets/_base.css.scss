@@ -55,44 +55,45 @@ $brandFont: 'Monda';
 
 .pad-top-lg {     padding-top: $mainPadding; }
 
+.no-spacing { 
+                  padding:0px;
+                  margin:0px;}
+
 .tribe-background { background: $navColor; }
 
-.add-hairline {border: 1px solid #e1e1e1}
+.add-hairline {   border: 1px solid #e1e1e1}
 
-h1 {font-family:$brandFont;}
+h1 {              font-family:$brandFont;}
 
 // Banner styles=================================
 @import 'navbar';
 .brand {
-  font-family: $brandFont;
-  color: $brandColor;
+                  font-family: $brandFont;
+                  color: $brandColor;
 
-  &:visited { color: $brandColor; }
-  &:hover { color: $brandColor; }
+  &:visited {     color: $brandColor; }
+  &:hover {       color: $brandColor; }
 }
 
 // Footer style====================================
 #footer {
-  background:none;
-  border:none;
-  box-shadow:none;
-  height:$footerHeight;
-}
+                  background:none;
+                  border:none;
+                  box-shadow:none;
+                  height:$footerHeight;}
 
 // Sticky footers==================================
-.fill-height {height:100%;} // add this to a body & html elements
-#wrap { min-height:100%;} // add this around the main page content
+.fill-height {    height:100%;} // add this to a body & html elements
+#wrap {           min-height:100%;} // add this around the main page content
   
 #main { // add this to the main content or container div
-  overflow:auto;
-  padding-bottom:$footerHeight;
-
-}
+                  overflow:auto;
+                  padding-bottom:$footerHeight;}
 .flush-footer { // surround footer partial with this div
-  position:relative;
-  margin-top:-$footerHeight;
-  padding-top:$mediumPadding;
-  clear:both;
+                  position:relative;
+                  margin-top:-$footerHeight;
+                  padding-top:$mediumPadding;
+                  clear:both;
 }
 
 

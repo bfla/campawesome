@@ -11,7 +11,8 @@ class CampsitesController < ApplicationController
     zoom = params[:zoom] || 10
     distance = params[:distance] || 30
     coordinates = Geocoder.coordinates(params[:keywords])
-    @campsites = Campsite.near(coordinates, distance)
+    @campsites = Campsite.near(coordinates, distance).includes(:tribes)
+    @tribes = Tribe.all
     #@campsites = Campsite.search(params[:keywords], zoom)
     #@campsites = Campsite.search(params[:keywords], my_distance)
     @center = Geocoder::Calculations.geographic_center(@campsites)
@@ -21,6 +22,7 @@ class CampsitesController < ApplicationController
     gon.geoJson = @geojson
     gon.center = @center
     gon.zoom = zoom
+    gon.initTribe = params[:tribe_id] || 0
 
     respond_to do |format|
       format.html { render layout:"layouts/pages/search", notice: 'I found 2 campsites that look perfect for you.' }

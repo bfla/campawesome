@@ -36,4 +36,42 @@
     alert "Center:" + mapCenter + "SW:" + southWest + "Distance:" + distanceInMiles
     window.location.replace("http://localhost:3000/campsites/search/?utf8=✓&keywords="+mapCenter.lng+"%2C+"+mapCenter.lat)
 
-  
+$(document).ready ->
+    # highlights filter thumbnail border on hover
+    $(".searchFilterThumbnail").hover ->
+      unless $(this).attr("style") is "border: 2px solid #65b045; background:#d5eacb;"
+        if $(this).attr("style") is "border: 1px solid #b7b7b7;"
+          $(this).removeAttr "style"
+        else
+          $(this).attr "style", "border: 1px solid #b7b7b7;"
+      return
+
+    # determines click behavior for browse filter thumbnails
+    $(".searchFilterThumbnail").click ->
+      # highlights selected thumb
+      myThumbnail = $(this)
+      if $(this).attr("style") is "border: 2px solid #65b045; background:#d5eacb;"
+        $(this).removeAttr "style"
+      else
+        $(".searchFilterThumbnail").removeAttr "style"
+        $(this).attr "style", "border: 2px solid #65b045; background:#d5eacb;"
+
+      # gets filter data
+      filterId = $(this).data('tribe-id')
+      alert filterId
+      # applies filter using jQuery to show or hide results
+      $(".searchResult").hide() # hide all the results
+      if filterId is 0 # if the filter is all campsites
+        $(".searchResult").show() # then show all
+      else
+        $(".searchResult").each -> # for each campsite result
+          targetResult = $(this)
+          tribeIds = targetResult.data("tribes") # gets tribe ids for the campsite
+          for x of tribeIds
+            targetResult.show() if tribeIds[x] is filterId
+          return
+
+      return
+
+    return
+    
