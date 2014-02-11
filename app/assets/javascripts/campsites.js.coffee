@@ -6,15 +6,24 @@
 # #seachJson should have a data-center in this format: [LAT, LON]
 # #searchJson should also contain a data-geoJson attribute equal to a geoJson object to set the marker layer
 # then it makes and sets up a wicked cool MapBox map!
-@makeSearchMap = ->
+
+$(document).ready ->
   # grab data from Gon
   initCenter = gon.center
+  initZoom = gon.zoom
+  initGeoJson = gon.geoJson
   campsites = gon.campsites
-  geoJson = gon.geoJson
-  zoom = gon.zoom
+
+  makeSearchMap(initCenter, initZoom, initGeoJson)
+
+  $('.searchFilterThumbnail').click ->
+    filterId = $(this).data('tribe-id')
+    filterMarkers(filterId, @getMap)
+
+@makeSearchMap = (center, zoom, geoJson) ->
   
   # map code
-  map = L.mapbox.map("resultsMap", "campawesome.h5d0p7ea").setView(initCenter, zoom) # initialize the map
+  map = L.mapbox.map("resultsMap", "campawesome.h5d0p7ea").setView(center, zoom) # initialize the map
   map.zoomControl.setPosition('bottomright') # move the map zoom control
   
   map.markerLayer.setGeoJSON(geoJson) # set the markers
@@ -26,15 +35,27 @@
     e.layer.closePopup() # close open popups
     e.layer.openPopup() # activate tooltip
 
-  @resetSearchMap = ->
-    alert 'hi'
-    mapCenter = map.getCenter() # Gets the current center of the map as an Leaflet LatLng
-    mapBounds = map.getBounds() # Gets the SW and NE corners of the map as a Leaflet LatLngBound
-    southWest = map.getBounds().getSouthWest() # Returns the SW corner
-    distanceInMeters = mapCenter.distanceTo(southWest) # Returns the distance in meters
-    distanceInMiles = distanceInMeters * .000621371 # Calculates the distance in miles
-    alert "Center:" + mapCenter + "SW:" + southWest + "Distance:" + distanceInMiles
-    window.location.replace("http://localhost:3000/campsites/search/?utf8=✓&keywords="+mapCenter.lng+"%2C+"+mapCenter.lat)
+  @getMap = ->
+    return map
+
+@filterMarkers = (tribeId, map) ->
+  geoJson = gon.geoJson
+  if tribeId is 0
+    filteredGeoJson = geoJson
+  else
+    filteredGeoJson = new Object() # create a new geojson object with only the appropriate campgrounds
+    for object of geoJson
+      for tribe of geoJson[object].properties.tribes
+        #alert geoJson[object].properties.title if geoJson[object].properties.tribes[tribe] is filterId
+        filteredGeoJson[object] = geoJson[object] if geoJson[object].properties.tribes[tribe] is tribeId
+    for object of filteredGeoJson
+      alert filteredGeoJson[object].properties.title
+  #currentMarkerLayer.clearLayers()
+  #map.markerLayer.clearLayers()
+  L.mapbox.map.markerLayer.setGeoJSON(filteredGeoJson)
+  #map.markerLayer.setGeoJSON(filteredGeoJson)
+  #makeSearchMap(center, zoom, filteredGeoJson)
+
 
 $(document).ready ->
     # highlights filter thumbnail border on hover
@@ -74,17 +95,12 @@ $(document).ready ->
 
     return
 
-@remakeMarkersFromFilter = (filterId) ->
-  geoJson = gon.geoJson
-  filteredGeoJson = new Object() # create a new geojson object with only the appropriate campgrounds
-  for object of geoJson
-    for tribe of geoJson[object].properties.tribes
-      #alert geoJson[object].properties.title if geoJson[object].properties.tribes[tribe] is filterId
-      filteredGeoJson[object] = geoJson[object] if geoJson[object].properties.tribes[tribe] is filterId
-  for object of filteredGeoJson
-    alert filteredGeoJson[object].properties.title
-  map.markerLayer.clearLayers()
-  map.markerLayer.setGeoJSON(filteredGeoJson)
-
-
-    
+@resetSearchArea = ->
+  alert 'hi'
+  mapCenter = map.getCenter() # Gets the current center of the map as an Leaflet LatLng
+  mapBounds = map.getBounds() # Gets the SW and NE corners of the map as a Leaflet LatLngBound
+  southWest = map.getBounds().getSouthWest() # Returns the SW corner
+  distanceInMeters = mapCenter.distanceTo(southWest) # Returns the distance in meters
+  distanceInMiles = distanceInMeters * .000621371 # Calculates the distance in miles
+  alert "Center:" + mapCenter + "SW:" + southWest + "Distance:" + distanceInMiles
+  window.location.replace("http://localhost:3000/campsites/search/?utf8=✓&keywords="+mapCenter.lng+"%2C+"+mapCenter.lat)

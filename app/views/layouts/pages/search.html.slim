@@ -32,14 +32,14 @@ html.fill-height
         / Vibe filters======================
         .row
           - @tribes.first(3).each do |tribe|
-            .col-md-3
-              .filterThumbnail.searchFilterThumbnail.well.white data-tribe-id=tribe.id
+            .col-md-2
+              .filterThumbnail.searchFilterThumbnail.thumbnail style="padding:5px;" data-tribe-id=tribe.id
                 = image_tag tribe.icon.url(:small), class:'img-circle img-responsive tribe-background'
               p.no-spacing.text-center
                   small.no-spacing
                     small.no-spacing = tribe.vibe
-          .col-md-3
-            .filterThumbnail.searchFilterThumbnail.well.white data-tribe-id="0"
+          .col-md-2
+            .filterThumbnail.searchFilterThumbnail.thumbnail data-tribe-id="0"
               = image_tag @tribes.find(1).icon.url(:small), class:'img-circle img-responsive tribe-background'
             p.no-spacing.text-center
                 small.no-spacing
@@ -47,21 +47,34 @@ html.fill-height
           .col-md-12
             hr
 
-        .row
+        / .row
           p.col-md-12
             #reset.btn.btn-default Search this area
             = tag :input, id: 'searchJson', type: 'hidden', value: 'test', data: {center: @center, geoJson: @campsites.to_json}
+        / If no results ===============
+        .row
+          .col-md-12
+            .panel.panel-warning
+              .panel-heading Frick-o-saurus!  No campsites matched your search.
+              .panel-body
+                ul
+                  li Maybe my reptile-computer brain didn't recognize the place you entered.
+                  li Maybe the place you entered isn't in Michigan?  Right now, Michigan is Camposaurus's only habitat.
+                  li Maybe you did nothing wrong and I'm just messed up now.  If so, voracious apologies to you, human.  Please consider leaving feedback so my puny human creators can help me evolve and fix this problem.
+
         / Results ======================
         .row
           - @campsites.each do |campsite|
             .searchResult data-tribes=campsite.tribes_json
-              p.lead.col-md-12
+              .col-md-2
+                = image_tag campsite.primary_icon(:small), class:'img-circle img-responsive tribe-subtle'
+              p.lead.col-md-10
                 small = link_to campsite.name, campsite_path(campsite)
                 br
                 small
                   small.subtle-text
                     | #{campsite.org} campground in #{campsite.state_name}
-              p.col-md-12 
+              p.col-md-10.col-md-offset-2
                 small
                   strong.subtle-text Bookings:
                   - if campsite.reservable
@@ -73,7 +86,22 @@ html.fill-height
                     |  accepts walk-ins
                   - else
                     |  no walk-ins
-
+              p.col-md-offset-2.col-md-12
+                - if campsite.res_phone?
+                  small.subtle-text
+                    span.glyphicon.glyphicon-earphone
+                    |  #{number_to_phone(campsite.res_phone)}&nbsp;&nbsp;
+                - else 
+                  small.subtle-text
+                    span.glyphicon.glyphicon-earphone
+                    |  #{number_to_phone(campsite.camp_phone)}&nbsp;&nbsp;
+                - if campsite.res_url?
+                  small.subtle-text
+                    span.glyphicon.glyphicon-globe
+                    | &nbsp;
+                    a href=campsite.res_url Online reservations
+              .col-md-10.col-md-offset-2
+                = render 'layouts/campsiteCommands', campsite:campsite
               hr.col-md-12
         .row
           p.col-md-12
@@ -85,14 +113,6 @@ html.fill-height
     .col-md-8.mapColumn.fill-height.no-spacing
       script src='https://api.tiles.mapbox.com/mapbox.js/v1.6.1/mapbox.js'
       #resultsMap
-
-  / Makeshift json data. Yuck but it works. 
-  javascript:
-    makeSearchMap();
-    //attemptHandoff();
-    $('#reset').click( function() {
-      resetSearchMap();
-    });
 
   javascript:
     var filterId = gon.initTribe;
@@ -129,7 +149,3 @@ html.fill-height
             });
           }
         }
-  javascript:
-    $('.searchFilterThumbnail').click( function() {
-      remakeMarkersFromFilter(1);
-    });
