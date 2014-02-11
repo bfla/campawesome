@@ -1,6 +1,6 @@
 .btn-group
   - if current_user.beens(campsite_id:campsite).exists?
-    = link_to current_user.beens(campsite_id:campsite).first, method: :delete, class:'btn btn-info btn-xs', remote:true do
+    = link_to current_user.beens(campsite_id:campsite).first, method: :delete, class:'btn btn-default btn-xs', remote:true do
       span.glyphicon.glyphicon-ok
       |  Been here
   - else
@@ -10,7 +10,7 @@
     / else if user is logged in let them add it
     / else require login first!
   - if current_user.wants(campsite_id:campsite).exists?
-    = link_to current_user.wants(campsite_id:campsite).first, method: :delete, class:'btn btn-info btn-xs', remote:true do
+    = link_to current_user.wants(campsite_id:campsite).first, method: :delete, class:'btn btn-default btn-xs', remote:true do
       span.glyphicon.glyphicon-plus-sign
       |  Want to go
   - else

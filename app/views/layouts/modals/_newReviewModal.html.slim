@@ -4,10 +4,10 @@
     .modal-content
       .modal-header
         button.close type="button" data-dismiss="modal" aria-hidden="true" &times
-        h5#descriptionModalTitle.modal-title.text-center Review #{campsite.name}
+        h4#descriptionModalTitle.modal-title.text-center Review #{campsite.name}
       .modal-body
         = form_tag reviews_path, method: :post do
-          = hidden_field_tag :rating, params[:rating], class:'rating', value:"0"
+          = hidden_field_tag :rating, params[:rating], class:'rating-value', value:"0"
           = hidden_field_tag :campsite_id, params[:campsite_id], value:campsite.id
           = hidden_field_tag :user_id, params[:user_id], value:current_user.id
           .row
