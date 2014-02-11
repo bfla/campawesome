@@ -47,6 +47,8 @@ class Campsite < ActiveRecord::Base
     self.beens.find_by_user(user)
   end
   def geojsonify
+    tribe_ids = Array.new
+    self.vibes.each { |vibe| tribe_ids << vibe.tribe.id }
     geojson = {
       type: 'Feature',
       geometry: {
@@ -55,6 +57,7 @@ class Campsite < ActiveRecord::Base
       },
       properties: {
         title: self.name,
+        tribes: tribe_ids,
         url: 'http://example.com',
         :'marker-color' => "\#09b",
         :'marker-symbol' => 'campsite',

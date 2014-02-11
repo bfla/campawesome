@@ -58,7 +58,6 @@ $(document).ready ->
 
       # gets filter data
       filterId = $(this).data('tribe-id')
-      alert filterId
       # applies filter using jQuery to show or hide results
       $(".searchResult").hide() # hide all the results
       if filterId is 0 # if the filter is all campsites
@@ -74,4 +73,18 @@ $(document).ready ->
       return
 
     return
+
+@remakeMarkersFromFilter = (filterId) ->
+  geoJson = gon.geoJson
+  filteredGeoJson = new Object() # create a new geojson object with only the appropriate campgrounds
+  for object of geoJson
+    for tribe of geoJson[object].properties.tribes
+      #alert geoJson[object].properties.title if geoJson[object].properties.tribes[tribe] is filterId
+      filteredGeoJson[object] = geoJson[object] if geoJson[object].properties.tribes[tribe] is filterId
+  for object of filteredGeoJson
+    alert filteredGeoJson[object].properties.title
+  map.markerLayer.clearLayers()
+  map.markerLayer.setGeoJSON(filteredGeoJson)
+
+
     
