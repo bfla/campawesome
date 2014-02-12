@@ -13,7 +13,7 @@
           .text-center
             a.btn.btn-default.btn-lg href=omniauth_authorize_path(resource_name, 'facebook') 
               = image_tag '/images/icons/FB-icon.png'
-              |   Sign up with Facebook
+              |   Sign in with Facebook
             br
             - if devise_mapping.rememberable?
               .row
@@ -44,7 +44,6 @@
   javascript:
     //$('.nonsocial-signin').hide();
     $('.reveal-nonsocial').click( function() {
-      alert('hi');
       $('.reveal-nonsocial').hide();
       $('.nonsocial-signin').append( $('.nonsocial-content') );
     });

@@ -14,13 +14,11 @@ body.fill-height
         .row
           .col-md-8.col-md-offset-2
             h1.text-center style="color:white; padding-top:150px;" 
-              | Camposaurus
-              br
-              | The mightiest camping app on earth
+              | Rawr! I'm Camposaurus
               br
               | I'll find you fiercely awesome campsites
               br
-              small style="color:white;" With recommendations from ferocious campers like yourself
+              small style="color:white;" With recommendations from mighty campers like yourself
         .row
             = form_tag search_campsites_path, method: "get", class: "form", role: "search" do
               = label_tag :keywords, 'Find campgrounds near', class: 'sr-only'
@@ -38,7 +36,11 @@ body.fill-height
           .col-md-10.col-md-offset-1
             p.lead Join a tribe to get personalized recommendations
             p To get personalized recommendations, and more.
-            button.btn.btn-success Join a tribe
+              / This markup assumes only users who are not signed in see this page
+            - if user_signed_in?
+              a.btn.btn-success href=new_tribal_membership_path Join a tribe
+            - else
+              a.nextAction.btn.btn-success href="#" data-toggle="modal" data-target="#signupModal" data-next-url=new_tribal_membership_path Join a tribe
         .col-md-4.text-center.pad-top-md
           .col-md-10.col-md-offset-1
             p.lead Find your friends to see where they camped & trade recommendations
@@ -54,3 +56,5 @@ body.fill-height
           a Skeptical?  See 25 more reasons to sign up.
   .flush-footer
     == render 'layouts/footer'
+  == render 'layouts/modals/signinModal'
+  == render 'layouts/modals/signupModal'

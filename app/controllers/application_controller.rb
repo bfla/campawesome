@@ -19,9 +19,11 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_in_path_for(resource)
+    #session[:previous_url] || root_path
     session[:previous_url] || root_path
   end
   def after_sign_up_path_for(resource)
+    session[:previous_url] = new_tribal_membership_path
     session[:previous_url] || root_path
   end
 

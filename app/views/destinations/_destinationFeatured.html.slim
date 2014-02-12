@@ -7,7 +7,7 @@
         = link_to ' see all', browse_destinations_path(id:place)
     br
     hr
-  .col-md-3 = image_tag @tribes.find(1).icon.url(:medium), class:'tribe-background img-circle'
+  .col-md-3 = image_tag @tribes.find(1).icon.url(:medium), class:'tribe-subtle img-circle'
   ol.col-md-9
     - campsites.first(5).each do |campsite|
         li = link_to campsite.name, campsite
@@ -19,7 +19,7 @@
         = link_to ' see all', browse_destinations_path(id:place, tribe_id:1)
     br
     hr
-  .col-md-3 = image_tag @tribes.find(1).icon.url(:medium), class:'tribe-background img-circle'
+  .col-md-3 = image_tag @tribes.find(1).icon.url(:medium), class:'tribe-subtle img-circle'
   ol.col-md-9
     - campsites.each do |campsite|
       - if campsite.has_tribe(1)
@@ -32,7 +32,7 @@
     small.pull-right
       small
         = link_to ' see all', browse_destinations_path(id:place, tribe_id:3)
-    .col-md-3 = image_tag @tribes.find(3).icon.url(:medium), class:'tribe-background img-circle'
+    .col-md-3 = image_tag @tribes.find(3).icon.url(:medium), class:'tribe-subtle img-circle'
     ol.col-md-9
       - campsites.each do |campsite|
         - if campsite.has_tribe(3)
@@ -45,7 +45,7 @@
     small.pull-right
       small
         = link_to ' see all', browse_destinations_path(id:place, tribe_id:2)
-    .col-md-3 = image_tag @tribes.find(2).icon.url(:medium), class:'tribe-background img-circle'
+    .col-md-3 = image_tag @tribes.find(2).icon.url(:medium), class:'tribe-subtle img-circle'
     ol.col-md-9
       - campsites.each do |campsite|
         - if campsite.has_tribe(2)

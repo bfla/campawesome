@@ -1,0 +1,55 @@
+#signupModal.modal.fade tabindex="-1" role="dialog" aria-labelledby="signupModalLabel" aria-hidden="true"
+  .modal-dialog
+    .modal-content
+      .modal-header
+        button.close type="button" data-dismiss="modal" aria-hidden="true" &times
+        h4#signinModalTitle.modal-title 
+          | Sign Up
+      .modal-body
+        / Form needs to go here
+        = form_tag registration_path(:user) do
+          .text-center
+            a.btn.btn-default.btn-lg href=omniauth_authorize_path(:user, 'facebook') 
+              = image_tag '/images/icons/FB-icon.png'
+              |   Sign up with Facebook
+            br
+            - if devise_mapping.rememberable?
+              .row
+                .form-inline.col-md-6.col-md-offset-3
+                  p
+                    = check_box_tag 'user[remember_me]'
+                    |  remember me
+            .nonsocial-signup-container.form-inline
+            small
+              a.reveal-nonsocial-signup.col-md-12 Sign up without a social network
+              br
+              = link_to "Already have an account?  Sign in.", new_session_path(:user), class:'col-md-12 pad-bottom-'
+
+            .row style="display:none;"
+              .nonsocial-signup-content
+                .col-md-12
+                  .form-group.col-md-4.col-md-offset-4
+                    = hidden_field_tag params[:next_url], nil, class:'next-url'
+                    = label_tag 'user[email]', nil, class: "control-label sr-only"
+                    = email_field_tag 'user[email]', nil, class: "form-control", placeholder:'your email'
+                .col-md-12
+                  .form-group.col-md-4.col-md-offset-4
+                    = label_tag 'user[password]', nil, class: "control-label sr-only"
+                    = password_field_tag 'user[password]', nil, class: "form-control", placeholder:'your password'
+                .col-md-12
+                  .form-group.col-md-4.col-md-offset-4
+                    = label_tag 'user[password_confirmation]', nil, class: "control-label sr-only"
+                    = password_field_tag 'user[password_confirmation]', nil, class: "form-control", placeholder:'your password'
+                p.col-md-12.text-cente
+                  button.btn.btn-success type="submit" Sign in
+                br
+
+javascript:
+  $('.nextAction').click( function () {
+    nextAction = $(this).data('next-url');
+    $('.next-url').val(nextAction);
+  });
+  $('.reveal-nonsocial-signup').click( function() {
+    $('.reveal-nonsocial-signup').hide();
+    $('.nonsocial-signup-container').append( $('.nonsocial-signup-content') );
+  });
