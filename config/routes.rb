@@ -8,7 +8,11 @@ Blog::Application.routes.draw do
 
   resources :listeds
 
-  resources :lists
+  resources :lists do
+    collection do
+      get 'management'
+    end
+  end
 
   resources :pages
 

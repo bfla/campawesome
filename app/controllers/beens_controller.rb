@@ -24,7 +24,11 @@ class BeensController < ApplicationController
   # POST /beens
   # POST /beens.json
   def create
-    @been = Been.new(been_params)
+    if current_user.beens.find_by_campsite_id(params[:campsite_id]).blank?
+      @been = Been.new(been_params)
+    else
+      @been = current.user.beens.find_by_campsite_id(params[:campsite_id])
+    end
 
     respond_to do |format|
       if @been.save

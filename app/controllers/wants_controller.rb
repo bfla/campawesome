@@ -24,7 +24,12 @@ class WantsController < ApplicationController
   # POST /wants
   # POST /wants.json
   def create
-    @want = Want.new(want_params)
+    if current_user.wants.find_by_campsite_id(params[:campsite_id]).blank?
+      @want = Want.new(want_params)
+    else
+      @want = current_user.wants.find_by_campsite_id(params[:campsite_id])
+    end
+    
 
     respond_to do |format|
       if @want.save

@@ -1,21 +1,19 @@
 - if user_signed_in?
   .btn-group
-    - if current_user.beens(campsite_id:campsite).exists?
-      = link_to current_user.beens(campsite_id:campsite).first, method: :delete, class:'btn btn-default btn-xs', remote:true do
+    - if current_user.beens.find_by_campsite_id(campsite.id).blank?
+      = link_to beens_path(campsite_id:campsite, user_id:current_user), method: :post, class:'btn btn-default btn-xs subtle-text enable-command-toggle', remote:true do
         span.glyphicon.glyphicon-ok
         |  Been here
-    - else
-      = link_to beens_path(campsite_id:campsite, user_id:current_user), method: :post, class:'btn btn-default btn-xs subtle-text' do
+    - else 
+      = link_to current_user.beens(campsite_id:campsite).first, method: :delete, class:'btn btn-default btn-xs enable-command-toggle', remote:true do
         span.glyphicon.glyphicon-ok
         |  Been here
-      / else if user is logged in let them add it
-      / else require login first!
-    - if current_user.wants(campsite_id:campsite).exists?
-      = link_to current_user.wants(campsite_id:campsite).first, method: :delete, class:'btn btn-default btn-xs', remote:true do
+    - if current_user.wants.find_by_campsite_id(campsite.id).blank?
+      = link_to wants_path(campsite_id:campsite, user_id:current_user), method: :post, class:'btn btn-default btn-xs subtle-text enable-command-toggle', remote:true do
         span.glyphicon.glyphicon-plus-sign
         |  Want to go
     - else
-      = link_to wants_path(campsite_id:campsite, user_id:current_user), method: :post, class:'btn btn-default btn-xs subtle-text' do
+      = link_to current_user.wants(campsite_id:campsite).first, method: :delete, class:'btn btn-default btn-xs enable-command-toggle', remote:true do
         span.glyphicon.glyphicon-plus-sign
         |  Want to go
 
@@ -31,14 +29,14 @@
             a href="#" data-toggle='modal' data-target='#newListModal' Create new list
           li =link_to 'Manage Lists', lists_path
 
-    a#reviewModal.btn.btn-default.btn-xs.subtle-text href="#" data-toggle='modal' data-target='#newReviewModal'
+    a#reviewModal.btn.btn-default.btn-xs.subtle-text href="#" data-toggle='modal' data-target='##{campsite.id}'
       span.glyphicon.glyphicon-star
       |  Review it
 
     = render 'layouts/modals/newReviewModal', campsite:campsite
-    = render 'layouts/modals/newListModal', campsite:@campsite
+    = render 'layouts/modals/newListModal', campsite:campsite
 - else
-  a.btn-group href="#" data-toggle="modal" data-target="#authModal"
+  a.btn-group href="#" data-toggle="modal" data-target="#signupModal"
     button.btn.btn-default.btn-xs.subtle-text
       span.glyphicon.glyphicon-ok
       |  Been here
@@ -51,3 +49,8 @@
     button.btn.btn-default.btn-xs.subtle-text
       span.glyphicon.glyphicon-star
       |  Review it
+
+javascript:
+  $('.enable-command-toggle').click( function() {
+    $(this).toggleClass('subtle-text');
+  });
