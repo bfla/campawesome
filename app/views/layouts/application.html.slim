@@ -1,5 +1,5 @@
 doctype html
-html
+html.fill-height
   head
     / meta tags
     == yield :head
@@ -12,7 +12,7 @@ html
     == render 'layouts/headscripts'
     == yield :head_javascripts
 
-  body.background
+  body.fill-height.background
     - if alert
       = alert
     - if notice
@@ -22,6 +22,7 @@ html
     / Body goes here
     == yield :layout
     / Footer goes here
-    .navbar-fixed-bottom
-        == render 'layouts/footer'
+    .flush-footer
+        .pad-top-lg
+            == render 'layouts/footer'
     == yield :end

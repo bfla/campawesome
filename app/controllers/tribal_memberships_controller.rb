@@ -30,7 +30,7 @@ class TribalMembershipsController < ApplicationController
 
     respond_to do |format|
       if @tribal_membership.save
-        format.html { redirect_to @tribal_membership, notice: 'Tribal membership was successfully created.' }
+        format.html { redirect_to session[:previous_url], notice: 'Tribal membership was successfully created.' }
         format.json { render action: 'show', status: :created, location: @tribal_membership }
       else
         format.html { render action: 'new' }

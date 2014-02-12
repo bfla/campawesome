@@ -1,5 +1,5 @@
 - content_for :head
-  title CampAwesome Tribes
+  title Camposaurus Tribes
   meta name='description' content='Join a camping tribe on CampAwesome'
 .background
   .container.background.pad-top-lg
@@ -7,22 +7,51 @@
       / heading
       .row.text-center
         h1.col-md-12 Join a tribe
-        p.lead Get personalized recommendations & more
+        p.lead 
+          | Pick the tribe that fits your camping style
+          br
+          | to get personalized recommendations
         = form_for @tribal_membership do |f|
           = f.hidden_field :user_id, value:current_user.id
-          = f.hidden_field :tribe_id
-          button.btn.btn-default Skip
-          = f.submit 'Join it!', class:"btn btn-success tribeJoinSubmit"
+          = f.hidden_field :tribe_id, class:'selected-tribe-id'
+          / a.btn.btn-default href="" Skip
+          = f.submit 'Done!', class:"btn btn-success tribeJoinSubmit btn-lg"
         hr
       / tribe thumbnails
       .row
       - @tribes.each do |tribe|
         .col-md-4 
-          .thumbnail.tribeThumb data-tribe-id=tribe.id
+          .thumbnail.tribe-thumb data-tribe-id=tribe.id
             = image_tag tribe.join_pic, class:'img'
             p.lead.tribe-caption.col-md-offset-1.pad-top-md
               = image_tag tribe.icon.url(:small), class:'img-circle tribe-background'
               small 
                 |   #{tribe.name}
-            p.col-md-offset-1 = tribe.description
-      /hidden form
+            p.col-md-offset-1 
+              = tribe.description
+              br
+              .text-center
+                button.joinButton.btn.btn-default Pick this tribe
+
+javascript:
+  $('.tribe-thumb').click( function(){
+    // Add green border to only active thumbnail
+    $('.tribe-thumb').removeAttr("style");
+    $(this).attr("style", "border: 1px solid rgb(71, 164, 71);");
+    // Add green button to only active thumbnail
+    $('.joinButton').removeClass('btn-success btn-default');
+    $('.joinButton').addClass('btn-default');
+    $(this).find('.joinButton').toggleClass('btn-success', 'btn-default');
+    // Change form data appropriately
+    var selectedTribe = $(this).data('tribe-id');
+    $('.selected-tribe-id').val(selectedTribe);
+  });
+
+  // highlight border of thumbnail on hover
+  $('.tribe-thumb').hover( function(){
+    if ($(this).attr("style") == "border: 1px solid #b7b7b7;") {
+      $(this).removeAttr("style");
+    } else if ($(this).attr("style") != "border: 1px solid rgb(71, 164, 71);") {
+      $(this).attr("style", "border: 1px solid #b7b7b7;");
+    }
+  });

@@ -1,3 +1,10 @@
 // Place all the styles related to the TribalMemberships controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.tribeThumbHover {
+  border: 1px solid #b7b7b7;
+}
+.tribeThumbActive {
+  border: 1px solid rgb(71, 164, 71);
+}
