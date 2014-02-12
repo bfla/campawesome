@@ -26,14 +26,21 @@ class TribalMembershipsController < ApplicationController
   # POST /tribal_memberships
   # POST /tribal_memberships.json
   def create
-    @tribal_membership = TribalMembership.new(tribal_membership_params)
+    @tribes = Tribe.all
+    if current_user.tribe.blank?
+      @tribal_membership = TribalMembership.new(tribal_membership_params)
+    else
+      @tribal_membership = current_user.tribal_membership
+      @tribal_membership.tribe_id = params[:tribe_id]
+      @tribal_membership.save
+    end
 
     respond_to do |format|
       if @tribal_membership.save
         format.html { redirect_to session[:previous_url], notice: 'Tribal membership was successfully created.' }
         format.json { render action: 'show', status: :created, location: @tribal_membership }
       else
-        format.html { render action: 'new' }
+        format.html { redirect_to session[:previous_url] }
         format.json { render json: @tribal_membership.errors, status: :unprocessable_entity }
       end
     end
