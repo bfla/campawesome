@@ -3,7 +3,7 @@
     .modal-content
       .modal-header
         button.close type="button" data-dismiss="modal" aria-hidden="true" &times
-        h4#signinModalTitle.modal-title 
+        h4#signinModalTitle.modal-title.text-center 
           | Sign In
       .modal-body
         / Form needs to go here
@@ -19,9 +19,10 @@
                   p
                     = check_box_tag 'user[remember_me]'
                     |  remember me
+            hr
             .nonsocial-signin.form-inline
             small
-              a.reveal-nonsocial.col-md-12 href="#" Sign in without a social network
+              a.reveal-nonsocial.col-md-12 Sign in without a social network
               br
               = link_to "Are you new?  Sign up.", new_registration_path(:user), class:'col-md-12'
 

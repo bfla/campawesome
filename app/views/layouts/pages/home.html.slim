@@ -7,6 +7,7 @@ html.fill-height
     == render 'layouts/headstyles'
     == render 'layouts/headscripts'
 body.fill-height
+  == render 'layouts/modals/standardModals'
   == render 'layouts/navbar'
   #wrap
     <div id="landingHeader" style='background-image:url("#{ asset_path "/images/landing/mears_1600x500.jpg"}"); height:500px;', alt='An image of camping in Michigan. It is a sunset at Mears State Park Campground.', title='Michigan camping near Mears State Park campground'>
@@ -56,5 +57,3 @@ body.fill-height
           a Skeptical?  See 25 more reasons to sign up.
   .flush-footer
     == render 'layouts/footer'
-  == render 'layouts/modals/signinModal'
-  == render 'layouts/modals/signupModal'

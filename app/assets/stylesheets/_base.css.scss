@@ -49,11 +49,17 @@ $brandFont: 'Monda';
 
 .margin-left-sm { margin-left:$smallPadding; }
 
+.margin-top-sm {  margin-top:$smallPadding; }
+
 .pad-left-sm {    padding-left: $smallPadding; }
+
+.pad-top-sm {     padding-top:$smallPadding;}
 
 .pad-top-md {     padding-top: $mediumPadding; }
 
 .pad-top-lg {     padding-top: $mainPadding; }
+
+.pad-bottom-huge { padding-bottom:200px;}
 
 .no-spacing { 
                   padding:0px;

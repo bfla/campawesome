@@ -13,12 +13,13 @@ html
     == yield :head_javascripts
     
   body.background
+    == render 'layouts/modals/standardModals'
     / Top navbar goes here
     == render 'layouts/navbar'
     / Body goes here
     #wrap
       #main.background
-        .container.background.pad-top-md
+        .container.background.pad-top-lg
           .row
             / Content area
             .col-md-10.col-md-offset-1.well.white
@@ -55,5 +56,4 @@ html
     / Footer goes here
     .flush-footer.background
       == render 'layouts/footer'
-    == render 'layouts/signinModal'
     == yield :end

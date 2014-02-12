@@ -1,37 +1,53 @@
-.btn-group
-  - if current_user.beens(campsite_id:campsite).exists?
-    = link_to current_user.beens(campsite_id:campsite).first, method: :delete, class:'btn btn-default btn-xs', remote:true do
-      span.glyphicon.glyphicon-ok
-      |  Been here
-  - else
-    = link_to beens_path(campsite_id:campsite, user_id:current_user), method: :post, class:'btn btn-default btn-xs subtle-text' do
-      span.glyphicon.glyphicon-ok
-      |  Been here
-    / else if user is logged in let them add it
-    / else require login first!
-  - if current_user.wants(campsite_id:campsite).exists?
-    = link_to current_user.wants(campsite_id:campsite).first, method: :delete, class:'btn btn-default btn-xs', remote:true do
-      span.glyphicon.glyphicon-plus-sign
-      |  Want to go
-  - else
-    = link_to wants_path(campsite_id:campsite, user_id:current_user), method: :post, class:'btn btn-default btn-xs subtle-text' do
-      span.glyphicon.glyphicon-plus-sign
-      |  Want to go
-
+- if user_signed_in?
   .btn-group
-    button.btn.btn-default.btn-xs.dropdown-toggle.subtle-text data-toggle="dropdown" type="button" 
+    - if current_user.beens(campsite_id:campsite).exists?
+      = link_to current_user.beens(campsite_id:campsite).first, method: :delete, class:'btn btn-default btn-xs', remote:true do
+        span.glyphicon.glyphicon-ok
+        |  Been here
+    - else
+      = link_to beens_path(campsite_id:campsite, user_id:current_user), method: :post, class:'btn btn-default btn-xs subtle-text' do
+        span.glyphicon.glyphicon-ok
+        |  Been here
+      / else if user is logged in let them add it
+      / else require login first!
+    - if current_user.wants(campsite_id:campsite).exists?
+      = link_to current_user.wants(campsite_id:campsite).first, method: :delete, class:'btn btn-default btn-xs', remote:true do
+        span.glyphicon.glyphicon-plus-sign
+        |  Want to go
+    - else
+      = link_to wants_path(campsite_id:campsite, user_id:current_user), method: :post, class:'btn btn-default btn-xs subtle-text' do
+        span.glyphicon.glyphicon-plus-sign
+        |  Want to go
+
+    .btn-group
+      button.btn.btn-default.btn-xs.dropdown-toggle.subtle-text data-toggle="dropdown" type="button" 
+        span.glyphicon.glyphicon-bookmark
+        |  Save
+      ul class="dropdown-menu" role="menu"
+          - current_user.lists.each do |list|
+           li = link_to list.name, listeds_path(campsite_id:campsite, list_id:list), method: :post
+          li.divider
+          li#newListModalTrigger
+            a href="#" data-toggle='modal' data-target='#newListModal' Create new list
+          li =link_to 'Manage Lists', lists_path
+
+    a#reviewModal.btn.btn-default.btn-xs.subtle-text href="#" data-toggle='modal' data-target='#newReviewModal'
+      span.glyphicon.glyphicon-star
+      |  Review it
+
+    = render 'layouts/modals/newReviewModal', campsite:campsite
+    = render 'layouts/modals/newListModal', campsite:@campsite
+- else
+  a.btn-group href="#" data-toggle="modal" data-target="#authModal"
+    button.btn.btn-default.btn-xs.subtle-text
+      span.glyphicon.glyphicon-ok
+      |  Been here
+    button.btn.btn-default.btn-xs.subtle-text
+      span.glyphicon.glyphicon-plus-sign
+      |  Want to go
+    button.btn.btn-default.btn-xs.subtle-text
       span.glyphicon.glyphicon-bookmark
       |  Save
-    ul class="dropdown-menu" role="menu"
-        - current_user.lists.each do |list|
-         li = link_to list.name, listeds_path(campsite_id:campsite, list_id:list), method: :post
-        li.divider
-        li#newListModalTrigger
-          a href="#" data-toggle='modal' data-target='#newListModal' Create new list
-        li =link_to 'Manage Lists', lists_path
-
-  a#reviewModal.btn.btn-default.btn-xs.subtle-text href="#" data-toggle='modal' data-target='#newReviewModal'
-    span.glyphicon.glyphicon-star
-    |  Review it
-
-  = render 'layouts/modals/newReviewModal', campsite:campsite
+    button.btn.btn-default.btn-xs.subtle-text
+      span.glyphicon.glyphicon-star
+      |  Review it

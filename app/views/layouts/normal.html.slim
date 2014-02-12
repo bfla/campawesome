@@ -13,6 +13,7 @@ html.fill-height
     == yield :head_javascripts
     
   body.fill-height.background
+    == render 'layouts/modals/standardModals'
     / Top navbar goes here
     == render 'layouts/navbar'
     / Body goes here
@@ -45,5 +46,4 @@ html.fill-height
     / Footer goes here
     .flush-footer.background
       == render 'layouts/footer'
-    == render 'layouts/signinModal'
     == yield :end

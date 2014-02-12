@@ -13,6 +13,7 @@ html.fill-height
     == yield :head_javascripts
 
   body.fill-height.background
+    == render 'layouts/modals/standardModals'
     - if alert
       = alert
     - if notice
@@ -25,4 +26,5 @@ html.fill-height
     .flush-footer
         .pad-top-lg
             == render 'layouts/footer'
+    
     == yield :end
