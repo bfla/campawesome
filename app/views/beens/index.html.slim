@@ -13,7 +13,7 @@
         - if current_user.beens.size == 1
           | You've been to 1 place
         - else
-          | You've been to #{current_user.beens.size} place
+          | You've been to #{current_user.beens.size} places
       hr
 
 - content_for :left
@@ -21,6 +21,16 @@
     p.pull-right 
       small = link_to 'Remove from list', been, data: {:confirm => 'Are you sure?'}, :method => :delete, class:'subtle-text'
     = render "layouts/guide/browseResult", campsite:been.campsite
+
+- content_for :right
+
+  .col-md-12
+    p.help-block 
+      | Tip: You can add campsites been to by clicking the campsite's "Been here" button.  The button looks like this:&nbsp;
+      button.btn.btn-default.btn-sm.subtle-text
+        span.glyphicon.glyphicon-ok
+        |  Been here
+      hr
 /
   - @beens.each do |been|
     tr
