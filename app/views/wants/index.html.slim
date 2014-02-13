@@ -1,21 +1,49 @@
-h1 Listing wants
+- content_for :head
+  title Places you want to camp
 
-table
-  tr
-    th Campsite
-    th User
-    th
-    th
-    th
+- content_for :breadcrumb
+  ol.breadcrumb.white
+    li = link_to 'Your home page', home_path 
+    li.active Want to go
 
-  - @wants.each do |want|
+- content_for :heading
+    h1 
+      | Places you want to camp
+      br
+      small 
+        - if current_user.wants.size == 1
+          | You want to camp at 1 place
+        - else
+          | You want to camp #{current_user.wants.size} places
+      hr
+
+- content_for :left
+  - current_user.wants.each do |want|
+    p.pull-right 
+      small = link_to 'Remove from list', want, data: {:confirm => 'Are you sure?'}, :method => :delete, class:'subtle-text'
+    = render "layouts/guide/browseResult", campsite:want.campsite
+
+
+
+/
+  h1 Listing wants
+
+  table
     tr
-      td = want.campsite_id
-      td = want.user_id
-      td = link_to 'Show', want
-      td = link_to 'Edit', edit_want_path(want)
-      td = link_to 'Destroy', want, data: {:confirm => 'Are you sure?'}, :method => :delete
+      th Campsite
+      th User
+      th
+      th
+      th
 
-br
+    - @wants.each do |want|
+      tr
+        td = want.campsite_id
+        td = want.user_id
+        td = link_to 'Show', want
+        td = link_to 'Edit', edit_want_path(want)
+        td = link_to 'Destroy', want, data: {:confirm => 'Are you sure?'}, :method => :delete
 
-= link_to 'New Want', new_want_path
+  br
+
+  = link_to 'New Want', new_want_path

@@ -4,7 +4,12 @@ class WantsController < ApplicationController
   # GET /wants
   # GET /wants.json
   def index
-    @wants = Want.all
+    if user_signed_in?
+      @wants = current_user.wants
+      render layout: "layouts/twoColumn"
+    else
+      redirect_to new_user_session_path
+    end
   end
 
   # GET /wants/1

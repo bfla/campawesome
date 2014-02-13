@@ -1,13 +1,27 @@
-h1 Listing beens
+- content_for :head
+  title Places you've been
 
-table
-  tr
-    th Campsite
-    th User
-    th
-    th
-    th
+- content_for :breadcrumb
+  ol.breadcrumb.white
+    li = link_to 'Your home page', home_path 
+    li.active Places you've been 
+- content_for :heading
+    h1 
+      | Places you've been
+      br
+      small 
+        - if current_user.beens.size == 1
+          | You've been to 1 place
+        - else
+          | You've been to #{current_user.beens.size} place
+      hr
 
+- content_for :left
+  - current_user.beens.each do |been|
+    p.pull-right 
+      small = link_to 'Remove from list', been, data: {:confirm => 'Are you sure?'}, :method => :delete, class:'subtle-text'
+    = render "layouts/guide/browseResult", campsite:been.campsite
+/
   - @beens.each do |been|
     tr
       td = been.campsite_id
@@ -16,6 +30,6 @@ table
       td = link_to 'Edit', edit_been_path(been)
       td = link_to 'Destroy', been, data: {:confirm => 'Are you sure?'}, :method => :delete
 
-br
+  br
 
-= link_to 'New Been', new_been_path
+  = link_to 'New Been', new_been_path
