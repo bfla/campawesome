@@ -4,7 +4,13 @@ class PhotosController < ApplicationController
   # GET /photos
   # GET /photos.json
   def index
-    @photos = Photo.all
+    #@photos = Photo.all
+    if user_signed_in?
+      @photos = current_user.photos
+      render layout:"layouts/twoColumn"
+    else
+      redirect_to new_user_session_path
+    end
   end
 
   # GET /photos/1

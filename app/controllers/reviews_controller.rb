@@ -4,7 +4,13 @@ class ReviewsController < ApplicationController
   # GET /reviews
   # GET /reviews.json
   def index
-    @reviews = Review.all
+    #@reviews = Review.all
+    if user_signed_in?
+      @reviews = current_user.reviews
+      render layout:"layouts/twoColumn"
+    else
+      redirect_to new_user_session_path
+    end
   end
 
   # GET /reviews/1

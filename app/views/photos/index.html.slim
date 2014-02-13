@@ -1,4 +1,45 @@
 - content_for :head
+  title Your photos - Camposaurus
+
+- content_for :breadcrumb
+  ol.breadcrumb.white
+    li = link_to 'Your home page', home_path 
+    li.active Your photos 
+- content_for :heading
+    h1 
+      | Your camping trip photos
+      br
+      small 
+        - if current_user.photos.size == 1
+          | You have 1 camping trip photo
+        - else
+          | You have #{current_user.photos.size} camping trip photos
+      hr
+
+- content_for :left
+  - current_user.photos.each do |photo|
+    .col-md-4
+      .thumbnail
+        = image_tag photo.photo_file.url(:large)
+      p.text-center
+        small = link_to 'Delete photo', photo, data: {:confirm => 'Are you sure?'}, :method => :delete, class:'subtle-text'
+/
+  - @beens.each do |been|
+    tr
+      td = been.campsite_id
+      td = been.user_id
+      td = link_to 'Show', been
+      td = link_to 'Edit', edit_been_path(been)
+      td = link_to 'Destroy', been, data: {:confirm => 'Are you sure?'}, :method => :delete
+
+  br
+
+  = link_to 'New Been', new_been_path
+
+
+
+
+/- content_for :head
   title Photo admin
 
   #main.container

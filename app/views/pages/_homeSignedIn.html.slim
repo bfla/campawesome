@@ -8,12 +8,12 @@
           = image_tag current_user.tribe.icon.url(:medium), class:"img-responsive img-circle tribe-background"
         p.text-center.col-md-12
           | #{current_user.reviews.size}&nbsp;
-          = link_to "Reviews", ""
+          = link_to "Reviews", reviews_path
           br
           | 5 Helpful votes
           br
           | #{current_user.photos.size}&nbsp;
-          = link_to "Photos", ""
+          = link_to "Photos", photos_path
       .col-md-10
         h1 style="padding-top:20px; margin-top:20px; z-index:1"
           small

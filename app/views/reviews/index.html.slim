@@ -1,25 +1,57 @@
-h1 Listing reviews
+- content_for :head
+  title Your reviews
 
-table
-  tr
-    th Body
-    th User
-    th Reviewable
-    th Reviewable type
-    th
-    th
-    th
+- content_for :breadcrumb
+  ol.breadcrumb.white
+    li = link_to 'Your home page', home_path 
+    li.active Your reviews
+- content_for :heading
+    h1 
+      | Reviews you've contributed
+      br
+      small
+        - if current_user.reviews.size == 1
+          | You've reviewed 1 place
+        - else
+          | You've reviewed #{current_user.reviews.size} place
+      hr
 
-  - @reviews.each do |review|
+- content_for :left
+  - current_user.reviews.each do |review|
+    p.lead.col-md-12 
+      = review.campsite.name
+      small created on #{review.created_at}
+    hr
+    - unless current_user.ratings.find_by_campsite(review.campsite).blank?
+      p You gave this campsite #{current_user.ratings.find_by_campsite(review.campsite).value} out of 5.0
+    p = review.body
+
+
+
+
+
+/h1 Listing reviews
+
+  table
     tr
-      td = review.body
-      td = review.user_id
-      td = review.reviewable_id
-      td = review.reviewable_type
-      td = link_to 'Show', review
-      td = link_to 'Edit', edit_review_path(review)
-      td = link_to 'Destroy', review, data: {:confirm => 'Are you sure?'}, :method => :delete
+      th Body
+      th User
+      th Reviewable
+      th Reviewable type
+      th
+      th
+      th
 
-br
+    - @reviews.each do |review|
+      tr
+        td = review.body
+        td = review.user_id
+        td = review.reviewable_id
+        td = review.reviewable_type
+        td = link_to 'Show', review
+        td = link_to 'Edit', edit_review_path(review)
+        td = link_to 'Destroy', review, data: {:confirm => 'Are you sure?'}, :method => :delete
 
-= link_to 'New Review', new_review_path
+  br
+
+  = link_to 'New Review', new_review_path
