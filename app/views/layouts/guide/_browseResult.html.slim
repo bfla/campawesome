@@ -21,6 +21,21 @@
           |  accepts walk-ins
         - else
           |  no walk-ins
+    p.col-md-12
+      - if campsite.res_phone?
+        small.subtle-text
+          span.glyphicon.glyphicon-earphone
+          |  #{number_to_phone(campsite.res_phone)}&nbsp;&nbsp;
+      - else 
+        small.subtle-text
+          span.glyphicon.glyphicon-earphone
+          |  #{number_to_phone(campsite.camp_phone)}&nbsp;&nbsp;
+      - if campsite.res_url?
+        small.subtle-text
+          span.glyphicon.glyphicon-globe
+          | &nbsp;
+          a href=campsite.res_url Online reservations
+
       br
   .col-md-12
     hr

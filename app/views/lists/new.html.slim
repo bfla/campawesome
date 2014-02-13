@@ -1,5 +1,15 @@
-h1 New list
+- content_for :head
+  title New List
 
-== render 'form'
+- content_for :breadcrumb
+  ol.breadcrumb.white
+    li = link_to "Profile", home_path
+    li = link_to "Your lists", management_lists_path
+    li.active New List
 
-= link_to 'Back', lists_path
+- content_for :heading
+  h1 
+    | New list
+    hr
+- content_for :left
+  == render 'form'

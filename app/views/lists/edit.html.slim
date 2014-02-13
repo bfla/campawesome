@@ -1,8 +1,15 @@
-h1 Editing list
+- content_for :head
+  title Edit list
 
-== render 'form'
+- content_for :breadcrumb
+  ol.breadcrumb.white
+    li = link_to "Profile", home_path
+    li = link_to "Your lists", management_lists_path
+    li.active Edit List: #{@list.name}
 
-= link_to 'Show', @list
-'|
-= link_to 'Back', lists_path
-
+- content_for :heading
+  h1 
+    | Rename list
+    hr
+- content_for :left
+  == render 'form'

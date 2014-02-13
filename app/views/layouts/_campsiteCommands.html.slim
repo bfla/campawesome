@@ -23,11 +23,13 @@
         |  Save
       ul class="dropdown-menu" role="menu"
           - current_user.lists.each do |list|
-           li = link_to list.name, listeds_path(campsite_id:campsite, list_id:list), method: :post
+            li.listSavedModalTrigger
+              / a href=listeds_path(campsite_id:campsite, list_id:list) method="post" = list.name
+              = link_to list.name, listeds_path(campsite_id:campsite, list_id:list), method: :post, remote:true
           li.divider
           li#newListModalTrigger
             a href="#" data-toggle='modal' data-target='#newListModal' Create new list
-          li =link_to 'Manage Lists', lists_path
+          li =link_to 'Manage lists', management_lists_path
 
     a#reviewModal.btn.btn-default.btn-xs.subtle-text href="#" data-toggle='modal' data-target='##{campsite.id}'
       span.glyphicon.glyphicon-star
@@ -35,6 +37,7 @@
 
     = render 'layouts/modals/newReviewModal', campsite:campsite
     = render 'layouts/modals/newListModal', campsite:campsite
+    = render 'layouts/modals/listSavedModal'
 - else
   a.btn-group href="#" data-toggle="modal" data-target="#signupModal"
     button.btn.btn-default.btn-xs.subtle-text
@@ -53,4 +56,7 @@
 javascript:
   $('.enable-command-toggle').click( function() {
     $(this).toggleClass('subtle-text');
+  });
+  $('.listSavedModalTrigger').click( function() {
+    $('#listSavedModal').modal();
   });

@@ -1,15 +1,25 @@
 = form_for @list do |f|
   - if @list.errors.any?
     #error_explanation
-      h2 = "#{pluralize(@list.errors.count, "error")} prohibited this list from being saved:"
-      ul
-        - @list.errors.full_messages.each do |message|
-          li = message
+      .panel.panel-danger
+        .panel-heading = "#{pluralize(@list.errors.count, "error")} prohibited this list from being saved:"
+        .panel-body
+          ul
+            - @list.errors.full_messages.each do |message|
+              li = message
 
-  .field
-    = f.label :name
-    = f.text_field :name
-  .field
-    = f.label :user_id
-    = f.number_field :user_id
-  .actions = f.submit 'Save'
+  .col-md-12
+    .col-md-10
+      = f.hidden_field :user_id, value:current_user.id
+      = f.label :name, class:"control-label"
+      .input-group
+        = f.text_field :name, class:"form-control"
+        span.input-group-btn
+          = f.submit 'Submit', class:"actions btn btn-success"
+  .col-md-10
+    p.help-block.text-center
+      | Tip: You can add campsites to your lists by clicking the campsite's "Save" button.  It looks like this:&nbsp;
+      button.btn.btn-default.btn-sm.subtle-text
+        span.glyphicon.glyphicon-bookmark
+        |  Save
+

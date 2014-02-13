@@ -1,0 +1,54 @@
+doctype html
+html.fill-height
+  head
+    / meta tags
+    == yield :head
+
+    / styles
+    == render 'layouts/headstyles'
+    == yield :extra_stylesheets
+
+    / scripts
+    == render 'layouts/headscripts'
+    == yield :head_javascripts
+    
+  body.background.fill-height
+    == render 'layouts/modals/standardModals'
+    / Top navbar goes here
+    == render 'layouts/navbar'
+    / Body goes here
+    #wrap
+      #main.background
+        .container.background.pad-top-lg
+          .row
+            / Content area
+            .col-md-10.col-md-offset-1.well.white
+              
+              / Notice area
+              - if notice
+                .panel.panel-success
+                  .panel-heading 
+                    | Notice
+                    #panelClose.button.close type="button" data-dismiss="panel" aria-hidden="true" &times;
+                  .panel-body
+                    p#notice = notice
+
+              == yield :breadcrumb
+              == yield :heading
+              
+              /Left content
+              .col-md-8
+                == yield :left
+
+              /Right content
+              .col-md-4
+                == yield :right
+          .row
+            .col-md-offset-1
+              == yield :licenses
+
+    / Footer goes here
+    .background
+      .flush-footer
+        == render 'layouts/footer'
+    == yield :end
