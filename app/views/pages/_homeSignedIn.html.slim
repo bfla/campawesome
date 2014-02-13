@@ -1,34 +1,45 @@
 #main.container style="margin-top:-50px; z-index:1;"
   .col-md-10.col-md-offset-1.well.white style="margin-top:-50px; z-index:1;"
+    / Breadcrumb
     ol.col-md-12.breadcrumb.white
       li.active Your home page
+    / Heading
     .col-md-12
       .col-md-2
         .col-md-offset-1.col-md-10
-          = image_tag current_user.tribe.icon.url(:medium), class:"img-responsive img-circle tribe-background"
+          - if current_user.tribe.blank?
+            h1.text-center
+              span.glyphicon.glyphicon-globe.subtle-text
+              br
+              small
+                small no tribe
+          - else
+            = image_tag current_user.tribe.icon.url(:medium), class:"img-responsive img-circle tribe-background"
         p.text-center.col-md-12
-          | #{current_user.reviews.size}&nbsp;
-          = link_to "Reviews", reviews_path
-          br
-          | 5 Helpful votes
-          br
-          | #{current_user.photos.size}&nbsp;
-          = link_to "Photos", photos_path
+          small
+            | #{current_user.reviews.size}&nbsp;
+            = link_to "Reviews", reviews_path
+            br
+            | 5 Helpful votes
+            br
+            | #{current_user.photos.size}&nbsp;
+            = link_to "Photos", photos_path
       .col-md-10
         h1 style="padding-top:20px; margin-top:20px; z-index:1"
           small
             small Happy camping,
             br
           - if current_user.first_name.blank?
-            | What's your first name?
+            / FIXIT
+            | Anonymous
             / Add form to let user add first_name
           - else
             = current_user.first_name
-          small
-            small 
-              | &nbsp;&nbsp;
-              span.glyphicon.glyphicon-home
-              |  From Ann Arbor, MI 
+            small
+              small 
+                | &nbsp;&nbsp;
+                span.glyphicon.glyphicon-home
+                |  From Ann Arbor, MI 
           br
           small
             = link_to "Been to", beens_path
@@ -37,5 +48,43 @@
             | : #{current_user.wants.size} |&nbsp;
             = link_to "Lists"
             | : #{current_user.lists.size}
+          br
+          small 
+            small 
+              - if current_user.tribe.blank?
+                | To get personalized recommendations, pick a tribe:
+                = link_to "Join a tribe", new_tribal_membership_path, class:'btn btn-warning btn-sm'
+              - else
+                | Newbie in the #{current_user.tribe.name} tribe&nbsp;&nbsp;
+                small = link_to "Switch tribe", new_tribal_membership_path
+    .col-md-12
+      hr
+    / Bottom content
+    .col-md-12
+      / Left content
+      .col-md-8
+        / Contribute!  Add friends. Whatever!
+        p.lead.col-md-12 Welcome back
+        .col-md-12
           hr
+        / Recommended for you
+        .col-md-12 
+          p.lead
+            | Recommended for you
+        .col-md-12
+          hr
+        / Best of Michigan
+        p.lead.col-md-12 Best of Michigan
+        .col-md-12
+          hr
+        / Friends recommend
+        p.lead.col-md-12 Your friends recommend...
+        .col-md-12
+          hr
+        / Recent history
+        p.lead.col-md-12 You recently viewed...
+        .col-md-12
+          hr
+
+
 
