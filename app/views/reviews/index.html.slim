@@ -19,12 +19,17 @@
 - content_for :left
   - current_user.reviews.each do |review|
     p.lead.col-md-12 
-      = review.campsite.name
-      small created on #{review.created_at}
+      = link_to review.reviewable.name, review.reviewable
+      br
+      small
+        small.subtle-text You reviewed this place on #{review.created_at.to_formatted_s(:short)}
     hr
-    - unless current_user.ratings.find_by_campsite(review.campsite).blank?
-      p You gave this campsite #{current_user.ratings.find_by_campsite(review.campsite).value} out of 5.0
-    p = review.body
+    /- unless current_user.ratings.(review.reviewable).blank?
+      p You gave this place #{current_user.ratings.find_by_campsite(review.reviewable).value} out of 5.0
+    .col-md-12 
+      p
+      = review.body
+      hr
 
 
 
