@@ -18,7 +18,9 @@
         - else
           |  This list has #{@list.campsites.size} campsites
         small
-          = link_to "Delete list", , class:'subtle-text'
+          | &nbsp;&nbsp;
+          = link_to "Delete list", @list, data: {:confirm => 'Are you sure?'}, :method => :delete, class:"subtle-text"
+          | &nbsp;&nbsp;
           = link_to  "Rename list", edit_list_path(@list), class:'subtle-text'
       hr
 
@@ -27,14 +29,9 @@
   .row
     - unless @list.campsites.blank?
       - @list.campsites.each do |campsite|
+        p
+          small = link_to "Remove campsite from list", @list.listeds.find_by_campsite_id(campsite.id), data: {:confirm => 'Are you sure?'}, :method => :delete, class:"subtle-text pull-right"
         = render 'layouts/guide/browseResult', campsite:campsite
-          /- @list.campsites.each do |campsite| 
-            = link_to campsite.name, campsite
-            small 
-              |&nbsp;&nbsp;&nbsp;
-              a.subtle-text Remove
-            br
-          
 
 - content_for :right
   = render 'listRightBar'
