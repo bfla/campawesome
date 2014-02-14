@@ -79,6 +79,6 @@ class BeensController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def been_params
       #params.require(:been).permit(:campsite_id, :user_id)
-      params.permit(:been, :beenable_id, :user_id, :beenable_type)
+      params.permit(:been, :user_id, :beenable_id, :beenable_type)
     end
 end

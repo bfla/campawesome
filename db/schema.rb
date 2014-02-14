@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140214141019) do
+ActiveRecord::Schema.define(version: 20140214145228) do
 
   create_table "been_heres", force: true do |t|
     t.integer  "campsite_id"
@@ -185,10 +185,11 @@ ActiveRecord::Schema.define(version: 20140214141019) do
   end
 
   create_table "wants", force: true do |t|
-    t.integer  "campsite_id"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "wantable_id"
+    t.string   "wantable_type"
   end
 
 end

@@ -21,7 +21,7 @@
   - current_user.wants.each do |want|
     p.pull-right 
       small = link_to 'Remove from list', want, data: {:confirm => 'Are you sure?'}, :method => :delete, class:'subtle-text'
-    = render "layouts/guide/browseResult", campsite:want.campsite
+    = render "layouts/guide/browseResult", campsite:want.wantable
 
 - content_for :right
   .col-md-12

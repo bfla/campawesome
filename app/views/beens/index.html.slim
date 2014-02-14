@@ -20,7 +20,7 @@
   - current_user.beens.each do |been|
     p.pull-right 
       small = link_to 'Remove from list', been, data: {:confirm => 'Are you sure?'}, :method => :delete, class:'subtle-text'
-    = render "layouts/guide/browseResult", campsite:been.campsite
+    = render "layouts/guide/browseResult", campsite:been.beenable
 
 - content_for :right
 

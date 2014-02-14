@@ -7,7 +7,7 @@ class Campsite < ActiveRecord::Base
   belongs_to :city
   
   has_many :beens, as: :beenable, dependent: :destroy
-  has_many :wants, dependent: :destroy
+  has_many :wants, as: :wantable, dependent: :destroy
   has_many :listeds, dependent: :destroy
   has_many :lists, through: :listed
   has_many :ratings, as: :ratable, dependent: :destroy
