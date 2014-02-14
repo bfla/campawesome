@@ -8,7 +8,7 @@ class Campsite < ActiveRecord::Base
   
   has_many :beens, as: :beenable, dependent: :destroy
   has_many :wants, as: :wantable, dependent: :destroy
-  has_many :listeds, dependent: :destroy
+  has_many :listeds, as: :listable, dependent: :destroy
   has_many :lists, through: :listed
   has_many :ratings, as: :ratable, dependent: :destroy
   has_many :reviews, as: :reviewable, dependent: :destroy

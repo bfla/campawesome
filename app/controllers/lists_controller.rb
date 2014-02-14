@@ -3,7 +3,7 @@ class ListsController < ApplicationController
 
   def management
     if user_signed_in?
-      @lists = current_user.lists.includes(:listeds, :campsites)
+      @lists = current_user.lists.includes( listeds: [:listable] )
       render layout: 'layouts/twoColumn'
     else
       respond_to do |format|
@@ -23,6 +23,7 @@ class ListsController < ApplicationController
   # GET /lists/1.json
   def show
     if user_signed_in?
+      @list = List.includes( listeds: [:listable] ).find(params[:id])
       render layout: 'layouts/twoColumn'
     else
       respond_to do |format|

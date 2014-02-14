@@ -18,35 +18,35 @@
       hr
 
 - content_for :left
-  - @lists.each do |list|
-      h3.col-md-12
-        = link_to list.name, list
-        small
-            - if list.listables.size == 1
-              |  (1 campsite)
-            - else
-              |  (#{list.listables.size} campsites)
-        small 
+    - @lists.each do |list|
+        h3.col-md-12
+          = link_to list.name, list
           small
-            | &nbsp;&nbsp;&nbsp;
-            = link_to 'Show list', list, class:"subtle-text"
-            |  &nbsp;&nbsp;
-            = link_to "Delete list", list, data: {:confirm => 'Are you sure?'}, :method => :delete, class:"subtle-text"
-            |  &nbsp;&nbsp;
-            = link_to "Edit list", edit_list_path(list), class:"subtle-text"
-        hr
-      - unless list.listables.blank?
-        - list.listables.first(3).each do |campsite|
-          .col-md-12
-            .col-md-2
-              = image_tag campsite.primary_icon(:small), class:"img-circle tribe-subtle img-responsive"
-            p.col-md-10
-            = link_to campsite.name, campsite
+              - if list.listeds.size == 1
+                |  (1 campsite)
+              - else
+                |  (#{list.listeds.size} campsites)
+          small 
             small
-              |&nbsp;&nbsp;&nbsp;
-              = link_to 'Remove from list', list.listeds.find_by_campsite_id(campsite.id), data: {:confirm => 'Are you sure?'}, :method => :delete, class:"subtle-text"
-        - if list.listables.size > 3
-          .col-md-10.col-md-offset-2 = link_to "See entire list...", list
+              | &nbsp;&nbsp;&nbsp;
+              = link_to 'Show list', list, class:"subtle-text"
+              |  &nbsp;&nbsp;
+              = link_to "Delete list", list, data: {:confirm => 'Are you sure?'}, :method => :delete, class:"subtle-text"
+              |  &nbsp;&nbsp;
+              = link_to "Edit list", edit_list_path(list), class:"subtle-text"
+          hr
+        - unless list.listeds.blank?
+          - list.listeds.first(3).each do |listed|
+            .col-md-12
+              .col-md-2
+                = image_tag listed.listable.primary_icon(:small), class:"img-circle tribe-subtle img-responsive"
+              p.col-md-10
+              = link_to listed.listable.name, listed.listable
+              small
+                |&nbsp;&nbsp;&nbsp;
+                = link_to 'Remove from list', listed.listable, data: {:confirm => 'Are you sure?'}, :method => :delete, class:"subtle-text"
+          - if list.listeds.size > 3
+            .col-md-10.col-md-offset-2 = link_to "See entire list...", list
 
 - content_for :right
   = render 'listRightBar'

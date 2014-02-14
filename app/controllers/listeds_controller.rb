@@ -24,7 +24,12 @@ class ListedsController < ApplicationController
   # POST /listeds
   # POST /listeds.json
   def create
-    @listed = Listed.new(listed_params)
+    campsite = Campsite.find(params[:campsite_id])
+    if campsite.listeds.where(list_id:params[:list_id]).blank?
+      @listed = campsite.listeds.create(list_id:params[:list_id])
+    else
+      @listed = campsite.listeds.where(list_id:params[:list_id])
+    end
 
     respond_to do |format|
       if @listed.save
@@ -69,6 +74,6 @@ class ListedsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def listed_params
-      params.permit(:listed, :campsite_id, :list_id)
+      params.permit(:listed, :list_id, :listable_id, :listable_type, :campsite_id)
     end
 end

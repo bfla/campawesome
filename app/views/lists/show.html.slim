@@ -13,10 +13,10 @@
     h1.heading.guide-heading.col-md-12 
       = @list.name
       small
-        - if @list.campsites.size == 1
+        - if @list.listeds.size == 1
           |  This list has 1 campsite
         - else
-          |  This list has #{@list.campsites.size} campsites
+          |  This list has #{@list.listeds.size} campsites
         small
           | &nbsp;&nbsp;
           = link_to "Delete list", @list, data: {:confirm => 'Are you sure?'}, :method => :delete, class:"subtle-text"
@@ -27,11 +27,11 @@
 
 - content_for :left
   .row
-    - unless @list.campsites.blank?
-      - @list.campsites.each do |campsite|
+    - unless @list.listeds.blank?
+      - @list.listeds.each do |listed|
         p
-          small = link_to "Remove campsite from list", @list.listeds.find_by_campsite_id(campsite.id), data: {:confirm => 'Are you sure?'}, :method => :delete, class:"subtle-text pull-right"
-        = render 'layouts/guide/browseResult', campsite:campsite
+          small = link_to "Remove campsite from list", listed, data: {:confirm => 'Are you sure?'}, :method => :delete, class:"subtle-text pull-right"
+        = render 'layouts/guide/browseResult', campsite:listed.listable
 
 - content_for :right
   = render 'listRightBar'
