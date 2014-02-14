@@ -43,7 +43,7 @@
           br
           small
             = link_to "Been to", beens_path
-            | : #{current_user.wants.size} |&nbsp;
+            | : #{current_user.beens.size} |&nbsp;
             = link_to "Want to go", wants_path
             | : #{current_user.wants.size} |&nbsp;
             = link_to "Lists"

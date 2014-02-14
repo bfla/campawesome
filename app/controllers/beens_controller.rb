@@ -29,10 +29,11 @@ class BeensController < ApplicationController
   # POST /beens
   # POST /beens.json
   def create
-    if current_user.beens.find_by_campsite_id(params[:campsite_id]).blank?
-      @been = Been.new(been_params)
+    campsite = Campsite.find(params[:campsite_id])
+    if campsite.beens.where(user_id:@user).blank?
+      @been = campsite.beens.create(user_id:params[:user_id])
     else
-      @been = current.user.beens.find_by_campsite_id(params[:campsite_id])
+      @been = campsite.beens.find_by_user_id(current_user).first
     end
 
     respond_to do |format|
@@ -78,6 +79,6 @@ class BeensController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def been_params
       #params.require(:been).permit(:campsite_id, :user_id)
-      params.permit(:been, :campsite_id, :user_id)
+      params.permit(:been, :beenable_id, :user_id, :beenable_type)
     end
 end
