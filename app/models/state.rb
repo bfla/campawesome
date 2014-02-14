@@ -6,7 +6,10 @@ class State < ActiveRecord::Base
   has_many :cities
   has_many :destinations
   has_many :campsites
+  
   has_many :photos
+  
+  has_many :users
   
   def self.to_s
     self.name

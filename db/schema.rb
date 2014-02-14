@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140214205330) do
+ActiveRecord::Schema.define(version: 20140214215025) do
 
   create_table "been_heres", force: true do |t|
     t.integer  "campsite_id"
@@ -175,6 +175,7 @@ ActiveRecord::Schema.define(version: 20140214205330) do
     t.string   "uid"
     t.string   "first_name"
     t.string   "location"
+    t.integer  "state_id"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
          :omniauthable, :omniauth_providers => [:facebook]
   has_one :tribal_membership, dependent: :destroy
   has_one :tribe, through: :tribal_membership
+  belongs_to :state
   has_many :beens, dependent: :destroy
   has_many :campsites, through: :beens
   has_many :wants, dependent: :destroy
@@ -22,10 +23,13 @@ class User < ActiveRecord::Base
       user.email = auth.info.email
       user.password = Devise.friendly_token[0,20]
       user.first_name = auth.info.first_name
-      user.location = auth.info.location
-      parsed_location = user.location.split(', ')
-      unless State.find_by_name(parsed_location[1]).blank?
-        user.state_id = State.find_by_name(parsed_location[1]).id
+      user.location = auth.info.location #from Facebook data
+      if user.state_id.blank?
+        parsed_location = user.location.split(', ') #try to split the location string into ["CITY", "STATE"]
+        unless State.find_by_name(parsed_location[1]).blank?
+          user.state_id = State.find_by_name(parsed_location[1]).id
+        end
+      end
       # FIXIT This triggers an error if the email is taken.  What should I do???
       user.save!
     end

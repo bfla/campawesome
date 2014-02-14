@@ -18,6 +18,8 @@
               = image_tag current_user.tribe.icon.url(:medium), class:"img-responsive img-circle tribe-background"
         p.text-center.col-md-12
           small
+            | Newbie
+            br
             | #{current_user.reviews.size}&nbsp;
             = link_to "Reviews", reviews_path
             br
