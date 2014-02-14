@@ -30,3 +30,7 @@ javascript:
     $('.newReviewModal').modal('hide');
     $('#reviewSuccessModal').modal('show');  
   });
+  $('.rateit').click( function() {
+    var rating = $(this).rateit('value');
+    $('.rating-value').val(rating);
+  });
