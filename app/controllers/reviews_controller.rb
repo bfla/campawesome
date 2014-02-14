@@ -34,9 +34,11 @@ class ReviewsController < ApplicationController
     @user = params[:user_id]
     if @campsite.reviews.where(@user).blank?
       @review = @campsite.reviews.create(body: params[:body], user_id:@user)
+      @review.save
     end
-    if params[:rating] != 0 && @campsite.ratings.where(user_id:@user).blank?
-      @rating = @campsite.ratings.create(value: params[:rating], user_id:@user, review_id:@review)
+    if params[:rating].to_f != 0.0 && @campsite.ratings.where(user_id:@user).blank?
+      @rating = @campsite.ratings.create(value: params[:rating].to_f, user_id:@user, review_id:@review.id)
+      @rating.save
     end
     respond_to do |format|
       if @review && @review.save
