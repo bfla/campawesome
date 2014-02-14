@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140214145228) do
+ActiveRecord::Schema.define(version: 20140214150728) do
 
   create_table "been_heres", force: true do |t|
     t.integer  "campsite_id"
@@ -73,7 +73,6 @@ ActiveRecord::Schema.define(version: 20140214145228) do
   end
 
   create_table "listeds", force: true do |t|
-    t.integer  "campsite_id"
     t.integer  "list_id"
     t.datetime "created_at"
     t.datetime "updated_at"
