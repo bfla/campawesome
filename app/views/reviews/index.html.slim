@@ -6,28 +6,26 @@
     li = link_to 'Your home page', home_path 
     li.active Your reviews
 - content_for :heading
-    h1 
-      | Reviews you've contributed
-      br
-      small
-        - if current_user.reviews.size == 1
-          | You've reviewed 1 place
-        - else
-          | You've reviewed #{current_user.reviews.size} place
-      hr
+    .col-md-12
+      h1 
+        | Reviews you've contributed
+        br
+        small
+          - if current_user.reviews.size == 1
+            | You've reviewed 1 place
+          - else
+            | You've reviewed #{current_user.reviews.size} place
+        hr
 
 - content_for :left
   - current_user.reviews.each do |review|
     p.lead.col-md-12 
       = link_to review.reviewable.name, review.reviewable
+      small.subtle-text  reviewed on #{review.created_at.to_formatted_s(:short)}
       br
       - unless review.rating.blank?
-        | You gave this campground #{review.rating.value} out of 5.0
-      small
-        small.subtle-text You reviewed this place on #{review.created_at.to_formatted_s(:short)}
+        small.subtle-text You gave this campground #{review.rating.value} out of 5.0
     hr
-    /- unless current_user.ratings.(review.reviewable).blank?
-      p You gave this place #{current_user.ratings.find_by_campsite(review.reviewable).value} out of 5.0
     .col-md-12 
       p
       = review.body
