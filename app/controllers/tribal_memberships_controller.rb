@@ -27,12 +27,11 @@ class TribalMembershipsController < ApplicationController
   # POST /tribal_memberships.json
   def create
     @tribes = Tribe.all
-    if current_user.tribe.blank?
+    if current_user.tribal_membership.blank?
       @tribal_membership = TribalMembership.new(tribal_membership_params)
     else
       @tribal_membership = current_user.tribal_membership
-      @tribal_membership.tribe_id = params[:tribe_id]
-      @tribal_membership.save
+      @tribal_membership.update(tribal_membership_params)
     end
 
     respond_to do |format|
