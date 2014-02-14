@@ -21,6 +21,8 @@
     p.lead.col-md-12 
       = link_to review.reviewable.name, review.reviewable
       br
+      - unless review.rating.blank?
+        | You gave this campground #{review.rating.value} out of 5.0
       small
         small.subtle-text You reviewed this place on #{review.created_at.to_formatted_s(:short)}
     hr

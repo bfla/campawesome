@@ -32,11 +32,11 @@ class ReviewsController < ApplicationController
   def create
     @campsite = Campsite.find(params[:campsite_id])
     @user = params[:user_id]
-    if @campsite.reviews.where(user_id:@user).blank?
-      @review = @campsite.reviews.create(body: params[:body], user_id:params[:user_id])
+    if @campsite.reviews.where(@user).blank?
+      @review = @campsite.reviews.create(body: params[:body], user_id:@user)
     end
-    if params[:rating] == 0 || @campsite.ratings.where(user_id:@user).blank?
-      @rating = @campsite.ratings.create(value: params[:rating], user_id:params[:user_id])
+    if params[:rating] != 0 && @campsite.ratings.where(user_id:@user).blank?
+      @rating = @campsite.ratings.create(value: params[:rating], user_id:@user, review_id:@review)
     end
     respond_to do |format|
       if @review && @review.save

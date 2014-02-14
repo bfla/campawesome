@@ -1,12 +1,12 @@
 / Needs a campsite
-.modal.fade id=campsite.id tabindex="-1" role="dialog" aria-labelledby="newReviewModalLabel" aria-hidden="true"
+.modal.fade.newReviewModal id=campsite.id tabindex="-1" role="dialog" aria-labelledby="newReviewModalLabel" aria-hidden="true"
   .modal-dialog
     .modal-content
       .modal-header
         button.close type="button" data-dismiss="modal" aria-hidden="true" &times
         h4#descriptionModalTitle.modal-title.text-center Review #{campsite.name}
       .modal-body
-        = form_tag reviews_path, method: :post do
+        = form_tag reviews_path, method: :post, remote:true do
           = hidden_field_tag :rating, params[:rating], class:'rating-value', value:"0"
           = hidden_field_tag :campsite_id, params[:campsite_id], value:campsite.id
           = hidden_field_tag :user_id, params[:user_id], value:current_user.id
@@ -23,4 +23,10 @@
           .row
             p.text-center.pad-top-md
               button.btn.btn-default type="button" data-dismiss="modal" Close
-              button.btn.btn-success type="submit" Say it
+              /button#reviewSubmit.btn.btn-success type="submit" data-dismiss="modal" data-toggle="modal" data-target="#reviewSuccessModal" Say it
+              button#reviewSubmit.btn.btn-success type="submit" data-target="#reviewSuccessModal" Say it
+javascript:
+  $('#reviewSubmit').click( function() {
+    $('.newReviewModal').modal('hide');
+    $('#reviewSuccessModal').modal('show');
+  });
