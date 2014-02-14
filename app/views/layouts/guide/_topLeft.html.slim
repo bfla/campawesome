@@ -1,11 +1,18 @@
 / Photo Gallery
 .col-md-9
-  div itemscope="itemscope" itemtype="http://schema.org/Photograph"
-    = image_tag place.photos.first.photo_file.url(:large), class: "img-thumbnail img-responsive", html: {title:"", alt:"", caption:"", description:""}
+  - if place.photos.first.blank?
+    div itemscope="itemscope" itemtype="http://schema.org/Photograph"
+     = image_tag '/images/dummies/destPhoto221x221.png'
+  - else place.photos.first.blank?
+    div itemscope="itemscope" itemtype="http://schema.org/Photograph"
+      = image_tag place.photos.first.photo_file.url(:large), class: "img-thumbnail img-responsive", html: {title:"", alt:"", caption:"", description:""}
 .col-md-3.hidden-xs
-  div itemscope="itemscope" itemtype="http://schema.org/Photograph"
-    img.img-thumbnail.img-responsive src="http://wikitravel.org/upload/en/thumb/b/bd/SleepingBearDunes.jpg/350px-SleepingBearDunes.jpg" title="" alt="" caption="" description=""
-  div itemscope="itemscope" itemtype="http://schema.org/Photograph"
-    img.img-thumbnail.img-responsive src="http://wikitravel.org/upload/en/thumb/b/bd/SleepingBearDunes.jpg/350px-SleepingBearDunes.jpg" title="" alt="" caption="" description=""
-  div itemscope="itemscope" itemtype="http://schema.org/Photograph"
-    img.img-thumbnail.img-responsive src="http://wikitravel.org/upload/en/thumb/b/bd/SleepingBearDunes.jpg/350px-SleepingBearDunes.jpg" title="" alt="" caption="" description=""
+  - unless place.photos.second.blank?
+    div itemscope="itemscope" itemtype="http://schema.org/Photograph"
+      = image_tag place.photos.second.photo_file.url(:small), class: "img img-thumbnail img-responsive", html: {title:"", alt:"", caption:"", description:""}
+  - unless place.photos.third.blank?
+    div itemscope="itemscope" itemtype="http://schema.org/Photograph"
+      = image_tag place.photos.third.photo_file.url(:small), class: "img img-thumbnail img-responsive", html: {title:"", alt:"", caption:"", description:""}
+  - unless place.photos.fourth.blank?
+    div itemscope="itemscope" itemtype="http://schema.org/Photograph"
+      = image_tag place.photos.fourth.photo_file.url(:small), class: "img img-thumbnail img-responsive", html: {title:"", alt:"", caption:"", description:""}
