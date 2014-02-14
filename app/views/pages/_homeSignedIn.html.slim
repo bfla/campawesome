@@ -36,11 +36,12 @@
             / Add form to let user add first_name
           - else
             = current_user.first_name
-            small
-              small 
-                | &nbsp;&nbsp;
-                span.glyphicon.glyphicon-home
-                |  From #{@data}
+            - unless current_user.location.blank?
+              small
+                small 
+                  | &nbsp;&nbsp;
+                  span.glyphicon.glyphicon-home
+                  |  From #{current_user.location}
           br
           small
             = link_to "Been to", beens_path

@@ -22,9 +22,11 @@ class User < ActiveRecord::Base
       user.email = auth.info.email
       user.password = Devise.friendly_token[0,20]
       user.first_name = auth.info.first_name
-      #user.name = auth.info.name   # assuming the user model has a name
-      #user.image = auth.info.image # assuming the user model has an image
-      # This triggers an error if the email is taken.  What should I do???
+      user.location = auth.info.location
+      parsed_location = user.location.split(', ')
+      unless State.find_by_name(parsed_location[1]).blank?
+        user.state_id = State.find_by_name(parsed_location[1]).id
+      # FIXIT This triggers an error if the email is taken.  What should I do???
       user.save!
     end
   end
@@ -34,9 +36,7 @@ class User < ActiveRecord::Base
       if data = session["devise.facebook_data"] && session["devise.facebook_data"]["extra"]["raw_info"]
         user.email = data["email"] if user.email.blank?
         user.first_name = data['first_name'] if user.first_name.blank?
-        if !data['user_location'].blank?
-          user.location = data['user_location']
-        end
+        user.location = data['user_location']
       end
     end
   end
