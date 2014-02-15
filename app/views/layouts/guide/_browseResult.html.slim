@@ -9,6 +9,7 @@
       small
         small.subtle-text
           | #{campsite.org} campground in #{campsite.state_name}
+      small.col-md-12 = render "campsites/campsiteRating", campsite:campsite
     p.col-md-12 
       small
         strong.subtle-text Bookings:

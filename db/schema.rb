@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140215165742) do
+ActiveRecord::Schema.define(version: 20140215182432) do
 
   create_table "been_heres", force: true do |t|
     t.integer  "campsite_id"
@@ -49,6 +49,7 @@ ActiveRecord::Schema.define(version: 20140215165742) do
     t.integer  "state_id"
     t.integer  "city_id"
     t.float    "avg_rating"
+    t.integer  "city_rank"
   end
 
   create_table "cities", force: true do |t|

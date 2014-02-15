@@ -1,7 +1,7 @@
 p.lead
-  |  Ranked #1 of 23 
+  |  Ranked ##{campsite.city_rank} of #{campsite.city.campsites.size}&nbsp;
   small
-    small = link_to "campsites near #{@campsite.city.name} #{@campsite.state_name}", @campsite.city
+    small = link_to "campsites near #{campsite.city.name}, #{campsite.state_name}", campsite.city
   br
   - if campsite.ratings.blank?
     - 4.times

@@ -25,6 +25,7 @@ class Campsite < ActiveRecord::Base
   reverse_geocoded_by :latitude, :longitude
   
   before_save :resave_avg_rating
+  before_save :resave_rank
   before_save :seed_blanks
   after_validation :reverse_geocode #auto-fetch address
   default_scope order('avg_rating DESC')
@@ -104,6 +105,18 @@ class Campsite < ActiveRecord::Base
         sum = 0
         self.ratings.each {|rating| sum = sum + rating.value}
         self.avg_rating = sum / self.ratings.size
+      end
+    end
+    def resave_rank
+      contenders = self.city.campsites.order('avg_rating DESC')
+      i = 1
+      contenders.each do |campsite|
+        if campsite.id == self.id
+          self.city_rank = i
+          break
+        else
+          i = i + 1
+        end
       end
     end
 
