@@ -11,21 +11,15 @@
   .headline
     h1.heading.guide-heading.col-md-12 
       | Your lists
-      - if @lists.size == 1
-        small You have 1 list
-      - else
-        small   You have #{@lists.size} lists
+      small  You have #{pluralize(@lists.size, "list")}
       hr
 
 - content_for :left
     - @lists.each do |list|
         h3.col-md-12
           = link_to list.name, list
-          small
-              - if list.listeds.size == 1
-                |  (1 campsite)
-              - else
-                |  (#{list.listeds.size} campsites)
+          small 
+            |  (#{pluralize(list.listeds.size, "campsite")})
           small 
             small
               | &nbsp;&nbsp;&nbsp;

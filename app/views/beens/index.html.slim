@@ -10,11 +10,7 @@
     h1 
       | Places you've been
       br
-      small 
-        - if current_user.beens.size == 1
-          | You've been to 1 place
-        - else
-          | You've been to #{current_user.beens.size} places
+      small You've been to #{pluralize(current_user.beens.size, "place")}
       hr
 
 - content_for :left

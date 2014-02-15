@@ -21,12 +21,18 @@
             | Newbie
             br
             | #{@user.reviews.size}&nbsp;
-            = link_to "Reviews", reviews_path
+            - if @user.reviews.size == 1
+              = link_to "Review", reviews_path
+            - else
+              = link_to "Reviews", reviews_path
             br
             | 5 Helpful votes
             br
             | #{@user.photos.size}&nbsp;
-            = link_to "Photos", photos_path
+            - if @user.photos.size == 1
+              = link_to "Photo", photos_path
+            - else
+              = link_to "Photos", photos_path
       .col-md-10.remove-margin-top
         h1.remove-margin-top
           small

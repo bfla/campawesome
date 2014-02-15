@@ -12,10 +12,7 @@
       | Places you want to camp
       br
       small 
-        - if current_user.wants.size == 1
-          | You want to camp at 1 place
-        - else
-          | You want to camp #{current_user.wants.size} places
+        |  You want to camp at #{pluralize(current_user.wants.size, "place")}
       hr
 
 - content_for :left

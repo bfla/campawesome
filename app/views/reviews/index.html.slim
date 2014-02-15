@@ -11,10 +11,7 @@
         | Reviews you've contributed
         br
         small
-          - if current_user.reviews.size == 1
-            | You've reviewed 1 place
-          - else
-            | You've reviewed #{current_user.reviews.size} place
+          |  You've reviewed #{pluralize(current_user.reviews.size, "place")}
         hr
 
 - content_for :left

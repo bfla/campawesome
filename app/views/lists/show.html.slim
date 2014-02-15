@@ -12,11 +12,8 @@
   .headline
     h1.heading.guide-heading.col-md-12 
       = @list.name
-      small
-        - if @list.listeds.size == 1
-          |  This list has 1 campsite
-        - else
-          |  This list has #{@list.listeds.size} campsites
+      small  
+        |  This list has #{pluralize(@list.listeds.size, "campsite")}
         small
           | &nbsp;&nbsp;
           = link_to "Delete list", @list, data: {:confirm => 'Are you sure?'}, :method => :delete, class:"subtle-text"

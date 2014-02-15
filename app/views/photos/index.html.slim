@@ -10,11 +10,8 @@
     h1
       | Your camping trip photos
       br
-      small 
-        - if current_user.photos.size == 1
-          | You have 1 camping trip photo
-        - else
-          | You have #{current_user.photos.size} camping trip photos
+      small
+        |  You have #{pluralize(current_user.photos.size, "camping trip photo", "camping trip photos")}
       hr
 
 - content_for :left
