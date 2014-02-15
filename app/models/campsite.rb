@@ -48,9 +48,14 @@ class Campsite < ActiveRecord::Base
   def icons
     self.vibes.each { |tribe| icons << tribe.icon }
   end
-  def beened(user)
-    self.beens.find_by_user(user)
+  def avg_rating
+    sum = 0
+    self.ratings.each {|rating| sum = sum + rating.value}
+    sum / self.ratings.size
   end
+  #def rank
+
+  #end
   def geojsonify
     tribe_ids = Array.new
     self.vibes.each { |vibe| tribe_ids << vibe.tribe.id }

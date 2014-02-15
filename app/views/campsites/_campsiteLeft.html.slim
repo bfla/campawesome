@@ -7,26 +7,7 @@
     p.lead
       span.glyphicon.glyphicon-certificate
   .col-md-10
-    p.lead
-      |  Ranked #1 of 23 
-      small
-        small
-          a 
-            | campsites near #{@campsite.city.name} #{@campsite.state_name}
-      br
-      span.glyphicon.glyphicon-fire.rating-color
-      | &nbsp;
-      span.glyphicon.glyphicon-fire.rating-color
-      | &nbsp;
-      span.glyphicon.glyphicon-fire.rating-color
-      | &nbsp;
-      span.glyphicon.glyphicon-fire.rating-color
-      | &nbsp;
-      span.glyphicon.glyphicon-fire.subtle-text
-      | &nbsp;
-      small
-        small
-          small.subtle-text 3 Reviews
+    = render "campsiteRating", campsite:@campsite
 hr
 
 

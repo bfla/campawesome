@@ -19,7 +19,7 @@
 
 - content_for :left
   - current_user.photos.each do |photo|
-    .col-md-4
+    .col-md-4.pad-md.pad
       .thumbnail
         = image_tag photo.photo_file.url(:large)
       p.text-center

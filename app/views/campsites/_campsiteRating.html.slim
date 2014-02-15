@@ -1,0 +1,40 @@
+p.lead
+  |  Ranked #1 of 23 
+  small
+    small = link_to "campsites near #{@campsite.city.name} #{@campsite.state_name}", @campsite.city
+  br
+  - if campsite.avg_rating >4.5
+    - 5.times
+      span.glyphicon.glyphicon-fire.rating-color
+      | &nbsp;
+  - elsif campsite.avg_rating > 3.9
+    - 4.times
+      span.glyphicon.glyphicon-fire.rating-color
+      | &nbsp;
+    - 1.times
+      span.glyphicon.glyphicon-fire.subtle-text
+      | &nbsp;
+  - elsif campsite.avg_rating > 3.0
+    - 3.times
+      span.glyphicon.glyphicon-fire.rating-color
+      | &nbsp;
+    - 2.times
+      span.glyphicon.glyphicon-fire.subtle-text
+      | &nbsp;
+  - elsif campsite.avg_rating > 2.0
+    - 2.times
+      span.glyphicon.glyphicon-fire.rating-color
+      | &nbsp;
+    - 3.times
+      span.glyphicon.glyphicon-fire.subtle-text
+      | &nbsp;
+  - else 
+    - 1.times
+      span.glyphicon.glyphicon-fire.rating-color
+      | &nbsp;
+    - 4.times
+      span.glyphicon.glyphicon-fire.subtle-text
+      | &nbsp;
+  small
+    small
+      small.subtle-text rated #{campsite.avg_rating} out of 5.0 by #{pluralize(campsite.ratings.size, "camper")}
