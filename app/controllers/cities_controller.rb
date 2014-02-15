@@ -8,7 +8,7 @@ class CitiesController < ApplicationController
   end
 
   def browse
-    @city = City.includes(campsites: [ :ratings, :tribe] ).find(params[:id])
+    @city = City.includes(campsites: [ :ratings, :tribes] ).find(params[:id])
     @tribes = Tribe.all
     gon.campsites = @city.campsites.to_json
     gon.zoom = @city.zoom

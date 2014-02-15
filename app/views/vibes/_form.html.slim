@@ -5,11 +5,13 @@
       ul
         - @vibe.errors.full_messages.each do |message|
           li = message
-
-  .field
-    = f.label :campsite_id
-    = f.number_field :campsite_id
-  .field
-    = f.label :tribe_id
-    = f.number_field :tribe_id
-  .actions = f.submit 'Save'
+  .row
+    .field
+      = f.label :campsite_id
+      = f.number_field :campsite_id
+  .row
+    .field
+      = f.label :tribe_id
+      = f.number_field :tribe_id
+  .row
+    .actions = f.submit 'Save', class:'btn btn-success'

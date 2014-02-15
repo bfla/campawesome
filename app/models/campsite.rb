@@ -23,7 +23,11 @@ class Campsite < ActiveRecord::Base
   validates :latitude, numericality: { greater_than: 0, message:'must be a positive' }
   validates :longitude, numericality: { less_than: 0, message:'must be a negative number' }
   reverse_geocoded_by :latitude, :longitude
+  
+  before_save :resave_avg_rating
+  before_save :seed_blanks
   after_validation :reverse_geocode #auto-fetch address
+  default_scope order('avg_rating DESC')
 
   # This returns the name of the Campsite's state
   def state_name
@@ -48,11 +52,11 @@ class Campsite < ActiveRecord::Base
   def icons
     self.vibes.each { |tribe| icons << tribe.icon }
   end
-  def avg_rating
-    sum = 0
-    self.ratings.each {|rating| sum = sum + rating.value}
-    sum / self.ratings.size
-  end
+  #def avg_rating
+    #sum = 0
+    #self.ratings.each {|rating| sum = sum + rating.value}
+    #sum / self.ratings.size
+  #end
   #def rank
 
   #end
@@ -90,5 +94,17 @@ class Campsite < ActiveRecord::Base
   def self.to_s
     self.name
   end
+  private
+    def seed_blanks
+      self.avg_rating = rand(3.5..4.2).round(2) if self.ratings.blank? && self.avg_rating.blank?
+      sum = 0
+    end
+    def resave_avg_rating
+      unless self.ratings.blank?
+        sum = 0
+        self.ratings.each {|rating| sum = sum + rating.value}
+        self.avg_rating = sum / self.ratings.size
+      end
+    end
 
 end
