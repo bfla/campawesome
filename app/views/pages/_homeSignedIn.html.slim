@@ -7,7 +7,7 @@
     .col-md-12
       .col-md-2
         .col-md-offset-1.col-md-10
-          - if current_user.tribe.blank?
+          - if @user.tribe.blank?
             h1.text-center
               span.glyphicon.glyphicon-globe.subtle-text
               br
@@ -15,51 +15,51 @@
                 small no tribe
           - else
             h1.text-center
-              = image_tag current_user.tribe.icon.url(:medium), class:"img-responsive img-circle tribe-background"
+              = image_tag @user.tribe.icon.url(:medium), class:"img-responsive img-circle tribe-background"
         p.text-center.col-md-12
           small
             | Newbie
             br
-            | #{current_user.reviews.size}&nbsp;
+            | #{@user.reviews.size}&nbsp;
             = link_to "Reviews", reviews_path
             br
             | 5 Helpful votes
             br
-            | #{current_user.photos.size}&nbsp;
+            | #{@user.photos.size}&nbsp;
             = link_to "Photos", photos_path
       .col-md-10.remove-margin-top
         h1.remove-margin-top
           small
             small Happy camping,
             br
-          - if current_user.first_name.blank?
+          - if @user.first_name.blank?
             / FIXIT
             | Anonymous
             / Add form to let user add first_name
           - else
-            = current_user.first_name
-            - unless current_user.location.blank?
+            = @user.first_name
+            - unless @user.location.blank?
               small
                 small 
                   | &nbsp;&nbsp;
                   span.glyphicon.glyphicon-home
-                  |  From #{current_user.location}
+                  |  From #{@user.location}
           br
           small
             = link_to "Been to", beens_path
-            | : #{current_user.beens.size} |&nbsp;
+            | : #{@user.beens.size} |&nbsp;
             = link_to "Want to go", wants_path
-            | : #{current_user.wants.size} |&nbsp;
+            | : #{@user.wants.size} |&nbsp;
             = link_to "Lists", management_lists_path
-            | : #{current_user.lists.size}
+            | : #{@user.lists.size}
           br
           small 
             small 
-              - if current_user.tribe.blank?
+              - if @user.tribe.blank?
                 | To get personalized recommendations, pick a tribe:
                 = link_to "Join a tribe", new_tribal_membership_path, class:'btn btn-warning btn-sm'
               - else
-                | Newbie in the #{current_user.tribe.name} tribe&nbsp;&nbsp;
+                | Newbie in the #{@user.tribe.name} tribe&nbsp;&nbsp;
                 small = link_to "Switch tribe", new_tribal_membership_path
     .col-md-12
       hr
@@ -89,6 +89,7 @@
         p.lead.col-md-12 You recently viewed...
         .col-md-12
           hr
-
+.flush-footer
+  == render 'layouts/footer'
 
 

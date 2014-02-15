@@ -1,5 +1,5 @@
 class CampsitesController < ApplicationController
-  before_action :set_campsite, only: [:show, :edit, :update, :destroy]
+  before_action :set_campsite, only: [ :edit, :update, :destroy]
 
   # GET /campsites
   # GET /campsites.json
@@ -34,6 +34,7 @@ class CampsitesController < ApplicationController
   # GET /campsites/1
   # GET /campsites/1.json
   def show
+    @campsite = Campsite.includes(:photos, reviews: [:rating]).find(params[:id])
     @nearbys = @campsite.nearbys.limit(5)
     render(layout: "layouts/normal")
   end

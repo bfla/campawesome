@@ -5,7 +5,7 @@ class BeensController < ApplicationController
   # GET /beens.json
   def index
     if user_signed_in?
-      @beens = current_user.beens
+      @beens = current_user.beens.includes(:beenables)
       render layout: "layouts/twoColumn"
     else
       redirect_to new_user_session_path

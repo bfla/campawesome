@@ -1,5 +1,5 @@
 class CitiesController < ApplicationController
-  before_action :set_city, only: [:show, :edit, :update, :destroy]
+  before_action :set_city, only: [ :edit, :update, :destroy]
 
   # GET /cities
   # GET /cities.json
@@ -8,7 +8,7 @@ class CitiesController < ApplicationController
   end
 
   def browse
-    @city = City.includes(campsites: [{vibes: :tribe}] ).find(params[:id])
+    @city = City.includes(campsites: [ :ratings, :tribe] ).find(params[:id])
     @tribes = Tribe.all
     gon.campsites = @city.campsites.to_json
     gon.zoom = @city.zoom
@@ -21,6 +21,7 @@ class CitiesController < ApplicationController
   # GET /cities/1
   # GET /cities/1.json
   def show
+    @city = City.includes(:photos, campsites: [ :ratings, {vibes: :tribe}] ).find(params[:id])
     @tribes = Tribe.all
     render(layout: "layouts/guide")
     gon.zoom = @city.zoom

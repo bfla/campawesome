@@ -1,5 +1,5 @@
 class DestinationsController < ApplicationController
-  before_action :set_destination, only: [:show, :edit, :update, :destroy]
+  before_action :set_destination, only: [:edit, :update, :destroy]
 
   # GET /destinations
   # GET /destinations.json
@@ -22,6 +22,7 @@ class DestinationsController < ApplicationController
   # GET /destinations/1
   # GET /destinations/1.json
   def show
+    @destination = Destination.includes(:photos).find(params[:id])
     @campsites = Campsite.near([@destination.latitude, @destination.longitude], 30)
     @tribes = Tribe.all
     render(layout: "layouts/guide")

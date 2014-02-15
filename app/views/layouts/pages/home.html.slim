@@ -1,12 +1,12 @@
 doctype html
-html.fill-height
+html.fill-height.background
   head
     title Camposaurus Home
     meta name="keywords" contents='Michigan Camping, travel, Camposaurus, camp that, campgrounds, rustic camping, rv parks, budget camping, camping sites, backcountry camping, backcountry camping, rv campgrounds'
     meta name="description" content="Camposaurus is the best site for finding information about Michigan Camping.  It has a complete listing of public campgrounds in Michigan, including rustic camping, RV campgrounds, and backcountry or backpacking camping sites."
     == render 'layouts/headstyles'
     == render 'layouts/headscripts'
-body.fill-height
+body.fill-height.background
   == render 'layouts/modals/standardModals'
   == render 'layouts/navbar'
   #wrap
@@ -31,6 +31,4 @@ body.fill-height
                       span.glyphicon.glyphicon-search 
                       |  Find campsites!
     </div>
-    == yield :belowTheFold
-  .flush-footer
-    == render 'layouts/footer'
+      == yield :belowTheFold
