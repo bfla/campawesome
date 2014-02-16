@@ -1,7 +1,4 @@
-|  Ranked ##{campsite.city_rank} of #{campsite.city.campsites.size}&nbsp;
-small
-  small = link_to "campsites in #{campsite.city.name}, #{campsite.state_name}", campsite.city
-br
+/ requires a campsite
 - if campsite.ratings.blank?
   - 4.times
     span.glyphicon.glyphicon-fire.rating-color
@@ -45,8 +42,3 @@ br
     - 4.times
       span.glyphicon.glyphicon-fire.subtle-text
       | &nbsp;
-  br
-  .subtle-text
-    = campsite.avg_rating
-    small
-      small  average out of 5.0 by #{pluralize(campsite.ratings.size, "camper")}

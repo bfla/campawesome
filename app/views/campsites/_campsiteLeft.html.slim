@@ -1,24 +1,12 @@
 / Photos
 = render 'layouts/guide/topLeft', place:@campsite
 
-/ Ratings
+/ Booking information 
 .row
-  .col-md-2
-    p.lead
-      span.glyphicon.glyphicon-certificate
-  .col-md-10
-    = render "campsiteRating", campsite:@campsite
-hr
-
-
-/ Check reservations
-.row
-  .col-md-2
-    p.lead
-      span.glyphicon.glyphicon-certificate
-  .col-md-10
+  .col-md-12
     p.lead 
-      | Booking It &nbsp; &nbsp;
+      span.glyphicon.glyphicon-book.subtle-text
+      |  Booking It &nbsp; &nbsp;
       - if @campsite.reservable
         button.btn.btn-success.btn-sm data-toggle="modal" data-target="#reserveModal" Check Reservations
       ul
@@ -51,12 +39,18 @@ hr
           a href=@campsite.camp_url
             span.glyphicon.glyphicon-globe
             |  Official site
-  .col-md-2
-  .col-md-10
-    p.lead Have you been here?
-    button.btn.btn-success data-toggle="modal" data-target="newReviewModal" Review It
-    buttn.btn.btn-success Add photo
-hr
+      br
+      hr
+/ Reviews
+- unless @campsite.reviews.blank?
+  .row
+    .col-md-12 
+      p.lead
+        span.glyphicon.glyphicon-edit.subtle-text
+        |  Reviews 
+        small.subtle-text for #{@campsite.name}
+    - @campsite.reviews.each do |review|
+      = render "campsiteReview", review:review, campsite:@campsite
 
 / Tribes who like it
 .row

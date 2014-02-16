@@ -1,10 +1,22 @@
-p.col-md-12
-  small
-    .extra-subtle Camping Description:
-    = truncate @campsite.description, length:20, separator:' '
-    a more
-p.col-md-12.lead Nearby campsites
-p.col-md-12
-  - @nearbys.each do |nearby_campsite|
-    = link_to nearby_campsite.name, nearby_campsite
-    br
+/ Command bar
+.row = render 'layouts/campsiteCommands', campsite:@campsite
+/ Ranking and rating
+.row
+  br
+  h4 = render "campsiteRating", campsite:@campsite
+/ Description
+.row
+  p.col-md-12
+    small
+      .extra-subtle Camping Description:
+      = truncate @campsite.description, length:20, separator:' '
+      a more
+/ Nearby campsites
+.row
+  h4 Nearby campsites
+  p
+    - @nearbys.each do |nearby_campsite|
+      = link_to nearby_campsite.name, nearby_campsite
+      br
+    - unless @nearbys.blank?
+      = link_to "see more", search_campsites_path(keywords:"#{@campsite.city.name}, #{@campsite.state.name}"), class:"subtle-text"

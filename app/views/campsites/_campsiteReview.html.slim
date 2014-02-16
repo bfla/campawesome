@@ -1,0 +1,35 @@
+/ Needs a rating:rating and campsite:campsite
+.col-md-3
+  .col-md-offset-1.col-md-10
+    - if review.user.tribe.blank?
+      h1.text-center
+        span.glyphicon.glyphicon-globe.subtle-text
+        br
+        small
+          small no tribe
+    - else
+      h1.text-center
+        = image_tag review.user.tribe.icon.url(:medium), class:"img-responsive img-circle tribe-background"
+  p.text-center.col-md-12
+    small
+      | Newbie
+      br
+      | #{pluralize(review.user.reviews.size, "Review")}
+      br
+      | 5 Helpful votes
+      br
+      | #{pluralize(review.user.photos.size, "Photo")}
+
+p.col-md-9
+  - if review.user.first_name.blank?
+    .lead Rating by Anonymous
+  - else
+    .lead Review by #{review.user.first_name}
+  = render "ratingDisplay", campsite:campsite
+  small.subtle-text #{review.rating.value} out of 5.0
+  br
+  = review.body
+  br
+  small.subtle-text reviewed on #{review.created_at.to_formatted_s(:short)}
+.col-md-12
+  hr
