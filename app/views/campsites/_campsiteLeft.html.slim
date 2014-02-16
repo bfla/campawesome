@@ -4,11 +4,12 @@
 / Booking information 
 .row
   .col-md-12
-    p.lead 
+    hr
+    p.lead
       span.glyphicon.glyphicon-book.subtle-text
       |  Booking It &nbsp; &nbsp;
       - if @campsite.reservable
-        button.btn.btn-success.btn-sm data-toggle="modal" data-target="#reserveModal" Check Reservations
+        button.btn.btn-success.btn-sm data-toggle="modal" data-target="#reserveModal" Check Availability
       ul
         - if @campsite.reservable
           li This campsite allows reservations.
@@ -48,7 +49,7 @@
       p.lead
         span.glyphicon.glyphicon-edit.subtle-text
         |  Reviews 
-        small.subtle-text for #{@campsite.name}
+        small.subtle-text  #{pluralize(@campsite.reviews.size, "review")} for #{@campsite.name}
     - @campsite.reviews.each do |review|
       = render "campsiteReview", review:review, campsite:@campsite
 

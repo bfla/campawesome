@@ -1,13 +1,15 @@
 - content_for :head
-  title #{@campsite.name} on campAwesome
+  title #{@campsite.name} on Camposaurus
   meta name="description" content="<%=campsite.name=> in <%= campsite.state_name %>: See booking information, reviews, photos and more for <%=campsite.name=>, ranked #blank for blank in blank area."
 
 - content_for :breadcrumb
+  / Breadcrumbs
   ol.breadcrumb.white
     li = link_to "#{@campsite.state_name} Camping", state_path(@campsite.state)
     li = link_to @campsite.city.name, @campsite.city
     li.active = @campsite.name
 - content_for :heading
+    / Heading
     h1.col-md-12
       = @campsite.name
       small
@@ -17,7 +19,10 @@
       br
       small 
         small #{@campsite.org} campground in #{@campsite.state_name}&nbsp;
-      hr
+    / Tabs
+    ul.nav.nav-tabs.guide-tabs
+      li.active = link_to "#{@campsite.name} Home", @campsite
+      li = link_to 'Things to do nearby', "#"
 
 - content_for :left
   = render 'campsiteLeft'
