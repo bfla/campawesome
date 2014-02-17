@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  activity_type_id: 1
+  campsite_id: 1
+  description: MyText
+  latitude: 1.5
+  longitude: 1.5
+
+two:
+  activity_type_id: 1
+  campsite_id: 1
+  description: MyText
+  latitude: 1.5
+  longitude: 1.5

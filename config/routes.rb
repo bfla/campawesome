@@ -1,5 +1,9 @@
 Blog::Application.routes.draw do
 
+  resources :activities
+
+  resources :activity_types
+
   resources :reviews
 
   resources :ratings

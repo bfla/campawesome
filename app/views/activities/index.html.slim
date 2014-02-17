@@ -1,0 +1,29 @@
+.container
+  .well.white.col-md-9.col-md-offset-1
+    h1 Listing activities
+
+    table.table
+      tr
+        th Activity type
+        th Campsite
+        th Description
+        th Latitude
+        th Longitude
+        th
+        th
+        th
+
+      - @activities.each do |activity|
+        tr
+          td = activity.activity_type_id
+          td = activity.campsite_id
+          td = activity.description
+          td = activity.latitude
+          td = activity.longitude
+          td = link_to 'Show', activity
+          td = link_to 'Edit', edit_activity_path(activity)
+          td = link_to 'Destroy', activity, data: {:confirm => 'Are you sure?'}, :method => :delete
+
+    br
+
+    = link_to 'New Activity', new_activity_path

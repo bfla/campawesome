@@ -1,0 +1,73 @@
+= form_for @activity do |f|
+  - if @activity.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@activity.errors.count, "error")} prohibited this activity from being saved:"
+      ul
+        - @activity.errors.full_messages.each do |message|
+          li = message
+
+  .row
+    - @activity_types.each do |activity|
+      .form-inline.col-md-2
+        .form-group
+          = f.label activity.name, class:'control-label'
+          = f.radio_button :activity_type_id, activity.id, class:"form-control"
+  .row
+    .field.col-md-2.form-group
+      = f.label :campsite_id, class:'control-label'
+      = f.number_field :campsite_id, class:"form-control"
+    .field.col-md-2.form-group
+      = f.label :user_id, class:'control-label'
+      = f.number_field :user_id, class:"form-control"
+  .row
+    .field.col-md-5.form-group
+      = f.label :description, class:'control-label'
+      = f.text_area :description, class:"form-control", rows:"3"
+  .row
+    .field.col-md-2.form-group
+      = f.label :latitude, class:'control-label'
+      = f.text_field :latitude, class:"form-control"
+    .field.col-md-2.form-group
+      = f.label :longitude, class:'control-label'
+      = f.text_field :longitude, class:"form-control"
+
+  .actions = f.submit 'Save', class:"btn btn-success"
+/
+
+
+
+  
+
+
+
+
+
+
+
+
+
+/
+  = form_for @activity do |f|
+    - if @activity.errors.any?
+      #error_explanation
+        h2 = "#{pluralize(@activity.errors.count, "error")} prohibited this activity from being saved:"
+        ul
+          - @activity.errors.full_messages.each do |message|
+            li = message
+
+    .field
+      = f.label :activity_type_id
+      = f.number_field :activity_type_id
+    .field
+      = f.label :campsite_id
+      = f.number_field :campsite_id
+    .field
+      = f.label :description
+      = f.text_area :description
+    .field
+      = f.label :latitude
+      = f.text_field :latitude
+    .field
+      = f.label :longitude
+      = f.text_field :longitude
+    .actions = f.submit 'Save'

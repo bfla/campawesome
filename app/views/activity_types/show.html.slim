@@ -1,0 +1,9 @@
+p#notice = notice
+
+p
+  strong Name:
+  = @activity_type.name
+
+= link_to 'Edit', edit_activity_type_path(@activity_type)
+'|
+= link_to 'Back', activity_types_path

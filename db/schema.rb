@@ -11,7 +11,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140215182432) do
+ActiveRecord::Schema.define(version: 20140217141546) do
+
+  create_table "activities", force: true do |t|
+    t.integer  "activity_type_id"
+    t.integer  "campsite_id"
+    t.integer  "user_id"
+    t.text     "description"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "activity_types", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "been_heres", force: true do |t|
     t.integer  "campsite_id"

@@ -1,0 +1,22 @@
+.container
+  .row
+    h1 Listing activity_types
+
+  .row
+    table.table
+      tr
+        th Name
+        th
+        th
+        th
+
+      - @activity_types.each do |activity_type|
+        tr
+          td = activity_type.name
+          td = link_to 'Show', activity_type
+          td = link_to 'Edit', edit_activity_type_path(activity_type)
+          td = link_to 'Destroy', activity_type, data: {:confirm => 'Are you sure?'}, :method => :delete
+
+  br
+  .row
+    .col-md-9.col-md-offset-1 style="z-index:1;" = link_to 'New Activity type', new_activity_type_path

@@ -1,0 +1,21 @@
+p#notice = notice
+
+p
+  strong Activity type:
+  = @activity.activity_type_id
+p
+  strong Campsite:
+  = @activity.campsite_id
+p
+  strong Description:
+  = @activity.description
+p
+  strong Latitude:
+  = @activity.latitude
+p
+  strong Longitude:
+  = @activity.longitude
+
+= link_to 'Edit', edit_activity_path(@activity)
+'|
+= link_to 'Back', activities_path
