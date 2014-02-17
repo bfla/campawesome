@@ -2,58 +2,64 @@
 .row = render 'layouts/campsiteCommands', campsite:@campsite
 / Ranking and rating =====================================
 .row
-  br
-  h4 = render "campsiteRating", campsite:@campsite
+  .col-md-12
+    br
+    h4 = render "campsiteRating", campsite:@campsite
 / Booking info =====================================
 .row
-  h4
-    | Bookings&nbsp;
-    - if @campsite.reservable
-      button.btn.btn-success.btn-sm data-toggle="modal" data-target="#reserveModal" Check Availability
-  ul.col-md-12
-    - if @campsite.reservable
-      li This campsite allows reservations.
-    - else
-      li This campsite doesn't allow reservations.
-    - if @campsite.walkin
-      li This campsite allows walkins
-    - else
-      li This campsite doesn't allow walkins
-  p.subtle-text.col-md-12
-    - if @campsite.res_phone?
-      .subtle-text
-        span.glyphicon.glyphicon-earphone 
-        | Reservations: #{number_to_phone(@campsite.res_phone)}
+  .col-md-12
+    hr
+    h4
+      | Bookings&nbsp;
+      - if @campsite.reservable
+        button.btn.btn-success.btn-sm data-toggle="modal" data-target="#reserveModal" Check Availability
+    ul.col-md-12
+      - if @campsite.reservable
+        li This campsite allows reservations.
+      - else
+        li This campsite doesn't allow reservations.
+      - if @campsite.walkin
+        li This campsite allows walkins
+      - else
+        li This campsite doesn't allow walkins
+    p.subtle-text.col-md-12
+      - if @campsite.res_phone?
+        .subtle-text
+          span.glyphicon.glyphicon-earphone 
+          | Reservations: #{number_to_phone(@campsite.res_phone)}
+          br
+      - if @campsite.camp_phone?
+        .subtle-text
+          span.glyphicon.glyphicon-earphone
+          |  Campground: #{number_to_phone(@campsite.camp_phone)}
+          br
+      - if @campsite.res_url?
+        a href=@campsite.res_url 
+          span.glyphicon.glyphicon-globe
+          |  Online reservations
         br
-    - if @campsite.camp_phone?
-      .subtle-text
-        span.glyphicon.glyphicon-earphone
-        |  Campground: #{number_to_phone(@campsite.camp_phone)}
+      - if @campsite.camp_url?
+        a href=@campsite.camp_url
+          span.glyphicon.glyphicon-globe
+          |  Official site
         br
-    - if @campsite.res_url?
-      a href=@campsite.res_url 
-        span.glyphicon.glyphicon-globe
-        |  Online reservations
-      br
-    - if @campsite.camp_url?
-      a href=@campsite.camp_url
-        span.glyphicon.glyphicon-globe
-        |  Official site
-      br
-
 / Nearby campsites =====================================
 .row
-  h4 Nearby campsites
-  p
-    - @nearbys.each do |nearby_campsite|
-      = link_to nearby_campsite.name, nearby_campsite
-      br
-    - unless @nearbys.blank?
-      = link_to "see more", search_campsites_path(keywords:"#{@campsite.city.name}, #{@campsite.state.name}"), class:"subtle-text"
+  .col-md-12
+    hr
+    h4 Nearby campsites
+    p
+      - @nearbys.each do |nearby_campsite|
+        = link_to nearby_campsite.name, nearby_campsite
+        br
+      - unless @nearbys.blank?
+        = link_to "see more", search_campsites_path(keywords:"#{@campsite.city.name}, #{@campsite.state.name}"), class:"subtle-text"
 / Description =====================================
 .row
-  p.col-md-12
-    small
-      .extra-subtle Camping Description:
-      = truncate @campsite.description, length:20, separator:' '
-      a more
+  .col-md-12
+    hr
+    p
+      small
+        .extra-subtle Camping Description:
+        = truncate @campsite.description, length:20, separator:' '
+        a more

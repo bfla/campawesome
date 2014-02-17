@@ -17,7 +17,7 @@
         | 50-amp plugins
     .col-md-3
       p
-        strong.subtle-text Activities
+        strong.subtle-text Things to do
         br
         | Beach
         br
@@ -36,7 +36,6 @@
         | On Lake Michigan
         br
         | Biting Flies
-
 
 / Booking information 
 /
@@ -80,13 +79,37 @@
               |  Official site
         br
         hr
+/ Location
+.row
+  hr
+  p.lead.col-md-12 
+    span.glyphicon.glyphicon-map-marker.subtle-text
+    |  Location
+  .col-md-6
+    #campsiteMap.thumbnail style="height:200px;"
+  .col-md-6
+    p
+      strong.subtle-text GPS:
+      |  #{@campsite.latitude}N, #{-@campsite.longitude}W
+      br
+      span.subtle-text.glyphicon.glyphicon-question-sign
+      |&nbsp;
+      small
+        a.subtle-text How to use GPS coordinates
+    p
+      a Show address
+      small.subtle-text &nbsp;(not recommended)
+      br
+      span.subtle-text.glyphicon.glyphicon-exclamation-sign
+      small.subtle-text  Campsite addresses are often inaccurate!
+    p = link_to "Things to do nearby", activities_campsite_path(@campsite)
 / Reviews
 - unless @campsite.reviews.blank?
   hr
   .row
     .col-md-12 
       p.lead
-        span.glyphicon.glyphicon-edit.subtle-text
+        span.glyphicon.glyphicon-pencil.subtle-text
         |  Reviews 
         small.subtle-text  #{pluralize(@campsite.reviews.size, "review")} for #{@campsite.name}
     - @campsite.reviews.each do |review|

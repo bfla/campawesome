@@ -21,7 +21,7 @@
         small #{@campsite.org} campground in #{@campsite.state_name}&nbsp;
     / Tabs
     ul.nav.nav-tabs.guide-tabs
-      li.active = link_to "#{@campsite.name} Home", @campsite
+      li.active = link_to @campsite.name, @campsite
       li = link_to 'Things to do nearby', activities_campsite_path(@campsite)
 
 - content_for :left
