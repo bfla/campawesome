@@ -17,19 +17,22 @@
       | #{pluralize(review.user.reviews.size, "Review")}
       br
       | 5 Helpful votes
-      br
-      | #{pluralize(review.user.photos.size, "Photo")}
 
 p.col-md-9
   - if review.user.first_name.blank?
-    .lead Rating by Anonymous
+    .lead.subtle-text Review by Anonymous camper
   - else
-    .lead Review by #{review.user.first_name}
-  = render "ratingDisplay", campsite:campsite
-  small.subtle-text #{review.rating.value} out of 5.0
-  br
+    .subtle-text 
+      | Reviewed by #{review.user.first_name}
+      - unless review.user.tribe.blank?
+        small
+          | , of the #{review.user.tribe.name}&nbsp;
+          span.glyphicon.glyphicon-info-sign.add-tooltip data-toggle="tooltip" data-placement="right" title=review.user.tribe.description
+      br
+      = render "ratingDisplay", campsite:campsite
+      small.subtle-text #{review.rating.value} out of 5.0
   = review.body
   br
-  small.subtle-text reviewed on #{review.created_at.to_formatted_s(:short)}
+  small.subtle-text  reviewed on #{review.created_at.to_formatted_s(:short)}
 .col-md-12
   hr
