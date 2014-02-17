@@ -4,7 +4,7 @@
     | Top campsites near #{place.name}
     small.pull-right
       small
-        = link_to ' see all', browse_cities_path(id:place)
+        = link_to ' see all', browse_city_path(place)
     br
     hr
   .col-md-3 = image_tag @tribes.find(1).icon.url(:medium), class:'tribe-subtle img-circle'
@@ -16,7 +16,7 @@
     | Best rustic camping near #{place.name}
     small.pull-right
       small
-        = link_to ' see all', browse_cities_path(id:place, tribe_id:1)
+        = link_to ' see all', browse_city_path(place, tribe_id:1)
     br
     hr
   .col-md-3 = image_tag @tribes.find(1).icon.url(:medium), class:'tribe-subtle img-circle'
@@ -31,7 +31,7 @@
     | Best RV parks near #{place.name}
     small.pull-right
       small
-        = link_to ' see all', browse_cities_path(id:place, tribe_id:3)
+        = link_to ' see all', browse_city_path(place, tribe_id:3)
     .col-md-3 = image_tag @tribes.find(3).icon.url(:medium), class:'tribe-subtle img-circle'
     ol.col-md-9
       - campsites.each do |campsite|
@@ -44,7 +44,7 @@
     | Best backcountry campsites near #{place.name}
     small.pull-right
       small
-        = link_to ' see all', browse_cities_path(id:place, tribe_id:2)
+        = link_to ' see all', browse_city_path(place, tribe_id:2)
     .col-md-3 = image_tag @tribes.find(2).icon.url(:medium), class:'tribe-subtle img-circle'
     ol.col-md-9
       - campsites.each do |campsite|

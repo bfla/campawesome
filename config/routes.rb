@@ -31,9 +31,7 @@ Blog::Application.routes.draw do
   resources :tribes
 
   resources :cities do
-    collection do
-      get 'browse'
-    end
+    get :browse, on: :member
   end
 
   resources :destinations do

@@ -25,13 +25,16 @@
       li.active = link_to 'Things to do nearby', activities_campsite_path(@campsite)
 
 - content_for :left
-  - @activity_types.each do |activity_type|
-    - unless @campsite.activities.find_by_activity_type_id(activity_type).blank?
-      p.lead = activity_type.name
-      ul
-        - @campsite.activities.each do |activity|
-          - if activity.activity_type == activity_type
-            li = activity.description
+  - if @campsite.activities.blank?
+    p.lead Sorry, Human. I don't yet know about any activities near here.  Don't worry though. I am evolving and soon I will learn.
+  - else
+    - @activity_types.each do |activity_type|
+      - unless @campsite.activities.find_by_activity_type_id(activity_type).blank?
+        p.lead = activity_type.name
+        ul
+          - @campsite.activities.each do |activity|
+            - if activity.activity_type == activity_type
+              li = activity.description
 
 
 - content_for :right
