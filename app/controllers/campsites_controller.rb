@@ -1,12 +1,6 @@
 class CampsitesController < ApplicationController
   before_action :set_campsite, only: [ :edit, :update, :destroy]
 
-  # GET /campsites
-  # GET /campsites.json
-  def index
-    @campsites = Campsite.all
-  end
-
   def search
     zoom = params[:zoom] || 10
     distance = params[:distance] || 30
@@ -31,6 +25,18 @@ class CampsitesController < ApplicationController
 
   end
   
+  def activities
+    @campsite = Campsite.includes(activities: :activity_type).find(params[:id])
+    @activity_types  = ActivityType.all
+    render layout: "layouts/normal"
+  end
+
+  # GET /campsites
+  # GET /campsites.json
+  def index
+    @campsites = Campsite.all
+  end
+
   # GET /campsites/1
   # GET /campsites/1.json
   def show

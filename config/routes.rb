@@ -49,6 +49,7 @@ Blog::Application.routes.draw do
   end
 
   resources :campsites do
+    get :activities, on: :member
     collection do
       get 'search'
     end
@@ -65,8 +66,6 @@ Blog::Application.routes.draw do
   # You can have the root of your site routed with "root"
   #root 'welcome#index'
   root to: 'pages#home', as: 'home'
-
-  #match '/search/:q', to: 'campsites#search', as:'search'
 
   # Devise sign_out needs a special path because OmniAuth is now included:
   #devise_scope :user do

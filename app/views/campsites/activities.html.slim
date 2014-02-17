@@ -21,23 +21,24 @@
         small #{@campsite.org} campground in #{@campsite.state_name}&nbsp;
     / Tabs
     ul.nav.nav-tabs.guide-tabs
-      li.active = link_to "#{@campsite.name} Home", @campsite
-      li = link_to 'Things to do nearby', activities_campsite_path(@campsite)
+      li = link_to "#{@campsite.name} Home", @campsite
+      li.active = link_to 'Things to do nearby', activities_campsite_path(@campsite)
 
 - content_for :left
-  = render 'campsiteLeft'
+  - @activity_types.each do |activity_type|
+    - unless @campsite.activities.find_by_activity_type_id(activity_type).blank?
+      p.lead = activity_type.name
+      ul
+        - @campsite.activities.each do |activity|
+          - if activity.activity_type == activity_type
+            li = activity.description
+
+
 - content_for :right
-  = render 'campsiteRight'
 
 - content_for :end
-  == render 'reserveModal'
   javascript:
     $('#panelClose').click( function () {
       $('.panel').hide();
     });
     $('.add-tooltip').tooltip();
-
-    /*$('.rateit').click( function() {
-      var rating = $(this).rateit('value');
-      $('.rating-value').val(rating);
-    });*/
