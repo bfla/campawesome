@@ -19,7 +19,7 @@
             span.glyphicon.glyphicon-info-sign.extra-subtle.add-tooltip  data-toggle="tooltip" data-placement="right" title="Tag your Twitter & Facebook posts with ##{@destination.hashtag} Why?  Because it'll make them awesomer."
   ul.nav.nav-tabs.guide-tabs
     li = link_to @destination.name, @destination
-    li.active = link_to "Campsites near #{@destination.name}", browse_destinations_path(id:@destination)
+    li.active = link_to "Campsites near #{@destination.name}", browse_destination_path(id:@destination)
 
   = render 'layouts/guide/browseFilter', place:@destination, campsites:@campsites
         

@@ -1,62 +1,55 @@
 Blog::Application.routes.draw do
 
-  resources :activities
-
-  resources :activity_types
-
-  resources :reviews
-
-  resources :ratings
-
+  # Saved places: lists, beens, etc
+  resources :beens
   resources :wants
-
   resources :listeds
-
   resources :lists do
     collection do
       get 'management'
     end
   end
 
-  resources :pages
-
+  # User contributions
   resources :photos
 
+  resources :reviews
+
+  resources :ratings
+
+  # Tribes
   resources :vibes
-
-  resources :beens
-
   resources :tribal_memberships
-
   resources :tribes
 
+  # Place guides
   resources :cities do
     get :browse, on: :member
   end
-
   resources :destinations do
-    collection do
-      get 'browse'
-    end
+    get :browse, on: :member
   end
-
   resources :states do
     collection do
       get 'browse_destinations'
     end
   end
 
+  #Campsites
   resources :campsites do
     get :activities, on: :member
     collection do
       get 'search'
     end
   end
+  resources :activities
+  resources :activity_types
 
+  # Pages
+  resources :pages
+  # Devise & users
   devise_for :users, :controllers => { omniauth_callbacks:"users/omniauth_callbacks", registrations:"users/registrations" }
   resources :users
-  
-
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
