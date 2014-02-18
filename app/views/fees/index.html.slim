@@ -1,0 +1,29 @@
+h1 Listing fees
+
+table
+  tr
+    th Campsite
+    th Value
+    th Per
+    th Unit
+    th Description
+    th Comment
+    th
+    th
+    th
+
+  - @fees.each do |fee|
+    tr
+      td = fee.campsite_id
+      td = fee.value
+      td = fee.per
+      td = fee.unit
+      td = fee.description
+      td = fee.comment
+      td = link_to 'Show', fee
+      td = link_to 'Edit', edit_fee_path(fee)
+      td = link_to 'Destroy', fee, data: {:confirm => 'Are you sure?'}, :method => :delete
+
+br
+
+= link_to 'New Fee', new_fee_path

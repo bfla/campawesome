@@ -1,0 +1,24 @@
+p#notice = notice
+
+p
+  strong Campsite:
+  = @fee.campsite_id
+p
+  strong Value:
+  = @fee.value
+p
+  strong Per:
+  = @fee.per
+p
+  strong Unit:
+  = @fee.unit
+p
+  strong Description:
+  = @fee.description
+p
+  strong Comment:
+  = @fee.comment
+
+= link_to 'Edit', edit_fee_path(@fee)
+'|
+= link_to 'Back', fees_path

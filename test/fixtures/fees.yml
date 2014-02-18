@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  campsite_id: 1
+  value: 1.5
+  per: MyString
+  unit: MyString
+  description: MyText
+  comment: MyText
+
+two:
+  campsite_id: 1
+  value: 1.5
+  per: MyString
+  unit: MyString
+  description: MyText
+  comment: MyText

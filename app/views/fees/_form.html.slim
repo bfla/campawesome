@@ -1,0 +1,32 @@
+= form_for @fee, html:{class:"col-md-6 col-md-offset-1 well white"} do |f|
+  - if @fee.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@fee.errors.count, "error")} prohibited this fee from being saved:"
+      ul
+        - @fee.errors.full_messages.each do |message|
+          li = message
+  .row
+    .field.col-md-2
+      = f.label :campsite_id, class:'control-label'
+      = f.number_field :campsite_id, class:"form-control"
+  .row
+    .field.col-md-3
+      = f.label :value, class:'control-label'
+      = f.text_field :value, class:"form-control"
+      .help-block As a float: 15.00, 17.50 etc...
+    .form-inline.col-md-2.form-group.col-md-offset-1
+      = f.label "per night", class:'control-label'
+      = f.radio_button :per, "per night", class:"form-control"
+  .row
+    .field.form-group.col-md-5
+      = f.label :unit, class:'control-label'
+      = f.text_field :unit, class:"form-control"
+      .help-block What does the fee buy?  For example, a regular site, group site, or site with 50-amp hookups
+  .field.form-group
+    = f.label :description
+    = f.text_area :description, class:"form-control"
+    .help-block This is the description that will actually appear
+  .field.form-group
+    = f.label :comment, class:'control-label'
+    = f.text_area :comment, class:"form-control"
+  .actions = f.submit 'Save', class:"btn btn-primary"

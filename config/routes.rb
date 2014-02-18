@@ -1,5 +1,7 @@
 Blog::Application.routes.draw do
 
+  resources :fees
+
   # Saved places: lists, beens, etc
   resources :beens
   resources :wants

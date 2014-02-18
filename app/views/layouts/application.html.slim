@@ -23,8 +23,10 @@ html.fill-height
     / Body goes here
     == yield :layout
     / Footer goes here
-    .flush-footer
-        .pad-top-lg
-            == render 'layouts/footer'
+    == render 'layouts/footer'
+    /
+        .flush-footer
+            .pad-top-lg
+                == render 'layouts/footer'
     
     == yield :end
