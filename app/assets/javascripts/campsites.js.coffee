@@ -8,6 +8,14 @@
 # then it makes and sets up a wicked cool MapBox map!
 
 $(document).ready ->
+  makeCampsiteMap(gon.initCenter, 9, gon.geoJson)  #initialize map with gon data
+
+@makeCampsiteMap = (center, zoom, geoJson) ->
+  map = L.mapbox.map("campsiteMap", "campawesome.h5d0p7ea").setView(center, zoom) # initialize the map
+  map.markerLayer.setGeoJSON(geoJson) # set the markers
+
+
+$(document).ready ->
   # grab data from Gon
   initCenter = gon.center
   initZoom = gon.zoom

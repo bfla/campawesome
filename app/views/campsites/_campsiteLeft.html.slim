@@ -85,24 +85,26 @@
   p.lead.col-md-12 
     span.glyphicon.glyphicon-map-marker.subtle-text
     |  Location
-  .col-md-6
-    #campsiteMap.thumbnail style="height:200px;"
-  .col-md-6
-    p
-      strong.subtle-text GPS:
-      |  #{@campsite.latitude}N, #{-@campsite.longitude}W
-      br
-      span.subtle-text.glyphicon.glyphicon-question-sign
-      |&nbsp;
-      small
-        a.subtle-text How to use GPS coordinates
-    p
-      a Show address
-      small.subtle-text &nbsp;(not recommended)
-      br
-      span.subtle-text.glyphicon.glyphicon-exclamation-sign
-      small.subtle-text  Campsite addresses are often inaccurate!
-    p = link_to "Things to do nearby", activities_campsite_path(@campsite)
+    #mapRow.col-md-5
+        #campsiteMap
+    .col-md-6.col-md-offset-1
+      p
+        strong.subtle-text GPS:
+        |  #{@campsite.latitude}N, #{-@campsite.longitude}W
+        br
+        span.subtle-text.glyphicon.glyphicon-question-sign
+        |&nbsp;
+        small
+          a.subtle-text How to use GPS coordinates
+      - unless @campsite.address.blank?
+        p
+          a href="#" data-toggle="modal" data-target="#addressModal" Show address
+          small.subtle-text &nbsp;(not recommended)
+          br
+          span.subtle-text.glyphicon.glyphicon-exclamation-sign
+          small.subtle-text  Campsite addresses are often inaccurate!
+      - unless @campsite.activities.blank?
+        p = link_to "Things to do nearby", activities_campsite_path(@campsite)
 / Reviews
 - unless @campsite.reviews.blank?
   hr

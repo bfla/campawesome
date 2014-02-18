@@ -1,6 +1,10 @@
 - content_for :head
   title #{@campsite.name} on Camposaurus
   meta name="description" content="<%=campsite.name=> in <%= campsite.state_name %>: See booking information, reviews, photos and more for <%=campsite.name=>, ranked #blank for blank in blank area."
+  / Mapbox styles
+  link href='//api.tiles.mapbox.com/mapbox.js/v1.6.1/mapbox.css' rel='stylesheet'
+  / Mapbox script
+  script src='https://api.tiles.mapbox.com/mapbox.js/v1.6.1/mapbox.js'
 
 - content_for :breadcrumb
   / Breadcrumbs
@@ -22,7 +26,8 @@
     / Tabs
     ul.nav.nav-tabs.guide-tabs
       li.active = link_to @campsite.name, @campsite
-      li = link_to 'Things to do nearby', activities_campsite_path(@campsite)
+      - unless @campsite.activities.blank?
+        li = link_to 'Things to do nearby', activities_campsite_path(@campsite)
 
 - content_for :left
   = render 'campsiteLeft'
@@ -31,6 +36,8 @@
 
 - content_for :end
   == render 'reserveModal'
+  = render "addressModal", campsite:@campsite
+  = render "layouts/guide/descriptionModal", place:@campsite
   javascript:
     $('#panelClose').click( function () {
       $('.panel').hide();

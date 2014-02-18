@@ -1,0 +1,18 @@
+/ Modal for full place description - takes a place e.g. place:@state
+#addressModal.modal.fade tabindex="-1" role="dialog" aria-labelledby="addressModalLabel" aria-hidden="true"
+  .modal-dialog
+    .modal-content
+      .modal-header
+        button.close type="button" data-dismiss="modal" aria-hidden="true" &times
+        h5#descriptionModalTitle.modal-title.text-center Address for #{campsite.name}
+      .modal-body
+        .panel.panel-danger
+          .panel-heading Be careful, Human!
+          .panel-body 
+            | Addresses for campgrounds often refer to a mailing address and not necessarily the location of the campground.  Whenever possible, use GPS coordinates instead.  (Google Maps and most navigation systems like Garmin can accept GPS coordinates.)  This campsite's GPS coordinates: 
+            br
+            .lead.text-center  #{campsite.latitude}, #{campsite.longitude}
+        h4.text-center Nearest address
+        p.text-center = campsite.address
+      .modal-footer
+        button.btn.btn-default type="button" data-dismiss="modal" Close

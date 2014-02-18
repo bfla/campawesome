@@ -2,6 +2,20 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+// Campsite page ============================
+$campsiteMapHeight: 200px;
+#campsiteMap {
+  height:$campsiteMapHeight;
+  width:100%;
+  position:absolute;
+  padding:$smallPadding;
+  margin:$smallPadding;
+}
+#mapRow {
+  height:$campsiteMapHeight;
+}
+
+// Seach page ===============================
 #resultsMap {
   height:100%;
   width:100%;

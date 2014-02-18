@@ -42,6 +42,8 @@ class CampsitesController < ApplicationController
   def show
     @campsite = Campsite.includes(:photos, reviews: [:rating]).find(params[:id])
     @nearbys = @campsite.nearbys.limit(5)
+    gon.initCenter = [@campsite.latitude, @campsite.longitude]
+    gon.geoJson = @campsite.geojsonify
     render(layout: "layouts/normal")
   end
 
