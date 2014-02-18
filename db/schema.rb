@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140218150101) do
+ActiveRecord::Schema.define(version: 20140218152753) do
 
   create_table "activities", force: true do |t|
     t.integer  "activity_type_id"
@@ -163,6 +163,23 @@ ActiveRecord::Schema.define(version: 20140218150101) do
     t.float    "longitude"
     t.string   "hashtag"
     t.integer  "zoom"
+  end
+
+  create_table "taggings", force: true do |t|
+    t.integer  "campsite_id"
+    t.integer  "tag_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "tags", force: true do |t|
+    t.string   "name"
+    t.string   "type"
+    t.boolean  "important"
+    t.boolean  "red_flag"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "tribal_memberships", force: true do |t|
