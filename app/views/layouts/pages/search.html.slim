@@ -33,7 +33,7 @@ html.fill-height
                   small.no-spacing
                     small.no-spacing = tribe.vibe
           .col-md-2
-            .filterThumbnail.searchFilterThumbnail.thumbnail data-tribe-id="0"
+            #allFilter.filterThumbnail.searchFilterThumbnail.thumbnail data-tribe-id="0"
               = image_tag @tribes.find(1).icon.url(:small), class:'img-circle img-responsive tribe-background'
             p.no-spacing.text-center
                 small.no-spacing
@@ -116,27 +116,48 @@ html.fill-height
       #resultsMap
 
   javascript:
-    var filterId = gon.initTribe;
-    $('.filterThumbnail').each( function() {
+    // highlight the all filter
+    highlightSearchThumbnail( $('#allFilter') );
+    // Create the initial map
+    var map = L.mapbox.map("resultsMap", "campawesome.h5d0p7ea").setView(gon.center, gon.zoom);
+    map.zoomControl.setPosition('bottomright'); // move the map zoom control
+    map.markerLayer.setGeoJSON(gon.geoJson); // set the marker layer
+
+    // Apply hover effect
+    $(".searchFilterThumbnail").hover( function(){
+      searchHoverEffect( $(this) );
+    });
+    // Set click behaviors for filter
+    $(".searchFilterThumbnail").click( function(){
+      highlightSearchThumbnail($(this));
+      var filterId = $(this).data('tribe-id');
+      filterSearchResults(filterId);
+      map.featureLayer.setFilter(function(f) {
+        if (filterId != 0) {
+          for (x in f.properties['tribes']) {
+            if (f.properties['tribes'][x] == filterId) {
+              return true;
+            }
+          }
+        } else {
+          map.featureLayer.setFilter(function(f) { return true; });
+        }
+        //return f.properties['title'] === "Endor Campsite";
+      });
+      return false;
+    });
+    /* Apply the initial filter, if any
+    if (gon.initTribe) { 
+      var filterId = gon.initTribe;
+    } else { 
+      var filterId = 0; 
+    }
+    $('.searchFilterThumbnail').each( function() {
       if ( $(this).data('tribe-id') == filterId) {
-        highlightFilter( $(this) );
+        highlightSearchFilter( $(this) );
       }
     });
-
-    if (filterId != 0) {
-      applyFilter(filterId);
-    }
-
-    function highlightFilter(targetFilterThumb) {
-      if (targetFilterThumb.attr("style") == "border: 2px solid #65b045; background:#d5eacb;") {
-        targetFilterThumb.removeAttr("style");
-      } else {
-        $(".filterThumbnail").removeAttr("style");
-        targetFilterThumb.attr("style", "border: 2px solid #65b045; background:#d5eacb;");
-      }
-    }
-
-    function applyFilter(tribalId) {
+    /*function applyFilter(tribalId) {
       $(".browseResult").hide();
       if (tribalId == 0) {
         $(".browseResult").show();
@@ -149,4 +170,4 @@ html.fill-height
           }  
             });
           }
-        }
+        }*/
