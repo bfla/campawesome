@@ -1,0 +1,25 @@
+h1 Listing tags
+
+table
+  tr
+    th Name
+    th Type
+    th Important
+    th Red flag
+    th
+    th
+    th
+
+  - @tags.each do |tag|
+    tr
+      td = tag.name
+      td = tag.type
+      td = tag.important
+      td = tag.red_flag
+      td = link_to 'Show', tag
+      td = link_to 'Edit', edit_tag_path(tag)
+      td = link_to 'Destroy', tag, data: {:confirm => 'Are you sure?'}, :method => :delete
+
+br
+
+= link_to 'New Tag', new_tag_path

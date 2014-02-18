@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  type: 
+  important: false
+  red_flag: false
+
+two:
+  name: MyString
+  type: 
+  important: false
+  red_flag: false

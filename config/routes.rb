@@ -1,5 +1,9 @@
 Blog::Application.routes.draw do
 
+  resources :taggings
+
+  resources :tags
+
   resources :fees
 
   # Saved places: lists, beens, etc

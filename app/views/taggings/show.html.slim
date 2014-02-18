@@ -1,0 +1,15 @@
+p#notice = notice
+
+p
+  strong Campsite:
+  = @tagging.campsite_id
+p
+  strong Tag:
+  = @tagging.tag_id
+p
+  strong User:
+  = @tagging.user_id
+
+= link_to 'Edit', edit_tagging_path(@tagging)
+'|
+= link_to 'Back', taggings_path

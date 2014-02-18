@@ -1,0 +1,18 @@
+p#notice = notice
+
+p
+  strong Name:
+  = @tag.name
+p
+  strong Type:
+  = @tag.type
+p
+  strong Important:
+  = @tag.important
+p
+  strong Red flag:
+  = @tag.red_flag
+
+= link_to 'Edit', edit_tag_path(@tag)
+'|
+= link_to 'Back', tags_path

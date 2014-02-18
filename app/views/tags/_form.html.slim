@@ -1,0 +1,21 @@
+= form_for @tag do |f|
+  - if @tag.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@tag.errors.count, "error")} prohibited this tag from being saved:"
+      ul
+        - @tag.errors.full_messages.each do |message|
+          li = message
+
+  .field
+    = f.label :name
+    = f.text_field :name
+  .field
+    = f.label :type
+    = f.text_field :type
+  .field
+    = f.label :important
+    = f.check_box :important
+  .field
+    = f.label :red_flag
+    = f.check_box :red_flag
+  .actions = f.submit 'Save'

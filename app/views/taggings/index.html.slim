@@ -1,0 +1,23 @@
+h1 Listing taggings
+
+table
+  tr
+    th Campsite
+    th Tag
+    th User
+    th
+    th
+    th
+
+  - @taggings.each do |tagging|
+    tr
+      td = tagging.campsite_id
+      td = tagging.tag_id
+      td = tagging.user_id
+      td = link_to 'Show', tagging
+      td = link_to 'Edit', edit_tagging_path(tagging)
+      td = link_to 'Destroy', tagging, data: {:confirm => 'Are you sure?'}, :method => :delete
+
+br
+
+= link_to 'New Tagging', new_tagging_path

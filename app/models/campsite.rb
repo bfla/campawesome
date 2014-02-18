@@ -16,6 +16,8 @@ class Campsite < ActiveRecord::Base
 
   has_many :vibes, dependent: :destroy
   has_many :tribes, through: :vibes
+  has_many :taggings
+  has_many :tags, through: :taggings
   has_many :activities
   has_many :fees, dependent: :destroy
 
