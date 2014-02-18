@@ -46,23 +46,22 @@ mapStyleArray = [
   stylers: [color: "#3f518c"]
 ]
 
+@makeGuideMap = ->
+  mapOptions =
+    zoom: gon.zoom
+    center: new google.maps.LatLng(gon.latitude, gon.longitude)
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+    disableDefaultUI: true
+    draggable: false
+    zoomControl: false
+    scrollwheel: false
+    styles: mapStyleArray #This is from the map_styles.js file
+
+  map = new google.maps.Map(document.getElementById("thumbMap"), mapOptions)
+  #google.maps.event.addDomListener window, "load", initialize
+
 # changes thumbnail style on hover for browse page filter thumbnails
 $(document).ready ->
-  # initialize #thumbMap on this page
-  initialize = ->
-    mapOptions =
-      zoom: gon.zoom
-      center: new google.maps.LatLng(gon.latitude, gon.longitude)
-      mapTypeId: google.maps.MapTypeId.ROADMAP
-      disableDefaultUI: true
-      draggable: false
-      zoomControl: false
-      scrollwheel: false
-      styles: mapStyleArray #This is from the map_styles.js file
-
-    map = new google.maps.Map(document.getElementById("thumbMap"), mapOptions)
-
-  google.maps.event.addDomListener window, "load", initialize
 
   # highlights filter thumbnail border on hover
   $(".filterThumbnail").hover ->

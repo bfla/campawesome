@@ -57,3 +57,7 @@ html
     .flush-footer.background
       == render 'layouts/footer'
     == yield :end
+    javascript:
+      $(document).ready( function(){
+        google.maps.event.addDomListener(window, "load", makeGuideMap);
+      });
