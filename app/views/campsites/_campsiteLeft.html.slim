@@ -12,30 +12,34 @@
       p
         strong.subtle-text Facilities
         br
-        | Showers
-        br
-        | 50-amp plugins
+        - @campsite.tags.where(category:"Facilities").each do |tag|
+          = tag.name
+          br
+        
     .col-md-3
       p
         strong.subtle-text Things to do
         br
-        | Beach
-        br
-        | Hiking
+        - @activity_types.each do |activity_type|
+          - @campsite.activities.each do |activity|
+            - if activity_type == activity.activity_type
+              = activity_type.name
+              br
+
     .col-md-3
       p
         strong.subtle-text Rules
         br
-        | Alcohol allowed
-        br
-        | Pets allowed
+        - @campsite.tags.where(category:"Rules").each do |tag|
+          = tag.name
+          br
     .col-md-3
       p 
         strong.subtle-text Tags
         br
-        | On Lake Michigan
-        br
-        | Biting Flies
+        - @campsite.tags.where(category:"Other").each do |tag|
+          = tag.name
+          br
 
 / Booking information 
 /

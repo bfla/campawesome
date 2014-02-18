@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140218152753) do
+ActiveRecord::Schema.define(version: 20140218155755) do
 
   create_table "activities", force: true do |t|
     t.integer  "activity_type_id"
@@ -175,7 +175,7 @@ ActiveRecord::Schema.define(version: 20140218152753) do
 
   create_table "tags", force: true do |t|
     t.string   "name"
-    t.string   "type"
+    t.string   "category"
     t.boolean  "important"
     t.boolean  "red_flag"
     t.datetime "created_at"

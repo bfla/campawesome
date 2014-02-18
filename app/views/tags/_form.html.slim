@@ -12,13 +12,13 @@
   .row
     .form-inline.col-md-2.form-group.col-md-offset-1
       = f.label "Facilties", class:'control-label'
-      = f.radio_button :type, "Facilities", class:"form-control"
+      = f.radio_button :category, "Facilities", class:"form-control"
     .form-inline.col-md-2.form-group.col-md-offset-1
       = f.label "Rules", class:'control-label'
-      = f.radio_button :type, "Rules", class:"form-control"
+      = f.radio_button :category, "Rules", class:"form-control"
     .form-inline.col-md-2.form-group.col-md-offset-1
       = f.label "Other", class:'control-label'
-      = f.radio_button :type, "Other", class:"form-control"
+      = f.radio_button :category, "Other", class:"form-control"
   .row
     .field.form-group.col-md-3
       = f.label :important, class:'control-label'

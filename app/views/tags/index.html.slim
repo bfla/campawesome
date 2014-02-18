@@ -1,25 +1,30 @@
-h1 Listing tags
 
-table
-  tr
-    th Name
-    th Type
-    th Important
-    th Red flag
-    th
-    th
-    th
+.container.pad-top-lg
+  h1 Listing tags
 
-  - @tags.each do |tag|
+  table.table
     tr
-      td = tag.name
-      td = tag.type
-      td = tag.important
-      td = tag.red_flag
-      td = link_to 'Show', tag
-      td = link_to 'Edit', edit_tag_path(tag)
-      td = link_to 'Destroy', tag, data: {:confirm => 'Are you sure?'}, :method => :delete
+      th id
+      th Name
+      th Type
+      th Important
+      th Red flag
+      th
+      th
+      th
 
-br
+    - @tags.each do |tag|
+      tr
+        td = tag.id
+        td = tag.name
+        td = tag.category
+        td = tag.important
+        td = tag.red_flag
+        td = link_to 'Show', tag
+        td = link_to 'Edit', edit_tag_path(tag)
+        td = link_to 'Destroy', tag, data: {:confirm => 'Are you sure?'}, :method => :delete
 
-= link_to 'New Tag', new_tag_path
+  br
+  .row
+    .col-md-12
+      = link_to 'New Tag', new_tag_path
