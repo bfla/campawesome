@@ -8,6 +8,9 @@
 - content_for :breadcrumb
   ol.breadcrumb.white
     li.active = @state.name+' Camping'
+    /small
+      /| &nbsp;&nbsp;
+      /= link_to 'Switch to another state', states_path, class:"subtle-text"      
 
 - content_for :heading
   .headline

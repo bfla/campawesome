@@ -1,0 +1,10 @@
+.container.pad-top-lg
+  .well.white.col-md-10.col-md-offset-1
+    h1 Editing product
+
+    == render 'form'
+    .col-md-12
+      = link_to 'Show', @product
+      '|
+      = link_to 'Back', products_path
+

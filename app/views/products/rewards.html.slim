@@ -1,0 +1,29 @@
+- content_for :head
+  title Your Camposaurus Rewards
+- content_for :heading
+  .col-md-12
+    h1 Rewards
+    p.lead 
+      | Earn coins by contributing reviews, photos, and in other ways.  
+      br
+      | Spend your coins here to earn cool rewards.
+    hr
+- content_for :left
+  - @products.each do |product|
+    .col-md-6
+      .thumbnail
+        = image_tag product.image.url(:large), class:"img-responsive"
+        .caption
+          h4 = product.name
+          p 
+            strong.subtle-text Price: 
+            |  #{product.points} coins
+            br
+            strong.subtle-text Quantity left:&nbsp;
+            - if product.quantity == 0
+              span.label.label-danger sold out
+            - else
+              |  #{product.quantity}
+          p = product.description
+          p
+            .btn.btn-warning Get it
