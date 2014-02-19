@@ -5,7 +5,7 @@ class CampsitesController < ApplicationController
     zoom = params[:zoom] || 10
     distance = params[:distance] || 30
     coordinates = Geocoder.coordinates(params[:keywords])
-    @campsites = Campsite.near(coordinates, distance).includes(:tribes)
+    @campsites = Campsite.near(coordinates, distance).includes(:tribes).first(50)
     @tribes = Tribe.all
     #@campsites = Campsite.search(params[:keywords], zoom)
     #@campsites = Campsite.search(params[:keywords], my_distance)

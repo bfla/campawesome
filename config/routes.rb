@@ -63,6 +63,9 @@ Blog::Application.routes.draw do
   # You can have the root of your site routed with "root"
   #root 'welcome#index'
   root to: 'pages#home', as: 'home'
+  get :terms, to:'pages#terms', as: 'terms'
+  get :privacy, to:'pages#privacy', as: 'privacy'
+  get :takedown, to:'pages#takedown', as: 'takedown'
 
   # Devise sign_out needs a special path because OmniAuth is now included:
   #devise_scope :user do

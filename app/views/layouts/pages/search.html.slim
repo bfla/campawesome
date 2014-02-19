@@ -111,7 +111,7 @@ html.fill-height
           p.col-md-12
             small.subtle-text 
               | CampAwesome &copy 2014&nbsp;
-              a.nav-link Terms
+              = link_to 'Terms', terms_path
 
     / MapBox ===============================
     .col-md-8.mapColumn.fill-height.no-spacing
@@ -124,7 +124,12 @@ html.fill-height
     var map = L.mapbox.map("resultsMap", "campawesome.h5d0p7ea").setView(gon.center, gon.zoom);
     map.zoomControl.setPosition('bottomright'); // move the map zoom control
     map.markerLayer.setGeoJSON(gon.geoJson); // set the marker layer
-
+    var popupContent =  '<h2>' + feature.properties.title + '</h2>';
+    marker.bindPopup(popupContent,{
+            closeButton: false,
+            minWidth: 320
+        });
+  javascript:
     // Apply hover effect
     $(".searchFilterThumbnail").hover( function(){
       searchHoverEffect( $(this) );

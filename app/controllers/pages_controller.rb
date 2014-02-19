@@ -7,4 +7,13 @@ class PagesController < ApplicationController
     render layout:"layouts/pages/home"
   end
 
+  def terms #Terms of use
+  end
+
+  def privacy #Privacy policy
+  end
+
+  def takedown # DMCA takedown policy
+  end
+
 end

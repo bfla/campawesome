@@ -77,7 +77,7 @@ class Campsite < ActiveRecord::Base
       properties: {
         title: self.name,
         tribes: tribe_ids,
-        url: 'http://example.com',
+        url: '/campsites/#{self.id}',
         :'marker-color' => "\#09b",
         :'marker-symbol' => 'campsite',
         :'marker-size' => 'large'
