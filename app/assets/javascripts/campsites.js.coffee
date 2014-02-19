@@ -22,13 +22,12 @@
 
 # highlight the selected thumbnail in green
 @highlightSearchThumbnail = (target) ->
-  $(".searchFilterThumbnail").removeClass('.activeSearchFilter')
-  target.toggleClass('.activeSearchFilter')
-  #unless target.attr("style") is "border: 2px solid #65b045; background:#d5eacb;"
+  unless target.attr("style") is "border: 2px solid #65b045; background:#d5eacb;"
     #target.removeAttr "style"
     #else
-    #$(".searchFilterThumbnail").removeAttr "style"
-    #target.attr "style", "border: 2px solid #65b045; background:#d5eacb;"
+    $("#allSearchFilter").removeClass('.activeSearchFilter')
+    $(".searchFilterThumbnail").removeAttr "style"
+    target.attr "style", "border: 2px solid #65b045; background:#d5eacb;"
     
     
 
