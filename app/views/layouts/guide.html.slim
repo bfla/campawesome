@@ -58,6 +58,11 @@ html
       == render 'layouts/footer'
     == yield :end
     javascript:
+      $('#panelClose').click( function(){
+        $('.panel').hide();
+      });
+      $('.add-tooltip').tooltip();
+    javascript:
       $(document).ready( function(){
         google.maps.event.addDomListener(window, "load", makeGuideMap);
       });

@@ -46,7 +46,9 @@ $campsiteMapHeight: 200px;
   background-color:#cccccc;
 }
 
-.searchFilterThumbnail {
+.activeSearchFilter {
+  border: 2px solid #65b045; 
+  background:#d5eacb;
 }
 
 .result-list {padding-top:50px;}

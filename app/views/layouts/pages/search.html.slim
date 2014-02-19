@@ -40,6 +40,9 @@ html.fill-height
                   small.no-spacing Show all
           .col-md-12
             hr
+        /
+          .row
+            a#resetSearchArea href="#" Reset search area
 
         / .row
           p.col-md-12
@@ -116,8 +119,10 @@ html.fill-height
       #resultsMap
 
   javascript:
-    // highlight the all filter
-    highlightSearchThumbnail( $('#allFilter') );
+    // when document is ready, highlight the all filter
+    $(document).ready( function(){
+      highlightSearchThumbnail( $('#allFilter') );
+    });
     // Create the initial map
     var map = L.mapbox.map("resultsMap", "campawesome.h5d0p7ea").setView(gon.center, gon.zoom);
     map.zoomControl.setPosition('bottomright'); // move the map zoom control
@@ -131,8 +136,9 @@ html.fill-height
     $(".searchFilterThumbnail").click( function(){
       highlightSearchThumbnail($(this));
       var filterId = $(this).data('tribe-id');
-      filterSearchResults(filterId);
-      map.featureLayer.setFilter(function(f) {
+      filterSearchResults(filterId); // Filter the list of search results
+      // Filter out map markers that don't match
+      map.featureLayer.setFilter(function(f) { 
         if (filterId != 0) {
           for (x in f.properties['tribes']) {
             if (f.properties['tribes'][x] == filterId) {
@@ -146,6 +152,19 @@ html.fill-height
       });
       return false;
     });
+
+    // reset map based on current location DOESN'T WORK
+    $("#resetSearchArea").click( function(){
+      var currentCenter = map.getCenter(); // Gets the current center of the map as an Leaflet LatLng
+      var mapBounds = map.getBounds(); // Gets the SW and NE corners of the map as a Leaflet LatLngBound
+      var southWest = map.getBounds().getSouthWest(); // Returns the SW corner
+      var distanceInMeters = mapCenter.distanceTo(southWest); // Returns the distance in meters
+      alert(distanceInMeters);  // FAILS HERE
+      var distanceInMiles = distanceInMeters * .000621371; // Calculates the distance in miles
+      alert(distanceInMiles);
+      alert("Center:" + currentCenter + "SW:" + southWest + "Distance:" + distanceInMiles);
+    });
+
     /* Apply the initial filter, if any
     if (gon.initTribe) { 
       var filterId = gon.initTribe;

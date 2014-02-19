@@ -18,17 +18,15 @@
         |  Want to go
 
     .btn-group
-      button.btn.btn-default.btn-xs.dropdown-toggle.subtle-text data-toggle="dropdown" type="button" 
+      button.btn.btn-default.btn-xs.dropdown-toggle.subtle-text data-toggle="dropdown" type="button"
         span.glyphicon.glyphicon-bookmark
         |  Save
-      ul class="dropdown-menu" role="menu"
-          - current_user.lists.each do |list|
-            li.listSavedModalTrigger
-              / a href=listeds_path(campsite_id:campsite, list_id:list) method="post" = list.name
-              = link_to list.name, listeds_path(campsite_id:campsite, list_id:list), method: :post, remote:true
-          li.divider
-          li#newListModalTrigger
-            a href="#" data-toggle='modal' data-target='#newListModal' Create new list
+      ul.dropdown-menu role="menu"
+        - current_user.lists.each do |list|
+          li.listSavedModalTrigger = link_to list.name, listeds_path(campsite_id:campsite, list_id:list.id), method: :post, remote:true
+        li.divider
+        li#newListModalTrigger
+          a href="#" data-toggle='modal' data-target='#newListModal' Create new list
           li =link_to 'Manage lists', management_lists_path
 
     a#reviewModal.btn.btn-default.btn-xs.subtle-text href="#" data-toggle='modal' data-target='##{campsite.id}'

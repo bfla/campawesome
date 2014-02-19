@@ -38,11 +38,7 @@
   == render 'reserveModal'
   = render "addressModal", campsite:@campsite
   = render "layouts/guide/descriptionModal", place:@campsite
-  javascript:
-    $('#panelClose').click( function () {
-      $('.panel').hide();
-    });
-    $('.add-tooltip').tooltip();
+    
   javascript:
     // Create the mapbox map
     makeCampsiteMap(gon.initCenter, 9, gon.geoJson);

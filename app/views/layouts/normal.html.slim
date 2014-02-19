@@ -47,3 +47,8 @@ html.fill-height
     .flush-footer.background
       == render 'layouts/footer'
     == yield :end
+    javascript:
+      $('#panelClose').click( function(){
+        $('.panel').hide();
+      });
+      $('.add-tooltip').tooltip();

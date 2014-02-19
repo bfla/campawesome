@@ -19,22 +19,18 @@
 
 # Campsite search.html scripts =================================
 
-# Set initial filter from url parameters
-if gon.initTribe
-  filterId = gon.initTribe
-else
-  filterId = 0
-$('.searchFilterThumbnail').each ->
-  if $(this).data('tribe-id') is filterId
-    highlightFilter $(this) # highlight the filter that was initialized
 
 # highlight the selected thumbnail in green
 @highlightSearchThumbnail = (target) ->
-  if target.attr("style") is "border: 2px solid #65b045; background:#d5eacb;"
-    target.removeAttr "style"
-  else
-    $(".searchFilterThumbnail").removeAttr "style"
-    target.attr "style", "border: 2px solid #65b045; background:#d5eacb;"
+  $(".searchFilterThumbnail").removeClass('.activeSearchFilter')
+  target.toggleClass('.activeSearchFilter')
+  #unless target.attr("style") is "border: 2px solid #65b045; background:#d5eacb;"
+    #target.removeAttr "style"
+    #else
+    #$(".searchFilterThumbnail").removeAttr "style"
+    #target.attr "style", "border: 2px solid #65b045; background:#d5eacb;"
+    
+    
 
 # add effect to filter thumbnails on hover
 @searchHoverEffect = (target) ->
