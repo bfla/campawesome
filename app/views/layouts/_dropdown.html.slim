@@ -2,9 +2,13 @@ li.dropdown
   a.dropdown-toggle.nav-link href="#" data-toggle="dropdown" 
     .nav-link
       - if current_user.first_name?
+        .badge.add-tooltip title="Earn coins by contributing. Spend them on cool stuff." data-toggle="tooltip" data-placement="bottom" $#{current_user.coin_tally}
+        | &nbsp;
         = current_user.first_name
       - else
+        .badge.add-tooltip title="Earn coins by contributing. Spend them on cool stuff." data-toggle="tooltip" data-placement="bottom" $#{current_user.coin_tally}
         = current_user.email
+
       b.caret
   ul.dropdown-menu
     li = link_to "Your Home Page", home_path
@@ -13,6 +17,7 @@ li.dropdown
     li = link_to "Places you've been", beens_path
     li = link_to 'Your lists', management_lists_path
     li.divider role="presentation"
+    li = link_to 'Spend your coins', rewards_products_path
     li = link_to 'Your photos', photos_path
     li = link_to 'Your reviews', reviews_path
     li.divider role="presentation"

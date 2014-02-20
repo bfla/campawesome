@@ -18,7 +18,7 @@
               = image_tag @user.tribe.icon.url(:medium), class:"img-responsive img-circle tribe-background"
         p.text-center.col-md-12
           small
-            | Newbie
+            /= @user.level
             br
             | #{@user.reviews.size}&nbsp;
             - if @user.reviews.size == 1
@@ -50,6 +50,15 @@
                   | &nbsp;&nbsp;
                   span.glyphicon.glyphicon-home
                   |  From #{@user.location}
+          br
+          small 
+            | $ coins: #{@user.coin_tally}&nbsp;
+            small
+              small 
+                = link_to "spend your coins", rewards_products_path, class:"subtle-text"
+                |  |&nbsp;
+                = link_to "how to earn coins", wages_products_path, class:"subtle-text"
+
           br
           small
             = link_to "Been to", beens_path

@@ -6,6 +6,10 @@ class ProductsController < ApplicationController
     render layout:"layouts/twoColumn"
   end
 
+  def wages
+    render layout:"layouts/twoColumn"
+  end
+
   # GET /products
   # GET /products.json
   def index

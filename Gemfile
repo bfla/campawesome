@@ -38,9 +38,10 @@ group :doc do
   gem 'sdoc', require: false
 end
 
-# User auth
+# ActiveRecord Plugins
 gem 'devise'
 gem 'omniauth-facebook'
+gem 'merit'
 
 # Geocoding
 gem 'geocoder'

@@ -1,0 +1,68 @@
+- content_for :head
+  title How to earn points
+- content_for :heading
+  .col-md-12
+    h1 Earning coins
+    p.lead 
+      | Earn coins by contributing reviews, photos, and in other ways.  
+      br
+      | Spend your coins to unlock cool rewards.
+    hr
+- content_for :left
+  table.table.table-striped
+    tr
+      th Action you can take
+      th $ coins awarded
+      th When you find a place, click this:
+    tr
+      td Write a review
+      td 
+        span.badge + 50
+      td 
+        button.btn.btn-default.btn-sm
+          span.glyphicon.glyphicon-star
+          |  Review it
+
+    tr
+      td Upload a photo
+      td 
+        span.badge + 50 
+      td Visit a place 
+    tr
+      td Receive an upvote
+      td 
+        span.badge + 1
+      td 
+    tr
+      td Mark places you've been & want to go
+      td
+        span.badge + 1
+      td
+        button.btn.btn-default.btn-sm
+          span.glyphicon.glyphicon-ok
+          |  Been here
+        button.btn.btn-default.btn-sm
+          span.glyphicon.glyphicon-plus-sign
+          |  Want to go
+    tr
+      td Make a list
+      td 
+        span.badge + 5
+      td 
+        .btn-group
+          button.btn.btn-default.btn-sm.dropdown-toggle data-toggle="dropdown" type="button"
+            span.glyphicon.glyphicon-bookmark
+            |  Save
+  .col-md-12
+    h4.subtle-text Ground rules
+    ul
+      li If you upload multiple photos for a single place, you'll only get full coin value for the 1st one.
+      li There is a cap on how many coins you can earn by marking places with "Been here" or "Want to go".
+      li Lists only earn coins if they are legitimate and have list items.
+      li Upvotes only count if they are from real people. No robots, secret agents, or pseudonyms.
+      li Camposaurus knows that humans sometimes try to play sneaky tricks on him.  So if Camposaurus concludes that a contribution (for whatever reason) should not be worth coins, he will take the points for himself and eat them for breakfast.
+
+- content_for :right
+  ul.nav.nav-pills.nav-stacked
+    li = link_to "Spend your coins", rewards_products_path
+    li.active = link_to "Ways to earn coins", wages_products_path

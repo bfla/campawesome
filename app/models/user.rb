@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  has_merit
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -44,5 +46,8 @@ class User < ActiveRecord::Base
         user.location = data['user_location']
       end
     end
+  end
+  def coin_tally
+    self.points
   end
 end
