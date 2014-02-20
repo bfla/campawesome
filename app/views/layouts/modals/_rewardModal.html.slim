@@ -1,0 +1,32 @@
+/ Needs a product
+.modal.fade.rewardModal id="rewardModal#{product.id}" tabindex="-1" role="dialog" aria-labelledby="rewardModalLabel" aria-hidden="true"
+  .modal-dialog
+    .modal-content
+      .modal-header
+        button.close type="button" data-dismiss="modal" aria-hidden="true" &times
+        h4#descriptionModalTitle.modal-title.text-center Is this what you want?
+      .modal-body
+        = form_tag reward_orders_path, method: :post do
+          = hidden_field_tag :product_id, params[:product_id], value:product.id
+          = hidden_field_tag :user_id, params[:user_id], value:current_user.id
+          .row
+            .col-md-8.col-md-offset-2
+              .thumbnail.col-md-8.col-md-offset-2
+                = image_tag product.image.url(:large)
+          .row
+            .col-md-8.col-md-offset-2
+              h4 = product.name
+              p
+                br
+                strong.subtle-text Price: 
+                |  #{product.points} coins
+                br
+                strong.subtle-text Description:
+                |  #{product.description}
+                hr
+              p.lead Are you sure you want this?  It will cost you #{product.points} of your coins.
+          .row
+            p.text-center.pad-top-md
+              button.btn.btn-default type="button" data-dismiss="modal" Cancel
+              | &nbsp;
+              = submit_tag "Yes, I want it!", class:"btn btn-success"

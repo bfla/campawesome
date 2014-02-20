@@ -48,6 +48,6 @@ class User < ActiveRecord::Base
     end
   end
   def coin_tally
-    self.points
+    self.points - (self.coins_spent || 0)
   end
 end

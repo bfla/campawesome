@@ -26,7 +26,8 @@
               |  #{product.quantity}
           p = product.description
           p
-            .btn.btn-warning Get it
+            a.btn.btn-warning href="#" data-toggle="modal" data-target="#rewardModal#{product.id}" Get it
+          = render "layouts/modals/rewardModal", product:product
 
 - content_for :right
   ul.nav.nav-pills.nav-stacked

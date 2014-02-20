@@ -7,9 +7,8 @@
         h4#reserveModalTitle.modal-title 
           | Reservations for #{@campsite.name}
       .modal-body
+        p.lead Coming soon: Premium users will be able to see which campgrounds are likely to have vacancies. 
         p
-          | Competition: 
-          | High
           br
           | Reservation phone: #{number_to_phone(@campsite.res_phone)}
           br
@@ -17,5 +16,6 @@
           br
       .modal-footer
         button.btn.btn-default type="button" data-dismiss="modal" Close
+        | &nbsp;
         a href=@campsite.res_url
           button.btn.btn-primary type="button"  Check their website

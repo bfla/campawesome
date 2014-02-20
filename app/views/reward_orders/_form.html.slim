@@ -1,0 +1,15 @@
+= form_for @reward_order do |f|
+  - if @reward_order.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@reward_order.errors.count, "error")} prohibited this reward_order from being saved:"
+      ul
+        - @reward_order.errors.full_messages.each do |message|
+          li = message
+
+  .field
+    = f.label :product_id
+    = f.number_field :product_id
+  .field
+    = f.label :user_id
+    = f.number_field :user_id
+  .actions = f.submit 'Save'

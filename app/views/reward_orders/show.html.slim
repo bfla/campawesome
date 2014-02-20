@@ -1,0 +1,16 @@
+- content_for :head
+  title Your reward!
+
+- content_for :heading
+  h1 Your order has been received!
+  hr
+- content_for :left
+  p#notice = notice
+  .col-md-4
+    .thumbnail
+      = image_tag @reward_order.product.image.url(:large), class:"img-responsive"
+  h4 = @reward_order.product.name
+  p.lead You should receive an email shortly once Camposaurus confirms your order.
+
+- content_for :right
+  

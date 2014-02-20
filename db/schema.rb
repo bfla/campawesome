@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140220152145) do
+ActiveRecord::Schema.define(version: 20140220194156) do
 
   create_table "activities", force: true do |t|
     t.integer  "activity_type_id"
@@ -211,6 +211,13 @@ ActiveRecord::Schema.define(version: 20140220152145) do
     t.datetime "updated_at"
   end
 
+  create_table "reward_orders", force: true do |t|
+    t.integer  "product_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "sashes", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -287,6 +294,7 @@ ActiveRecord::Schema.define(version: 20140220152145) do
     t.integer  "state_id"
     t.integer  "sash_id"
     t.integer  "level",                  default: 0
+    t.integer  "coins_spent"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

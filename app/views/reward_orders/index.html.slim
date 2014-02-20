@@ -1,0 +1,21 @@
+h1 Listing reward_orders
+
+table
+  tr
+    th Product
+    th User
+    th
+    th
+    th
+
+  - @reward_orders.each do |reward_order|
+    tr
+      td = reward_order.product_id
+      td = reward_order.user_id
+      td = link_to 'Show', reward_order
+      td = link_to 'Edit', edit_reward_order_path(reward_order)
+      td = link_to 'Destroy', reward_order, data: {:confirm => 'Are you sure?'}, :method => :delete
+
+br
+
+= link_to 'New Reward order', new_reward_order_path

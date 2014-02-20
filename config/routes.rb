@@ -1,5 +1,7 @@
 Blog::Application.routes.draw do
 
+  resources :reward_orders
+
   resources :products do
     collection do
       get :rewards
