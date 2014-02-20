@@ -25,10 +25,12 @@ body.fill-height.background
               = label_tag :keywords, 'Find campgrounds near', class: 'sr-only'
               .col-md-6.col-md-offset-3
                 .input-group
-                  = text_field_tag :keywords, params[:keywords], class: "form-control input-lg", placeholder: "Enter location, Park, or Campground Name"
+                  = text_field_tag :keywords, params[:keywords], class: "form-control input-lg", placeholder: "Enter location or campground name"
                   span.input-group-btn
                     button.btn.btn-success.btn-lg type='submit' 
                       span.glyphicon.glyphicon-search 
                       |  Find campsites!
     </div>
       == yield :belowTheFold
+      javascript:
+        $('.add-tooltip').tooltip();

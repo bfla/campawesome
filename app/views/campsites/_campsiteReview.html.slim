@@ -12,11 +12,11 @@
         = image_tag review.user.tribe.icon.url(:medium), class:"img-responsive img-circle tribe-background"
   p.text-center.col-md-12
     small
-      | Newbie
-      br
+      /| Newbie
+      /br
       | #{pluralize(review.user.reviews.size, "Review")}
-      br
-      | 5 Helpful votes
+      /br
+      /| 5 Helpful votes
 
 p.col-md-9
   - if review.user.first_name.blank?

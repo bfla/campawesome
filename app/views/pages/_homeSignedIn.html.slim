@@ -19,14 +19,14 @@
         p.text-center.col-md-12
           small
             /= @user.level
-            br
+            /br
             | #{@user.reviews.size}&nbsp;
             - if @user.reviews.size == 1
               = link_to "Review", reviews_path
             - else
               = link_to "Reviews", reviews_path
-            br
-            | 5 Helpful votes
+            /br
+            /| 5 Helpful votes
             br
             | #{@user.photos.size}&nbsp;
             - if @user.photos.size == 1
@@ -52,7 +52,7 @@
                   |  From #{@user.location}
           br
           small 
-            | $ coins: #{@user.coin_tally}&nbsp;
+            | Coins: #{@user.coin_tally}&nbsp;
             small
               small 
                 = link_to "spend your coins", rewards_products_path, class:"subtle-text"
@@ -74,7 +74,8 @@
                 | To get personalized recommendations, pick a tribe:
                 = link_to "Join a tribe", new_tribal_membership_path, class:'btn btn-warning btn-sm'
               - else
-                | Newbie in the #{@user.tribe.name} tribe&nbsp;&nbsp;
+                /| Newbie in the #{@user.tribe.name} tribe&nbsp;&nbsp;
+                | Member of the #{@user.tribe.name} tribe&nbsp;&nbsp;
                 small = link_to "Switch tribe", new_tribal_membership_path
     .col-md-12
       hr
@@ -83,9 +84,9 @@
       / Left content
       .col-md-8
         / Contribute!  Add friends. Whatever!
-        p.lead.col-md-12 Welcome back
-        .col-md-12
-          hr
+          p.lead.col-md-12 Welcome back
+          .col-md-12
+            hr
         / Recommended for you
         .col-md-12 
           p.lead
@@ -97,13 +98,13 @@
         .col-md-12
           hr
         / Friends recommend
-        p.lead.col-md-12 Your friends recommend...
-        .col-md-12
-          hr
+          p.lead.col-md-12 Your friends recommend...
+          .col-md-12
+            hr
         / Recent history
-        p.lead.col-md-12 You recently viewed...
-        .col-md-12
-          hr
+          p.lead.col-md-12 You recently viewed...
+          .col-md-12
+            hr
 .flush-footer
   == render 'layouts/footer'
 
