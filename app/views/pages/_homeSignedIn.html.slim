@@ -15,7 +15,7 @@
                 small no tribe
           - else
             h1.text-center
-              = image_tag @user.tribe.icon.url(:medium), class:"img-responsive img-circle tribe-background add-tooltip", data: {toggle:"tooltip", position:"left"}
+              = image_tag @user.tribe.icon.url(:medium), class:"img-responsive img-circle tribe-background add-tooltip", data: {toggle:"tooltip", placement:"left"}, title:"#{@user.tribe.name}: #{@user.tribe.description}"
         p.text-center.col-md-12
           small
             /= @user.level
