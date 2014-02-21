@@ -16,18 +16,19 @@
         small
             span.glyphicon.glyphicon-info-sign.extra-subtle.add-tooltip  data-toggle="tooltip" data-placement="right" title="Tag your Twitter & Facebook posts with ##{@state.hashtag} Why?  Because it'll make them awesomer."
   ul.nav.nav-tabs.guide-tabs
-    li = link_to "#{@state.name} Guide", @state
-    li.active = link_to 'Destinations', browse_destinations_states_path(id:@state)
+    li = link_to "#{@state.name} home", @state
+    li.active = link_to 'Camping destinations', browse_destinations_states_path(id:@state)
 
   - @state.destinations.each do |destination, index|
     .col-md-3
       = link_to destination_path(destination)
-        = image_tag 'dummies/destPhoto221x221.png', class:'img-circle img-responsive add-hairline'
+        = image_tag destination.photos.first.photo_file.url(:thumbnail), class:'img-thumbnail img-responsive add-hairline'
       
       p.text-center 
         small = link_to destination.name, destination_path(destination)
 
-
+- content_for :licenses
+  = render 'destinationLicenses'
 - content_for :end
   javascript:
     $('.add-tooltip').tooltip();

@@ -16,10 +16,10 @@
 
 - content_for :left
   - current_user.photos.each do |photo|
-    - if photo.license.blank?
+    - if photo.license_text.blank?
       .col-md-4.pad-md.pad
         .thumbnail
-          = image_tag photo.photo_file.url(:large)
+          = image_tag photo.photo_file.url(:thumbnail)
         p.text-center
           small = link_to 'Delete photo', photo, data: {:confirm => 'Are you sure?'}, :method => :delete, class:'subtle-text'
 /

@@ -32,6 +32,16 @@
               br
               .text-center
                 button.joinButton.btn.btn-default Pick this tribe
+      .col-md-12
+        p.subtle-text.pad-top-lg
+          small
+            | Photo credits:
+            - @tribes.each do |tribe|
+              - unless tribe.join_pic.blank? || tribe.license_text.blank?
+                |  #{tribe.name} photo: #{tribe.license_text}.
+            |  Used under the&nbsp;
+            a.subtle-text href="http://creativecommons.org/licenses/by/2.0/" Creative Commons Attribution License
+            | .
 
 javascript:
   $('.tribe-thumb').click( function(){

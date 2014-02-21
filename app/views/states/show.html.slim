@@ -22,8 +22,8 @@
         small
             span.glyphicon.glyphicon-info-sign.extra-subtle.add-tooltip  data-toggle="tooltip" data-placement="right" title="Tag your Twitter & Facebook posts with ##{@state.hashtag} Why?  Because it'll make them awesomer."
   ul.nav.nav-tabs.guide-tabs
-    li.active = link_to "#{@state.name} Guide", @state
-    li = link_to 'Destinations', browse_destinations_states_path(id:@state)
+    li.active = link_to "#{@state.name} home", @state
+    li = link_to 'Camping destinations', browse_destinations_states_path(id:@state)
 
 - content_for :top_left
   = render 'layouts/guide/topLeft', place:@state
@@ -34,7 +34,7 @@
 - content_for :bottom_right
   = render "stateRightBot"
 - content_for :licenses
-  = render "layouts/guide/guideLicenses", place:@state
+  = render "stateLicenses", place:@state
 
 - content_for :end
   = render "layouts/guide/descriptionModal", place:@state

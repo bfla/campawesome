@@ -1,0 +1,9 @@
+p.subtle-text
+  small
+    | Photo credits:
+    - @state.destinations.each do |destination|
+      - unless destination.photos.first.blank? || destination.photos.first.license_text.blank?
+        |  #{destination.name} photo: #{destination.photos.first.license_text}.
+    |  Used under the&nbsp;
+    a.subtle-text href="http://creativecommons.org/licenses/by/2.0/" Creative Commons Attribution License
+    | .

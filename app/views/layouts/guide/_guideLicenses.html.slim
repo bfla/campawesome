@@ -1,10 +1,16 @@
 / Takes a place. Renders photo licenses if appropriate
 p.subtle-text
   small
-    | Photo credits:
-    - place.photos.each do |photo|
-      - if photo.license_text?
-        = photo.license_text
-    br
-    | Numbered from left to right and top to bottom.  Any photos listed above are licensed under the 
-    a.subtle-text href="http://creativecommons.org/licenses/by/2.0/" Creative Commons Attribution License
+    - if has_licenses(place)
+      | Photo credits:
+      - unless place.photos.blank? || place.photos.first.license_text.blank?
+        | #{place.photos.first.license_text} (upper left),
+      - unless place.photos.second.blank? || place.photos.second.license_text.blank?
+        | #{place.photos.second.license_text} (right top),
+      - unless place.photos.third.blank? || place.photos.third.license_text.blank?
+        | #{place.photos.third.license_text} (right middle),
+      - unless place.photos.fourth.blank? || place.photos.fourth.license_text.blank?
+        | #{place.photos.fourth.license_text} (right bottom),
+      |  Used under the&nbsp;
+      a.subtle-text href="http://creativecommons.org/licenses/by/2.0/" Creative Commons Attribution License
+      | .
