@@ -1,0 +1,37 @@
+/ Needs a campsite
+#photoUploadModal.modal.fade tabindex="-1" role="dialog" aria-labelledby="photoUploadModalLabel" aria-hidden="true"
+  .modal-dialog
+    .modal-content
+      .modal-header
+        button.close type="button" data-dismiss="modal" aria-hidden="true" &times
+        h4#photoUploadModalTitle.modal-title.text-center Add a photo for #{campsite.name}
+
+      .modal-body
+        = form_tag photos_path, method: :post, multipart:true do
+          = token_tag form_authenticity_token
+          = hidden_field_tag :user_id, params[:user_id], value:current_user.id
+          = hidden_field_tag :campsite_id, params[:campsite_id], value:campsite.id
+          = hidden_field_tag :city_id, params[:city_id], value:campsite.city.id
+          = hidden_field_tag :state_id, params[:state_id], value:campsite.state.id
+          .row
+            .field.form-group
+              label.control-label Upload your photo
+              /input#photo_photo_file name="photo[photo_file]" type="file"
+              = file_field_tag :photo_file
+          .row
+            .field.form-group
+              label.control-label Optional title
+              = text_field_tag :title, params[:title], class:'form-control'
+          .row
+            .field.form-group
+              label.control-label Optional caption
+              = text_field_tag :caption, params[:caption], class:"form-control"
+
+          .row
+            p.text-center.pad-top-md
+              button.btn.btn-default.btn-lg type="button" data-dismiss="modal" Cancel
+              | &nbsp;
+              /button#reviewSubmit.btn.btn-success type="submit" data-dismiss="modal" data-toggle="modal" data-target="#reviewSuccessModal" Say it
+              = submit_tag 'Submit', class:"btn btn-success btn-lg"
+              | &nbsp;
+              strong.subtle-text +50 coins

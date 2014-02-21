@@ -16,11 +16,12 @@
 
 - content_for :left
   - current_user.photos.each do |photo|
-    .col-md-4.pad-md.pad
-      .thumbnail
-        = image_tag photo.photo_file.url(:large)
-      p.text-center
-        small = link_to 'Delete photo', photo, data: {:confirm => 'Are you sure?'}, :method => :delete, class:'subtle-text'
+    - if photo.license.blank?
+      .col-md-4.pad-md.pad
+        .thumbnail
+          = image_tag photo.photo_file.url(:large)
+        p.text-center
+          small = link_to 'Delete photo', photo, data: {:confirm => 'Are you sure?'}, :method => :delete, class:'subtle-text'
 /
   - @beens.each do |been|
     tr

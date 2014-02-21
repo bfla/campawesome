@@ -34,7 +34,7 @@
 - content_for :bottom_right
   = render "stateRightBot"
 - content_for :licenses
-  = render "stateLicenses"
+  = render "layouts/guide/guideLicenses", place:@state
 
 - content_for :end
   = render "layouts/guide/descriptionModal", place:@state

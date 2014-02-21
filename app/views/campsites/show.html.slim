@@ -34,10 +34,21 @@
 - content_for :right
   = render 'campsiteRight'
 
+- content_for :licenses
+  p.subtle-text 
+    small
+      | Photo credits:
+      - @campsite.photos.each do |photo, index|
+        |  ##{index}: #{photo.license_text},
+      br
+      | Numbered from left to right and top to bottom.  Any photos listed above are licensed under the 
+      a.subtle-text href="http://creativecommons.org/licenses/by/2.0/" Creative Commons Attribution License
+
 - content_for :end
   == render 'reserveModal'
   = render "addressModal", campsite:@campsite
   = render "layouts/guide/descriptionModal", place:@campsite
+
     
   javascript:
     // Create the mapbox map

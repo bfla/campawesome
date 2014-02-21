@@ -22,9 +22,12 @@
                 = text_area_tag :body, params[:body], class:'form-control', placeholder:"What should other campers know about your experience?", rows:4
           .row
             p.text-center.pad-top-md
-              button.btn.btn-default type="button" data-dismiss="modal" Close
+              button.btn.btn-default type="button" data-dismiss="modal" Cancel
+              | &nbsp;
               /button#reviewSubmit.btn.btn-success type="submit" data-dismiss="modal" data-toggle="modal" data-target="#reviewSuccessModal" Say it
               button#reviewSubmit.btn.btn-success type="submit" data-target="#reviewSuccessModal" Say it
+              | &nbsp;
+              strong.subtle-text +50 coins
 javascript:
   $('#reviewSubmit').click( function() {
     $('.newReviewModal').modal('hide');

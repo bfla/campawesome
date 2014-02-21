@@ -4,7 +4,8 @@ source 'https://rubygems.org'
 gem 'rails', '4.0.0'
 
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+gem 'sqlite3', group: :development
+gem 'sqlite3', group: :test
 
 # Use SLIM markup for html
 gem 'slim-rails'
@@ -50,13 +51,17 @@ gem 'geocoder'
 gem "paperclip", "~> 3.0"
 
 # Use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.0.0'
+gem 'bcrypt-ruby', '~> 3.0.0'
 
 # Use unicorn as the app server
 # gem 'unicorn'
 
 # Use Capistrano for deployment
 # gem 'capistrano', group: :development
+group :production do
+  gem 'rails_12factor'
+  gem 'pg'
+end
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]

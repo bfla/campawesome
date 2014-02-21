@@ -2,12 +2,9 @@
 p.subtle-text
   small
     | Photo credits:
-    - @state.photos.each do |photo|
+    - place.photos.each do |photo|
       - if photo.license_text?
         = photo.license_text
-    - @state.destinations.each do |destination|
-      - if destination.photos.first.license_text?
-        = destination.photos.first.license_text
     br
     | Numbered from left to right and top to bottom.  Any photos listed above are licensed under the 
     a.subtle-text href="http://creativecommons.org/licenses/by/2.0/" Creative Commons Attribution License

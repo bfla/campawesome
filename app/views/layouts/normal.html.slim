@@ -42,6 +42,8 @@ html.fill-height
               /Right content
               .col-md-4
                 == yield :right
+            .col-md-10.col-md-offset-1
+              == yield :licenses
 
     / Footer goes here
     .flush-footer.background
