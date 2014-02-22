@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140221185700) do
+ActiveRecord::Schema.define(version: 20140222153726) do
 
   create_table "activities", force: true do |t|
     t.integer  "activity_type_id"
@@ -296,6 +296,7 @@ ActiveRecord::Schema.define(version: 20140221185700) do
     t.integer  "sash_id"
     t.integer  "level",                  default: 0
     t.integer  "coins_spent"
+    t.integer  "fb_id"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
