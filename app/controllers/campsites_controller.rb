@@ -24,6 +24,10 @@ class CampsitesController < ApplicationController
     end
 
   end
+
+  def contrib
+    @campsites = Campsite.name_search(params[:keywords])
+  end
   
   def activities
     @campsite = Campsite.includes(activities: :activity_type).find(params[:id])

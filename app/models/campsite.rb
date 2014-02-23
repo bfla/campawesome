@@ -96,6 +96,14 @@ class Campsite < ActiveRecord::Base
     end
   end
 
+  def self.name_search(keywords)
+    if keywords
+      where('name LIKE ?', "%#{keywords}%")
+    else
+      nil
+    end
+  end
+
   def self.to_s
     self.name
   end

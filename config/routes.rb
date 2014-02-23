@@ -55,6 +55,7 @@ Blog::Application.routes.draw do
     get :activities, on: :member
     collection do
       get 'search'
+      get 'contrib'
     end
   end
   resources :activities

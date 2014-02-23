@@ -44,6 +44,7 @@ class User < ActiveRecord::Base
         user.email = data["email"] if user.email.blank?
         user.first_name = data['first_name'] if user.first_name.blank?
         user.location = data['user_location']
+        user.fb_id = data['id'] if user.fb_id.blank?
       end
     end
   end

@@ -1,0 +1,45 @@
+- content_for :head
+  title Contribute to Camposaurus
+
+.container.pad-top-lg
+  .col-md-10.col-md-offset-1.well.white
+    / header
+    .row
+      h1.text-center Review your favorite campground(s)
+      p.lead.text-center
+        br
+        | Reviewing campsites tells Camposaurus what types of places it should recommend for you.
+        br
+        | It also helps other campers & earns you coins that you can spend on cool stuff.
+      p.text-center
+        button.btn.btn-default Skip this step
+        | &nbsp;
+        button.btn.btn-success Done
+      hr
+    .row
+      .col-md-6.col-md-offset-3
+        = form_tag contrib_campsites_path, method: "get", class: "form", role: "search" do
+          = label_tag :keywords, 'Enter the name of the place you camped', class: 'sr-only'
+          .input-group
+            = text_field_tag :keywords, params[:keywords], class: "form-control", placeholder: "Campground or campsite name"
+            span.input-group-btn
+              button.btn.btn-warning type='submit'
+                span.glyphicon.glyphicon-search 
+                |  Find campsites!
+        p.text-center
+          | Don't know the name?  
+          a href="#" Find it on a map instead.
+    .col-md-12
+      - if @campsites
+        - @campsites.each do |campsite|
+          .col-md-4.well.white
+            .col-md-12.text-center
+              = image_tag campsite.primary_icon(:small), class:"img-circle tribe-subtle"
+            .col-md-12.text-center
+              h5 
+                = campsite.name
+                br
+                small in #{campsite.city.name}, #{campsite.state.abbreviation}
+              p
+                = render "layouts/campsiteCommands", campsite:campsite
+

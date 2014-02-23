@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140222153726) do
+ActiveRecord::Schema.define(version: 20140223150241) do
 
   create_table "activities", force: true do |t|
     t.integer  "activity_type_id"
@@ -232,6 +232,7 @@ ActiveRecord::Schema.define(version: 20140222153726) do
     t.float    "longitude"
     t.string   "hashtag"
     t.integer  "zoom"
+    t.string   "abbreviation"
   end
 
   create_table "taggings", force: true do |t|
