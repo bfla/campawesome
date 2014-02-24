@@ -5,25 +5,33 @@
         span.glyphicon.glyphicon-ok
         |  Been here
     - else 
-      = link_to campsite.beens.find_by_user_id(current_user), method: :delete, class:'btn btn-default btn-xs enable-command-toggle', remote:true do
-        span.glyphicon.glyphicon-ok
+      /= link_to campsite.beens.find_by_user_id(current_user), method: :delete, class:'btn btn-default btn-xs enable-command-toggle', remote:true do
+      button.btn.btn-default.btn-xs.enable-command-toggle
+        span.glyphicon.glyphicon-ok.greenify
         |  Been here
     - if campsite.wants.find_by_user_id(current_user).blank?
       = link_to wants_path(campsite_id:campsite, user_id:current_user), method: :post, class:'btn btn-default btn-xs subtle-text enable-command-toggle', remote:true do
         span.glyphicon.glyphicon-plus-sign
         |  Want to go
     - else
-      = link_to campsite.wants.find_by_user_id(current_user), method: :delete, class:'btn btn-default btn-xs enable-command-toggle', remote:true do
-        span.glyphicon.glyphicon-plus-sign
+      /= link_to campsite.wants.find_by_user_id(current_user), method: :delete, class:'btn btn-default btn-xs enable-command-toggle', remote:true do
+      button.btn.btn-default.btn-xs.enable-command-toggle
+        span.glyphicon.glyphicon-plus-sign.greenify
         |  Want to go
 
     .btn-group
       button.btn.btn-default.btn-xs.dropdown-toggle.subtle-text data-toggle="dropdown" type="button"
         span.glyphicon.glyphicon-bookmark
         |  Save
-      ul.dropdown-menu role="menu"
+      ul.dropdown-menu id="listDropdown#{campsite.id}" role="menu" aria-labelledby="dropdownMenu#{campsite.id}"
         - current_user.lists.each do |list|
-          li.listSavedModalTrigger = link_to list.name, listeds_path(campsite_id:campsite, list_id:list.id), method: :post, remote:true
+            /= link_to "#{list.name}", listeds_path(campsite_id:campsite.id, list_id:list.id), method: :post, remote:true, role:"menuitem", tabindex:"-1"
+            = form_tag listeds_path, method: :post do
+              = hidden_field_tag :campsite_id, params[:campsite_id], value:campsite.id
+              = hidden_field_tag :list_id, params[:list_id], value:list.id
+              li role="presentation" 
+                a type="submit" role="menuitem" href="#" = list.name
+            
         li.divider
         li#newListModalTrigger
           a href="#" data-toggle='modal' data-target='#newListModal' Create new list
@@ -54,7 +62,8 @@
 
 javascript:
   $('.enable-command-toggle').click( function() {
-    $(this).toggleClass('subtle-text');
+    $(this).removeClass('subtle-text', '');
+    $(this).find('.glyphicon').addClass('greenify', '');
   });
   $('.listSavedModalTrigger').click( function() {
     $('#listSavedModal').modal();
