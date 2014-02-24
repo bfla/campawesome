@@ -30,16 +30,25 @@
           | Don't know the name?  
           a href="#" Find it on a map instead.
     .col-md-12
-      - if @campsites
+      - unless @campsites == nil
         - @campsites.each do |campsite|
-          .col-md-4.well.white
-            .col-md-12.text-center
-              = image_tag campsite.primary_icon(:small), class:"img-circle tribe-subtle"
-            .col-md-12.text-center
-              h5 
-                = campsite.name
-                br
-                small in #{campsite.city.name}, #{campsite.state.abbreviation}
-              p
-                = render "layouts/campsiteCommands", campsite:campsite
+          - unless campsite == nil
+            .col-md-4.well.white
+              .col-md-12.text-center
+                = image_tag campsite.primary_icon(:small), class:"img-circle tribe-subtle"
+              .col-md-12.text-center
+                h5 
+                  = campsite.name
+                  br
+                  small in #{campsite.city.name}, #{campsite.state.abbreviation}
+                p
+                  = render "layouts/campsiteCommands", campsite:campsite
+          .col-md-12 style="display:none;"
+            .panel.panel-primary
+              .panel-heading Sorry no results. Possible causes:
+              ol.panel-body 
+                li Is it in Michigan?  Right not Camposaurus only hunts campsites in Michigan.
+                li Maybe Camposaurus doesn't know about this campground.  If you'd like Camposaurus to add it, leave him a note in the Feedback & Support tab.
+                li Maybe the name you entered didn't match the name in Camposaurus's brain.  If you know where it is, you could try finding it on a map instead.
+
 
