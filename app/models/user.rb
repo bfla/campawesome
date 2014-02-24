@@ -58,8 +58,8 @@ class User < ActiveRecord::Base
     if self.fb_token.blank?
       []
     else
-      #graph = Koala::Facebook::API.new(self.fb_token)
-      #graph.get_connections("me", "friends")
+      fb_user = FbGraph::User.me(self.fb_token)
+      fb_user.friends
     end
   end
 end

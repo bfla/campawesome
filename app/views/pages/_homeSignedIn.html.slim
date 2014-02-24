@@ -21,7 +21,6 @@
           small
             /= @user.level
             /br
-            a#friendsCount href="#" Count
             | #{@user.reviews.size}&nbsp;
             - if @user.reviews.size == 1
               = link_to "Review", reviews_path
@@ -35,6 +34,7 @@
               = link_to "Photo", photos_path
             - else
               = link_to "Photos", photos_path
+      / Middle (main) header section
       .col-md-8.remove-margin-top
         h1.remove-margin-top
           small
@@ -82,6 +82,15 @@
                 /| Newbie in the #{@user.tribe.name} tribe&nbsp;&nbsp;
                 | Member of the #{@user.tribe.name} tribe&nbsp;&nbsp;
                 small = link_to "Switch tribe", new_tribal_membership_path, class:"subtle-text"
+      / Right header section
+      .col-md-2
+        h1#friendsCount.text-center href="#" 
+          small
+            small
+              = image_tag '/images/icons/FB-icon.png' 
+              |  friends:
+          br 
+          | #{@friends.size}
     .col-md-12
       hr
     / Bottom content

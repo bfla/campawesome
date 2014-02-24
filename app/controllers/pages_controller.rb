@@ -3,6 +3,7 @@ class PagesController < ApplicationController
   def home
     if user_signed_in?
       @user = User.includes(:tribe, :beens, :wants, :lists, :photos, :reviews).find(current_user)
+      @friends = current_user.fb_friends
       gon.friends = current_user.fb_friends
     end
     if user_signed_in? && !current_user.tribe.blank?
