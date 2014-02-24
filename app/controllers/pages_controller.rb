@@ -10,7 +10,7 @@ class PagesController < ApplicationController
       @recommendations = state.campsites.first(4) unless current_user.tribe.blank?
       @best_of_state = state.destinations.first(4)
       @nearbys = Campsite.near(request.location, radius = 50).first(4)
-    elsif !@user.location.blank?
+    elsif false #!@user.location.blank?
       state = State.find(@user.state_id)
       @recommendations = state.campsites.first(4) unless current_user.tribe.blank?
       @best_of_state = state.destinations.first(4)

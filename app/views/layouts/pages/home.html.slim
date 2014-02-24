@@ -10,7 +10,7 @@ body.fill-height.background
   == render 'layouts/modals/standardModals'
   == render 'layouts/navbar'
   #wrap
-    <div id="landingHeader" style='background-image:url("#{ asset_path "/images/landing/mears_1600x500.jpg"}"); height:500px;', alt='An image of camping in Michigan. It is a sunset at Mears State Park Campground.', title='Michigan camping near Mears State Park campground'>
+    <div id="landingHeader" style='background-image:url("#{request.protocol}#{request.host_with_port}#{ asset_path "/images/landing/mears_1600x500.jpg"}"); height:500px;' alt='An image of camping in Michigan. It is a sunset at Mears State Park Campground.', title='Michigan camping near Mears State Park campground'>
       .container
         .row
           .col-md-8.col-md-offset-2
