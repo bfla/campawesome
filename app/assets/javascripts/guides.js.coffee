@@ -61,7 +61,7 @@ mapStyleArray = [
   #google.maps.event.addDomListener window, "load", initialize
 
 # changes thumbnail style on hover for browse page filter thumbnails
-$(document).ready ->
+@initializeGuideFilters ->
 
   # highlights filter thumbnail border on hover
   $(".filterThumbnail").hover ->

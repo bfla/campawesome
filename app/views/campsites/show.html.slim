@@ -52,7 +52,9 @@
     
   javascript:
     // Create the mapbox map
-    makeCampsiteMap(gon.initCenter, 9, gon.geoJson);
+    $(document).ready( function() {
+      makeCampsiteMap(gon.initCenter, 9, gon.geoJson);
+    });
 
     /*$('.rateit').click( function() {
       var rating = $(this).rateit('value');
