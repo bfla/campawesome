@@ -3,7 +3,7 @@ class PagesController < ApplicationController
   def home
     if user_signed_in?
       @user = User.includes(:tribe, :beens, :wants, :lists, :photos, :reviews).find(current_user)
-      #gon.friends = current_user.fb_friends
+      gon.friends = current_user.fb_friends
     end
     if user_signed_in? && !current_user.tribe.blank?
       if !request.location.nil? && Rails.env.production?
@@ -14,6 +14,7 @@ class PagesController < ApplicationController
         location = @user.location unless @user.location.blank?
       end
       unless @state.blank?
+        #Student.joins(:schools).where(schools: { category: 'public' })
         @recommendations = @state.campsites.first(4)
         @best_of_state = @state.destinations.first(4)
       end

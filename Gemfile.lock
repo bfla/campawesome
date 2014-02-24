@@ -28,7 +28,6 @@ GEM
     ambry (0.3.1)
     arel (4.0.1)
     atomic (1.1.14)
-    attr_required (1.0.0)
     bcrypt-ruby (3.0.1)
     bootstrap-sass (3.0.3.0)
       sass (~> 3.2)
@@ -61,11 +60,6 @@ GEM
     execjs (2.0.2)
     faraday (0.9.0)
       multipart-post (>= 1.2, < 3)
-    fb_graph (2.7.10)
-      httpclient (>= 2.2.0.2)
-      multi_json (>= 1.3)
-      rack-oauth2 (>= 0.14.4)
-      tzinfo
     fssm (0.2.10)
     geocoder (1.1.9)
     gon (5.0.1)
@@ -73,7 +67,6 @@ GEM
       json
     hashie (2.0.5)
     hike (1.2.3)
-    httpclient (2.3.4.1)
     i18n (0.6.9)
     jbuilder (1.5.3)
       activesupport (>= 3.0.0)
@@ -122,12 +115,6 @@ GEM
     pg (0.17.1)
     polyglot (0.3.3)
     rack (1.5.2)
-    rack-oauth2 (1.0.7)
-      activesupport (>= 2.3)
-      attr_required (>= 0.0.5)
-      httpclient (>= 2.2.0.2)
-      multi_json (>= 1.3.6)
-      rack (>= 1.1)
     rack-test (0.6.2)
       rack (>= 1.0)
     rails (4.0.0)
@@ -203,7 +190,6 @@ DEPENDENCIES
   coffee-rails (~> 4.0.0)
   compass-rails
   devise
-  fb_graph
   geocoder
   gon
   jbuilder (~> 1.2)

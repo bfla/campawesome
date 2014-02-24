@@ -28,6 +28,7 @@ class User < ActiveRecord::Base
       user.first_name = auth.info.first_name
       user.location = auth.info.location #from Facebook data
       user.fb_id = auth.uid
+      user.fb_token = auth.info.fb_token
       if user.state_id.blank?
         parsed_location = user.location.split(', ') #try to split the location string into ["CITY", "STATE"]
         unless State.find_by_name(parsed_location[1]).blank?
@@ -46,6 +47,7 @@ class User < ActiveRecord::Base
         user.first_name = data['first_name'] if user.first_name.blank?
         user.location = data['user_location'] if user.location.blank?
         user.fb_id = data['id'] if user.fb_id.blank?
+        user.fb_token = data['credentials']['token']
       end
     end
   end
@@ -53,10 +55,10 @@ class User < ActiveRecord::Base
     self.points - (self.coins_spent || 0)
   end
   def fb_friends
-    if self.auth.find_by_provider(:facebook).blank?
-      nil
+    if session['access_token'].blank?
+      []
     else
-      token = self.auth.find_by_provider(:facebook).token
+      token = session['access_token']
       graph = Koala::Facebook::API.new(token)
       graph.get_connections("me", "friends")
     end
