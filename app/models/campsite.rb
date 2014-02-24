@@ -47,7 +47,11 @@ class Campsite < ActiveRecord::Base
     tribe_ids = tribe_ids.to_json
   end
   def primary_icon(style)
-    self.vibes.first.tribe.icon(style)
+    if self.tribes.first.blank? 
+      false 
+    else 
+      self.tribes.first.icon(style)
+    end
   end
   def has_tribe(tribe_id)
     bool = false
@@ -98,9 +102,9 @@ class Campsite < ActiveRecord::Base
 
   def self.name_search(keywords)
     if keywords
-      where('name LIKE ?', "%#{keywords}%") || nil
+      where('name LIKE ?', "%#{keywords}%") || Campsite.none
     else
-      nil
+      Campsite.none
     end
   end
 

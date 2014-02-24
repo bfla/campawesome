@@ -89,22 +89,29 @@
           .col-md-12
             hr
         / Recommended for you
-        .col-md-12 
-          p.lead
-            | Recommended for you
-          - @recommendations.each do |recommendation|
-            .col-md-3.well.white
-              .col-md-12
-                = image_tag recommendation.primary_icon(:medium), class:"img-circle tribe-background"
-              .col-md-12
-                = recommendation.name
-                = recommendation.avg_rating
+        - unless @recommendations.blank?
+          .col-md-12
+            p.lead
+              | Recommended for you
+            - @recommendations.each do |recommendation|
+              .col-md-3.well.white
+                .col-md-12
+                  = image_tag recommendation.primary_icon(:medium), class:"img-circle tribe-background"
+                .col-md-12
+                  = recommendation.name
+                  = recommendation.avg_rating
         .col-md-12
           hr
         / Best of Michigan
-        p.lead.col-md-12 Best of Michigan
-        .col-md-12
-          hr
+        - unless @best_of_state.blank?
+          p.lead.col-md-12 Best of Michigan
+          .col-md-12
+            hr
+        / Best Nearby
+        - unless @nearbys.blank?
+            p.lead.col-md-12 Best Nearby
+            .col-md-12
+              hr
         / Friends recommend
           p.lead.col-md-12 Your friends recommend...
           .col-md-12

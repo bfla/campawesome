@@ -26,23 +26,24 @@
               button.btn.btn-warning type='submit'
                 span.glyphicon.glyphicon-search 
                 |  Find campsites!
-        p.text-center
-          | Don't know the name?  
-          a href="#" Find it on a map instead.
-    .col-md-12
-      - unless @campsites == nil
+        /p.text-center
+          /| Don't know the name?  
+          /a href="#" Find it on a map instead.
+    .col-md-12.pad-top-lg
+      - unless @campsites.blank?
         - @campsites.each do |campsite|
-          - unless campsite == nil
-            .col-md-4.well.white
-              .col-md-12.text-center
-                = image_tag campsite.primary_icon(:small), class:"img-circle tribe-subtle"
-              .col-md-12.text-center
-                h5 
-                  = campsite.name
-                  br
-                  small in #{campsite.city.name}, #{campsite.state.abbreviation}
-                p
-                  = render "layouts/campsiteCommands", campsite:campsite
+          - unless campsite.blank?
+            .col-md-4
+                .col-md-12.text-center
+                  - if campsite.primary_icon(:small)
+                    = image_tag campsite.primary_icon(:small), class:"img-circle tribe-subtle"
+                .col-md-12.text-center
+                  h5 
+                    = campsite.name
+                    br
+                    small in #{campsite.city.name}, #{campsite.state.abbreviation}
+                  p
+                    = render "layouts/reviewButton", campsite:campsite
           .col-md-12 style="display:none;"
             .panel.panel-primary
               .panel-heading Sorry no results. Possible causes:
