@@ -21,6 +21,7 @@
           small
             /= @user.level
             /br
+            a#friendsCount href="#" Count
             | #{@user.reviews.size}&nbsp;
             - if @user.reviews.size == 1
               = link_to "Review", reviews_path

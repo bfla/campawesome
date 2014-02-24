@@ -3,6 +3,9 @@ class PagesController < ApplicationController
   def home
     if user_signed_in?
       @user = User.includes(:tribe, :beens, :wants, :lists, :photos, :reviews).find(current_user)
+      if data = session["devise.facebook_data"]["extra"]["raw_info"]
+        gon.friends = data["friends"] || "Nothing here"
+      end
     end
     if false #request.location?
       geo_coded_state = request.location.state
