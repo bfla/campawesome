@@ -42,7 +42,7 @@ end
 # ActiveRecord Plugins
 gem 'devise'
 gem 'omniauth-facebook'
-gem 'koala'
+gem 'koala', "~> 1.8.0rc1"
 gem 'merit'
 
 # Geocoding

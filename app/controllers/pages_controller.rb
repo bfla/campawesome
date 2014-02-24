@@ -3,21 +3,23 @@ class PagesController < ApplicationController
   def home
     if user_signed_in?
       @user = User.includes(:tribe, :beens, :wants, :lists, :photos, :reviews).find(current_user)
-      if data = session["devise.facebook_data"]["extra"]["raw_info"]
-        gon.friends = data["friends"] || "Nothing here"
-      end
+      #gon.friends = current_user.fb_friends
     end
-    if false #request.location?
-      geo_coded_state = request.location.state
-      state = State.find_by_name(geo_coded_state)
-      @recommendations = state.campsites.first(4) unless current_user.tribe.blank?
-      @best_of_state = state.destinations.first(4)
-      @nearbys = Campsite.near(request.location, radius = 50).first(4)
-    elsif false #!@user.location.blank?
-      state = State.find(@user.state_id)
-      @recommendations = state.campsites.first(4) unless current_user.tribe.blank?
-      @best_of_state = state.destinations.first(4)
-      @nearbys = Campsite.near(@user.location, radius = 50).first(4)
+    if user_signed_in? && !current_user.tribe.blank?
+      if !request.location.nil? && Rails.env.production?
+        @state = State.find_by(name: request.location.state) || @user.state || nil
+        location = request.location
+      elsif user_signed_in?
+        @state = @user.state unless @user.state.blank?
+        location = @user.location unless @user.location.blank?
+      end
+      unless @state.blank?
+        @recommendations = @state.campsites.first(4)
+        @best_of_state = @state.destinations.first(4)
+      end
+      unless location.blank?
+        @nearbys = Campsite.near(location, radius = 50).first(4)
+      end
     end
     render layout:"layouts/pages/home"
   end

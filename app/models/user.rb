@@ -52,4 +52,13 @@ class User < ActiveRecord::Base
   def coin_tally
     self.points - (self.coins_spent || 0)
   end
+  def fb_friends
+    if self.auth.find_by_provider(:facebook).blank?
+      nil
+    else
+      token = self.auth.find_by_provider(:facebook).token
+      graph = Koala::Facebook::API.new(token)
+      graph.get_connections("me", "friends")
+    end
+  end
 end

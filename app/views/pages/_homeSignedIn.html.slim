@@ -83,34 +83,57 @@
       hr
     / Bottom content
     .col-md-12
-      / Left content
-      .col-md-8
         / Contribute!  Add friends. Whatever!
           p.lead.col-md-12 Welcome back
           .col-md-12
             hr
         / Recommended for you
-        - unless @recommendations.blank?
+        - if @user.tribe.blank?
           .col-md-12
             p.lead
               | Recommended for you
-            - @recommendations.each do |recommendation|
-              .col-md-3.well.white
-                .col-md-12
-                  = image_tag recommendation.primary_icon(:medium), class:"img-circle tribe-background"
-                .col-md-12
-                  = recommendation.name
-                  = recommendation.avg_rating
-        .col-md-12
-          hr
+          .col-md-12
+            p 
+              | To get personalized recommendations, join a tribe: 
+              = link_to 'Join tribe', new_tribal_membership_path, class:'btn btn-warning'
+          .col-md-12
+            hr
+        - unless @user.tribe.blank? || @recommendations.blank?
+          .col-md-12
+            p.lead
+              | Recommended for you
+          - @recommendations.each do |campsite|
+            .col-md-3
+              .col-md-12.text-center = image_tag campsite.primary_icon(:small), class:"img-circle tribe-subtle"
+              h5.col-md-12.text-center 
+                = link_to campsite.name, campsite
+              p.col-md-12.text-center = campsite.avg_rating
+          .col-md-12
+            hr
         / Best of Michigan
         - unless @best_of_state.blank?
-          p.lead.col-md-12 Best of Michigan
+          p.lead.col-md-12 
+            | Best of #{@state.name} Camping&nbsp;
+            small 
+              small = link_to 'see more', @state
+          .col-md-12
+            - @best_of_state.each do |destination|
+              .col-md-3
+                a href=destinations_path(destination)
+                  = image_tag destination.photos.first.photo_file.url(:thumb), class:"img-thumbnail img-responsive"
+                h5 = link_to destination.name, destination
+
           .col-md-12
             hr
         / Best Nearby
         - unless @nearbys.blank?
             p.lead.col-md-12 Best Nearby
+            - @nearbys.each do |campsite|
+              .col-md-3
+                .col-md-12.text-center = image_tag campsite.primary_icon(:small), class:"img-circle tribe-subtle"
+                h5.col-md-12.text-center 
+                  = link_to campsite.name, campsite
+                p.col-md-12.text-center = campsite.avg_rating
             .col-md-12
               hr
         / Friends recommend
