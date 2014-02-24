@@ -36,10 +36,10 @@ class TribalMembershipsController < ApplicationController
 
     respond_to do |format|
       if @tribal_membership.save
-        format.html { redirect_to session[:previous_url], notice: 'Tribal membership was successfully created.' }
+        format.html { redirect_to contrib_campsites_path, notice: 'Tribal membership was successfully created.' }
         format.json { render action: 'show', status: :created, location: @tribal_membership }
       else
-        format.html { redirect_to session[:previous_url] }
+        format.html { redirect_to new_tribal_membership_path }
         format.json { render json: @tribal_membership.errors, status: :unprocessable_entity }
       end
     end

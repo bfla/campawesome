@@ -27,6 +27,7 @@ class User < ActiveRecord::Base
       user.password = Devise.friendly_token[0,20]
       user.first_name = auth.info.first_name
       user.location = auth.info.location #from Facebook data
+      user.fb_id = auth.uid
       if user.state_id.blank?
         parsed_location = user.location.split(', ') #try to split the location string into ["CITY", "STATE"]
         unless State.find_by_name(parsed_location[1]).blank?
@@ -43,7 +44,7 @@ class User < ActiveRecord::Base
       if data = session["devise.facebook_data"] && session["devise.facebook_data"]["extra"]["raw_info"]
         user.email = data["email"] if user.email.blank?
         user.first_name = data['first_name'] if user.first_name.blank?
-        user.location = data['user_location']
+        user.location = data['user_location'] if user.location.blank?
         user.fb_id = data['id'] if user.fb_id.blank?
       end
     end

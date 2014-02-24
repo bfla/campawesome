@@ -27,6 +27,7 @@ class CampsitesController < ApplicationController
 
   def contrib
     @campsites = Campsite.name_search(params[:keywords])
+    @previous_url = session[:previous_url]
   end
   
   def activities
