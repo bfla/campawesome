@@ -45,7 +45,7 @@ class CampsitesController < ApplicationController
   # GET /campsites/1
   # GET /campsites/1.json
   def show
-    @campsite = Campsite.includes(:photos, :tags, :fees, reviews: [:rating]).find(params[:id])
+    @campsite = Campsite.includes(:photos, :tags, :fees, :beens, :wants, :listeds, reviews: [:rating]).find(params[:id])
     @activity_types = ActivityType.all
     @nearbys = @campsite.nearbys.limit(5)
     gon.initCenter = [@campsite.latitude, @campsite.longitude]
