@@ -6,6 +6,15 @@ class UsersController < ApplicationController
     render(layout: "layouts/guide")
   end
 
+  def reward_like
+    unless current_user.likes_me?
+      current_user.likeify
+    end
+    respond_to do |format|
+      format.html { redirect_to session[:previous_url]}
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user

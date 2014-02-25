@@ -66,6 +66,12 @@ html.fill-height
               .col-md-2
                 = image_tag campsite.primary_icon(:small), class:'img-circle img-responsive tribe-subtle'
               p.lead.col-md-10
+                - if current_user.tribe && campsite.tribes.first.id == current_user.tribe.id && campsite.avg_rating > 4.0
+                  small 
+                    small.greenify
+                      span.glyphicon.glyphicon-chevron-up
+                      |  Recommended for you
+                      br
                 small = link_to campsite.name, campsite_path(campsite)
                 br
                 small

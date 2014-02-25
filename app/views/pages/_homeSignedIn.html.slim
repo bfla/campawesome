@@ -90,7 +90,9 @@
               = image_tag '/images/icons/FB-icon.png' 
               |  friends:
           br 
-          | #{@friends.size}
+          .lead #{@friends.size}
+          - unless @user.likes_me?
+            a#likesMe href=reward_like_users_path Like me
     .col-md-12
       hr
     / Bottom content

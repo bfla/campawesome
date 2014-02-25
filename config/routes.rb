@@ -65,7 +65,11 @@ Blog::Application.routes.draw do
   resources :pages
   # Devise & users
   devise_for :users, :controllers => { omniauth_callbacks:"users/omniauth_callbacks", registrations:"users/registrations" }
-  resources :users
+  resources :users do
+    collection do 
+      get 'reward_like'
+    end
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
