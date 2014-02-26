@@ -30,10 +30,10 @@ class BeensController < ApplicationController
   # POST /beens.json
   def create
     campsite = Campsite.find(params[:campsite_id])
-    if campsite.beens.where(user_id:@user).blank?
-      @been = campsite.beens.create(user_id:params[:user_id])
+    if campsite.beens.where(user_id:current_user.id).blank?
+      @been = campsite.beens.create(user_id:current_user.id)
     else
-      @been = campsite.beens.find_by_user_id(current_user).first
+      @been = campsite.beens.find_by_user_id(current_user.id).first
     end
 
     respond_to do |format|

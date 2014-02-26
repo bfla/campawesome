@@ -1,7 +1,7 @@
 - if user_signed_in?
   .btn-group
     - if campsite.beens.find_by_user_id(current_user).blank?
-      = link_to beens_path(campsite_id:campsite, user_id:current_user), method: :post, class:'btn btn-default btn-xs subtle-text enable-command-toggle', remote:true do
+      = link_to beens_path(campsite_id:campsite), method: :post, class:'btn btn-default btn-xs subtle-text enable-command-toggle', remote:true do
         span.glyphicon.glyphicon-ok
         |  Been here
     - else 
@@ -10,7 +10,7 @@
         span.glyphicon.glyphicon-ok.greenify
         |  Been here
     - if campsite.wants.find_by_user_id(current_user).blank?
-      = link_to wants_path(campsite_id:campsite, user_id:current_user), method: :post, class:'btn btn-default btn-xs subtle-text enable-command-toggle', remote:true do
+      = link_to wants_path(campsite_id:campsite), method: :post, class:'btn btn-default btn-xs subtle-text enable-command-toggle', remote:true do
         span.glyphicon.glyphicon-plus-sign
         |  Want to go
     - else

@@ -24,7 +24,7 @@ class RatingsController < ApplicationController
   # POST /ratings
   # POST /ratings.json
   def create
-    @rating = Rating.new(rating_params)
+    @rating = Rating.new(rating_params, user_id:current_user.id)
 
     respond_to do |format|
       if @rating.save
@@ -69,6 +69,6 @@ class RatingsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def rating_params
-      params.permit(:rating, :ratable_id, :ratable_type, :value, :user_id, :review_id)
+      params.permit(:rating, :ratable_id, :ratable_type, :value, :review_id)
     end
 end

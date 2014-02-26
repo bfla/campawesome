@@ -30,7 +30,14 @@ class PhotosController < ApplicationController
   # POST /photos
   # POST /photos.json
   def create
-    @photo = Photo.new(photo_params)
+    @photo =  Photo.create(photo_params)
+    @photo.user_id = current_user.id
+    #@photo = Photo.create(campsite_id:params[:campsite_id], user_id:current_user.id)
+    #@photo.title = params[:title] unless params[:title].blank?
+    #@photo.caption = params[:caption] unless params[:caption].blank?
+    #@photo.state_id = params[:state_id] unless params[:state_id].blank?
+    #@photo.city_id = params[:city_id] unless params[:city_id].blank?
+
 
     respond_to do |format|
       if @photo.save
@@ -75,6 +82,6 @@ class PhotosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def photo_params
-      params.permit(:photo, :title, :license_type, :license_text, :user_id, :campsite_id, :city_id, :state_id, :destination_id, :caption, :photo_file)
+      params.permit(:photo, :title, :license_type, :license_text, :campsite_id, :city_id, :state_id, :destination_id, :caption, :photo_file)
     end
 end

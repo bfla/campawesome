@@ -26,7 +26,7 @@ class ActivitiesController < ApplicationController
   # POST /activities
   # POST /activities.json
   def create
-    @activity = Activity.new(activity_params)
+    @activity = Activity.new(activity_params, user_id:current_user.id)
     @activity_types = ActivityType.all
 
     respond_to do |format|
@@ -72,6 +72,6 @@ class ActivitiesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def activity_params
-      params.require(:activity).permit(:activity_type_id, :campsite_id, :user_id, :description, :latitude, :longitude)
+      params.require(:activity).permit(:activity_type_id, :campsite_id, :description, :latitude, :longitude)
     end
 end

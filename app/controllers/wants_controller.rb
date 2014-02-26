@@ -30,10 +30,10 @@ class WantsController < ApplicationController
   # POST /wants.json
   def create
     campsite = Campsite.find(params[:campsite_id])
-    if campsite.wants.where(user_id:@user).blank?
-      @want = campsite.wants.create(user_id:params[:user_id])
+    if campsite.wants.where(user_id:current_user.id).blank?
+      @want = campsite.wants.create(user_id:current_user.id)
     else
-      @want = campsite.want.find_by_user_id(current_user).first
+      @want = campsite.want.find_by_user_id(current_user.id).first
     end
 
     respond_to do |format|
@@ -79,6 +79,6 @@ class WantsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def want_params
-      params.permit(:want, :wantable_id, :wantable_type, :user_id)
+      params.permit(:want, :wantable_id, :wantable_type)
     end
 end

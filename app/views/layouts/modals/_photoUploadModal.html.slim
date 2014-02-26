@@ -7,9 +7,8 @@
         h4#photoUploadModalTitle.modal-title.text-center Add a photo for #{campsite.name}
 
       .modal-body
-        = form_tag photos_path, method: :post, multipart:true do
+        = form_tag photos_path, method: :post, multipart:true, remote:true do
           = token_tag form_authenticity_token
-          = hidden_field_tag :user_id, params[:user_id], value:current_user.id
           = hidden_field_tag :campsite_id, params[:campsite_id], value:campsite.id
           = hidden_field_tag :city_id, params[:city_id], value:campsite.city.id
           = hidden_field_tag :state_id, params[:state_id], value:campsite.state.id

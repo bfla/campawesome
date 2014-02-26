@@ -25,10 +25,8 @@ class ListedsController < ApplicationController
   # POST /listeds.json
   def create
     campsite = Campsite.find(params[:campsite_id])
-    if campsite.listeds.where(list_id:params[:list_id]).blank?
+    if campsite.listeds.where(list_id:params[:list_id]).blank? && !current_user.lists.find_by(list_id:params[:list_id]).blank?
       @listed = campsite.listeds.create(list_id:params[:list_id])
-    else
-      @listed = campsite.listeds.where(list_id:params[:list_id])
     end
 
     respond_to do |format|
