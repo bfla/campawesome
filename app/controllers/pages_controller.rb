@@ -26,6 +26,9 @@ class PagesController < ApplicationController
     render layout:"layouts/pages/home"
   end
 
+  def reasons # Reasons to sign up
+  end
+
   def terms #Terms of use
   end
 
