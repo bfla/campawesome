@@ -11,8 +11,8 @@ html.fill-height
   body.fill-height
     == render 'layouts/modals/standardModals'
     == render 'layouts/navbar'
-    #results-container.col-md-4.well.white
-      .result-list
+    #results-container.col-md-4.well.white.fill-height.remove-bottom-margin
+      .result-list.fill-height
         / Time filter - doesn't work yet==========
           .row
             .input-group.col-md-6
@@ -66,12 +66,13 @@ html.fill-height
               .col-md-2
                 = image_tag campsite.primary_icon(:small), class:'img-circle img-responsive tribe-subtle'
               p.lead.col-md-10
-                - if current_user.tribe && campsite.tribes.first.id == current_user.tribe.id && campsite.avg_rating > 4.0
-                  small 
-                    small.greenify
-                      span.glyphicon.glyphicon-chevron-up
-                      |  Recommended for you
-                      br
+                - if user_signed_in? && !campsite.tribes.first.blank? 
+                  - if current_user.tribe && campsite.tribes.first.id == current_user.tribe.id && campsite.avg_rating > 4.0
+                    small 
+                      small.greenify
+                        span.glyphicon.glyphicon-chevron-up
+                        |  Recommended for you
+                        br
                 small = link_to campsite.name, campsite_path(campsite)
                 br
                 small
@@ -161,40 +162,40 @@ html.fill-height
       return false;
     });
 
-    // reset map based on current location DOESN'T WORK
-    /*$("#resetSearchArea").click( function(){
-      var currentCenter = map.getCenter(); // Gets the current center of the map as an Leaflet LatLng
-      var mapBounds = map.getBounds(); // Gets the SW and NE corners of the map as a Leaflet LatLngBound
-      var southWest = map.getBounds().getSouthWest(); // Returns the SW corner
-      var distanceInMeters = mapCenter.distanceTo(southWest); // Returns the distance in meters
-      alert(distanceInMeters);  // FAILS HERE
-      var distanceInMiles = distanceInMeters * .000621371; // Calculates the distance in miles
-      alert(distanceInMiles);
-      alert("Center:" + currentCenter + "SW:" + southWest + "Distance:" + distanceInMiles);
-    });*/
+      // reset map based on current location DOESN'T WORK
+      /*$("#resetSearchArea").click( function(){
+        var currentCenter = map.getCenter(); // Gets the current center of the map as an Leaflet LatLng
+        var mapBounds = map.getBounds(); // Gets the SW and NE corners of the map as a Leaflet LatLngBound
+        var southWest = map.getBounds().getSouthWest(); // Returns the SW corner
+        var distanceInMeters = mapCenter.distanceTo(southWest); // Returns the distance in meters
+        alert(distanceInMeters);  // FAILS HERE
+        var distanceInMiles = distanceInMeters * .000621371; // Calculates the distance in miles
+        alert(distanceInMiles);
+        alert("Center:" + currentCenter + "SW:" + southWest + "Distance:" + distanceInMiles);
+      });*/
 
-    /* Apply the initial filter, if any
-    if (gon.initTribe) { 
-      var filterId = gon.initTribe;
-    } else { 
-      var filterId = 0; 
-    }
-    $('.searchFilterThumbnail').each( function() {
-      if ( $(this).data('tribe-id') == filterId) {
-        highlightSearchFilter( $(this) );
+      /* Apply the initial filter, if any
+      if (gon.initTribe) { 
+        var filterId = gon.initTribe;
+      } else { 
+        var filterId = 0; 
       }
-    });
-    /*function applyFilter(tribalId) {
-      $(".browseResult").hide();
-      if (tribalId == 0) {
-        $(".browseResult").show();
-      } else {
-        $(".browseResult").each( function () {
-          var targetResult = $(this);
-          var tribeIds = targetResult.data("tribes"); // gets tribe ids for the campsite
-          for (x in tribeIds) {
-            if (tribeIds[x] == tribalId) { targetResult.show(); }
-          }  
-            });
-          }
-        }*/
+      $('.searchFilterThumbnail').each( function() {
+        if ( $(this).data('tribe-id') == filterId) {
+          highlightSearchFilter( $(this) );
+        }
+      });
+      /*function applyFilter(tribalId) {
+        $(".browseResult").hide();
+        if (tribalId == 0) {
+          $(".browseResult").show();
+        } else {
+          $(".browseResult").each( function () {
+            var targetResult = $(this);
+            var tribeIds = targetResult.data("tribes"); // gets tribe ids for the campsite
+            for (x in tribeIds) {
+              if (tribeIds[x] == tribalId) { targetResult.show(); }
+            }  
+              });
+            }
+          }*/

@@ -1,36 +1,36 @@
 doctype html
-html.fill-height.background
+html.fill-height
   head
     title Camposaurus Home
     meta name="keywords" contents='Michigan Camping, travel, Camposaurus, camp that, campgrounds, rustic camping, rv parks, budget camping, camping sites, backcountry camping, backcountry camping, rv campgrounds'
     meta name="description" content="Camposaurus is the best site for finding information about Michigan Camping.  It has a complete listing of public campgrounds in Michigan, including rustic camping, RV campgrounds, and backcountry or backpacking camping sites."
     == render 'layouts/headstyles'
     == render 'layouts/headscripts'
-body.fill-height.background
-  == render 'layouts/modals/standardModals'
-  == render 'layouts/navbar'
-  #wrap
-    <div id="landingHeader" style='background-image:url("#{request.protocol}#{request.host_with_port}#{ asset_path "/images/landing/mears_1600x500.jpg"}"); height:500px;' alt='An image of camping in Michigan. It is a sunset at Mears State Park Campground.', title='Michigan camping near Mears State Park campground'>
-      .container
-        .row
-          .col-md-8.col-md-offset-2
-            h1.text-center style="color:white; padding-top:150px;" 
-              | Rawr! I'm Camposaurus
-              br
-              | I'll find you fiercely awesome campsites
-              br
-              small style="color:white;" With recommendations from mighty campers like yourself
-        .row
-            = form_tag search_campsites_path, method: "get", class: "form", role: "search" do
-              = label_tag :keywords, 'Find campgrounds near', class: 'sr-only'
-              .col-md-6.col-md-offset-3
-                .input-group
-                  = text_field_tag :keywords, params[:keywords], class: "form-control input-lg", placeholder: "Enter location or campground name"
-                  span.input-group-btn
-                    button.btn.btn-success.btn-lg type='submit' 
-                      span.glyphicon.glyphicon-search 
-                      |  Find campsites!
-    </div>
-      == yield :belowTheFold
-      javascript:
-        $('.add-tooltip').tooltip();
+  body.fill-height
+    == render 'layouts/modals/standardModals'
+    == render 'layouts/navbar'
+    #wrap
+      <div id="landingHeader" style='background-image:url("#{request.protocol}#{request.host_with_port}#{ asset_path "/images/landing/mears_1600x500.jpg"}"); height:500px;' alt='An image of camping in Michigan. It is a sunset at Mears State Park Campground.', title='Michigan camping near Mears State Park campground'>
+        .container
+          .row
+            .col-md-8.col-md-offset-2
+              h1.text-center style="color:white; padding-top:150px;" 
+                | Rawr! I'm Camposaurus
+                br
+                | I'll find you fiercely awesome campsites
+                br
+                small style="color:white;" With recommendations from mighty campers like yourself
+          .row
+              = form_tag search_campsites_path, method: "get", class: "form", role: "search" do
+                = label_tag :keywords, 'Find campgrounds near', class: 'sr-only'
+                .col-md-6.col-md-offset-3
+                  .input-group
+                    = text_field_tag :keywords, params[:keywords], class: "form-control input-lg", placeholder: "Enter location or campground name"
+                    span.input-group-btn
+                      button.btn.btn-success.btn-lg type='submit' 
+                        span.glyphicon.glyphicon-search 
+                        |  Find campsites!
+      </div>
+        == yield :belowTheFold
+        javascript:
+          $('.add-tooltip').tooltip();
