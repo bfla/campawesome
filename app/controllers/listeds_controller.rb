@@ -25,7 +25,9 @@ class ListedsController < ApplicationController
   # POST /listeds.json
   def create
     campsite = Campsite.find(params[:campsite_id])
-    if campsite.listeds.where(list_id:params[:list_id]).blank? && !current_user.lists.find_by(list_id:params[:list_id]).blank?
+    # check that the list item doesn't already exist and check that the user owns the list
+    if Listed.find_by(list_id:params[:list_id], listable_id:campsite.id, listable_type:'Campsite').blank? && !current_user.lists.find(params[:list_id]).blank?
+      #if campsite.listeds.find_by(list_id:params[:list_id]).blank? && !current_user.lists.find_by(list_id:params[:list_id]).blank?
       @listed = campsite.listeds.create(list_id:params[:list_id])
     end
 

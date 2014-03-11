@@ -47,12 +47,15 @@ class ListsController < ApplicationController
   # POST /lists
   # POST /lists.json
   def create
-    @list = List.new(list_params)
-    if params[:campsite_id]
-      @listed = Listed.new()
-      @listed.list_id = @list
-      @listed.user_id = current_user
-      @listed.save
+    #@list = List.new(list_params)
+    @list = current_user.lists.create(list_params)
+    if params[:campsite_id] && @list.listeds.find_by_campsite_id(params[:campsite_id]).blank?
+      campsite = Campsite.find(params[:campsite_id])
+      @listed = campsite.listeds.create(list:@list.id, user_id:current_user.id)
+      #@listed = Listed.new()
+      #@listed.list_id = @list.id
+      #@listed.user_id = current_user.id
+      #@listed.save
     end
 
     respond_to do |format|
@@ -98,6 +101,6 @@ class ListsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def list_params
-      params.require(:list).permit(:name, :user_id)
+      params.require(:list).permit(:name, :campsite_id)
     end
 end

@@ -2,7 +2,9 @@ h1 Listing listeds
 
 table
   tr
-    th Campsite
+    th id
+    th Listable id
+    th Listable type
     th List
     th
     th
@@ -10,7 +12,9 @@ table
 
   - @listeds.each do |listed|
     tr
-      td = listed.campsite_id
+      td = listed.id
+      td = listed.listable_id
+      td = listed.listable_type
       td = listed.list_id
       td = link_to 'Show', listed
       td = link_to 'Edit', edit_listed_path(listed)

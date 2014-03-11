@@ -25,17 +25,18 @@
         |  Save
       ul.dropdown-menu id="listDropdown#{campsite.id}" role="menu" aria-labelledby="dropdownMenu#{campsite.id}"
         - current_user.lists.each do |list|
-            /= link_to "#{list.name}", listeds_path(campsite_id:campsite.id, list_id:list.id), method: :post, remote:true, role:"menuitem", tabindex:"-1"
-            = form_tag listeds_path, method: :post do
-              = hidden_field_tag :campsite_id, params[:campsite_id], value:campsite.id
-              = hidden_field_tag :list_id, params[:list_id], value:list.id
-              li role="presentation" 
-                a type="submit" role="menuitem" href="#" = list.name
+            li = link_to "#{list.name}", listeds_path(campsite_id:campsite.id, list_id:list.id), method: :post, role:"menuitem", tabindex:"-1"
+            /
+              = form_tag listeds_path, method: :post do
+                = hidden_field_tag :campsite_id, params[:campsite_id], value:campsite.id
+                = hidden_field_tag :list_id, params[:list_id], value:list.id
+                  /li role="presentation"
+                    /a type="submit" role="menuitem" href="#" = list.name
             
         li.divider
         li#newListModalTrigger
-          a href="#" data-toggle='modal' data-target='#newListModal' Create new list
-          li =link_to 'Manage lists', management_lists_path
+          /a href="#" data-toggle='modal' data-target='#newListModal' Create new list
+        li =link_to 'Manage lists', management_lists_path
 
     a#reviewModal.btn.btn-default.btn-xs.subtle-text href="#" data-toggle='modal' data-target='##{campsite.id}'
       span.glyphicon.glyphicon-star
