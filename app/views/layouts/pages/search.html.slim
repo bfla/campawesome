@@ -25,6 +25,12 @@ html.fill-height
               input#toDate.form-control type="text" placeholder="Monday"
         / Vibe filters======================
         .row
+          .col-md-2
+            #allSearchFilter.searchFilterThumbnail.thumbnail data-tribe-id="0"
+              = image_tag 'icons/all120px.png', class:'img-circle img-responsive tribe-background'
+            p.no-spacing.text-center
+                small.no-spacing
+                  small.no-spacing Show all
           - @tribes.first(3).each do |tribe|
             .col-md-2
               .searchFilterThumbnail.thumbnail style="padding:5px;" data-tribe-id=tribe.id
@@ -32,12 +38,6 @@ html.fill-height
               p.no-spacing.text-center
                   small.no-spacing
                     small.no-spacing = tribe.vibe
-          .col-md-2
-            #allSearchFilter.searchFilterThumbnail.thumbnail data-tribe-id="0"
-              = image_tag @tribes.find(1).icon.url(:small), class:'img-circle img-responsive tribe-background'
-            p.no-spacing.text-center
-                small.no-spacing
-                  small.no-spacing Show all
           .col-md-12
             hr
         /
@@ -65,6 +65,11 @@ html.fill-height
             .searchResult data-tribes=campsite.tribes_json
               .col-md-2
                 = image_tag campsite.primary_icon(:small), class:'img-circle img-responsive tribe-subtle'
+                - campsite.tribes.each do |tribe|
+                  p.no-spacing.text-center
+                      small.no-spacing
+                        small.no-spacing 
+                          small.no-spacing.subtle-text = tribe.vibe
               p.lead.col-md-10
                 - if user_signed_in? && !campsite.tribes.first.blank? 
                   - if current_user.tribe && campsite.tribes.first.id == current_user.tribe.id && campsite.avg_rating > 4.0
