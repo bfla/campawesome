@@ -34,3 +34,8 @@
               = submit_tag 'Submit', class:"btn btn-success btn-lg"
               | &nbsp;
               strong.subtle-text +50 coins
+  javascript:
+    $('.photoForm').submit( function() {
+      $('.photoUploadModal').modal('hide');
+      $('#submitSuccessModal').modal('show');  
+    });

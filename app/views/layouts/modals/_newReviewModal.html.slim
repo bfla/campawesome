@@ -28,16 +28,16 @@
               /button#reviewSubmit.btn.btn-success type="submit" Say it
               | &nbsp;
               strong.subtle-text +50 coins
-javascript:
-  /*$('#reviewSubmit').click( function() {
-    $('.newReviewModal').modal('hide');
-    $('#submitSuccessModal').modal('show');  
-  });*/
-  $('.reviewForm').submit( function() {
-    $('.newReviewModal').modal('hide');
-    $('#submitSuccessModal').modal('show');  
-  });
-  $('.rateit').click( function() {
-    var rating = $(this).rateit('value');
-    $('.rating-value').val(rating);
-  });
+  javascript:
+    /*$('#reviewSubmit').click( function() {
+      $('.newReviewModal').modal('hide');
+      $('#submitSuccessModal').modal('show');  
+    });*/
+    $('.reviewForm').submit( function() {
+      $('.newReviewModal').modal('hide');
+      $('#submitSuccessModal').modal('show');  
+    });
+    $('.rateit').click( function() {
+      var rating = $(this).rateit('value');
+      $('.rating-value').val(rating);
+    });
