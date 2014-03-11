@@ -3,8 +3,8 @@
     .row
       .col-md-4.text-center.pad-top-md
         .col-md-10.col-md-offset-1
-          p.lead Join a tribe to get personalized recommendations
-          p Different people prefer different styles of camping.  Join a tribe so Camposaurus can better predict which campsites you'll love ferociously and show you reviews by campers most like yourself.
+          p.lead Get personalized campsite recommendations by joining a tribe
+          p Different people prefer different camping styles.  Join a tribe that suits your style so I can better predict which campsites you'll love ferociously and show you reviews by campers most like yourself.
           / This markup assumes only users who are not signed in see this page
           - if user_signed_in?
             a.btn.btn-success href=new_tribal_membership_path Join a tribe
@@ -12,14 +12,14 @@
             a.nextAction.btn.btn-success href="#" data-toggle="modal" data-target="#signupModal" data-next-url=new_tribal_membership_path Join a tribe
       .col-md-4.text-center.pad-top-md
         .col-md-10.col-md-offset-1
-          p.lead Find your friends to see where they camped & trade recommendations
-          p I am a nonsocial dinosaur-technology but I know humans trust their friends for advice.  Connect with your Facebook friends to exchange camping advice with those you trust.
-          button.btn.btn-success Find friends
+          p.lead Trade camping recommendations & tips with friends you trust
+          p I personally am a antisocial dinosaur-technology but I know humans trust their friends for advice.  Connect with your Facebook friends to exchange camping advice with those you trust.
+          button.btn.btn-success Connect friends
       .col-md-4.text-center.pad-top-md
         .col-md-10.col-md-offset-1
           p.lead Review campsites to get better recommendations, good karma & rewards
           p 
-            | When you review campsites, it lets me learn what types of campsites you like.  Your reviews will also help other campers, & you'll earn points you can use to buy awesome stuff like gift cards & exclusive features.
+            | When you review campsites, it lets me learn what types of campsites you like.  Your reviews will also help other campers, & you'll earn points you can use to buy awesome stuff like gift cards.
           button.btn.btn-success Review some campsites
     .row
       p.lead.col-md-12.text-center.pad-top-md = link_to "Skeptical?  See 10 more reasons to sign up.", reasons_path

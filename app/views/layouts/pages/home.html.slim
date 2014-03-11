@@ -19,7 +19,7 @@ html.fill-height class=(user_signed_in? ? 'background':'white')
                 br
                 | I'll find you fiercely awesome campsites
                 br
-                small style="color:white;" With recommendations from mighty campers like yourself
+                small style="color:white;" With recommendations from smart campers like yourself
           .row
               = form_tag search_campsites_path, method: "get", class: "form", role: "search" do
                 = label_tag :keywords, 'Find campgrounds near', class: 'sr-only'
