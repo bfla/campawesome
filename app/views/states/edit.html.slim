@@ -2,6 +2,13 @@
   .row
     h1.heading.col-md-12 Editing state
   == render 'form'
+  - if @state.errors.any?
+    #error_explanation.panel.panel-warning
+      h2.panel-heading = "#{pluralize(@state.errors.count, "error")} prohibited this state from being saved:"
+      .panel-body
+        ul
+          - @state.errors.full_messages.each do |message|
+            li = message
   .row
     .col-md-12
       = link_to 'Show', @state

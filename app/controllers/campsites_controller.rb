@@ -36,6 +36,14 @@ class CampsitesController < ApplicationController
     render layout: "layouts/normal"
   end
 
+  def import
+    if params[:file]
+      Campsite.import(params[:file])
+      redirect_to root_url, notice:"imported!"
+    else
+    end
+  end
+
   # GET /campsites
   # GET /campsites.json
   def index

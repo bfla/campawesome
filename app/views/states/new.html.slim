@@ -1,7 +1,9 @@
-#main.container
-  .row
-    h1.heading.col-md-12 New state
-  == render 'form'
-  .row
-    .col-md-12
-      = link_to 'Back', states_path
+#main.container.pad-top-lg
+  .col-md-8.col-md-offset-2.well.white
+    .row
+      h1.heading.col-md-12 New state
+
+    == render 'form'
+    .row
+      .col-md-12
+        = link_to 'Back', states_path

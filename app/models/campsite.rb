@@ -39,14 +39,17 @@ class Campsite < ActiveRecord::Base
   def state_name
     self.state.name if self.state.name?
   end
+
   def hashtag
     self.state.hashtag if self.state.hashtag?
   end
+
   def tribes_json
     tribe_ids = Array.new
     self.vibes.each { |vibe| tribe_ids << vibe.tribe.id }
     tribe_ids = tribe_ids.to_json
   end
+
   def primary_icon(style)
     if self.tribes.first.blank? 
       false 
@@ -54,11 +57,13 @@ class Campsite < ActiveRecord::Base
       self.tribes.first.icon(style)
     end
   end
+
   def has_tribe(tribe_id)
     bool = false
     self.tribes.each { |tribe| bool = true if tribe.id == tribe_id }
     bool
   end
+
   def icons
     self.vibes.each { |tribe| icons << tribe.icon }
   end
@@ -90,6 +95,11 @@ class Campsite < ActiveRecord::Base
     }
   end
 
+  # import CSV file
+  def self.import(file)
+    CSV.foreach(file.path, headings:true) { |row| campsite.create! row.to_hash }
+  end
+
   # This takes a search query and distance, codes it into a coordinates, 
   # and returns nearby campgrounds
   def self.search(search, distance)
@@ -112,15 +122,14 @@ class Campsite < ActiveRecord::Base
   def self.to_s
     self.name
   end
+
   private
 
     def seed_blanks
       self.avg_rating = rand(3.5..4.2).round(2) if self.ratings.blank? && self.avg_rating.blank?
       sum = 0
     end
-    def add_city
 
-    end
     def resave_avg_rating
       unless self.ratings.blank?
         sum = 0
@@ -128,6 +137,7 @@ class Campsite < ActiveRecord::Base
         self.avg_rating = sum / self.ratings.size
       end
     end
+
     def resave_rank
       contenders = self.city.campsites.order('avg_rating DESC')
       i = 1

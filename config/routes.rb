@@ -56,6 +56,7 @@ Blog::Application.routes.draw do
     collection do
       get 'search'
       get 'contrib'
+      post 'import'
     end
   end
   resources :activities

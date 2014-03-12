@@ -35,3 +35,10 @@
       br
 
       = link_to 'New Campsite', new_campsite_path
+  .row  
+      h5 Upload campsites as csv
+      = form_tag import_campsites_path, multipart:true do
+        br
+        = file_field_tag :file
+        br
+        = submit_tag "Import campsites", class:"btn btn-primary"
