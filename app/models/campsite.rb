@@ -78,6 +78,7 @@ class Campsite < ActiveRecord::Base
   def geojsonify
     tribe_ids = Array.new
     self.vibes.each { |vibe| tribe_ids << vibe.tribe.id }
+    self.camp_phone.blank? ? phone = self.res_phone : phone = self.camp_phone
     geojson = {
       type: 'Feature',
       geometry: {
@@ -85,9 +86,17 @@ class Campsite < ActiveRecord::Base
         coordinates: [self.longitude, self.latitude]
       },
       properties: {
-        title: self.name,
+        title: self.name,        org: self.org,
         tribes: tribe_ids,
         url: '/campsites/#{self.id}',
+        # Extra data for iOS search:
+        phone: phone,
+        #reservable: self.reservable,
+        #walkins: self.walkins,
+        #avg_rating: self.avg_rating,
+        #ranking: self.rank,
+        #tribes_dict: self.tribes.each {|tribe| self.tribes << tribe.to_json },
+        #reviews_dict: self.reviews.each { |review| self.reviews << review.to_json },
         :'marker-color' => "\#09b",
         :'marker-symbol' => 'campsite',
         :'marker-size' => 'large'
