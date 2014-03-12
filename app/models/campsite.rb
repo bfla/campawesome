@@ -23,7 +23,7 @@ class Campsite < ActiveRecord::Base
 
   #has_many :tribes
   validates :name, :org, :state_id, :city_id, :latitude, :longitude, presence: { message:'is required' }
-  validates :res_phone, :camp_phone, numericality: { message:'must be a number', allow_blank:true }
+  #validates :res_phone, :camp_phone, numericality: { message:'must be a number', allow_blank:true }
   validates :latitude, numericality: { greater_than: 0, message:'must be a positive' }
   validates :longitude, numericality: { less_than: 0, message:'must be a negative number' }
   reverse_geocoded_by :latitude, :longitude
@@ -31,7 +31,7 @@ class Campsite < ActiveRecord::Base
   before_save :resave_avg_rating
   before_save :resave_rank
   before_save :seed_blanks
-  before_validation :fetch_city_and_state
+  #before_validation :fetch_city_and_state
   after_validation :reverse_geocode #auto-fetch address
   default_scope order('avg_rating DESC')
 
@@ -97,7 +97,7 @@ class Campsite < ActiveRecord::Base
 
   # import CSV file
   def self.import(file)
-    CSV.foreach(file.path, headings:true) { |row| campsite.create! row.to_hash }
+    CSV.foreach(file.path, headers:true) { |row| Campsite.create! row.to_hash }
   end
 
   # This takes a search query and distance, codes it into a coordinates, 
