@@ -31,6 +31,7 @@ class Campsite < ActiveRecord::Base
   before_save :resave_avg_rating
   before_save :resave_rank
   before_save :seed_blanks
+  before_validation :fetch_city_and_state
   after_validation :reverse_geocode #auto-fetch address
   default_scope order('avg_rating DESC')
 
@@ -112,9 +113,13 @@ class Campsite < ActiveRecord::Base
     self.name
   end
   private
+
     def seed_blanks
       self.avg_rating = rand(3.5..4.2).round(2) if self.ratings.blank? && self.avg_rating.blank?
       sum = 0
+    end
+    def add_city
+
     end
     def resave_avg_rating
       unless self.ratings.blank?
