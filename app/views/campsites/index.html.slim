@@ -12,8 +12,6 @@
           th Org
           th Res phone
           th Camp phone
-          th Res url
-          th Camp url
           th
           th
           th
@@ -26,8 +24,6 @@
             td = campsite.org
             td = campsite.res_phone
             td = campsite.camp_phone
-            td = campsite.res_url
-            td = campsite.camp_url
             td = link_to 'Show', campsite
             td = link_to 'Edit', edit_campsite_path(campsite)
             td = link_to 'Destroy', campsite, data: {:confirm => 'Are you sure?'}, :method => :delete
