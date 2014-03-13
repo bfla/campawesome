@@ -11,7 +11,12 @@ br
     | &nbsp;
   small
     small
-      small.subtle-text rated #{campsite.avg_rating} out of 5.0 by 2 campers
+      small.subtle-text 
+        | rated #{campsite.avg_rating} out of 5.0 by 
+        - if campsite.reviews.size > 0
+          = pluralize( campsite.reviews.size, 'campers')
+        - else
+          |  1 camper
 - else
   - if campsite.avg_rating >4.5
     - 5.times
