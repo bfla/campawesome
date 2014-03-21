@@ -99,14 +99,14 @@
         span.subtle-text.glyphicon.glyphicon-question-sign
         |&nbsp;
         small
-          a.subtle-text How to use GPS coordinates
+          a.subtle-text.add-tooltip data-toggle="tooltip" data-placement="right" title="It's usually easy.  Most map services like Google Maps, Apple Maps, and Garmin will let you enter GPS coordinates instead of an address." How to use GPS coordinates
       - unless @campsite.address.blank?
         p
           a href="#" data-toggle="modal" data-target="#addressModal" Show address
           small.subtle-text &nbsp;(not recommended)
           br
           span.subtle-text.glyphicon.glyphicon-exclamation-sign
-          small.subtle-text  Campsite addresses are often inaccurate!
+          small.subtle-text.add-tooltip  data-toggle="tooltip" data-placement="right" title="Sadly, campgrounds often don't have addresses.  Or the address is for a mailbox instead of where the campground itself is located. GPS is more trustworthy." Campsite addresses are often inaccurate!
       - unless @campsite.activities.blank?
         p = link_to "Things to do nearby", activities_campsite_path(@campsite)
 / Reviews
