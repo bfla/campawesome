@@ -79,6 +79,7 @@ class Campsite < ActiveRecord::Base
     tribe_ids = Array.new
     self.vibes.each { |vibe| tribe_ids << vibe.tribe.id }
     self.camp_phone.blank? ? phone = self.res_phone : phone = self.camp_phone
+
     geojson = {
       type: 'Feature',
       geometry: {
@@ -102,6 +103,7 @@ class Campsite < ActiveRecord::Base
         :'marker-size' => 'large'
       }
     }
+
   end
 
   # import CSV file

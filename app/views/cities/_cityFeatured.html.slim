@@ -7,7 +7,7 @@
         = link_to ' see all', browse_city_path(place)
     br
     hr
-  .col-md-3 = image_tag @tribes.find(1).icon.url(:medium), class:'tribe-subtle img-circle'
+  .col-md-3 = image_tag "icons/all100px.png", class:'tribe-subtle img-circle'
   ol.col-md-9
     - campsites.first(5).each do |campsite|
         li = link_to campsite.name, campsite
