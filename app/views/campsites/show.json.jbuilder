@@ -1,6 +1,6 @@
 json.extract! @campsite, :id, :name, :org, :latitude, :longitude, :res_phone, :camp_phone, :res_url, :camp_url, :reservable, :walkin, :avg_rating, :city_rank
 
-json.state @campsite.state, :name
+json.state @campsite.state, :name, :abbreviation
 
 json.city @campsite.city, :name
 
