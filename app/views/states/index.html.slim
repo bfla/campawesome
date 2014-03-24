@@ -9,19 +9,19 @@
       table.table
         tr
           th Name
-          th Description
           th
-          th
-          th
+          - if current_user && current_user.is_admin
+            th
+            th
 
         - @states.each do |state|
           tr
             td = state.name
-            td = state.description
             td = link_to 'Show', state
-            td = link_to 'Edit', edit_state_path(state)
-            td = link_to 'Destroy', state, data: {:confirm => 'Are you sure?'}, :method => :delete
+            - if current_user && current_user.is_admin
+              td = link_to 'Edit', edit_state_path(state)
+              td = link_to 'Destroy', state, data: {:confirm => 'Are you sure?'}, :method => :delete
 
   br
-
-  = link_to 'New State', new_state_path
+  - if current_user && current_user.is_admin
+    = link_to 'New State', new_state_path

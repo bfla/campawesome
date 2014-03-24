@@ -1,5 +1,6 @@
 class CampsitesController < ApplicationController
   before_action :set_campsite, only: [ :edit, :update, :destroy]
+  before_action :admin_only, only: [:new, :create, :import, :edit, :update, :destroy ]
 
   def search
     zoom = params[:zoom] || 10
@@ -36,12 +37,9 @@ class CampsitesController < ApplicationController
     render layout: "layouts/normal"
   end
 
-  def import
-    if params[:file]
-      Campsite.import(params[:file])
-      redirect_to root_url, notice:"imported!"
-    else
-    end
+def import
+    Campsite.import(params[:file])
+    redirect_to root_url, notice:"imported!"
   end
 
   # GET /campsites
@@ -74,7 +72,6 @@ class CampsitesController < ApplicationController
   # POST /campsites.json
   def create
     @campsite = Campsite.new(campsite_params)
-
     respond_to do |format|
       if @campsite.save
         format.html { redirect_to @campsite, notice: 'Campsite was successfully created.' }
@@ -111,6 +108,9 @@ class CampsitesController < ApplicationController
   end
 
   private
+    def admin_only
+      redirect_to forbidden_path unless current_user && current_user.is_admin
+    end
     # Use callbacks to share common setup or constraints between actions.
     def set_campsite
       @campsite = Campsite.friendly.find(params[:id])

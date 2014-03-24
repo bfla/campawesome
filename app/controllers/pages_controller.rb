@@ -38,4 +38,7 @@ class PagesController < ApplicationController
   def takedown # DMCA takedown policy
   end
 
+  def forbidden #Forbidden action or url
+  end
+
 end

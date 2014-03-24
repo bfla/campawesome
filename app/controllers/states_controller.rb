@@ -1,5 +1,6 @@
 class StatesController < ApplicationController
   before_action :set_state, only: [:show, :edit, :update, :destroy]
+  before_action :admin_only, only: [:new, :create, :import, :edit, :update, :destroy ]
 
   # GET /states
   # GET /states.json
@@ -72,6 +73,9 @@ class StatesController < ApplicationController
   end
 
   private
+    def admin_only
+      redirect_to forbidden_path unless current_user && current_user.is_admin
+    end
     # Use callbacks to share common setup or constraints between actions.
     def set_state
       @state = State.friendly.find(params[:id])

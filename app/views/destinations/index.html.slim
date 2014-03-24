@@ -6,6 +6,8 @@
 
   table.table
     tr
+      - if current_user && current_user.is_admin
+        th id
       th Name
       th Description
       th Latitude
@@ -13,11 +15,14 @@
       th Zoom
       th State
       th
-      th
-      th
+      - if current_user && current_user.is_admin
+        th
+        th
 
     - @destinations.each do |destination|
       tr
+        - if current_user && current_user.is_admin
+          td = destination.id
         td = destination.name
         td = destination.description
         td = destination.latitude
@@ -25,9 +30,11 @@
         td = destination.zoom
         td = destination.state_id
         td = link_to 'Show', destination
-        td = link_to 'Edit', edit_destination_path(destination)
-        td = link_to 'Destroy', destination, data: {:confirm => 'Are you sure?'}, :method => :delete
+        - if current_user && current_user.is_admin
+          td = link_to 'Edit', edit_destination_path(destination)
+          td = link_to 'Destroy', destination, data: {:confirm => 'Are you sure?'}, :method => :delete
 
-  br
-  .row
-    = link_to 'New Destination', new_destination_path
+  - if current_user && current_user.is_admin
+    br
+    .row
+      = link_to 'New Destination', new_destination_path
