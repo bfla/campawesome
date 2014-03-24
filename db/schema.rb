@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140324141452) do
+ActiveRecord::Schema.define(version: 20140324142713) do
 
   create_table "activities", force: true do |t|
     t.integer  "activity_type_id"
@@ -92,7 +92,10 @@ ActiveRecord::Schema.define(version: 20140324141452) do
     t.integer  "state_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "slug"
   end
+
+  add_index "cities", ["slug"], name: "index_cities_on_slug", unique: true
 
   create_table "destinations", force: true do |t|
     t.string   "name"
@@ -103,7 +106,10 @@ ActiveRecord::Schema.define(version: 20140324141452) do
     t.integer  "state_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "slug"
   end
+
+  add_index "destinations", ["slug"], name: "index_destinations_on_slug", unique: true
 
   create_table "fees", force: true do |t|
     t.integer  "campsite_id"
@@ -249,7 +255,10 @@ ActiveRecord::Schema.define(version: 20140324141452) do
     t.string   "hashtag"
     t.integer  "zoom"
     t.string   "abbreviation"
+    t.string   "slug"
   end
+
+  add_index "states", ["slug"], name: "index_states_on_slug", unique: true
 
   create_table "taggings", force: true do |t|
     t.integer  "campsite_id"

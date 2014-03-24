@@ -8,7 +8,7 @@ class CitiesController < ApplicationController
   end
 
   def browse
-    @city = City.includes(campsites: [ :ratings, :tribes] ).find(params[:id])
+    @city = City.includes(campsites: [ :ratings, :tribes] ).friendly.find(params[:id])
     @tribes = Tribe.all
     gon.campsites = @city.campsites.to_json
     gon.zoom = @city.zoom
@@ -21,7 +21,7 @@ class CitiesController < ApplicationController
   # GET /cities/1
   # GET /cities/1.json
   def show
-    @city = City.includes(:photos, campsites: [ :ratings, {vibes: :tribe}] ).find(params[:id])
+    @city = City.includes(:photos, campsites: [ :ratings, {vibes: :tribe}] ).friendly.find(params[:id])
     @tribes = Tribe.all
     render(layout: "layouts/guide")
     gon.zoom = @city.zoom
@@ -81,7 +81,7 @@ class CitiesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_city
-      @city = City.find(params[:id])
+      @city = City.friendly.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

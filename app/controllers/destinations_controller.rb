@@ -8,7 +8,7 @@ class DestinationsController < ApplicationController
   end
 
   def browse
-    @destination = Destination.find(params[:id])
+    @destination = Destination.friendly.find(params[:id])
     @campsites = Campsite.near([@destination.latitude, @destination.longitude], 30).includes(:tribes)
     @tribes = Tribe.all
     gon.campsites = @campsites.to_json
@@ -22,7 +22,7 @@ class DestinationsController < ApplicationController
   # GET /destinations/1
   # GET /destinations/1.json
   def show
-    @destination = Destination.includes(:photos).find(params[:id])
+    @destination = Destination.includes(:photos).friendly.find(params[:id])
     @campsites = Campsite.near([@destination.latitude, @destination.longitude], 30)
     @tribes = Tribe.all
     render(layout: "layouts/guide")
@@ -83,7 +83,7 @@ class DestinationsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_destination
-      @destination = Destination.find(params[:id])
+      @destination = Destination.friendly.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

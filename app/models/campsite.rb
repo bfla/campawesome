@@ -1,7 +1,4 @@
 class Campsite < ActiveRecord::Base
-  # Use friendly ids for urls
-  extend FriendlyId
-  friendly_id :name, use: :slugged
   # name:string, org:string, description:text, 
   # state_id:integer, latititude:float, longitude:float
   # res_phone:string, camp_phone:string, res_url:string, camp_url:string, 
@@ -135,6 +132,13 @@ class Campsite < ActiveRecord::Base
 
   def self.to_s
     self.name
+  end
+
+  # Use friendly ids for urls
+  extend FriendlyId
+  friendly_id :slug_me_up, use: :slugged
+  def slug_me_up
+    "#{name} in #{city.name} #{state.abbreviation} camping"
   end
 
   private

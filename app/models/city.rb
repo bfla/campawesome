@@ -1,4 +1,5 @@
 class City < ActiveRecord::Base
+  
   belongs_to :state
   has_many :campsites
   has_many :photos
@@ -6,6 +7,13 @@ class City < ActiveRecord::Base
   validates :latitude, numericality: {greater_than: 0}
   validates :longitude, numericality: {less_than: 0}
   validates :zoom, numericality: true
+
+  # use friendly ids for urls
+  extend FriendlyId
+  friendly_id :slug_me_up, use: :slugged
+  def slug_me_up
+    "#{name} #{state.abbreviation} camping"
+  end
 
   def hashtag
     self.state.hashtag
