@@ -53,7 +53,7 @@ class CampsitesController < ApplicationController
   # GET /campsites/1
   # GET /campsites/1.json
   def show
-    @campsite = Campsite.includes(:photos, :tags, :fees, :beens, :wants, :listeds, reviews: [:rating]).find(params[:id])
+    @campsite = Campsite.includes(:photos, :tags, :fees, :beens, :wants, :listeds, reviews: [:rating]).friendly.find(params[:id])
     @activity_types = ActivityType.all
     @nearbys = @campsite.nearbys.limit(5)
     gon.initCenter = [@campsite.latitude, @campsite.longitude]
@@ -113,7 +113,7 @@ class CampsitesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_campsite
-      @campsite = Campsite.find(params[:id])
+      @campsite = Campsite.friendly.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
