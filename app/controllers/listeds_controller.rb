@@ -1,5 +1,6 @@
 class ListedsController < ApplicationController
   before_action :set_listed, only: [:show, :edit, :update, :destroy]
+  before_action :verify_user, only: [:destroy, :update]
 
   # GET /listeds
   # GET /listeds.json
@@ -75,5 +76,9 @@ class ListedsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def listed_params
       params.permit(:listed, :list_id, :listable_id, :listable_type, :campsite_id)
+    end
+
+    def verify_user
+      redirect_to forbidden_path unless user_signed_in? && @listed.list.user_id == current_user.id
     end
 end

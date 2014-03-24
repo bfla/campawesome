@@ -1,5 +1,6 @@
 class ReviewsController < ApplicationController
   before_action :set_review, only: [:show, :edit, :update, :destroy]
+  before_action :verify_user, only: [:destroy, :update]
 
   # GET /reviews
   # GET /reviews.json
@@ -85,5 +86,10 @@ class ReviewsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def review_params
       params.permit(:review, :body, :reviewable_id, :reviewable_type)
+    end
+
+    # Verify the user owns the campsite
+    def verify_user
+      redirect_to forbidden_path unless user_signed_in? && @review.user_id == current_user.id
     end
 end

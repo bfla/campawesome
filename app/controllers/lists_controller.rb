@@ -1,5 +1,6 @@
 class ListsController < ApplicationController
   before_action :set_list, only: [:show, :edit, :update, :destroy]
+  before_action :verify_user, only: [:destroy, :update]
 
   def management
     if user_signed_in?
@@ -102,5 +103,9 @@ class ListsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def list_params
       params.require(:list).permit(:name, :campsite_id)
+    end
+
+    def verify_user
+      redirect_to forbidden_path unless user_signed_in? && @list.user_id == current_user.id
     end
 end

@@ -1,5 +1,6 @@
 class RatingsController < ApplicationController
   before_action :set_rating, only: [:show, :edit, :update, :destroy]
+  before_action :verify_user, only: [:destroy, :update]
 
   # GET /ratings
   # GET /ratings.json
@@ -70,5 +71,9 @@ class RatingsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def rating_params
       params.permit(:rating, :ratable_id, :ratable_type, :value, :review_id)
+    end
+
+    def verify_user
+      redirect_to forbidden_path unless user_signed_in? && @rating.user_id == current_user.id
     end
 end

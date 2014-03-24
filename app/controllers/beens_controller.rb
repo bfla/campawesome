@@ -1,5 +1,6 @@
 class BeensController < ApplicationController
   before_action :set_been, only: [:show, :edit, :update, :destroy]
+  before_action :verify_user, only: [:destroy, :update]
 
   # GET /beens
   # GET /beens.json
@@ -80,5 +81,9 @@ class BeensController < ApplicationController
     def been_params
       #params.require(:been).permit(:campsite_id, :user_id)
       params.permit(:been, :user_id, :beenable_id, :beenable_type)
+    end
+
+    def verify_user
+      redirect_to forbidden_path unless user_signed_in? && @been.user.id == current_user.id
     end
 end

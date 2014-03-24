@@ -1,5 +1,6 @@
 class WantsController < ApplicationController
   before_action :set_want, only: [:show, :edit, :update, :destroy]
+  before_action :verify_user, only: [:destroy, :update]
 
   # GET /wants
   # GET /wants.json
@@ -80,5 +81,9 @@ class WantsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def want_params
       params.permit(:want, :wantable_id, :wantable_type)
+    end
+
+    def verify_user
+      redirect_to forbidden_path unless user_signed_in? && @want.user.id == current_user.id
     end
 end
