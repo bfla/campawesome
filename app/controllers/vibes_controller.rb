@@ -1,5 +1,6 @@
 class VibesController < ApplicationController
   before_action :set_vibe, only: [:show, :edit, :update, :destroy]
+  before_action :admin_only
 
   # GET /vibes
   # GET /vibes.json
@@ -62,6 +63,9 @@ class VibesController < ApplicationController
   end
 
   private
+    def admin_only
+      redirect_to forbidden_path unless current_user && current_user.is_admin
+    end
     # Use callbacks to share common setup or constraints between actions.
     def set_vibe
       @vibe = Vibe.find(params[:id])

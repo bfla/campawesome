@@ -1,6 +1,7 @@
 class TribalMembershipsController < ApplicationController
   before_action :set_tribal_membership, only: [:show, :edit, :update, :destroy]
   before_action :set_user, only: [:create]
+  before_action :admin_only, only: [:index, :show, :destroy]
 
   # GET /tribal_memberships
   # GET /tribal_memberships.json
@@ -70,6 +71,9 @@ class TribalMembershipsController < ApplicationController
   end
 
   private
+    def admin_only
+      redirect_to forbidden_path unless current_user && current_user.is_admin
+    end
     # Use callbacks to share common setup or constraints between actions.
     def set_tribal_membership
       @tribal_membership = TribalMembership.find(params[:id])

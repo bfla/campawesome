@@ -1,5 +1,6 @@
 class RewardOrdersController < ApplicationController
   before_action :set_reward_order, only: [:show, :edit, :update, :destroy]
+  before_action :admin_only, only: [:index, :edit, :update, :destroy]
 
   # GET /reward_orders
   # GET /reward_orders.json
@@ -63,6 +64,9 @@ class RewardOrdersController < ApplicationController
   end
 
   private
+    def admin_only
+      redirect_to forbidden_path unless current_user && current_user.is_admin
+    end
     # Use callbacks to share common setup or constraints between actions.
     def set_reward_order
       @reward_order = RewardOrder.find(params[:id])
