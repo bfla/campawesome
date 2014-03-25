@@ -66,6 +66,7 @@ gem 'bcrypt-ruby', '~> 3.0.0'
 group :production do
   gem 'rails_12factor'
   gem 'pg'
+  gem 'aws-sdk'
 end
 ruby '2.0.0'
 # Use debugger
