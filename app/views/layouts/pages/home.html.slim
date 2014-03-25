@@ -15,11 +15,11 @@ html.fill-height class=(user_signed_in? ? 'background':'white')
           .row
             .col-md-8.col-md-offset-2
               h1.text-center style="color:white; padding-top:150px;" 
-                | Rawr! I'm CampHero
+                | Greetings citizen! I'm CampHero
                 br
-                | I'll find you fiercely awesome campsites
+                | I'll find you mighty awesome campsites
                 br
-                small style="color:white;" With recommendations from smart campers like yourself
+                small style="color:white;" With recommendations from heroic campers like yourself
           .row
               = form_tag search_campsites_path, method: "get", class: "form", role: "search" do
                 = label_tag :keywords, 'Find campgrounds near', class: 'sr-only'
