@@ -12,7 +12,7 @@ html.fill-height
     == render 'layouts/headscripts'
     == yield :head_javascripts
     
-  body.fill-height.background
+  body.fill-height.background itemscope="itemscope" itemtype="http://schema.org/Place"
     == render 'layouts/modals/standardModals'
     / Top navbar goes here
     == render 'layouts/navbar'

@@ -38,8 +38,8 @@
           | Reservations: #{number_to_phone(@campsite.res_phone)}
           br
       - if @campsite.camp_phone?
-        .subtle-text
-          span.glyphicon.glyphicon-earphone
+        .subtle-text itemprop="telephone"
+          span.glyphicon.glyphicon-earphone 
           |  Campground: #{number_to_phone(@campsite.camp_phone)}
           br
       - if @campsite.res_url?
@@ -48,8 +48,8 @@
           |  Online reservations
         br
       - if @campsite.camp_url?
-        a href=@campsite.camp_url
-          span.glyphicon.glyphicon-globe
+        a href=@campsite.camp_url itemprop="sameAs"
+          span.glyphicon.glyphicon-globe 
           |  Official site
         br
 / Nearby campsites =====================================
@@ -69,6 +69,7 @@
     hr
     p
       small
-        .extra-subtle Camping Description:
-        = truncate @campsite.description, length:250, separator:' '
+        .extra-subtle 
+          | Camping Description:
+        span itemprop="description" = truncate @campsite.description, length:250, separator:' '
         a ... more

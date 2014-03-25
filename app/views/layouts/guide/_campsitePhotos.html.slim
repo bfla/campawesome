@@ -6,6 +6,12 @@
   - else place.photos.first.blank?
     div itemscope="itemscope" itemtype="http://schema.org/Photograph"
       = image_tag place.photos.first.photo_file.url(:large), class: "img-thumbnail img-responsive", html: {title:"", alt:"", caption:"", description:""}
+      - unless place.photos.first.title.blank?
+        meta itemprop="name" content="#{place.photos.first.title}"
+      - unless place.photos.first.caption.blank?
+        meta itemprop="description" content="#{place.photos.first.caption}"
+      meta itemprop="image" content="place.photos.first.photo_file.url(:large)"
+      meta itemprop="keywords" content="photo of #{place.name}"
 .col-md-3.hidden-xs
   - unless place.photos.second.blank?
     .pad-top-sm itemscope="itemscope" itemtype="http://schema.org/Photograph"

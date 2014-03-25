@@ -1,38 +1,54 @@
-/ Needs a rating:rating and campsite:campsite
-.col-md-3
-  .col-md-offset-1.col-md-10
-    - if review.user.tribe.blank?
-      h1.text-center
-        span.glyphicon.glyphicon-globe.subtle-text
-        br
-        small
-          small no tribe
-    - else
-      h1.text-center
-        = image_tag review.user.tribe.icon.url(:medium), class:"img-responsive img-circle tribe-background add-tooltip", data: {toggle:"tooltip", placement:"right"}, title:"#{review.user.tribe.name}: #{review.user.tribe.description}"
-  p.text-center.col-md-12
-    small
-      /| Newbie
-      /br
-      | #{pluralize(review.user.reviews.size, "Review")}
-      /br
-      /| 5 Helpful votes
+div itemprop="review" itemscope="itemscope" itemtype="http://schema.org/Review"
+  / Schema data
+  meta itemprop="timeRequired" content="P1M"
+  meta itemprop="typicalAgeRange" content="17-55"
+  meta itemprop="isFamilyFriendly" content="true"
+  div itemprop="audience" itemscope="itemscope" itemtype="http://schema.org/Audience"
+    meta itemprop="name" content="campers"
+    meta itemprop="description" content="This is website for finding places to camp. It is ideal for campers, outdoor enthusiasts, backpackers, RV travelers and anyone who likes camping."
+    meta itemprop="audienceType" content="campers"
 
-p.col-md-9
-  - if review.user.first_name.blank?
-    .lead.subtle-text Review by Anonymous camper
-  - else
-    .subtle-text 
-      | Reviewed by #{review.user.first_name}
-      - unless review.user.tribe.blank?
-        small
-          | , of the #{review.user.tribe.name}&nbsp;
-          span.glyphicon.glyphicon-info-sign.add-tooltip data-toggle="tooltip" data-placement="right" title=review.user.tribe.description
-      br
-      = render "ratingDisplay", campsite:campsite
-      small.subtle-text #{review.rating.value} out of 5.0
-  = review.body
-  br
-  small.subtle-text  reviewed on #{review.created_at.to_formatted_s(:short)}
-.col-md-12
-  hr
+  / Needs a rating:rating and campsite:campsite
+  .col-md-3
+    .col-md-offset-1.col-md-10
+      - if review.user.tribe.blank?
+        h1.text-center
+          span.glyphicon.glyphicon-globe.subtle-text
+          br
+          small
+            small no tribe
+      - else
+        h1.text-center
+          = image_tag review.user.tribe.icon.url(:medium), class:"img-responsive img-circle tribe-background add-tooltip", data: {toggle:"tooltip", placement:"right"}, title:"#{review.user.tribe.name}: #{review.user.tribe.description}"
+    p.text-center.col-md-12
+      small
+        /| Newbie
+        /br
+        | #{pluralize(review.user.reviews.size, "Review")}
+        /br
+        /| 5 Helpful votes
+
+  p.col-md-9 
+    - if review.user.first_name.blank?
+      .lead.subtle-text Review by Anonymous camper
+    - else
+      .subtle-text 
+        | Reviewed by 
+        span itemprop="author"  #{review.user.first_name}
+        - unless review.user.tribe.blank?
+          small
+            | , of the #{review.user.tribe.name}&nbsp;
+            span.glyphicon.glyphicon-info-sign.add-tooltip data-toggle="tooltip" data-placement="right" title=review.user.tribe.description
+        br
+        = render "ratingDisplay", campsite:campsite
+        small.subtle-text itemprop="reviewRating" itemscope="itemscope" itemtype="http://schema.org/AggregateRating"
+          span itemprop="ratingValue" #{review.rating.value} out of 5.0
+          meta itemprop="bestRating" content="5"
+          meta itemprop="worstRating" content="1"
+    span itemprop="reviewBody" = review.body
+    br
+    small.subtle-text
+    |  reviewed on 
+    span  itemprop="datePublished" #{review.created_at.to_formatted_s(:short)}
+  .col-md-12
+    hr

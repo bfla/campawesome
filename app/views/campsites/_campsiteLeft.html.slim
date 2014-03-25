@@ -92,9 +92,17 @@
     #mapRow.col-md-5
         #campsiteMap
     .col-md-6.col-md-offset-1
-      p
+      div itemprop="containedIn" itemscope="itemscope" itemtype="http://schema.org/Place"
+        meta itemprop="name" content="#{@campsite.city.name}"
+        meta itemprop="description" content="The city of #{@campsite.city.name}"
+        div itemprop="containedIn" itemscope="itemscope" itemtype="http://schema.org/Place"
+          meta itemprop="name" content="#{@campsite.state.name}"
+          meta itemprop="description" content="The state of #{@campsite.state.name}."
+      p itemprop="geo" itemscope="itemscope" itemtype="http://schema.org/GeoCoordinates"
         strong.subtle-text GPS:
-        |  #{@campsite.latitude}N, #{-@campsite.longitude}W
+        span itemprop="latitude"  #{@campsite.latitude}
+        |, 
+        span itemprop="longitude"  #{@campsite.longitude}
         br
         span.subtle-text.glyphicon.glyphicon-question-sign
         |&nbsp;
