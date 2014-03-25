@@ -4,7 +4,7 @@
   .col-md-2 = image_tag campsite.primary_icon(:medium), class:"img-circle tribe-background img-responsive"
   .col-md-10
     p.lead.col-md-12
-      - if current_user.tribe && campsite.tribes.first.id == current_user.tribe.id && campsite.avg_rating > 4.0
+      - if !current_user.tribe.blank? && !campsite.tribes.first.blank? && campsite.tribes.first.id == current_user.tribe.id && campsite.avg_rating > 4.0
         small 
           small.greenify
             span.glyphicon.glyphicon-chevron-up
