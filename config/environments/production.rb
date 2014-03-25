@@ -70,9 +70,9 @@ Blog::Application.configure do
   config.action_mailer.smtp_settings = {
     address:        "smtp.gmail.com",
     port:           587,
-    domain:         "getcamphero.com",
+    domain:         "getCampHero.com",
     authentication: "plain",
-    user_name:      "brian@getcamphero.com",
+    user_name:      "brian@getCampHero.com",
     password:       "Witpomc2t",
     enable_starttls_auto: true
   }

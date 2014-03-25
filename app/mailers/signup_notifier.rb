@@ -1,5 +1,5 @@
 class SignupNotifier < ActionMailer::Base
-  default from: "Brian at CampHero <brian@getcamphero.com>"
+  default from: "Brian at CampHero <brian@getCampHero.com>"
 
   # Subject can be set in your I18n file at config/locales/en.yml
   # with the following lookup:
