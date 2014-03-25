@@ -130,6 +130,8 @@ html.fill-height
       script src='https://api.tiles.mapbox.com/mapbox.js/v1.6.1/mapbox.js'
       #resultsMap
 
+    == render 'layouts/bottomScripts'
+
   javascript:
     highlightSearchThumbnail($('#allSearchFilter'));
     // Create the initial map
@@ -166,6 +168,7 @@ html.fill-height
       });
       return false;
     });
+
 
       // reset map based on current location DOESN'T WORK
       /*$("#resetSearchArea").click( function(){
