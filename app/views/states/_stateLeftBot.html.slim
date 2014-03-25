@@ -6,11 +6,12 @@
       small 
         small = link_to 'see more', browse_destinations_states_path(id:@state)
 - @destinations.each_with_index do |destination, index|
-  .col-md-4
-    = link_to destination_path(destination), class:'thumbnail'
-      = image_tag destination.photos.first.photo_file
-    p.text-center
-      span.label.label-info = index + 1
-      |&nbsp;&nbsp;
-      = link_to link_to destination.name, destination
+  - if destination.photos.any?
+    .col-md-4
+      = link_to destination_path(destination), class:'thumbnail'
+        = image_tag destination.photos.first.photo_file
+      p.text-center
+        span.label.label-info = index + 1
+        |&nbsp;&nbsp;
+        = link_to link_to destination.name, destination
 
