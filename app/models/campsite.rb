@@ -89,7 +89,7 @@ class Campsite < ActiveRecord::Base
       properties: {
         title: self.name,        org: self.org,
         tribes: tribe_ids,
-        url: "campsites/#{self.id}",
+        url: "campsites/#{self.slug}",
         # Extra data for iOS search:
         phone: phone,
         #reservable: self.reservable,
