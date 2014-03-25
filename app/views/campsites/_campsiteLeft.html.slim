@@ -127,7 +127,8 @@
         |  Reviews 
         small.subtle-text  #{pluralize(@campsite.reviews.size, "review")} for #{@campsite.name}
     - @campsite.reviews.each do |review|
-      = render "campsiteReview", review:review, campsite:@campsite
+      .col-md-12
+        = render "campsiteReview", review:review, campsite:@campsite
 
 / Tribes who like it
 /

@@ -2,10 +2,10 @@
 .row 
   = render 'layouts/campsiteCommands', campsite:@campsite
   br
-  p.subtle-text
-    |  #{@campsite.beens.size} been here |
-    |  #{@campsite.wants.size} want to go |
-    |  On #{pluralize(@campsite.listeds.size, 'list')}
+  /p.subtle-text
+    /|  #{@campsite.beens.size} been here |
+    /|  #{@campsite.wants.size} want to go |
+    /|  On #{pluralize(@campsite.listeds.size, 'list')}
 
 / Ranking and rating =====================================
 .row

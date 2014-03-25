@@ -1,0 +1,33 @@
+/ requires a rating
+- if rating.value >4.5
+  - 5.times
+    span.glyphicon.glyphicon-fire.rating-color
+    | &nbsp;
+- elsif rating.value > 3.9
+  - 4.times
+    span.glyphicon.glyphicon-fire.rating-color
+    | &nbsp;
+  - 1.times
+    span.glyphicon.glyphicon-fire.subtle-text
+    | &nbsp;
+- elsif rating.value > 3.0
+  - 3.times
+    span.glyphicon.glyphicon-fire.rating-color
+    | &nbsp;
+  - 2.times
+    span.glyphicon.glyphicon-fire.subtle-text
+    | &nbsp;
+- elsif rating.value > 2.0
+  - 2.times
+    span.glyphicon.glyphicon-fire.rating-color
+    | &nbsp;
+  - 3.times
+    span.glyphicon.glyphicon-fire.subtle-text
+    | &nbsp;
+- else 
+  - 1.times
+    span.glyphicon.glyphicon-fire.rating-color
+    | &nbsp;
+  - 4.times
+    span.glyphicon.glyphicon-fire.subtle-text
+    | &nbsp;

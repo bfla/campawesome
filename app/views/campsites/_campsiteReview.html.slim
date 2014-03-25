@@ -29,26 +29,27 @@ div itemprop="review" itemscope="itemscope" itemtype="http://schema.org/Review"
         /| 5 Helpful votes
 
   p.col-md-9 
-    - if review.user.first_name.blank?
-      .lead.subtle-text Review by Anonymous camper
-    - else
-      .subtle-text 
+    .subtle-text
+      - if review.user.first_name.blank?
+        | Review by Anonymous camper
+      - else
         | Reviewed by 
         span itemprop="author"  #{review.user.first_name}
-        - unless review.user.tribe.blank?
-          small
-            | , of the #{review.user.tribe.name}&nbsp;
-            span.glyphicon.glyphicon-info-sign.add-tooltip data-toggle="tooltip" data-placement="right" title=review.user.tribe.description
-        br
-        = render "ratingDisplay", campsite:campsite
-        small.subtle-text itemprop="reviewRating" itemscope="itemscope" itemtype="http://schema.org/AggregateRating"
-          span itemprop="ratingValue" #{review.rating.value} out of 5.0
-          meta itemprop="bestRating" content="5"
-          meta itemprop="worstRating" content="1"
+      - unless review.user.tribe.blank?
+        small
+          | , of the #{review.user.tribe.name}&nbsp;
+          span.glyphicon.glyphicon-info-sign.add-tooltip data-toggle="tooltip" data-placement="right" title=review.user.tribe.description
+    - unless review.rating.value.blank?
+      = render "reviewRating", rating:review.rating
+    small.subtle-text itemprop="reviewRating" itemscope="itemscope" itemtype="http://schema.org/AggregateRating"
+      span itemprop="ratingValue" #{review.rating.value} out of 5.0
+      meta itemprop="bestRating" content="5"
+      meta itemprop="worstRating" content="1"
+    br  
     span itemprop="reviewBody" = review.body
     br
     small.subtle-text
-    |  reviewed on 
-    span  itemprop="datePublished" #{review.created_at.to_formatted_s(:short)}
+      |  reviewed on 
+      span  itemprop="datePublished" #{review.created_at.to_formatted_s(:short)}
   .col-md-12
     hr
