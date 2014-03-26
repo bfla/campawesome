@@ -7,10 +7,12 @@ html
     / styles
     == render 'layouts/headstyles'
     == yield :extra_stylesheets
+    link href='//api.tiles.mapbox.com/mapbox.js/v1.6.1/mapbox.css' rel='stylesheet'
 
     / scripts
     == render 'layouts/headscripts'
     == yield :head_javascripts
+    script src='https://api.tiles.mapbox.com/mapbox.js/v1.6.1/mapbox.js'
     
   body.background
     == render 'layouts/modals/standardModals'
@@ -62,6 +64,12 @@ html
         $('.panel').hide();
       });
       $('.add-tooltip').tooltip();
+
     javascript:
-      google.maps.event.addDomListener(window, "load", makeGuideMap);
+      //makeAreaMap( [gon.latitude, gon.longitude], gon.zoom);
+      /*$(document).ready( function() {
+        makeAreaMap( [gon.latitude, gon.longitude], gon.zoom);
+      });*/
+        //map = L.mapbox.map("thumbMap", "campawesome.h5d0p7ea", { zoomControl:false }).setView([gon.latitude, gon.longitude], gon.zoom);
+
     == render 'layouts/bottomScripts'
