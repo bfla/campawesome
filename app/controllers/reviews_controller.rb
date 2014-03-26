@@ -34,6 +34,7 @@ class ReviewsController < ApplicationController
     @campsite = Campsite.find(params[:campsite_id])
     if @campsite.reviews.find_by(user_id:current_user.id).blank?
       @review = @campsite.reviews.create(body: params[:body], user_id:current_user.id)
+      @review.title = params[:title] if params[:title]
       @review.save
     end
     if params[:rating].to_f != 0.0 && @campsite.ratings.find_by(user_id:current_user.id).blank?
@@ -85,7 +86,7 @@ class ReviewsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def review_params
-      params.permit(:review, :body, :reviewable_id, :reviewable_type)
+      params.permit(:review, :body, :title, :reviewable_id, :reviewable_type)
     end
 
     # Verify the user owns the campsite

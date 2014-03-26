@@ -29,6 +29,9 @@ div itemprop="review" itemscope="itemscope" itemtype="http://schema.org/Review"
         /| 5 Helpful votes
 
   p.col-md-9 
+    - unless review.title.blank?
+      .lead
+        small = review.title
     .subtle-text
       - if review.user.first_name.blank?
         | Review by Anonymous camper
