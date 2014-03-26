@@ -17,9 +17,6 @@
   map.markerLayer.setGeoJSON(geoJson) # set the markers
 
 
-# Campsite search.html scripts =================================
-
-
 # highlight the selected thumbnail in green
 @highlightSearchThumbnail = (target) ->
   unless target.attr("style") is "border: 2px solid #65b045; background:#d5eacb;"
