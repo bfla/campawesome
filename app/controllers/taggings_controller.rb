@@ -31,7 +31,7 @@ class TaggingsController < ApplicationController
   # POST /taggings
   # POST /taggings.json
   def create
-    @tagging = Tagging.new(campsite_id:params[:campsite_id], tag_id:params[:tag_id], user_id:current_user.id)
+    @tagging = Tagging.new(tagging_params)
 
     respond_to do |format|
       if @tagging.save
@@ -79,6 +79,6 @@ class TaggingsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def tagging_params
-      params.require(:tagging).permit(:campsite_id, :tag_id)
+      params.require(:tagging).permit(:campsite_id, :tag_id. :user_id)
     end
 end
