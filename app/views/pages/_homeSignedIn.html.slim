@@ -76,7 +76,7 @@
           small 
             small 
               - if @user.tribe.blank?
-                | To get personalized recommendations, pick a tribe:
+                | You don't belong to a tribe.
                 = link_to "Join a tribe", new_tribal_membership_path, class:'btn btn-warning btn-sm'
               - else
                 /| Newbie in the #{@user.tribe.name} tribe&nbsp;&nbsp;
