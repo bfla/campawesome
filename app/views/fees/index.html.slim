@@ -25,5 +25,14 @@ table
       td = link_to 'Destroy', fee, data: {:confirm => 'Are you sure?'}, :method => :delete
 
 br
-
-= link_to 'New Fee', new_fee_path
+.row
+  = link_to 'New Fee', new_fee_path
+.row
+  - if current_user && current_user.is_admin
+    .row  
+        h5 Upload fees as csv
+        = form_tag import_fees_path, multipart:true do
+          br
+          = file_field_tag :file
+          br
+          = submit_tag "Import fees!", class:"btn btn-info"

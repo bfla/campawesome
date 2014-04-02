@@ -2,6 +2,12 @@ class ActivitiesController < ApplicationController
   before_action :set_activity, only: [:show, :edit, :update, :destroy]
   before_action :admin_only
 
+  # Import CSV file
+  def import
+    Activity.import(params[:file])
+    redirect_to root_url, notice:"imported!"
+  end
+
   # GET /activities
   # GET /activities.json
   def index

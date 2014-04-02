@@ -2,6 +2,12 @@ class FeesController < ApplicationController
   before_action :set_fee, only: [:show, :edit, :update, :destroy]
   before_action :admin_only
 
+  # Import CSV file
+  def import
+    Fee.import(params[:file])
+    redirect_to root_url, notice:"imported!"
+  end
+
   # GET /fees
   # GET /fees.json
   def index

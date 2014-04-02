@@ -37,7 +37,7 @@ class CampsitesController < ApplicationController
     render layout: "layouts/normal"
   end
 
-def import
+  def import
     Campsite.import(params[:file])
     redirect_to root_url, notice:"imported!"
   end

@@ -9,11 +9,27 @@ Blog::Application.routes.draw do
     end
   end
 
-  resources :taggings
-
+  # Campsite-related items...
+  resources :taggings do
+    collection do
+      post 'import'
+    end
+  end
   resources :tags
 
-  resources :fees
+  resources :activities do
+    collection do
+      post 'import'
+    end
+  end
+  resources :activity_types
+
+  resources :fees do
+    collection do
+      post 'import'
+    end
+  end
+
 
   # Saved places: lists, beens, etc
   resources :beens
@@ -33,7 +49,11 @@ Blog::Application.routes.draw do
   resources :ratings
 
   # Tribes
-  resources :vibes
+  resources :vibes do
+    collection do
+      post 'import'
+    end
+  end
   resources :tribal_memberships
   resources :tribes
 
@@ -59,8 +79,6 @@ Blog::Application.routes.draw do
       post 'import'
     end
   end
-  resources :activities
-  resources :activity_types
 
   # Pages
   resources :pages

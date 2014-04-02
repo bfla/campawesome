@@ -2,6 +2,12 @@ class TaggingsController < ApplicationController
   before_action :set_tagging, only: [:show, :edit, :update, :destroy]
   before_action :admin_only
 
+  # Import CSV file
+  def import
+    Tagging.import(params[:file])
+    redirect_to root_url, notice:"imported!"
+  end
+
   # GET /taggings
   # GET /taggings.json
   def index

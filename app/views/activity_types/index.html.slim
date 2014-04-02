@@ -20,3 +20,12 @@
   br
   .row
     .col-md-9.col-md-offset-1 style="z-index:1;" = link_to 'New Activity type', new_activity_type_path
+  .row
+    - if current_user && current_user.is_admin
+      .row  
+          h5 Upload activities as csv
+          = form_tag import_activities_path, multipart:true do
+            br
+            = file_field_tag :file
+            br
+            = submit_tag "Import activities!", class:"btn btn-info"

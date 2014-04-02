@@ -19,5 +19,14 @@ table
       td = link_to 'Destroy', tagging, data: {:confirm => 'Are you sure?'}, :method => :delete
 
 br
-
-= link_to 'New Tagging', new_tagging_path
+.row
+  = link_to 'New Tagging', new_tagging_path
+.row
+  - if current_user && current_user.is_admin
+    .row
+        h5 Upload taggings as csv
+        = form_tag import_taggings_path, multipart:true do
+          br
+          = file_field_tag :file
+          br
+          = submit_tag "Import taggings!", class:"btn btn-info"

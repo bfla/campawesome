@@ -2,6 +2,12 @@ class VibesController < ApplicationController
   before_action :set_vibe, only: [:show, :edit, :update, :destroy]
   before_action :admin_only
 
+  # Import CSV file
+  def import
+    Vibe.import(params[:file])
+    redirect_to root_url, notice:"imported!"
+  end
+
   # GET /vibes
   # GET /vibes.json
   def index

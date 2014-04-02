@@ -17,5 +17,14 @@ table
       td = link_to 'Destroy', vibe, data: {:confirm => 'Are you sure?'}, :method => :delete
 
 br
-
-= link_to 'New Vibe', new_vibe_path
+.row
+  = link_to 'New Vibe', new_vibe_path
+.row
+  - if current_user && current_user.is_admin
+    .row  
+        h5 Upload vibes as csv
+        = form_tag import_vibes_path, multipart:true do
+          br
+          = file_field_tag :file
+          br
+          = submit_tag "Import vibes!", class:"btn btn-info"
