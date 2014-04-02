@@ -1,6 +1,5 @@
 class TribalMembershipsController < ApplicationController
   before_action :set_tribal_membership, only: [:show, :edit, :update, :destroy]
-  before_action :set_user, only: [:create]
   before_action :admin_only, only: [:index, :show, :destroy]
 
   # GET /tribal_memberships
@@ -29,7 +28,7 @@ class TribalMembershipsController < ApplicationController
   def create
     @tribes = Tribe.all
     if current_user.tribal_membership.blank?
-      @tribal_membership = TribalMembership.new(tribal_membership_params, user_id:current_user.id)
+      @tribal_membership = TribalMembership.new(tribe_id:params[:tribe_id], user_id:current_user.id)
     else
       @tribal_membership = current_user.tribal_membership
       @tribal_membership.update(tribal_membership_params)
@@ -77,9 +76,6 @@ class TribalMembershipsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_tribal_membership
       @tribal_membership = TribalMembership.find(params[:id])
-    end
-    def set_user
-      params[:user_id] = current_user
     end
     # Never trust parameters from the scary internet, only allow the white list through.
     def tribal_membership_params
