@@ -76,6 +76,6 @@ class ActivitiesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def activity_params
-      params.require(:activity).permit(:activity_type_id, :campsite_id, :description, :latitude, :longitude)
+      params.require(:activity).permit(:activity_type_id, :campsite_id, :name, :description, :latitude, :longitude)
     end
 end
