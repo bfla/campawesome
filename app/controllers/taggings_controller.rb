@@ -31,7 +31,7 @@ class TaggingsController < ApplicationController
   # POST /taggings
   # POST /taggings.json
   def create
-    @tagging = Tagging.new(tagging_params)
+    @tagging = Tagging.new(campsite_id:params[:campsite_id], tag_id:params[:tag_id], user_id:current_user.id)
 
     respond_to do |format|
       if @tagging.save
@@ -70,7 +70,7 @@ class TaggingsController < ApplicationController
 
   private
     def admin_only
-      redirect_to forbidden_path unless current_user && current_user.is_admin
+      redirect_to forbidden_path unless user_signed_in? && current_user.is_admin
     end
     # Use callbacks to share common setup or constraints between actions.
     def set_tagging
@@ -79,6 +79,6 @@ class TaggingsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def tagging_params
-      params.require(:tagging).permit(:campsite_id, :tag_id, :user_id)
+      params.require(:tagging).permit(:campsite_id, :tag_id)
     end
 end
