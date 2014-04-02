@@ -87,7 +87,8 @@ class Campsite < ActiveRecord::Base
         coordinates: [self.longitude, self.latitude]
       },
       properties: {
-        title: self.name,        org: self.org,
+        title: self.name,        
+        org: self.org,
         tribes: tribe_ids,
         url: "campsites/#{self.slug}",
         # Extra data for iOS search:
