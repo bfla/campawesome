@@ -23,10 +23,8 @@ module Merit
       #   'comments#create',
       #   'photos#create'
       # ]
-      score 50, :on => 'reviews#create' do
-      end
-      score 50, :on => 'photos#create' do
-      end
+      score 25, :on => 'reviews#create'
+      score 25, :on => 'photos#create'
       score 1, :on => 'beens#create'
       score 1, :on => 'wants#create'
       score 5, :on => 'lists#create'
