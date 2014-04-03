@@ -8,9 +8,13 @@ class CampsitesController < ApplicationController
     coordinates = Geocoder.coordinates(params[:keywords])
     @campsites = Campsite.near(coordinates, distance).includes(:tribes).first(50)
     @tribes = Tribe.all
-    #@campsites = Campsite.search(params[:keywords], zoom)
-    #@campsites = Campsite.search(params[:keywords], my_distance)
-    @center = Geocoder::Calculations.geographic_center(@campsites)
+
+    if @campsites.blank?
+      @center = coordinates
+    else
+      @center = Geocoder::Calculations.geographic_center(@campsites)
+    end
+
     @geojson = Array.new
     @campsites.each { |campsite| @geojson << campsite.geojsonify}
     gon.campsites = @campsites
