@@ -10,6 +10,7 @@ html.fill-height
 
   body.fill-height
     == render 'layouts/modals/standardModals'
+
     == render 'layouts/navbar'
     #results-container.col-md-4.well.white.fill-height.remove-bottom-margin
       .result-list.fill-height
@@ -62,6 +63,10 @@ html.fill-height
         / Results ======================
         .row
           - @campsites.each do |campsite|
+            = render 'layouts/modals/newReviewModal', campsite:campsite
+            = render 'layouts/modals/newListModal', campsite:campsite
+            = render 'layouts/modals/listSavedModal'
+            = render 'layouts/modals/submitSuccessModal'
             .searchResult data-tribes=campsite.tribes_json
               .col-md-2
                 = image_tag campsite.primary_icon(:small), class:'img-circle img-responsive tribe-subtle'

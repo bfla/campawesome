@@ -1,4 +1,4 @@
-- if user_signed_in?
+- if user_signed_in?  
   .btn-group
     - if campsite.beens.find_by_user_id(current_user).blank?
       = link_to beens_path(campsite_id:campsite), method: :post, class:'btn btn-default btn-xs subtle-text enable-command-toggle', remote:true do
@@ -42,10 +42,7 @@
       span.glyphicon.glyphicon-star
       |  Review it
 
-    = render 'layouts/modals/newReviewModal', campsite:campsite
-    = render 'layouts/modals/newListModal', campsite:campsite
-    = render 'layouts/modals/listSavedModal'
-    = render 'layouts/modals/submitSuccessModal'
+
 - else
   a.btn-group href="#" data-toggle="modal" data-target="#signupModal"
     button.btn.btn-default.btn-xs.subtle-text
