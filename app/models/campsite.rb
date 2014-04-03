@@ -22,17 +22,18 @@ class Campsite < ActiveRecord::Base
   has_many :fees, dependent: :destroy
 
   #has_many :tribes
-  validates :name, :org, :state_id, :city_id, :latitude, :longitude, presence: { message:'is required' }
+  validates :name, :org, :state_id, :latitude, :longitude, presence: { message:'is required' }
   #validates :res_phone, :camp_phone, numericality: { message:'must be a number', allow_blank:true }
   validates :latitude, numericality: { greater_than: 0, message:'must be a positive' }
   validates :longitude, numericality: { less_than: 0, message:'must be a negative number' }
   reverse_geocoded_by :latitude, :longitude
   
+  before_validation :reverse_geocode #reverse geocode it before friendlyId needs the city
   before_save :resave_avg_rating
   before_save :resave_rank
   before_save :seed_blanks
   #before_validation :fetch_city_and_state
-  after_validation :reverse_geocode #auto-fetch address
+  #after_validation :reverse_geocode #auto-fetch address
   default_scope order('avg_rating DESC')
 
   # This returns the name of the Campsite's state
@@ -147,6 +148,25 @@ class Campsite < ActiveRecord::Base
     def seed_blanks
       self.avg_rating = rand(3.5..4.2).round(2) if self.ratings.blank? && self.avg_rating.blank?
       sum = 0
+    end
+
+    # app/models/place.rb
+    reverse_geocoded_by :latitude, :longitude do |campsite, results|
+      if geo = results.first
+        campsite.address = geo.address
+        city_name = geo.city
+
+        if campsite.city_id.blank? && City.find_by(name:city_name, state_id:campsite.state_id).nil?
+          # if the city doesn't exist, make it and add it to the campsite
+          city = City.create(name:city_name, state_id:campsite.state_id, latitude:campsite.latitude, longitude:campsite.longitude, zoom:9)
+          campsite.city_id = city.id
+        elsif campsite.city_id.blank?
+          # if the city already exists, find it and add it to the campsite
+          city = City.find_by(name:city_name, state_id:campsite.state_id)
+          campsite.city_id = city.id
+        end
+
+      end
     end
 
     def resave_avg_rating

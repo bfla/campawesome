@@ -11,6 +11,8 @@ hr
     #stateMap style="height:150px; padding:0px; margin:0px;" onload="makeGuideMap();"
 p.col-md-12
   small
-    a itemprop='map' href=search_campsites_path(keywords:"#{place.map_latitude}, #{place.map_longitude}", distance:500, zoom:6)
-      span.glyphicon.glyphicon-zoom-in
-      | Explore map of all #{place.name} camping places
+    <div data-no-turbolink>
+      a itemprop='map' href=search_campsites_path(keywords:"#{place.map_latitude}, #{place.map_longitude}", distance:500, zoom:6)
+        span.glyphicon.glyphicon-zoom-in
+        | Explore map of all #{place.name} camping places
+    </div>

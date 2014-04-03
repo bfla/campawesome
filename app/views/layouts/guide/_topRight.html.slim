@@ -12,6 +12,8 @@ hr
     img src="http://maps.googleapis.com/maps/api/staticmap?center=#{place.latitude}%2C+#{place.longitude}&zoom=#{place.zoom}&size=600x300&maptype=roadmap&sensor=false"
 p.col-md-12
   small
-    a itemprop='map' href=search_campsites_path(keywords:"#{place.latitude}, #{place.longitude}", distance:500, zoom:6)
-      span.glyphicon.glyphicon-zoom-in
-      | Explore map of all #{place.name} camping places
+    <div data-no-turbolink>
+      a itemprop='map' href=search_campsites_path(keywords:"#{place.latitude}, #{place.longitude}", distance:search_distance, zoom:search_zoom)
+        span.glyphicon.glyphicon-zoom-in
+        | Explore map of all #{place.name} camping places
+    </div>

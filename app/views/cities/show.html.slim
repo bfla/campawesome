@@ -25,7 +25,7 @@
   - content_for :top_left
     = render 'layouts/guide/topLeft', place:@city
   - content_for :top_right
-    = render "layouts/guide/topRight", place:@city
+    = render "layouts/guide/topRight", place:@city, search_distance:30, search_zoom:10
   - content_for :bottom_left
     = render "cityFeatured", place:@city, campsites:@city.campsites
   - content_for :bottom_right

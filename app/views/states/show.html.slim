@@ -29,7 +29,7 @@
 - content_for :top_left
   = render 'layouts/guide/topLeft', place:@state
 - content_for :top_right
-  = render "layouts/guide/topRight", place:@state
+  = render "layouts/guide/topRight", place:@state, search_distance:500, search_zoom:6
 - content_for :bottom_left
   = render "stateLeftBot"
 - content_for :bottom_right
