@@ -1,6 +1,6 @@
 class Review < ActiveRecord::Base
 
-  belongs_to :user
+  belongs_to :user, counter_cache: :reviews_count
   has_one :rating, dependent: :destroy
   belongs_to :reviewable, polymorphic:true
 

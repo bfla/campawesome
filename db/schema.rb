@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140402160443) do
+ActiveRecord::Schema.define(version: 20140404163815) do
 
   create_table "activities", force: true do |t|
     t.integer  "activity_type_id"
@@ -328,6 +328,7 @@ ActiveRecord::Schema.define(version: 20140402160443) do
     t.string   "fb_token"
     t.boolean  "likes_me"
     t.boolean  "is_admin"
+    t.integer  "reviews_count",          default: 0
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
