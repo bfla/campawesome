@@ -1,6 +1,7 @@
 class TribalMembershipsController < ApplicationController
   before_action :set_tribal_membership, only: [:show, :edit, :update, :destroy]
   before_action :admin_only, only: [:index, :show, :destroy]
+  before_action :authenticate_user!
 
   # GET /tribal_memberships
   # GET /tribal_memberships.json
@@ -26,7 +27,6 @@ class TribalMembershipsController < ApplicationController
   # POST /tribal_memberships
   # POST /tribal_memberships.json
   def create
-    @tribes = Tribe.all
     if current_user.tribal_membership.blank?
       @tribal_membership = TribalMembership.new(tribe_id:params[:tribe_id], user_id:current_user.id)
     else
