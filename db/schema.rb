@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140404170306) do
+ActiveRecord::Schema.define(version: 20140404181912) do
 
   create_table "activities", force: true do |t|
     t.integer  "activity_type_id"
@@ -24,6 +24,8 @@ ActiveRecord::Schema.define(version: 20140404170306) do
     t.datetime "updated_at"
     t.string   "name"
   end
+
+  add_index "activities", ["campsite_id"], name: "index_activities_on_campsite_id"
 
   create_table "activity_types", force: true do |t|
     t.string   "name"
@@ -60,6 +62,8 @@ ActiveRecord::Schema.define(version: 20140404170306) do
     t.string   "beenable_type"
   end
 
+  add_index "beens", ["user_id"], name: "index_beens_on_user_id"
+
   create_table "campsites", force: true do |t|
     t.string   "name"
     t.text     "description"
@@ -82,7 +86,10 @@ ActiveRecord::Schema.define(version: 20140404170306) do
     t.string   "slug"
   end
 
+  add_index "campsites", ["avg_rating"], name: "index_campsites_on_avg_rating"
+  add_index "campsites", ["city_id", "avg_rating"], name: "index_campsites_on_city_id_and_avg_rating"
   add_index "campsites", ["slug"], name: "index_campsites_on_slug"
+  add_index "campsites", ["state_id", "avg_rating"], name: "index_campsites_on_state_id_and_avg_rating"
 
   create_table "cities", force: true do |t|
     t.string   "name"
@@ -111,6 +118,7 @@ ActiveRecord::Schema.define(version: 20140404170306) do
   end
 
   add_index "destinations", ["slug"], name: "index_destinations_on_slug", unique: true
+  add_index "destinations", ["state_id"], name: "index_destinations_on_state_id"
 
   create_table "fees", force: true do |t|
     t.integer  "campsite_id"
@@ -122,6 +130,8 @@ ActiveRecord::Schema.define(version: 20140404170306) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "fees", ["campsite_id"], name: "index_fees_on_campsite_id"
 
   create_table "friendly_id_slugs", force: true do |t|
     t.string   "slug",                      null: false
@@ -150,6 +160,8 @@ ActiveRecord::Schema.define(version: 20140404170306) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "lists", ["user_id"], name: "index_lists_on_user_id"
 
   create_table "merit_actions", force: true do |t|
     t.integer  "user_id"
@@ -201,6 +213,10 @@ ActiveRecord::Schema.define(version: 20140404170306) do
     t.datetime "photo_file_updated_at"
   end
 
+  add_index "photos", ["campsite_id"], name: "index_photos_on_campsite_id"
+  add_index "photos", ["destination_id"], name: "index_photos_on_destination_id"
+  add_index "photos", ["user_id"], name: "index_photos_on_user_id"
+
   create_table "products", force: true do |t|
     t.string   "name"
     t.text     "description"
@@ -225,6 +241,8 @@ ActiveRecord::Schema.define(version: 20140404170306) do
     t.integer  "review_id"
   end
 
+  add_index "ratings", ["ratable_id", "ratable_type"], name: "index_ratings_on_ratable_id_and_ratable_type"
+
   create_table "reviews", force: true do |t|
     t.text     "body"
     t.integer  "user_id"
@@ -234,6 +252,9 @@ ActiveRecord::Schema.define(version: 20140404170306) do
     t.datetime "updated_at"
     t.string   "title"
   end
+
+  add_index "reviews", ["reviewable_id", "reviewable_type"], name: "index_reviews_on_reviewable_id_and_reviewable_type"
+  add_index "reviews", ["user_id"], name: "index_reviews_on_user_id"
 
   create_table "reward_orders", force: true do |t|
     t.integer  "product_id"
@@ -270,6 +291,8 @@ ActiveRecord::Schema.define(version: 20140404170306) do
     t.datetime "updated_at"
   end
 
+  add_index "taggings", ["campsite_id"], name: "index_taggings_on_campsite_id"
+
   create_table "tags", force: true do |t|
     t.string   "name"
     t.string   "category"
@@ -285,6 +308,8 @@ ActiveRecord::Schema.define(version: 20140404170306) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "tribal_memberships", ["user_id"], name: "index_tribal_memberships_on_user_id"
 
   create_table "tribes", force: true do |t|
     t.string   "name"
@@ -345,6 +370,8 @@ ActiveRecord::Schema.define(version: 20140404170306) do
     t.datetime "updated_at"
   end
 
+  add_index "vibes", ["campsite_id"], name: "index_vibes_on_campsite_id"
+
   create_table "wants", force: true do |t|
     t.integer  "user_id"
     t.datetime "created_at"
@@ -352,5 +379,7 @@ ActiveRecord::Schema.define(version: 20140404170306) do
     t.integer  "wantable_id"
     t.string   "wantable_type"
   end
+
+  add_index "wants", ["user_id"], name: "index_wants_on_user_id"
 
 end

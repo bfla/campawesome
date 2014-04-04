@@ -7,6 +7,6 @@ class Review < ActiveRecord::Base
   validates :user, presence:true
   validates :title, length: {maximum:100}
   validates :body, presence:true, if: "rating.nil?"
-  validates :rating, presence:true, if: "review.nil?"
+  #validates :rating, presence:true, if: "review.nil?"
 
 end
