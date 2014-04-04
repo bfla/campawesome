@@ -27,8 +27,8 @@ class TribalMembershipsController < ApplicationController
   # POST /tribal_memberships
   # POST /tribal_memberships.json
   def create
-    if current_user.tribal_membership.blank?
-      @tribal_membership = TribalMembership.new(tribe_id:params[:tribe_id], user_id:current_user.id)
+    if current_user.tribal_membership.nil?
+      @tribal_membership = TribalMembership.create(tribe_id:params[:tribe_id], user_id:current_user.id)
     else
       @tribal_membership = current_user.tribal_membership
       @tribal_membership.update(tribal_membership_params)
@@ -79,6 +79,6 @@ class TribalMembershipsController < ApplicationController
     end
     # Never trust parameters from the scary internet, only allow the white list through.
     def tribal_membership_params
-      params.require(:tribal_membership).permit(:tribe_id)
+      params.permit(:id, :tribe_id)
     end
 end

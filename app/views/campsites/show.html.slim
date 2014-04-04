@@ -14,6 +14,15 @@
     li = link_to @campsite.city.name, @campsite.city
     li.active = @campsite.name
 - content_for :heading
+    / Modals first 
+    = render 'reserveModal'
+    = render "addressModal", campsite:@campsite
+    = render "layouts/guide/descriptionModal", place:@campsite
+    = render 'layouts/modals/newReviewModal', campsite:@campsite
+    = render 'layouts/modals/newListModal', campsite:@campsite
+    = render 'layouts/modals/listSavedModal'
+    = render 'layouts/modals/submitSuccessModal'
+
     / Heading
     h1.col-md-12 itemprop="name"
       = @campsite.name
@@ -46,9 +55,6 @@
       a.subtle-text href="http://creativecommons.org/licenses/by/2.0/" Creative Commons Attribution License
 
 - content_for :end
-  == render 'reserveModal'
-  = render "addressModal", campsite:@campsite
-  = render "layouts/guide/descriptionModal", place:@campsite
 
     
   javascript:

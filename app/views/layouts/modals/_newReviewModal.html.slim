@@ -18,7 +18,7 @@
           .row
             .col-md-8.col-md-offset-2
               .input-group.col-md-12
-                = text_field_tag :title, params[:title], class:'form-control', placeholder: "Optional title for your review"
+                = text_field_tag :title, params[:title], class:'form-control add-margin-bottom-sm', placeholder: "Optional title for your review"
                 = text_area_tag :body, params[:body], class:'form-control', placeholder:"What should other campers know about your experience?", rows:4
           .row
             p.text-center.pad-top-md
@@ -28,7 +28,7 @@
               button#reviewSubmit.btn.btn-success type="submit" data-target="#submitSuccessModal" Say it
               /button#reviewSubmit.btn.btn-success type="submit" Say it
               | &nbsp;
-              strong.subtle-text +50 coins
+              strong.subtle-text +25 coins
   javascript:
     /*$('#reviewSubmit').click( function() {
       $('.newReviewModal').modal('hide');

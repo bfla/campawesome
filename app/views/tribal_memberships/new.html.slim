@@ -11,10 +11,18 @@
           | Pick the tribe that fits your camping style
           br
           | to get personalized recommendations
-        = form_for @tribal_membership do |f|
-          = f.hidden_field :tribe_id, class:'selected-tribe-id'
+        = form_tag tribal_memberships_path, method: :post do
+          = hidden_field_tag :tribe_id, params[:tribe_id], class:'selected-tribe-id'
+          = submit_tag 'Join tribe!', class:'btn btn-success tribeJoinSubmit btn-lg'
+          br
+          small
+            = link_to 'Do this later', contrib_campsites_path
+
+
+        /= form_for @tribal_membership do |f|
+          /= f.hidden_field :tribe_id, class:'selected-tribe-id'
           / a.btn.btn-default href="" Skip
-          = f.submit 'Join tribe!', class:"btn btn-success tribeJoinSubmit btn-lg"
+          /= f.submit 'Join tribe!', class:"btn btn-success tribeJoinSubmit btn-lg"
         hr
       / tribe thumbnails
       .row
