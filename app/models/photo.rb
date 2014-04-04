@@ -1,5 +1,5 @@
 class Photo < ActiveRecord::Base
-  belongs_to :user
+  belongs_to :user, counter_cache: :photos_count
   belongs_to :campsite
   belongs_to :destination
   belongs_to :city

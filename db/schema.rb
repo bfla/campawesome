@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140404163815) do
+ActiveRecord::Schema.define(version: 20140404170306) do
 
   create_table "activities", force: true do |t|
     t.integer  "activity_type_id"
@@ -329,6 +329,10 @@ ActiveRecord::Schema.define(version: 20140404163815) do
     t.boolean  "likes_me"
     t.boolean  "is_admin"
     t.integer  "reviews_count",          default: 0
+    t.integer  "photos_count",           default: 0
+    t.integer  "lists_count",            default: 0
+    t.integer  "beens_count",            default: 0
+    t.integer  "wants_count",            default: 0
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
