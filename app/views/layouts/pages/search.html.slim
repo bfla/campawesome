@@ -13,7 +13,8 @@ html.fill-height
     / Generate modals for campsite forms
     - @campsites.each do |campsite|
       = render 'layouts/modals/newReviewModal', campsite:campsite
-      = render 'layouts/modals/newListModal', campsite:campsite
+      - if user_signed_in? && current_user.lists.any?
+        = render 'layouts/modals/newListModal', campsite:campsite
       = render 'layouts/modals/listSavedModal'
       = render 'layouts/modals/submitSuccessModal'
 
@@ -135,7 +136,11 @@ html.fill-height
     / MapBox ===============================
     .col-md-8.mapColumn.fill-height.no-spacing
       script src='https://api.tiles.mapbox.com/mapbox.js/v1.6.1/mapbox.js'
+      img src="/public/images/icons/searchIcon.png" z-index="2"
       #resultsMap
+      #map-ui style="position: absolute; top: 60px; left: 5px; z-index: 100; margin-left:5px; padding-left:5px;"
+        button#searchReset.thumbnail.add-tooltip data-toggle="tooltip" type="submit" title="Search this area for campsites" data-placement="right" style="background:rgba(0.1, 0.1, 0.1, .6);" 
+          span.glyphicon.glyphicon-repeat style="font-size:40px; color:#666666;"
 
     == render 'layouts/bottomScripts'
 
@@ -155,6 +160,7 @@ html.fill-height
     $(".searchFilterThumbnail").hover( function(){
       searchHoverEffect( $(this) );
     });
+    $('.add-tooltip').tooltip();
     // Set click behaviors for filter
     $(".searchFilterThumbnail").click( function(){
       highlightSearchThumbnail($(this));
@@ -175,6 +181,37 @@ html.fill-height
       });
       return false;
     });
+    $(document).ready( function() {
+      //$('#searchReset').hide();
+      $('#searchReset').click( function() {
+        //alert('clicked reset button...');
+        var currentCenter = map.getCenter(); // Current center of the map as Leaflet LatLng
+        //alert("...Got center:"+currentCenter);
+        var southWest = map.getBounds().getSouthWest(); // Returns the SW corner as LatLng
+        //alert("...Got SW corner:"+southWest);
+        var distanceInMeters = currentCenter.distanceTo(southWest);
+        //alert("Distance in meters:"+distanceInMeters);
+        var distanceInMiles = distanceInMeters * .000621371;
+        //alert("Distance in miles:"+distanceInMiles);
+        centerString = currentCenter['lat'].toString()+', '+currentCenter['lng'].toString();
+        //alert("centerString:" +centerString);
+        var params = $.param( { distance:distanceInMiles, keywords:centerString});
+        //alert("params: "+ params);
+        var url = "http://localhost:3000/campsites/search.json?" + params;
+        //alert("url: "+url);
+        //window.location.replace(url);
+
+        $.getJSON(url, {})
+          .done( function(data) {
+            var newGeojson = data;
+            alert(data);
+            map.markerLayer.setGeoJSON(data);
+          })
+        ;
+
+      });
+    });
+
 
 
       // reset map based on current location DOESN'T WORK

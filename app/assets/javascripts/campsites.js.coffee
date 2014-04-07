@@ -51,7 +51,9 @@
   map.markerLayer.on "mouseover", (e) -> # set marker layer mouseover behavior
     e.layer.closePopup() # close open popups
     e.layer.openPopup() # activate tooltip
+
   return map
+  
 
 # Hides all results that don't match the tribal id
 @filterSearchResults = (filterId) ->
