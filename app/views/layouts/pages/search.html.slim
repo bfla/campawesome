@@ -49,14 +49,7 @@ html.fill-height
                     small.no-spacing = tribe.vibe
           .col-md-12
             hr
-        /
-          .row
-            a#resetSearchArea href="#" Reset search area
 
-        / .row
-          p.col-md-12
-            #reset.btn.btn-default Search this area
-            = tag :input, id: 'searchJson', type: 'hidden', value: 'test', data: {center: @center, geoJson: @campsites.to_json}
         / If no results ===============
         - if @campsites.blank?
           .col-md-12
@@ -140,7 +133,7 @@ html.fill-height
       img src="/public/images/icons/searchIcon.png" z-index="2"
       #resultsMap
       #map-ui style="position: absolute; top: 60px; left: 5px; z-index: 100; margin-left:5px; padding-left:5px;"
-        button#searchReset.thumbnail.add-tooltip data-toggle="tooltip" type="submit" title="Search this area for campsites" data-placement="right" style="background:rgba(0.1, 0.1, 0.1, .6);" 
+        button#searchReset.thumbnail.add-tooltip data-toggle="tooltip" type="submit" title="Search this area" data-placement="right" style="background:rgba(0.1, 0.1, 0.1, .6);" 
           span.glyphicon.glyphicon-repeat style="font-size:40px; color:#666666;"
 
     == render 'layouts/bottomScripts'
@@ -176,6 +169,7 @@ html.fill-height
   javascript:
     $(document).ready( function() {
       $('#searchReset').hide();
+      $('#searchReset').tooltip('hide');
       $('#searchReset').click( function() {
         //alert('clicked reset button...');
         var currentCenter = map.getCenter(); // Current center of the map as Leaflet LatLng
@@ -191,27 +185,34 @@ html.fill-height
         var params = $.param( { distance:distanceInMiles, keywords:centerString });
         //alert("params: "+ params);
         var url = "http://localhost:3000/campsites/search.json?" + params;
+        var stateObj = { search: "search" };
+        history.replaceState(stateObj, "", "search.html?"+params); // Add the proper url to the browser
         //alert("url: "+url);
         //window.location.replace(url);
+
         // Make ajax request for campsite JSON
         $.getJSON(url, {})
           .done( function(data) {
             //alert(data);
+            $("#searchReset").hide();
             map.markerLayer.setGeoJSON(data);
             filterId = $('#activeTribeId').val();
             createSearchResults(data);
             filterSearchResults(filterId);
             filterSearchMarkers(map, filterId);
-            $("#searchReset").hide();
+
           })
         ;
       });
     });
-    map.on( "move", function(e) { 
+    map.on( "moveend", function(e) { 
       $('#searchReset').show();
+      $('#searchReset').tooltip('show');
+
     });
-    map.on( "resize", function(e) {
+    map.on( "zoomend", function(e) {
       $('#searchReset').show();
+      $('#searchReset').tooltip('show');
     });
 
   javascript:
@@ -229,7 +230,7 @@ html.fill-height
           });
         }
       });
-      return false;
+      //return false;
     }
     /* Apply the initial filter, if any
     if (gon.initTribe) { 
