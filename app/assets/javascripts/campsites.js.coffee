@@ -61,6 +61,7 @@
 # Hides all results that don't match the tribal id
 @filterSearchResults = (filterId) ->
   $(".searchResult").hide() # hide all the results
+  $("#activeTribeId").val(filterId); # store the active Tribe Id
   if filterId is 0 # if the filter is all campsites
     $(".searchResult").show() # then show all
   else
@@ -71,3 +72,4 @@
         targetResult.show() if tribeIds[x] is filterId
       return
   return
+

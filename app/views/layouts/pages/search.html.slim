@@ -19,6 +19,7 @@ html.fill-height
       = render 'layouts/modals/submitSuccessModal'
 
     == render 'layouts/navbar'
+    input#activeTribeId type="hidden" value="0"
     #results-container.col-md-4.well.white.fill-height.remove-bottom-margin.pad-left-sm
       .result-list.fill-height
         / Time filter - doesn't work yet==========
@@ -155,37 +156,26 @@ html.fill-height
             closeButton: false,
             minWidth: 320
         });
-        
+
   javascript:
     // Apply hover effect
     $(".searchFilterThumbnail").hover( function(){
       searchHoverEffect( $(this) );
     });
     $('.add-tooltip').tooltip();
+
     // Set click behaviors for filter
     $(".searchFilterThumbnail").click( function(){
       highlightSearchThumbnail($(this));
       var filterId = $(this).data('tribe-id');
       filterSearchResults(filterId); // Filter the list of search results
-      // Filter out map markers that don't match
-      map.featureLayer.setFilter(function(f) { 
-        if (filterId != 0) {
-          for (x in f.properties['tribes']) {
-            if (f.properties['tribes'][x] == filterId) {
-              return true;
-            }
-          }
-        } else {
-          map.featureLayer.setFilter(function(f) { return true; });
-        }
-        //return f.properties['title'] === "Endor Campsite";
-      });
-      return false;
+      filterSearchMarkers(map, filterId); // Filter the search markers
     });
+    
 
   javascript:
     $(document).ready( function() {
-      //$('#searchReset').hide();
+      $('#searchReset').hide();
       $('#searchReset').click( function() {
         //alert('clicked reset button...');
         var currentCenter = map.getCenter(); // Current center of the map as Leaflet LatLng
@@ -198,35 +188,49 @@ html.fill-height
         //alert("Distance in miles:"+distanceInMiles);
         centerString = currentCenter['lat'].toString()+', '+currentCenter['lng'].toString();
         //alert("centerString:" +centerString);
-        var params = $.param( { distance:distanceInMiles, keywords:centerString});
+        var params = $.param( { distance:distanceInMiles, keywords:centerString });
         //alert("params: "+ params);
         var url = "http://localhost:3000/campsites/search.json?" + params;
         //alert("url: "+url);
         //window.location.replace(url);
-
+        // Make ajax request for campsite JSON
         $.getJSON(url, {})
           .done( function(data) {
             //alert(data);
             map.markerLayer.setGeoJSON(data);
+            filterId = $('#activeTribeId').val();
+            createSearchResults(data);
+            filterSearchResults(filterId);
+            filterSearchMarkers(map, filterId);
+            $("#searchReset").hide();
           })
         ;
       });
     });
-    //map.on( "move", function(e) {});
-    //map.on( "resize", function(e) {});
+    map.on( "move", function(e) { 
+      $('#searchReset').show();
+    });
+    map.on( "resize", function(e) {
+      $('#searchReset').show();
+    });
 
-    // reset map based on current location DOESN'T WORK
-    /*$("#resetSearchArea").click( function(){
-      var currentCenter = map.getCenter(); // Gets the current center of the map as an Leaflet LatLng
-      var mapBounds = map.getBounds(); // Gets the SW and NE corners of the map as a Leaflet LatLngBound
-      var southWest = map.getBounds().getSouthWest(); // Returns the SW corner
-      var distanceInMeters = mapCenter.distanceTo(southWest); // Returns the distance in meters
-      alert(distanceInMeters);  // FAILS HERE
-      var distanceInMiles = distanceInMeters * .000621371; // Calculates the distance in miles
-      alert(distanceInMiles);
-      alert("Center:" + currentCenter + "SW:" + southWest + "Distance:" + distanceInMiles);
-    });*/
-
+  javascript:
+    function filterSearchMarkers(map, filterId) {
+      map.featureLayer.setFilter(function(f) { 
+        if (filterId != 0) {
+          for (x in f.properties['tribes']) {
+            if (f.properties['tribes'][x] == filterId) {
+              return true;
+            }
+          }
+        } else {
+          map.featureLayer.setFilter(function(f) { 
+            return true; 
+          });
+        }
+      });
+      return false;
+    }
     /* Apply the initial filter, if any
     if (gon.initTribe) { 
       var filterId = gon.initTribe;
