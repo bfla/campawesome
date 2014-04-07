@@ -52,8 +52,11 @@
     e.layer.closePopup() # close open popups
     e.layer.openPopup() # activate tooltip
 
+  #map.on "move", (e) ->
+    #$('#searchReset').hide()
+  #map.on "resize", (e) ->
+    #$('#searchReset').hide()
   return map
-  
 
 # Hides all results that don't match the tribal id
 @filterSearchResults = (filterId) ->

@@ -155,6 +155,7 @@ html.fill-height
             closeButton: false,
             minWidth: 320
         });
+        
   javascript:
     // Apply hover effect
     $(".searchFilterThumbnail").hover( function(){
@@ -181,6 +182,8 @@ html.fill-height
       });
       return false;
     });
+
+  javascript:
     $(document).ready( function() {
       //$('#searchReset').hide();
       $('#searchReset').click( function() {
@@ -203,51 +206,49 @@ html.fill-height
 
         $.getJSON(url, {})
           .done( function(data) {
-            var newGeojson = data;
-            alert(data);
+            //alert(data);
             map.markerLayer.setGeoJSON(data);
           })
         ;
-
       });
     });
+    //map.on( "move", function(e) {});
+    //map.on( "resize", function(e) {});
 
+    // reset map based on current location DOESN'T WORK
+    /*$("#resetSearchArea").click( function(){
+      var currentCenter = map.getCenter(); // Gets the current center of the map as an Leaflet LatLng
+      var mapBounds = map.getBounds(); // Gets the SW and NE corners of the map as a Leaflet LatLngBound
+      var southWest = map.getBounds().getSouthWest(); // Returns the SW corner
+      var distanceInMeters = mapCenter.distanceTo(southWest); // Returns the distance in meters
+      alert(distanceInMeters);  // FAILS HERE
+      var distanceInMiles = distanceInMeters * .000621371; // Calculates the distance in miles
+      alert(distanceInMiles);
+      alert("Center:" + currentCenter + "SW:" + southWest + "Distance:" + distanceInMiles);
+    });*/
 
-
-      // reset map based on current location DOESN'T WORK
-      /*$("#resetSearchArea").click( function(){
-        var currentCenter = map.getCenter(); // Gets the current center of the map as an Leaflet LatLng
-        var mapBounds = map.getBounds(); // Gets the SW and NE corners of the map as a Leaflet LatLngBound
-        var southWest = map.getBounds().getSouthWest(); // Returns the SW corner
-        var distanceInMeters = mapCenter.distanceTo(southWest); // Returns the distance in meters
-        alert(distanceInMeters);  // FAILS HERE
-        var distanceInMiles = distanceInMeters * .000621371; // Calculates the distance in miles
-        alert(distanceInMiles);
-        alert("Center:" + currentCenter + "SW:" + southWest + "Distance:" + distanceInMiles);
-      });*/
-
-      /* Apply the initial filter, if any
-      if (gon.initTribe) { 
-        var filterId = gon.initTribe;
-      } else { 
-        var filterId = 0; 
+    /* Apply the initial filter, if any
+    if (gon.initTribe) { 
+      var filterId = gon.initTribe;
+    } else { 
+      var filterId = 0; 
+    }
+    $('.searchFilterThumbnail').each( function() {
+      if ( $(this).data('tribe-id') == filterId) {
+        highlightSearchFilter( $(this) );
       }
-      $('.searchFilterThumbnail').each( function() {
-        if ( $(this).data('tribe-id') == filterId) {
-          highlightSearchFilter( $(this) );
-        }
-      });
-      /*function applyFilter(tribalId) {
-        $(".browseResult").hide();
-        if (tribalId == 0) {
-          $(".browseResult").show();
-        } else {
-          $(".browseResult").each( function () {
-            var targetResult = $(this);
-            var tribeIds = targetResult.data("tribes"); // gets tribe ids for the campsite
-            for (x in tribeIds) {
-              if (tribeIds[x] == tribalId) { targetResult.show(); }
-            }  
-              });
-            }
-          }*/
+    });
+    /*function applyFilter(tribalId) {
+      $(".browseResult").hide();
+      if (tribalId == 0) {
+        $(".browseResult").show();
+      } else {
+        $(".browseResult").each( function () {
+          var targetResult = $(this);
+          var tribeIds = targetResult.data("tribes"); // gets tribe ids for the campsite
+          for (x in tribeIds) {
+            if (tribeIds[x] == tribalId) { targetResult.show(); }
+          }  
+            });
+          }
+        }*/

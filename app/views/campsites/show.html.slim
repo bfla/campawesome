@@ -19,7 +19,8 @@
     = render "addressModal", campsite:@campsite
     = render "layouts/guide/descriptionModal", place:@campsite
     = render 'layouts/modals/newReviewModal', campsite:@campsite
-    = render 'layouts/modals/newListModal', campsite:@campsite
+    - if user_signed_in?
+      = render 'layouts/modals/newListModal', campsite:@campsite
     = render 'layouts/modals/listSavedModal'
     = render 'layouts/modals/submitSuccessModal'
 
