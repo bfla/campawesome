@@ -15,8 +15,8 @@ html.fill-height
       = render 'layouts/modals/newReviewModal', campsite:campsite
       - if user_signed_in? && current_user.lists.any?
         = render 'layouts/modals/newListModal', campsite:campsite
-      = render 'layouts/modals/listSavedModal'
-      = render 'layouts/modals/submitSuccessModal'
+    = render 'layouts/modals/listSavedModal'
+    = render 'layouts/modals/submitSuccessModal'
 
     == render 'layouts/navbar'
     input#activeTribeId type="hidden" value="0"
@@ -52,75 +52,23 @@ html.fill-height
 
         / If no results ===============
         - if @campsites.blank?
-          .col-md-12
-            .panel.panel-warning
-              .panel-heading Super-frick!  No campsites matched your search.
-              .panel-body
-                ul
-                  li Maybe my advanced computer brain didn't recognize the place you entered.
-                  li Maybe the place you entered isn't in Michigan?  Right now, Michigan is the only territory under CampHero's protection.
-                  li Maybe you did nothing wrong and I just messed.  Even heroes make mistakes.  If so, I am epicly sorry.  Please consider leaving feedback so my techno-nerd sidekicks can discover and fix this nefarious problem.
+          .row.results
+            .col-md-12
+              .panel.panel-warning
+                .panel-heading Super-frick!  No campsites matched your search.
+                .panel-body
+                  ul
+                    li Maybe my advanced computer brain didn't recognize the place you entered.
+                    li Maybe the place you entered isn't in Michigan?  Right now, Michigan is the only territory under CampHero's protection.
+                    li Maybe you did nothing wrong and I just messed.  Even heroes make mistakes.  If so, I am epicly sorry.  Please consider leaving feedback so my techno-nerd sidekicks can discover and fix this nefarious problem.
 
         / Results ======================
-        .row
-          - @campsites.each do |campsite|
-            .searchResult data-tribes=campsite.tribes_json
-              .col-md-2
-                = image_tag campsite.primary_icon(:small), class:'img-circle img-responsive tribe-subtle'
-                - campsite.tribes.each do |tribe|
-                  p.no-spacing.text-center
-                      small.no-spacing
-                        small.no-spacing 
-                          small.no-spacing.subtle-text = tribe.vibe
-              p.lead.col-md-10
-                - if user_signed_in? && !campsite.tribes.first.blank? 
-                  - if current_user.tribe && campsite.tribes.first.id == current_user.tribe.id && campsite.avg_rating > 4.0
-                    small 
-                      small.greenify
-                        span.glyphicon.glyphicon-chevron-up
-                        |  Recommended for you
-                        br
-                small = link_to campsite.name, campsite_path(campsite)
-                br
-                small
-                  small.subtle-text
-                    | #{campsite.org} campground in #{campsite.state_name}
-                br
-              p.col-md-10.col-md-offset-2
-                | Ranked ##{campsite.city_rank} of #{campsite.city.campsites.size}&nbsp;
-                small
-                  small = link_to "campsites in #{campsite.city.name}, #{campsite.state_name}", campsite.city
-                br
-                = render "searchRating", campsite:campsite
-                br
-                small
-                  strong.subtle-text Bookings:
-                  - if campsite.reservable
-                    |  Accepts reservations
-                  - else
-                    |  No reservations
-                  |  &
-                  - if campsite.walkin
-                    |  accepts walk-ins
-                  - else
-                    |  no walk-ins
-              p.col-md-offset-2.col-md-12
-                - if campsite.res_phone?
-                  small.subtle-text
-                    span.glyphicon.glyphicon-earphone
-                    |  #{number_to_phone(campsite.res_phone)}&nbsp;&nbsp;
-                - else 
-                  small.subtle-text
-                    span.glyphicon.glyphicon-earphone
-                    |  #{number_to_phone(campsite.camp_phone)}&nbsp;&nbsp;
-                - if campsite.res_url?
-                  small.subtle-text
-                    span.glyphicon.glyphicon-globe
-                    | &nbsp;
-                    a href=campsite.res_url Online reservations
-              .col-md-10.col-md-offset-2
-                = render 'layouts/campsiteCommands', campsite:campsite
-              hr.col-md-12
+        - else
+          .row.results
+            - @campsites.each do |campsite|
+              = render "searchResult", campsite:campsite
+
+        / Legal boilerplate =============================================
         .row
           p.col-md-12
             small.subtle-text 
@@ -130,8 +78,9 @@ html.fill-height
     / MapBox ===============================
     .col-md-8.mapColumn.fill-height.no-spacing
       script src='https://api.tiles.mapbox.com/mapbox.js/v1.6.1/mapbox.js'
-      img src="/public/images/icons/searchIcon.png" z-index="2"
+      / Map
       #resultsMap
+      / Reset button
       #map-ui style="position: absolute; top: 60px; left: 5px; z-index: 100; margin-left:5px; padding-left:5px;"
         button#searchReset.thumbnail.add-tooltip data-toggle="tooltip" type="submit" title="Search this area" data-placement="right" style="background:rgba(0.1, 0.1, 0.1, .6);" 
           span.glyphicon.glyphicon-repeat style="font-size:40px; color:#666666;"
@@ -194,12 +143,14 @@ html.fill-height
         $.getJSON(url, {})
           .done( function(data) {
             //alert(data);
-            $("#searchReset").hide();
-            map.markerLayer.setGeoJSON(data);
-            filterId = $('#activeTribeId').val();
-            createSearchResults(data);
-            filterSearchResults(filterId);
-            filterSearchMarkers(map, filterId);
+            $("#searchReset").hide(); // Hide the reset button
+
+            map.markerLayer.setGeoJSON(data); //Reset map markers
+            resetSearchList(params); // Reset search list
+
+            filterId = $('#activeTribeId').val(); // Get active tribe Filter
+            filterSearchMarkers(map, filterId); // // Refilter map markers
+            //filterSearchResults(filterId); // Refilter search list
 
           })
         ;
@@ -232,6 +183,45 @@ html.fill-height
       });
       //return false;
     }
+
+  javascript:
+    // takes search parameters coded into html and resets the list of results
+    function resetSearchList(params) {
+      $('.results').empty(); // Clear the result list
+      $('.results').html("<h3 class='greenify text-center'> Fetching new results...<br>Activating superspeed...<br>Defeating forces of evil... <br>Deploying X-Ray vision...</h3>");
+
+      // Make an ajax call to get the new html
+      var targetUrl = "http://localhost:3000/campsites/resetSearch.html?"+params;
+      //alert('started fetching new search list...');
+      $.get( targetUrl, function( newHtml ) {
+        //alert('completed get for new html...');
+        $('.results').empty();
+        $( ".results" ).html( newHtml ); // Add the new results
+      });
+    }
+
+  javascript:
+    /*function resetSearchList(geoJson) {
+      $('.results').empty(); // Clear the result list
+      /*newResults = $('<div/>').addClass('newResult');
+      for (campsite in geoJson) {
+        //result_div = $('<div/>').addClass('searchResult').data-tribes(campsite['properties']['tribeIds']);
+        //leftCol = $('<div/>').addClass('col-md-2');
+        leftCol = $('<div/>').addClass('col-md-2');
+        rightCol = $('<div/>').addClass('col-md-10');
+        link = $('<a/>').attr('href', geoJson[campsite]['properties']['url']);
+        smallSpan = $('<small/>');
+        heading = $('<p/>').addClass('lead').text(geoJson[campsite]['properties']['title']);
+        smallSpan.append(heading);
+        link.append(smallSpan);
+        newResults = newResults.append(link);
+      }
+
+      //$('.results').html(newResults);
+      $('#template').jqote(geoJson).appendTo($('.results'));
+
+    }*/
+
     /* Apply the initial filter, if any
     if (gon.initTribe) { 
       var filterId = gon.initTribe;

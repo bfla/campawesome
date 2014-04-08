@@ -1,0 +1,19 @@
+/ If no results ===============
+- if @campsites.blank?
+  .col-md-12
+    .panel.panel-warning
+      .panel-heading Super-frick!  No campsites matched your search.
+      .panel-body
+        ul
+          li Maybe my advanced computer brain didn't recognize the place you entered.
+          li Maybe the place you entered isn't in Michigan?  Right now, Michigan is the only territory under CampHero's protection.
+          li Maybe you did nothing wrong and I just messed.  Even heroes make mistakes.  If so, I am epicly sorry.  Please consider leaving feedback so my techno-nerd sidekicks can discover and fix this nefarious problem.
+
+/ Results ======================
+- else
+  - @campsites.each do |campsite|
+    | &nbsp;
+    = render "searchResult", campsite:campsite
+    = render 'layouts/modals/newReviewModal', campsite:campsite
+    - if user_signed_in? && current_user.lists.any?
+      = render 'layouts/modals/newListModal', campsite:campsite

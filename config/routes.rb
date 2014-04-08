@@ -75,6 +75,7 @@ Blog::Application.routes.draw do
     get :activities, on: :member
     collection do
       get 'search'
+      get 'resetSearch'
       get 'contrib'
       post 'import'
     end

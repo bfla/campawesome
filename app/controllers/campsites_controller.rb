@@ -30,6 +30,14 @@ class CampsitesController < ApplicationController
 
   end
 
+  def resetSearch
+    zoom = params[:zoom] || 10
+    distance = params[:distance] || 30
+    coordinates = Geocoder.coordinates(params[:keywords])
+    @campsites = Campsite.near(coordinates, distance).includes(:tribes).first(50)
+    @tribes = Tribe.all
+  end
+
   def contrib
     @campsites = Campsite.name_search(params[:keywords])
     @previous_url = session[:previous_url]

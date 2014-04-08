@@ -1,0 +1,58 @@
+/ Results ======================
+.searchResult data-tribes=campsite.tribes_json
+  .col-md-2
+    = image_tag campsite.primary_icon(:small), class:'img-circle img-responsive tribe-subtle'
+    - campsite.tribes.each do |tribe|
+      p.no-spacing.text-center
+          small.no-spacing
+            small.no-spacing 
+              small.no-spacing.subtle-text = tribe.vibe
+  p.lead.col-md-10
+    - if user_signed_in? && !campsite.tribes.first.blank? 
+      - if current_user.tribe && campsite.tribes.first.id == current_user.tribe.id && campsite.avg_rating > 4.0
+        small 
+          small.greenify
+            span.glyphicon.glyphicon-chevron-up
+            |  Recommended for you
+            br
+    small z-index="5" = link_to campsite.name, campsite_path(campsite)
+    br
+    small
+      small.subtle-text
+        | #{campsite.org} campground in #{campsite.state_name}
+    br
+  p.col-md-10.col-md-offset-2
+    | Ranked ##{campsite.city_rank} of #{campsite.city.campsites.size}&nbsp;
+    small
+      small = link_to "campsites in #{campsite.city.name}, #{campsite.state_name}", campsite.city
+    br
+    = render "searchRating", campsite:campsite
+    br
+    small
+      strong.subtle-text Bookings:
+      - if campsite.reservable
+        |  Accepts reservations
+      - else
+        |  No reservations
+      |  &
+      - if campsite.walkin
+        |  accepts walk-ins
+      - else
+        |  no walk-ins
+  p.col-md-offset-2.col-md-12
+    - if campsite.res_phone?
+      small.subtle-text
+        span.glyphicon.glyphicon-earphone
+        |  #{number_to_phone(campsite.res_phone)}&nbsp;&nbsp;
+    - else 
+      small.subtle-text
+        span.glyphicon.glyphicon-earphone
+        |  #{number_to_phone(campsite.camp_phone)}&nbsp;&nbsp;
+    - if campsite.res_url?
+      small.subtle-text
+        span.glyphicon.glyphicon-globe
+        | &nbsp;
+        a href=campsite.res_url Online reservations
+  .col-md-10.col-md-offset-2
+    = render 'layouts/campsiteCommands', campsite:campsite
+  hr.col-md-12
