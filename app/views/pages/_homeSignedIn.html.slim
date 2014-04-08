@@ -104,6 +104,7 @@
           .col-md-12
             p.lead
               | Recommended for you
+
           .col-md-12
             p 
               | To get personalized recommendations, join a tribe: 
@@ -112,8 +113,10 @@
             hr
         - unless @user.tribe.blank? || @recommendations.blank?
           .col-md-12
-            p.lead
+            p.lead 
+              br
               | Recommended for you
+
           - @recommendations.each do |campsite|
             .col-md-3
               .col-md-12.text-center = image_tag campsite.primary_icon(:small), class:"img-circle tribe-subtle"
@@ -121,10 +124,18 @@
                 = link_to campsite.name, campsite
               p.col-md-12.text-center = campsite.avg_rating
           .col-md-12
+            p 
+              small.subtle-text
+                br
+                br
+                a href=contrib_campsites_path 
+                  button.btn.btn-warning.btn-xs Review campsites 
+                |  to improve your recommendations, earn coins, & help other campers. 
             hr
         / Best of Michigan
         - unless @best_of_state.blank?
           p.lead.col-md-12 
+            br
             | Best of #{@state.name} Camping&nbsp;
             small 
               small = link_to 'see more', @state
@@ -140,7 +151,9 @@
             hr
         / Best Nearby
         - unless @nearbys.blank?
-            p.lead.col-md-12 Best Nearby
+            p.lead.col-md-12 
+              br
+              | Best Nearby
             - @nearbys.each do |campsite|
               .col-md-3
                 .col-md-12.text-center = image_tag campsite.primary_icon(:small), class:"img-circle tribe-subtle"
