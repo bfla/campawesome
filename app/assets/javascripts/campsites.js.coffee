@@ -58,18 +58,29 @@
     #$('#searchReset').hide()
   return map
 
-# Hides all results that don't match the tribal id
-@filterSearchResults = (filterId) ->
-  $("#activeTribeId").val(filterId) # store the active Tribe Id
-  $(".searchResult").hide() # hide all the results
-  if filterId is 0 # if the filter is all campsites
-    $(".searchResult").show() # then show all
+@toggleReservableFilter = ->
+  if $("#activeReservableFilter").val() is "false"
+    #alert $("#activeReservableFilter").val()+'...changing value to true...'
+    $("#activeReservableFilter").val("true") # store new value
+    $("#searchReservableFilter").addClass('btn-success') #
+    $("#searchReservableFilter").removeClass('btn-default')
   else
-    $(".searchResult").each -> # for each campsite result
-      targetResult = $(this)
-      tribeIds = targetResult.data("tribes") # gets tribe ids for the campsite
-      for x of tribeIds
-        targetResult.show() if tribeIds[x] is filterId
-      return
-  return
+    #alert $("#activeReservableFilter").val()+'...changing value to false...'
+    $("#activeReservableFilter").val("false") # store new value
+    $("#searchReservableFilter").addClass('btn-default')
+    $("#searchReservableFilter").removeClass('btn-success')
+
+
+@toggleWalkinsFilter = ->
+  if $("#activeWalkinsFilter").val() is "false"
+    $("#activeWalkinsFilter").val("true")
+    $("#searchWalkinsFilter").addClass('btn-success') #
+    $("#searchWalkinsFilter").removeClass('btn-default')
+  else 
+    $("#activeWalkinsFilter").val("false")
+    $("#searchWalkinsFilter").addClass('btn-default')
+    $("#searchWalkinsFilter").removeClass('btn-success')
+
+@changeTribeFilter = (filterId) ->
+  $("#activeTribeId").val(filterId)
 

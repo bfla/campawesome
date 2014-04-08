@@ -20,20 +20,27 @@ html.fill-height
 
     == render 'layouts/navbar'
     input#activeTribeId type="hidden" value="0"
+    input#activeReservableFilter type="hidden" value="false"
+    input#activeWalkinsFilter type="hidden" value="false"
     #results-container.col-md-4.well.white.fill-height.remove-bottom-margin.pad-left-sm
       .result-list.fill-height
-        / Time filter - doesn't work yet==========
-          .row
-            .input-group.col-md-6
-              span.input-group-addon 
-                span.glyphicon.glyphicon-calendar
-                | When
-              input#fromDate.form-control type="text" placeholder="Monday"
-            .input-group.col-md-6
-              span.input-group-addon to
-              input#toDate.form-control type="text" placeholder="Monday"
-        / Vibe filters======================
+        / Time filter - doesn't work yet================================
+          /.row
+            /.input-group.col-md-6
+              /span.input-group-addon 
+                /span.glyphicon.glyphicon-calendar
+                /| When
+              /input#fromDate.form-control type="text" placeholder="Monday"
+            /.input-group.col-md-6
+              /span.input-group-addon to
+              /input#toDate.form-control type="text" placeholder="Monday"
+        / Filters============================================
         .row
+          / Vibe filters
+          p.col-md-12.lead
+            small.subtle-text 
+              | Filters&nbsp;
+              span.glyphicon.glyphicon-info-sign
           .col-md-2
             #allSearchFilter.searchFilterThumbnail.thumbnail data-tribe-id="0"
               = image_tag 'icons/all120px.png', class:'img-circle img-responsive tribe-background'
@@ -47,8 +54,17 @@ html.fill-height
               p.no-spacing.text-center
                   small.no-spacing
                     small.no-spacing = tribe.vibe
+          / Booking filters
+          .col-md-12
+          p.col-md-12.subtle-text 
+            button#searchReservableFilter.btn.btn-default.btn-xs Takes reservations
+            | &nbsp;
+            button#searchWalkinsFilter.btn.btn-default.btn-xs Allows walkins
           .col-md-12
             hr
+
+        
+
 
         / If no results ===============
         - if @campsites.blank?
@@ -117,8 +133,25 @@ html.fill-height
     $(".searchFilterThumbnail").click( function(){
       highlightSearchThumbnail($(this));
       var filterId = $(this).data('tribe-id');
-      filterSearchResults(filterId); // Filter the list of search results
-      filterSearchMarkers(map, filterId); // Filter the search markers
+      changeTribeFilter(filterId);
+      filterSearchResults(); // Filter the list of search results
+      filterSearchMarkers(map); // Filter the search markers
+    });
+
+    // Filter results when reserve filter is clicked
+    $('#searchReservableFilter').click( function() {
+      toggleReservableFilter();
+      //alert( $('#activeTribeId').val() );
+      filterSearchResults();
+      filterSearchMarkers(map);
+
+    });
+
+    // Filter results when walkins filter is clicked
+    $('#searchWalkinsFilter').click( function() {
+      toggleWalkinsFilter();
+      filterSearchResults();
+      filterSearchMarkers(map);
     });
     
 
@@ -153,11 +186,11 @@ html.fill-height
 
             map.markerLayer.setGeoJSON(data); //Reset map markers
             resetSearchList(params).done( function () { // Reset search list
-              filterSearchResults( $('#activeTribeId').val() ); // Refilter search list
+              filterSearchResults(); // Refilter search list
             }); 
 
             filterId = $('#activeTribeId').val(); // Get active tribe Filter
-            filterSearchMarkers(map, filterId); // // Refilter map markers
+            filterSearchMarkers(map); // // Refilter map markers
 
           })
         ;
@@ -175,11 +208,12 @@ html.fill-height
     });
 
   javascript:
-    function filterSearchMarkers(map, filterId) {
+    function filterSearchMarkers(map) {
       map.featureLayer.setFilter(function(f) { 
-        if (filterId != 0) {
+        var activeTribeId = $("#activeTribeId").val();
+        if (activeTribeId != 0) {
           for (x in f.properties['tribes']) {
-            if (f.properties['tribes'][x] == filterId) {
+            if (f.properties['tribes'][x] == activeTribeId) {
               return true;
             }
           }
@@ -210,49 +244,44 @@ html.fill-height
     }
 
   javascript:
-    /*function resetSearchList(geoJson) {
-      $('.results').empty(); // Clear the result list
-      /*newResults = $('<div/>').addClass('newResult');
-      for (campsite in geoJson) {
-        //result_div = $('<div/>').addClass('searchResult').data-tribes(campsite['properties']['tribeIds']);
-        //leftCol = $('<div/>').addClass('col-md-2');
-        leftCol = $('<div/>').addClass('col-md-2');
-        rightCol = $('<div/>').addClass('col-md-10');
-        link = $('<a/>').attr('href', geoJson[campsite]['properties']['url']);
-        smallSpan = $('<small/>');
-        heading = $('<p/>').addClass('lead').text(geoJson[campsite]['properties']['title']);
-        smallSpan.append(heading);
-        link.append(smallSpan);
-        newResults = newResults.append(link);
-      }
+    function filterSearchResults() {
+      $(".searchResult").hide(); // Hide all search results
 
-      //$('.results').html(newResults);
-      $('#template').jqote(geoJson).appendTo($('.results'));
+      // Now we'll determine which results fit all the criteria and show only them
+      $(".searchResult").each( function() {
+        var targetResult = $(this);
+        var showMeBool = true;
+        var activeTribeId = $("#activeTribeId").val();
 
-    }*/
-
-    /* Apply the initial filter, if any
-    if (gon.initTribe) { 
-      var filterId = gon.initTribe;
-    } else { 
-      var filterId = 0; 
-    }
-    $('.searchFilterThumbnail').each( function() {
-      if ( $(this).data('tribe-id') == filterId) {
-        highlightSearchFilter( $(this) );
-      }
-    });
-    /*function applyFilter(tribalId) {
-      $(".browseResult").hide();
-      if (tribalId == 0) {
-        $(".browseResult").show();
-      } else {
-        $(".browseResult").each( function () {
-          var targetResult = $(this);
-          var tribeIds = targetResult.data("tribes"); // gets tribe ids for the campsite
+        // First apply the active tribe filter, if any
+        if (activeTribeId != 0 && activeTribeId != "0") {
+          showMeBool = false;
+          var tribeIds = targetResult.data("tribes");
           for (x in tribeIds) {
-            if (tribeIds[x] == tribalId) { targetResult.show(); }
-          }  
-            });
+            if (tribeIds[x] == activeTribeId) {
+              showMeBool = true;
+            }
           }
-        }*/
+        }
+
+        // Now apply the reservable filter, if active...
+        if (showMeBool && ($("#activeReservableFilter").val() == "true") ) {
+          if (targetResult.data("reservable") == false) {
+            showMeBool = false;
+          }
+        }
+
+        // Now apply the walkin filter, if active...
+        if (showMeBool && ($("#activeWalkinsFilter").val() == "true") ) {
+          if (targetResult.data("walkins") == false) {
+            showMeBool = false;
+          }
+        }
+
+        // Show the result only if it passed all the tests
+        if (showMeBool) {
+          targetResult.show();
+        }
+
+      });
+    }
