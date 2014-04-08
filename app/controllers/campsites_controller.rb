@@ -36,6 +36,7 @@ class CampsitesController < ApplicationController
     coordinates = Geocoder.coordinates(params[:keywords])
     @campsites = Campsite.near(coordinates, distance).includes(:tribes).first(50)
     @tribes = Tribe.all
+    render layout: "layouts/pages/none"
   end
 
   def contrib

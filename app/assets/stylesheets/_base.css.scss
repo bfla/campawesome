@@ -36,12 +36,18 @@ $brandFont: 'Monda';
   background:#ffffff;
   opacity:1.0;
 }
+.black {
+  background:#000000;
+  opacity:1.0;
+}
 
 .rating-color {   color: $ratingColor; }
 
 .background {     background: $backgroundColor; }
 
 .subtle-text {    color: $lightGray; }
+
+.white-text {     color: #ffffff; }
 
 .extra-subtle {   color: $lightGray; }
 

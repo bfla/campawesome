@@ -84,6 +84,13 @@ html.fill-height
       #map-ui style="position: absolute; top: 60px; left: 5px; z-index: 100; margin-left:5px; padding-left:5px;"
         button#searchReset.thumbnail.add-tooltip data-toggle="tooltip" type="submit" title="Search this area" data-placement="right" style="background:rgba(0.1, 0.1, 0.1, .6);" 
           span.glyphicon.glyphicon-repeat style="font-size:40px; color:#666666;"
+      - if @campsites.size >= 50
+        #map-notice style="position:absolute; top: 60px; right:5px; z-index:100;"
+          .well.black.white-text 
+            small
+              | Your mighty search resulted in more than 50 campsites.
+              br
+              | Narrow your search-area to see more campsites.
 
     == render 'layouts/bottomScripts'
 
@@ -125,19 +132,18 @@ html.fill-height
         //alert("...Got center:"+currentCenter);
         var southWest = map.getBounds().getSouthWest(); // Returns the SW corner as LatLng
         //alert("...Got SW corner:"+southWest);
-        var distanceInMeters = currentCenter.distanceTo(southWest);
+        var distanceInMeters = currentCenter.distanceTo(southWest); // Distance to edge of map
         //alert("Distance in meters:"+distanceInMeters);
         var distanceInMiles = distanceInMeters * .000621371;
         //alert("Distance in miles:"+distanceInMiles);
-        centerString = currentCenter['lat'].toString()+', '+currentCenter['lng'].toString();
+        var centerString = currentCenter['lat'].toString()+', '+currentCenter['lng'].toString(); // Reformat coordinates
         //alert("centerString:" +centerString);
-        var params = $.param( { distance:distanceInMiles, keywords:centerString });
+        var params = $.param( { distance:distanceInMiles, keywords:centerString }); // HTML parameters for request
         //alert("params: "+ params);
-        var url = "http://localhost:3000/campsites/search.json?" + params;
-        var stateObj = { search: "search" };
+        var url = "http://localhost:3000/campsites/search.json?" + params; // The request url
+        var stateObj = { search: "search" }; // Obj for replaceState function (see next line)
         history.replaceState(stateObj, "", "search.html?"+params); // Add the proper url to the browser
         //alert("url: "+url);
-        //window.location.replace(url);
 
         // Make ajax request for campsite JSON
         $.getJSON(url, {})
@@ -146,14 +152,16 @@ html.fill-height
             $("#searchReset").hide(); // Hide the reset button
 
             map.markerLayer.setGeoJSON(data); //Reset map markers
-            resetSearchList(params); // Reset search list
+            resetSearchList(params).done( function () { // Reset search list
+              filterSearchResults( $('#activeTribeId').val() ); // Refilter search list
+            }); 
 
             filterId = $('#activeTribeId').val(); // Get active tribe Filter
             filterSearchMarkers(map, filterId); // // Refilter map markers
-            //filterSearchResults(filterId); // Refilter search list
 
           })
         ;
+
       });
     });
     map.on( "moveend", function(e) { 
@@ -198,6 +206,7 @@ html.fill-height
         $('.results').empty();
         $( ".results" ).html( newHtml ); // Add the new results
       });
+
     }
 
   javascript:
