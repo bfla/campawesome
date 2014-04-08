@@ -24,16 +24,6 @@ html.fill-height
     input#activeWalkinsFilter type="hidden" value="false"
     #results-container.col-md-4.well.white.fill-height.remove-bottom-margin.pad-left-sm
       .result-list.fill-height
-        / Time filter - doesn't work yet================================
-          /.row
-            /.input-group.col-md-6
-              /span.input-group-addon 
-                /span.glyphicon.glyphicon-calendar
-                /| When
-              /input#fromDate.form-control type="text" placeholder="Monday"
-            /.input-group.col-md-6
-              /span.input-group-addon to
-              /input#toDate.form-control type="text" placeholder="Monday"
         / Filters============================================
         .row
           / Vibe filters
@@ -56,7 +46,7 @@ html.fill-height
                     small.no-spacing = tribe.vibe
           / Booking filters
           .col-md-12
-          p.col-md-12.subtle-text 
+          p.col-md-12.subtle-text
             button#searchReservableFilter.btn.btn-default.btn-xs Takes reservations
             | &nbsp;
             button#searchWalkinsFilter.btn.btn-default.btn-xs Allows walkins
@@ -159,6 +149,7 @@ html.fill-height
     $(document).ready( function() {
       $('#searchReset').hide();
       $('#searchReset').tooltip('hide');
+      // reset search based on current map frame...
       $('#searchReset').click( function() {
         //alert('clicked reset button...');
         var currentCenter = map.getCenter(); // Current center of the map as Leaflet LatLng

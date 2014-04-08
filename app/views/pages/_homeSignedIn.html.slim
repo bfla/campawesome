@@ -34,8 +34,12 @@
               = link_to "Photo", photos_path
             - else
               = link_to "Photos", photos_path
+            br
+            | #{@user.coin_tally}&nbsp;  
+            = link_to 'Coins', rewards_products_path     
+            br
       / Middle (main) header section
-      .col-md-8.remove-margin-top
+      .col-md-7.remove-margin-top
         h1.remove-margin-top
           small
             small Happy camping,
@@ -55,14 +59,6 @@
                   | &nbsp;&nbsp;
                   span.glyphicon.glyphicon-home
                   |  From #{@user.location}
-          br
-          small 
-            | Coins: #{@user.coin_tally}&nbsp;
-            small
-              small 
-                = link_to "spend your coins", rewards_products_path, class:"subtle-text"
-                |  |&nbsp;
-                = link_to "how to earn coins", wages_products_path, class:"subtle-text"
 
           br
           small
@@ -83,16 +79,18 @@
                 | Member of the #{@user.tribe.name} tribe&nbsp;&nbsp;
                 small = link_to "Switch tribe", new_tribal_membership_path, class:"subtle-text"
       / Right header section
-      .col-md-2
-        h1#friendsCount.text-center href="#" 
+      .col-md-3
+        h1#friendsCount href="#" 
           small
             small
               = image_tag '/images/icons/FB-icon.png' 
-              |  friends:
-          br 
-          .lead #{@friends.size}
+              |  #{@friends.size} friends
           - unless @user.likes_me?
-            a#likesMe href=reward_like_users_path Like me
+            br
+            small
+              small
+                = link_to 'Like me to earn a reward', reward_like_users_path, class:"btn btn-warning btn-xs", id:"likeMe"
+
     .col-md-12
       hr
     / Bottom content
