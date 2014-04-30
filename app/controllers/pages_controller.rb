@@ -41,4 +41,13 @@ class PagesController < ApplicationController
   def forbidden #Forbidden action or url
   end
 
+  def bloggers
+  end
+
+  def smallbiz
+  end
+
+  def advertisers
+  end
+
 end
