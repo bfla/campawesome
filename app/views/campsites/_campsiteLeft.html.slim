@@ -99,22 +99,28 @@
           meta itemprop="name" content="#{@campsite.state.name}"
           meta itemprop="description" content="The state of #{@campsite.state.name}."
       p itemprop="geo" itemscope="itemscope" itemtype="http://schema.org/GeoCoordinates"
-        strong.subtle-text GPS:
-        span itemprop="latitude"  #{@campsite.latitude}
-        |, 
-        span itemprop="longitude"  #{@campsite.longitude}
         br
-        span.subtle-text.glyphicon.glyphicon-question-sign
-        |&nbsp;
-        small
-          a.subtle-text.add-tooltip data-toggle="tooltip" data-placement="right" title="It's usually easy.  Most map services like Google Maps, Apple Maps, and Garmin will let you enter GPS coordinates instead of an address." How to use GPS coordinates
+          strong
+            span.col-md-12 itemprop="latitude"  #{ number_with_precision(@campsite.latitude, precision:5)} N
+            span.col-md-12 itemprop="longitude"  #{ number_with_precision(-@campsite.longitude, precision:5)} W
+          small.col-md-12.subtle-text #{number_with_precision(@campsite.latitude, precision:5)}, #{number_with_precision(@campsite.longitude, precision:5)}
+
+        br
+        .col-md-12
+          span.subtle-text.glyphicon.glyphicon-question-sign
+          |&nbsp;
+          small
+            a.subtle-text.add-tooltip data-toggle="tooltip" data-placement="right" title="It's usually easy.  Most map services like Google Maps, Apple Maps, and Garmin will let you enter GPS coordinates instead of an address." How to use GPS coordinates
       - unless @campsite.address.blank?
         p
-          a href="#" data-toggle="modal" data-target="#addressModal" Show address
-          small.subtle-text &nbsp;(not recommended)
-          br
-          span.subtle-text.glyphicon.glyphicon-exclamation-sign
-          small.subtle-text.add-tooltip  data-toggle="tooltip" data-placement="right" title="Sadly, campgrounds often don't have addresses.  Or the address is for a mailbox instead of where the campground itself is located. GPS is more trustworthy." Campsite addresses are often inaccurate!
+          .col-md-12
+            br
+            a href="#" data-toggle="modal" data-target="#addressModal" Show address
+            small.subtle-text  (not recommended)
+            br
+          .col-md-12
+            span.subtle-text.glyphicon.glyphicon-exclamation-sign
+            small.subtle-text.add-tooltip  data-toggle="tooltip" data-placement="right" title="Sadly, campgrounds often don't have addresses.  Or the address is for a mailbox instead of where the campground itself is located. GPS is more trustworthy."  Campsite addresses are often inaccurate!
       - unless @campsite.activities.blank?
         p = link_to "Things to do nearby", activities_campsite_path(@campsite)
 / Reviews

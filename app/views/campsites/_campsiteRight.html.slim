@@ -72,4 +72,5 @@
         .extra-subtle 
           | Camping Description:
         span itemprop="description" = truncate @campsite.description, length:250, separator:' '
-        a ... more
+        - if @campsite.description.length > 250
+          a data-toggle="modal" data-target="#descriptionModal" (more)
