@@ -31,13 +31,22 @@ class PhotosController < ApplicationController
   # POST /photos
   # POST /photos.json
   def create
-    @photo =  Photo.create(photo_params)
-    @photo.user_id = current_user.id
+    @photo = Photo.create(user_id:current_user.id, photo_file:params[:photo_file])
+    @photo.title = params[:title] unless params[:title].blank?
+    @photo.caption = params[:caption] unless params[:caption].blank?
+    @photo.state_id = params[:state_id] unless params[:state_id].blank?
+    @photo.city_id = params[:city_id] unless params[:city_id].blank?
+    @photo.destination_id = params[:destination_id] unless params[:destination_id].blank?
+    @photo.license_type = params[:license_type] unless params[:license_type].blank?
+    @photo.license_text = params[:license_text] unless params[:license_text].blank?
+    ##@photo =  Photo.create(photo_params)
+    ##@photo.user_id = current_user.id
     #@photo = Photo.create(campsite_id:params[:campsite_id], user_id:current_user.id)
     #@photo.title = params[:title] unless params[:title].blank?
     #@photo.caption = params[:caption] unless params[:caption].blank?
     #@photo.state_id = params[:state_id] unless params[:state_id].blank?
     #@photo.city_id = params[:city_id] unless params[:city_id].blank?
+    #@photo.photo_file = params[:photo_file] unless params[:photo_file].blank?
 
 
     respond_to do |format|

@@ -9,5 +9,5 @@ class Photo < ActiveRecord::Base
                     :default_url => "/images/:style/missing.png"
   validates_attachment_content_type :photo_file, :content_type => /\Aimage\/.*\Z/
   validates_attachment_size :photo_file, less_than:5.megabytes
-  #validates :photo_file, :user_id, presence:true
+  validates :photo_file, :user_id, presence:true
 end
