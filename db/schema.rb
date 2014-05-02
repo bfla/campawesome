@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140423161505) do
+ActiveRecord::Schema.define(version: 20140502170026) do
 
   create_table "activities", force: true do |t|
     t.integer  "activity_type_id"
@@ -116,6 +116,7 @@ ActiveRecord::Schema.define(version: 20140423161505) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "slug"
+    t.integer  "distance"
   end
 
   add_index "destinations", ["slug"], name: "index_destinations_on_slug", unique: true
