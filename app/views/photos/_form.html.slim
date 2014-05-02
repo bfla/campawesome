@@ -16,12 +16,12 @@
       = text_field_tag :caption, params[:caption], class:"form-control"
   .row
     .field.col-md-3
-      label.control-label "CC attribution 2", class:'control-label'
-      = radio_button :license_type, params[:license_type], 'CC attribution 2', class:'form-control'
+      label.control-label CC attribution 2
+      = radio_button_tag :license_type, 'CC attribution 2', class:'form-control'
   .row
     .field.form-group
       label.control-label License text
-      = text_area :license_text, params[:license_text], class:'form-control'
+      = text_field_tag :license_text, params[:license_text], class:'form-control'
   .row
     .field.form-group.col-md-3
       label.control-label Campsite
