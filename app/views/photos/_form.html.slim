@@ -1,5 +1,51 @@
-= form_for @photo, html: {class:"col-md-offset-1 col-md-6", multipart:true} do |f|
-  - if @photo.errors.any?
+= form_tag photos_path, method: :post, multipart:true, remote:true do
+  = token_tag form_authenticity_token
+  = hidden_field_tag :user_id, params[:user_id], value:current_user.id
+  .row
+    .field.form-group
+      label.control-label Upload your photo
+      /input#photo_photo_file name="photo[photo_file]" type="file"
+      = file_field_tag :photo_file
+  .row
+    .field.form-group
+      label.control-label Optional title
+      = text_field_tag :title, params[:title], class:'form-control'
+  .row
+    .field.form-group
+      label.control-label Optional caption
+      = text_field_tag :caption, params[:caption], class:"form-control"
+  .row
+    .field.col-md-3
+      label.control-label "CC attribution 2", class:'control-label'
+      = radio_button :license_type, params[:license_type], 'CC attribution 2', class:'form-control'
+  .row
+    .field.form-group
+      label.control-label License text
+      = text_area :license_text, params[:license_text], class:'form-control'
+  .row
+    .field.form-group.col-md-3
+      label.control-label Campsite
+      = text_field_tag :campsite_id, params[:campsite_id], class:'form-control'
+    .field.form-group.col-md-3
+      label.control-label City
+      = text_field_tag :city_id, params[:city_id], class:'form-control'
+    .field.form-group.col-md-3
+      label.control-label Destination
+      = text_field_tag :destination_id, params[:destination_id], class:'form-control'
+    .field.form-group.col-md-3
+      label.control-label State
+      = text_field_tag :state_id, params[:state_id], class:'form-control'
+  .row
+    p.text-center.pad-top-md
+      button.btn.btn-default.btn-lg type="button" data-dismiss="modal" Cancel
+      | &nbsp;
+      /button#reviewSubmit.btn.btn-success type="submit" data-dismiss="modal" data-toggle="modal" data-target="#reviewSuccessModal" Say it
+      = submit_tag 'Submit', class:"btn btn-success btn-lg"
+
+
+
+/= form_for @photo, multipart:true, html: {class:"col-md-offset-1 col-md-6"} do |f|
+  /- if @photo.errors.any?
     .panel.panel-danger
           .panel-heading Bummer! Something went wrong
           #error_explanation.panel-body
@@ -7,22 +53,21 @@
             ul
               - @photo.errors.full_messages.each do |message|
                 li = message
-  .row
+  /.row
     .field.form-group
       = f.label :title, class:'control-label'
       = f.text_field :title, class:'form-control'
-  .row
+  /.row
     .field.col-md-3
       = f.label "CC attribution 2", class:'control-label'
       = f.radio_button :license_type, 'CC attribution 2', class:'form-control'
-  .row
+  /.row
     .field.form-group
       = f.label :license_text, class:'control-label'
       = f.text_area :license_text, class:'form-control'
-  .row
+  /.row
     .field.form-group.col-md-2
-      = f.label :user_id, class:'control-label'
-      = f.number_field :user_id, class:'form-control'
+      = f.hidden_field :user_id, class:'form-control', value:"current_user.id"
     .field.form-group.col-md-2
       = f.label :campsite_id, class:'control-label'
       = f.number_field :campsite_id, class:'form-control'
@@ -35,14 +80,15 @@
     .field.form-group.col-md-2
       = f.label :destination_id, class:'control-label'
       = f.number_field :destination_id, class:'form-control'
-  .row
+  /.row
     .field.form-group
       = f.label :caption, class:'control-label'
       = f.text_area :caption, class:'form-control'
-  .row
+  /.row
     .field.form-group
       = f.label :photo_file, class:'control-label'
-      = f.file_field :photo_file
+      /= f.file_field :photo_file
+      = file_field_tag :photo_file
       p.help-block < 5 MB
-  .row
+  /.row
     .actions = f.submit 'Save', class:'btn btn-success'
