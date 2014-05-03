@@ -9,6 +9,15 @@ html.fill-height
     == render 'layouts/headscripts'
 
   body.fill-height
+    #fb-root
+    script
+      | (function(d, s, id) {
+      | var js, fjs = d.getElementsByTagName(s)[0];
+      | if (d.getElementById(id)) return;
+      | js = d.createElement(s); js.id = id;
+      | js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.0";
+      | fjs.parentNode.insertBefore(js, fjs);
+      | }(document, 'script', 'facebook-jssdk'));
     == render 'layouts/modals/standardModals'
     / Generate modals for campsite forms
     - @campsites.each do |campsite|
@@ -17,10 +26,10 @@ html.fill-height
         = render 'layouts/modals/newListModal', campsite:campsite
     = render 'layouts/modals/listSavedModal'
     = render 'layouts/modals/submitSuccessModal'
-    /- if user_signed_in? && current_user.likes_me
-      /= render 'layouts/modals/filterModal'
-    /- else
-      /= render 'layouts/modals/likeMeModal'
+    - if user_signed_in? && current_user.likes_me
+      = render 'layouts/modals/filterModal', tribes:@tribes, tags:@tags
+    - else
+      = render 'layouts/modals/likeMeModal'
 
     == render 'layouts/navbar'
     input#activeTribeId type="hidden" value="0"
@@ -47,7 +56,9 @@ html.fill-height
           .col-md-4.pad-top-sm
                 a href="#" data-toggle="modal" data-target="#filterModal"
                   p
-                    small more filters>
+                    small
+                      | more filters
+                      span.glyphicon.glyphicon-chevron-right
 
           / Booking filters
           .col-md-12

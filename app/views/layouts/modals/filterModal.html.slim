@@ -1,0 +1,25 @@
+/ Filter modal on search page
+#filterModal.modal.fade.bs-modal-sm tabindex="-1" role="dialog" aria-labelledby="newListModalLabel" aria-hidden="true"
+  .modal-dialog
+    .modal-content
+      .modal-header
+        button.close type="button" data-dismiss="modal" aria-hidden="true" &times
+        h4#descriptionModalTitle.modal-title.text-center Super-filters
+      .modal-body
+        p Campsite types
+          - for tribe in tribes
+            button.btn.btn-default.tribeButton tribe.name
+
+        p Bookings
+          button#searchReservableFilter.btn.btn-default.btn-xs Takes reservations
+          button#searchWalkinsFilter.btn.btn-default.btn-xs Allows walkins
+        p RV features
+          button.btn.btn-default.tagButton RV Parking
+          button.btn.btn-default.tagButton Sanitation station
+          button.btn.btn-default.tagButton Electrical hookups
+        p Facilities
+          button.btn.btn-default.tagButton Showers
+          button.btn.btn-default.tagButton Flush toilets
+          button.btn.btn-default.tagButton Outhouse
+      .modal-footer
+        button.btn.btn-default type="button" data-dismiss="modal" Close

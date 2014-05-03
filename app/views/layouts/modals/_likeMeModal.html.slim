@@ -1,0 +1,14 @@
+/ Modal for likes me solicitation
+#filterModal.modal.fade.bs-modal-sm tabindex="-1" role="dialog" aria-labelledby="likeMeModalLabel" aria-hidden="true"
+  .modal-dialog
+    .modal-content
+      .modal-header
+        button.close type="button" data-dismiss="modal" aria-hidden="true" &times
+        h4#descriptionModalTitle.modal-title.text-center Unlock super-filters
+      .modal-body
+        p 
+          | 'Like me' on Facebook to unlock more super-filters.  Super-filters let you refine your search and show only campsites that match your criteria.
+          br
+          div.fb-like data-href="https://www.facebook.com/CamposaurusRex" data-layout="button" data-action="like" data-show-faces="true" data-share="false"
+      .modal-footer
+        button.btn.btn-default type="button" data-dismiss="modal" Close

@@ -6,8 +6,9 @@ class CampsitesController < ApplicationController
     zoom = params[:zoom] || 10
     distance = params[:distance] || 30
     coordinates = Geocoder.coordinates(params[:keywords])
-    @campsites = Campsite.near(coordinates, distance).includes(:tribes).first(50)
+    @campsites = Campsite.near(coordinates, distance).includes(:tribes, :taggings).first(50)
     @tribes = Tribe.all
+    @tags = Tag.all
 
     if @campsites.blank?
       @center = coordinates
@@ -34,8 +35,9 @@ class CampsitesController < ApplicationController
     zoom = params[:zoom] || 10
     distance = params[:distance] || 30
     coordinates = Geocoder.coordinates(params[:keywords])
-    @campsites = Campsite.near(coordinates, distance).includes(:tribes).first(50)
+    @campsites = Campsite.near(coordinates, distance).includes(:tribes, :taggings).first(50)
     @tribes = Tribe.all
+    @tags = Tag.all
     render layout: "layouts/pages/none"
   end
 
