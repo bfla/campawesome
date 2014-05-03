@@ -17,6 +17,10 @@ html.fill-height
         = render 'layouts/modals/newListModal', campsite:campsite
     = render 'layouts/modals/listSavedModal'
     = render 'layouts/modals/submitSuccessModal'
+    /- if user_signed_in? && current_user.likes_me
+      /= render 'layouts/modals/filterModal'
+    /- else
+      /= render 'layouts/modals/likeMeModal'
 
     == render 'layouts/navbar'
     input#activeTribeId type="hidden" value="0"
@@ -27,10 +31,6 @@ html.fill-height
         / Filters============================================
         .row
           / Vibe filters
-          p.col-md-12.lead
-            small.subtle-text 
-              | Filters&nbsp;
-              span.glyphicon.glyphicon-info-sign
           .col-md-2
             #allSearchFilter.searchFilterThumbnail.thumbnail data-tribe-id="0"
               = image_tag 'icons/all120px.png', class:'img-circle img-responsive tribe-background'
@@ -44,6 +44,11 @@ html.fill-height
               p.no-spacing.text-center
                   small.no-spacing
                     small.no-spacing = tribe.vibe
+          .col-md-4.pad-top-sm
+                a href="#" data-toggle="modal" data-target="#filterModal"
+                  p
+                    small more filters>
+
           / Booking filters
           .col-md-12
           p.col-md-12.subtle-text

@@ -110,7 +110,11 @@ class Campsite < ActiveRecord::Base
 
   # import CSV file
   def self.import(file)
-    CSV.foreach(file.path, headers:true) { |row| Campsite.create! row.to_hash }
+    #CSV.foreach(file.path, headers:true) { |row| Campsite.create! row.to_hash }
+    CSV.foreach(file.path, headers:true) do |row|
+      Campsite.create! row.to_hash
+      sleep(.5)
+    end
   end
 
   # This takes a search query and distance, codes it into a coordinates, 
