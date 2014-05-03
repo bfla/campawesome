@@ -51,6 +51,10 @@ $campsiteMapHeight: 200px;
   background:#d5eacb;
 }
 
-.result-list {padding-top:50px;}
+.searchFilterThumbnail {
+  margin-bottom:$tinySpacing;
+}
+
+.result-list {padding-top:$mediumPadding;}
 
 #filter-chevron {font-size:32px;}
