@@ -113,7 +113,7 @@ class Campsite < ActiveRecord::Base
     #CSV.foreach(file.path, headers:true) { |row| Campsite.create! row.to_hash }
     CSV.foreach(file.path, headers:true) do |row|
       Campsite.create! row.to_hash
-      sleep(.5)
+      sleep(0.5)
     end
   end
 
