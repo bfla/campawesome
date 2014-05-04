@@ -7,7 +7,7 @@ class UsersController < ApplicationController
   end
 
   def reward_like
-    unless current_user.likes_me?
+    unless current_user.likes_me
       current_user.likeify
     end
     respond_to do |format|

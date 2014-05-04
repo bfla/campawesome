@@ -64,7 +64,8 @@ class User < ActiveRecord::Base
   end
   def likeify # ensure the user likes us on Facebook
     me = FbGraph::User.me(self.fb_token)
-    page = FbGraph::Page.new('220594224811415')
+    page = FbGraph::Page.new('1412101645730094') if Rails.env.development?
+    page = FbGraph::Page.new('1412101645730094') if Rails.env.production?
     if me.like?(page)
       self.likes_me = true
       self.save
