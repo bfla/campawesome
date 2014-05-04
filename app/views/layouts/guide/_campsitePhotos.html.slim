@@ -1,8 +1,12 @@
 / Photo Gallery
 .col-md-9
   - if place.photos.first.blank?
-    div itemscope="itemscope" itemtype="http://schema.org/Photograph"
-     = image_tag '/images/dummies/destPhoto221x221.png'
+    .pad-top-sm
+      #placesPhoto
+      div itemscope="itemscope" itemtype="http://schema.org/Photograph"
+      = image_tag '/images/dummies/destPhoto221x221.png'
+      /img src="https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=CoQBegAAAFg5U0y-iQEtUVMfqw4KpXYe60QwJC-wl59NZlcaxSQZNgAhGrjmUKD2NkXatfQF1QRap-PQCx3kMfsKQCcxtkZqQ&sensor=true&key=AIzaSyB9mHzeQJxtkMkn_UkKAOs00Hkg2Y9qKds"
+      /= image_tag "/images/icons/poweredByGoogle.png"
   - else place.photos.first.blank?
     div itemscope="itemscope" itemtype="http://schema.org/Photograph"
       = image_tag place.photos.first.photo_file.url(:large), class: "img-thumbnail img-responsive", html: {title:"", alt:"", caption:"", description:""}
@@ -32,3 +36,12 @@
       |  Add photo
 - if user_signed_in? 
   = render 'layouts/modals/photoUploadModal', campsite:place
+
+- if place.photos.first.blank?
+  javascript:
+    /*var placesData = $.getJSON('https://maps.googleapis.com/maps/api/place/textsearch/json?query=restaurants+in+Sydney&sensor=true&key=AIzaSyB9mHzeQJxtkMkn_UkKAOs00Hkg2Y9qKds');
+    
+    function placesCallback() {
+      console.log(placesData);
+    }*/
+    

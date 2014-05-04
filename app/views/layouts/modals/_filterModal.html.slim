@@ -1,0 +1,70 @@
+/ Filter modal on search page
+#filterModal.modal.fade.bs-modal-sm tabindex="-1" role="dialog" aria-labelledby="newListModalLabel" aria-hidden="true"
+  .modal-dialog
+    .modal-content
+      .modal-header
+        button.close type="button" data-dismiss="modal" aria-hidden="true" &times
+        h4#descriptionModalTitle.modal-title.text-center Super-filters
+      .modal-body
+        p 
+          strong Campsite type
+          - for tribe in tribes
+            | &nbsp;
+            button.btn.btn-default.tribeButton.btn-xs = tribe.vibe
+          br
+          hr
+        p 
+          strong Bookings
+          | &nbsp;
+          button#searchReservableFilter.btn.btn-default.btn-xs Takes reservations
+          | &nbsp;
+          button#searchWalkinsFilter.btn.btn-default.btn-xs Allows walkins
+          br
+          hr
+        p 
+          strong Highlights
+          | &nbsp;
+          button#searchReservableFilter.btn.btn-default.btn-xs Beachfront
+          | &nbsp;
+          button#searchReservableFilter.btn.btn-default.btn-xs Canoe trail
+          | &nbsp;
+          button#searchReservableFilter.btn.btn-default.btn-xs On lake
+          | &nbsp;
+          button#searchReservableFilter.btn.btn-default.btn-xs On river
+
+          br
+          hr
+
+        p 
+          strong RV features
+          | &nbsp;
+          button.btn.btn-default.tagButton.btn-xs RV Parking
+          | &nbsp;
+          button.btn.btn-default.tagButton.btn-xs Sanitation station
+          | &nbsp;
+          button.btn.btn-default.tagButton.btn-xs Electrical hookups
+          | &nbsp;
+          button.btn.btn-default.tagButton.btn-xs 50-amp hookups
+          br
+          hr
+        p 
+          strong Facilities
+          | &nbsp;
+          button.btn.btn-default.tagButton.btn-xs Showers
+          | &nbsp;
+          button.btn.btn-default.tagButton.btn-xs Flush toilets
+          | &nbsp;
+          button.btn.btn-default.tagButton.btn-xs Outhouse
+          br
+          hr
+        p
+          strong Rules
+          | &nbsp;
+          button.btn.btn-default.tagButton.btn-xs Allows pets
+          | &nbsp;
+          button.btn.btn-default.tagButton.btn-xs Allows alcohol
+        p
+          br
+          .text-center.subtle-text More coming soon!
+      .modal-footer
+        button.btn.btn-default type="button" data-dismiss="modal" Close

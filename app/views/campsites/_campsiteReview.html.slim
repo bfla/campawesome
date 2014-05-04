@@ -13,7 +13,7 @@ div itemprop="review" itemscope="itemscope" itemtype="http://schema.org/Review"
     .col-md-offset-1.col-md-10
       - if review.user.tribe.blank?
         h1.text-center
-          span.glyphicon.glyphicon-globe.subtle-text
+          = image_tag 'icons/all120px.png', class:'img-circle img-responsive tribe-background'
           br
           small
             small no tribe

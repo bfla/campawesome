@@ -10,10 +10,9 @@
         .col-md-offset-1.col-md-10
           - if @user.tribe.blank?
             h1.text-center
-              span.glyphicon.glyphicon-globe.subtle-text
-              br
-              small
-                small no tribe
+              = image_tag 'icons/all120px.png', class:'img-circle img-responsive tribe-background'
+            p.text-center
+              small.subtle-text no tribe
           - else
             h1.text-center
               = image_tag @user.tribe.icon.url(:medium), class:"img-responsive img-circle tribe-background add-tooltip", data: {toggle:"tooltip", placement:"bottom"}, title:"#{@user.tribe.name}: #{@user.tribe.description}"
@@ -72,7 +71,7 @@
           small 
             small 
               - if @user.tribe.blank?
-                | You don't belong to a tribe.
+                | You don't belong to a tribe.&nbsp;
                 = link_to "Join a tribe", new_tribal_membership_path, class:'btn btn-warning btn-sm'
               - else
                 /| Newbie in the #{@user.tribe.name} tribe&nbsp;&nbsp;

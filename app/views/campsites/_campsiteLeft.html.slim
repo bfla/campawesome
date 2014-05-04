@@ -123,6 +123,7 @@
             small.subtle-text.add-tooltip  data-toggle="tooltip" data-placement="right" title="Sadly, campgrounds often don't have addresses.  Or the address is for a mailbox instead of where the campground itself is located. GPS is more trustworthy."  Campsite addresses are often inaccurate!
       - unless @campsite.activities.blank?
         p = link_to "Things to do nearby", activities_campsite_path(@campsite)
+
 / Reviews
 - unless @campsite.reviews.blank?
   hr

@@ -17,21 +17,25 @@
             /a.btn.btn-default.btn-lg href=reward_like_users_path
               /= image_tag '/images/icons/FB-icon.png'
               /|   Like CampHero
-          - if user_signed_in && user.fb_token
-            = form_tag reward_likes_path, remote:true do
+          - if user_signed_in 
+            - if user.fb_token
               .text-center
                 div.fb-like data-href="https://www.facebook.com/pages/CampHero/1412101645730094" data-layout="button" data-action="like" data-show-faces="true" data-share="false"
+                /= form_tag reward_like_users_path, remote:true do
+                p
+                  br
+                  a.btn.btn-warning href=reward_like_users_path Done. Claim my reward
+            - else
+              / Uhhh.... What if they're not on a connected FB account?
+              div
           - if !user_signed_in
             = form_tag registration_path(:user) do
-              a.btn.btn-default.btn-lg href=omniauth_authorize_path(:user, 'facebook') 
-                = image_tag '/images/icons/FB-icon.png'
-                |   Sign up with Facebook
-              = link_to "Already have an account?  Sign in.", new_session_path(:user), class:'col-md-12'
+              .text-center
+                a.btn.btn-default.btn-lg href=omniauth_authorize_path(:user, 'facebook') 
+                  = image_tag '/images/icons/FB-icon.png'
+                  |   Sign up with Facebook
+                = link_to "Already have an account?  Sign in.", new_session_path(:user), class:'col-md-12'
+              / ... THEN RELOAD PAGE
           br
       .modal-footer
         button.btn.btn-default type="button" data-dismiss="modal" Close
-
-      javascript:
-        $('.fb-like').click( function() {
-          // ajax call to change user.likes_me variable...
-        });
