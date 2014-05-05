@@ -179,7 +179,7 @@ html.fill-height
         //alert("centerString:" +centerString);
         var params = $.param( { distance:distanceInMiles, keywords:centerString }); // HTML parameters for request
         //alert("params: "+ params);
-        var url = "http://localhost:3000/campsites/search.json?" + params; // The request url
+        var url = "/campsites/search.json?" + params; // The request url
         var stateObj = { search: "search" }; // Obj for replaceState function (see next line)
         history.replaceState(stateObj, "", "search.html?"+params); // Add the proper url to the browser
         //alert("url: "+url);
