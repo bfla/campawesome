@@ -10,7 +10,12 @@ class DestinationsController < ApplicationController
 
   def browse
     @destination = Destination.friendly.find(params[:id])
-    @campsites = Campsite.near([@destination.latitude, @destination.longitude], 30).includes(:tribes)
+    if @destination.distance
+      @searchRadius = @destination.distance
+    else
+      @searchRadius = 30
+    end
+    @campsites = Campsite.near([@destination.latitude, @destination.longitude], @searchRadius).includes(:tribes)
     @tribes = Tribe.all
     gon.campsites = @campsites.to_json
     gon.zoom = @destination.zoom
@@ -24,7 +29,12 @@ class DestinationsController < ApplicationController
   # GET /destinations/1.json
   def show
     @destination = Destination.includes(:photos).friendly.find(params[:id])
-    @campsites = Campsite.near([@destination.latitude, @destination.longitude], 30)
+    if @destination.distance
+      @searchRadius = @destination.distance
+    else
+      @searchRadius = 30
+    end
+    @campsites = Campsite.near([@destination.latitude, @destination.longitude], @searchRadius)
     @tribes = Tribe.all
     render(layout: "layouts/guide")
     gon.zoom = @destination.zoom

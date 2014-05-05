@@ -31,19 +31,6 @@
     | Best RV parks near #{place.name}
     small.pull-right
       small
-        = link_to ' see all', browse_city_path(place, tribe_id:3)
-    .col-md-3 = image_tag @tribes.find(3).icon.url(:medium), class:'tribe-subtle img-circle'
-    ol.col-md-9
-      - campsites.each do |campsite|
-        - if campsite.has_tribe(3)
-          li = link_to campsite.name, campsite
-      - unless set_has_tribe(campsites, 3)
-        = render "layouts/guide/blankFeaturedSet", place:place, tribe:@tribes.find(3)
-.row
-  p.lead.col-md-12.pad-top-lg
-    | Best backcountry campsites near #{place.name}
-    small.pull-right
-      small
         = link_to ' see all', browse_city_path(place, tribe_id:2)
     .col-md-3 = image_tag @tribes.find(2).icon.url(:medium), class:'tribe-subtle img-circle'
     ol.col-md-9
@@ -52,3 +39,16 @@
           li = link_to campsite.name, campsite
       - unless set_has_tribe(campsites, 2)
         = render "layouts/guide/blankFeaturedSet", place:place, tribe:@tribes.find(2)
+.row
+  p.lead.col-md-12.pad-top-lg
+    | Best backcountry campsites near #{place.name}
+    small.pull-right
+      small
+        = link_to ' see all', browse_city_path(place, tribe_id:3)
+    .col-md-3 = image_tag @tribes.find(3).icon.url(:medium), class:'tribe-subtle img-circle'
+    ol.col-md-9
+      - campsites.each do |campsite|
+        - if campsite.has_tribe(3)
+          li = link_to campsite.name, campsite
+      - unless set_has_tribe(campsites, 3)
+        = render "layouts/guide/blankFeaturedSet", place:place, tribe:@tribes.find(3)
