@@ -85,11 +85,11 @@
             small
               = image_tag '/images/icons/FB-icon.png' 
               |  #{@friends.size} friends
-          - unless @user.likes_me?
-            br
-            small
-              small
-                = link_to 'Like me to earn a reward', reward_like_users_path, class:"btn btn-warning btn-xs", id:"likeMe"
+          /- unless @user.likes_me?
+            /br
+            /small
+              /small
+                /= link_to 'Like me to earn a reward', reward_like_users_path, class:"btn btn-warning btn-xs", id:"likeMe"
 
     .col-md-12
       hr
