@@ -159,7 +159,6 @@ html.fill-height
       filterSearchResults();
       filterSearchMarkers(map);
     });
-    
 
   javascript:
     $(document).ready( function() {
@@ -240,7 +239,10 @@ html.fill-height
       $('.results').html("<h3 class='greenify text-center'> Fetching new results...<br>Activating superspeed...<br>Defeating forces of evil... <br>Deploying X-Ray vision...</h3>");
 
       // Make an ajax call to get the new html
-      var targetUrl = "http://localhost:3000/campsites/resetSearch.html?"+params;
+      // var targetUrl = "http://http://localhost:3000/campsites/resetSearch.html?"+params;
+      //var targetUrl = "http://http://gentle-ocean-6036.herokuapp.com/campsites/resetSearch.html?"+params;
+      var targetUrl = "/campsites/resetSearch.html?"+params;
+      targetUrl = targetUrl + params;
       //alert('started fetching new search list...');
       $.get( targetUrl, function( newHtml ) {
         //alert('completed get for new html...');
