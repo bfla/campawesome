@@ -29,6 +29,10 @@ $campsiteMapHeight: 200px;
   position:absolute;
 }
 
+#searchReset {
+  padding-bottom:0px;
+}
+
 #results-container {
   min-height:100%;
   padding-top: $topNavbarHeight;

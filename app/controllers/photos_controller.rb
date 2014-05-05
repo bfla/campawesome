@@ -1,6 +1,7 @@
 class PhotosController < ApplicationController
   before_action :set_photo, only: [:show, :edit, :update, :destroy]
   before_action :verify_user, only: [:destroy, :update]
+  before_action :admin_only, only: [:new]
 
   # GET /photos
   # GET /photos.json
@@ -100,5 +101,9 @@ class PhotosController < ApplicationController
 
     def verify_user
       redirect_to forbidden_path unless user_signed_in? && @photo.user_id == current_user.id
+    end
+
+    def admin_only
+      redirect_to forbidden_path unless current_user && current_user.is_admin
     end
 end
