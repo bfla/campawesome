@@ -1,6 +1,7 @@
 class CampsitesController < ApplicationController
   before_action :set_campsite, only: [ :edit, :update, :destroy]
   before_action :admin_only, only: [:new, :create, :import, :edit, :update, :destroy ]
+  after_action :set_access_control_headers, only: [:resetSearch]
 
   def search
     zoom = params[:zoom] || 10
@@ -136,5 +137,9 @@ class CampsitesController < ApplicationController
       params.require(:campsite).permit(:name, :description, :org, 
         :res_phone, :camp_phone, :res_url, :camp_url, :reservable, 
         :walkin, :latitude, :longitude, :state_id, :city_id)
+    end
+
+    def set_access_control_headers
+      headers['Access-Control-Allow-Origin'] = "http://gentle-ocean-6036.herokuapp.com"
     end
 end
