@@ -1,7 +1,7 @@
 class CampsitesController < ApplicationController
   before_action :set_campsite, only: [ :edit, :update, :destroy]
   before_action :admin_only, only: [:new, :create, :import, :edit, :update, :destroy ]
-  after_action :set_access_control_headers, only: [:resetSearch]
+  after_action :set_access_control_headers, only: [:search, :resetSearch]
 
   def search
     zoom = params[:zoom] || 10
