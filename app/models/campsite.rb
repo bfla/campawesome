@@ -30,7 +30,7 @@ class Campsite < ActiveRecord::Base
   
   before_validation :reverse_geocode #reverse geocode it before friendlyId needs the city
   before_save :resave_avg_rating
-  before_save :resave_rank
+  before_save :check_ranking
   before_save :seed_blanks
   #before_validation :fetch_city_and_state
   #after_validation :reverse_geocode #auto-fetch address
@@ -88,12 +88,15 @@ class Campsite < ActiveRecord::Base
         coordinates: [self.longitude, self.latitude]
       },
       properties: {
-        title: self.name,        
+        title: self.name,
+        campsiteId:self.id,      
         org: self.org,
         tribes: tribe_ids,
         url: "campsites/#{self.slug}",
         # Extra data for iOS search:
         phone: phone,
+        reservable: self.reservable,
+        walkin: self.walkin,
         #reservable: self.reservable,
         #walkins: self.walkins,
         #avg_rating: self.avg_rating,
@@ -181,17 +184,8 @@ class Campsite < ActiveRecord::Base
       end
     end
 
-    def resave_rank
-      contenders = self.city.campsites.order('avg_rating DESC')
-      i = 1
-      contenders.each do |campsite|
-        if campsite.id == self.id
-          self.city_rank = i
-          break
-        else
-          i = i + 1
-        end
-      end
+    def check_ranking
+      self.city.rerank if self.avg_rating_changed?
     end
 
 end

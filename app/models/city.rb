@@ -21,4 +21,11 @@ class City < ActiveRecord::Base
   def self.to_s
     self.name
   end
+  def self.rerank
+    contenders = self.campsites.order('avg_rating DESC')
+    contenders.each do |campsite, index|
+      campsite.city_rank = index
+      campsite.save()
+    end
+  end
 end

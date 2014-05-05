@@ -66,6 +66,7 @@ html.fill-height
             button#searchReservableFilter.btn.btn-default.btn-xs Takes reservations
             | &nbsp;
             button#searchWalkinsFilter.btn.btn-default.btn-xs Allows walkins
+            button#scrollMe.btn.btn-default Scroll me
           .col-md-12
             hr
 
@@ -216,6 +217,7 @@ html.fill-height
   javascript:
     function filterSearchMarkers(map) {
       map.featureLayer.setFilter(function(f) { 
+        // Filter markers based on active tribe marker. Hide ones that don't match.
         var activeTribeId = $("#activeTribeId").val();
         if (activeTribeId != 0) {
           for (x in f.properties['tribes']) {
@@ -228,6 +230,13 @@ html.fill-height
             return true; 
           });
         }
+        /*var activeReserveFilter = $("#activeReservableFilter").val();
+        if (activeReserveFilter == "true") {
+            if (f.properties['reservable'][x] == "1") {
+              return true;
+            }
+        }*/
+
       });
       //return false;
     }
@@ -252,6 +261,21 @@ html.fill-height
 
     }
 
+  javascript:
+    // This should make the list scroll to a campsite when its marker is clicked.
+    /*$('#scrollMe').click( function() {
+      var container = $('#results-container');
+      var targetResult = $('[data-campsite-id="3"]');
+      container.scrollTop( targetResult.offset().top - 75);
+    });
+    $('.leaflet-marker-icon').click( function() {
+      var title = $(this).attr('title');
+      var container = $('#results-container');
+      var targetResult = $('.searchResult[data-title="'+title+'"]');
+      container.scrollTop( targetResult.offset().top + 200);
+      //container.scrollTop( targetResult.offset().top);
+    });*/
+    
   javascript:
     function filterSearchResults() {
       $(".searchResult").hide(); // Hide all search results

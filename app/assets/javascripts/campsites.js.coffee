@@ -47,7 +47,7 @@
   
   map.markerLayer.on "click", (e) -> # set markerLayer click behaviors
     e.layer.openPopup()
-  
+
   map.markerLayer.on "mouseover", (e) -> # set marker layer mouseover behavior
     e.layer.closePopup() # close open popups
     e.layer.openPopup() # activate tooltip

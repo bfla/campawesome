@@ -1,5 +1,5 @@
 / Results ======================
-.searchResult data-tribes=campsite.tribes_json data-reservable="#{campsite.reservable}" data-walkins="#{campsite.walkin}"
+.searchResult data-tribes=campsite.tribes_json data-reservable="#{campsite.reservable}" data-walkins="#{campsite.walkin}" data-campsite-id=campsite.id data-title=campsite.name
   .col-md-2
     = image_tag campsite.primary_icon(:small), class:'img-circle img-responsive tribe-subtle'
     - campsite.tribes.each do |tribe|
