@@ -2,9 +2,9 @@
 .col-md-9
   - if place.photos.first.blank?
     .pad-top-sm
-      #placesPhoto
-      div itemscope="itemscope" itemtype="http://schema.org/Photograph"
-      = image_tag '/images/dummies/destPhoto221x221.png'
+      = image_tag '/images/dummies/blankPhoto.jpg', class:'img img-thumbnail img-responsive'
+      /#placesPhoto
+      /div itemscope="itemscope" itemtype="http://schema.org/Photograph"
       /img src="https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=CoQBegAAAFg5U0y-iQEtUVMfqw4KpXYe60QwJC-wl59NZlcaxSQZNgAhGrjmUKD2NkXatfQF1QRap-PQCx3kMfsKQCcxtkZqQ&sensor=true&key=AIzaSyB9mHzeQJxtkMkn_UkKAOs00Hkg2Y9qKds"
       /= image_tag "/images/icons/poweredByGoogle.png"
   - else place.photos.first.blank?

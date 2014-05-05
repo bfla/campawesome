@@ -61,12 +61,13 @@
 
           br
           small
-            = link_to "Been to", beens_path
-            | : #{@user.beens.size} |&nbsp;
-            = link_to "Want to go", wants_path
-            | : #{@user.wants.size} |&nbsp;
-            = link_to "Lists", management_lists_path
-            | : #{@user.lists.size}
+            small
+              = link_to "Been to", beens_path
+              | : #{@user.beens.size} |&nbsp;
+              = link_to "Want to go", wants_path
+              | : #{@user.wants.size} |&nbsp;
+              = link_to "Lists", management_lists_path
+              | : #{@user.lists.size}
           br
           small 
             small 
