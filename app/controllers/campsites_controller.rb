@@ -141,5 +141,6 @@ class CampsitesController < ApplicationController
 
     def set_access_control_headers
       headers['Access-Control-Allow-Origin'] = "http://gentle-ocean-6036.herokuapp.com"
+      headers['Access-Control-Request-Method'] = %w{GET POST OPTIONS}.join(",")
     end
 end
