@@ -29,8 +29,7 @@ class Campsite < ActiveRecord::Base
   reverse_geocoded_by :latitude, :longitude
   
   before_validation :reverse_geocode #reverse geocode it before friendlyId needs the city
-  before_save :resave_avg_rating
-  before_save :check_ranking
+  #before_save :check_ranking
   before_save :seed_blanks
   #before_validation :fetch_city_and_state
   #after_validation :reverse_geocode #auto-fetch address
@@ -177,15 +176,15 @@ class Campsite < ActiveRecord::Base
     end
 
     def resave_avg_rating
-      unless self.ratings.blank?
+      if !self.ratings.blank?
         sum = 0
         self.ratings.each {|rating| sum = sum + rating.value}
         self.avg_rating = sum / self.ratings.size
       end
     end
 
-    def check_ranking
-      self.city.rerank if self.avg_rating_changed?
-    end
+    #def check_ranking BAD TRIGGERS ENDLESS LOOP
+      #self.city.rerank if self.avg_rating_changed?
+    #end
 
 end

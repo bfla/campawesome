@@ -66,7 +66,7 @@ html.fill-height
             button#searchReservableFilter.btn.btn-default.btn-xs Takes reservations
             | &nbsp;
             button#searchWalkinsFilter.btn.btn-default.btn-xs Allows walkins
-            button#scrollMe.btn.btn-default Scroll me
+            /button#scrollMe.btn.btn-default Scroll me
           .col-md-12
             hr
 
@@ -216,31 +216,47 @@ html.fill-height
 
   javascript:
     function filterSearchMarkers(map) {
+      var activeTribeId = $("#activeTribeId").val();
+      var activeReserveFilter = $("#activeReservableFilter").val();
+      var activeWalkinFilter = $("#activeWalkinsFilter").val();
+
       map.featureLayer.setFilter(function(f) { 
-        // Filter markers based on active tribe marker. Hide ones that don't match.
-        var activeTribeId = $("#activeTribeId").val();
+        // Test if it passes the tribe filter
+        var tribeBool = false;
         if (activeTribeId != 0) {
           for (x in f.properties['tribes']) {
             if (f.properties['tribes'][x] == activeTribeId) {
-              return true;
+              tribeBool = true;
             }
           }
         } else {
-          map.featureLayer.setFilter(function(f) { 
-            return true; 
-          });
+          tribeBool = true;
         }
-        /*var activeReserveFilter = $("#activeReservableFilter").val();
-        if (activeReserveFilter == "true") {
-            if (f.properties['reservable'][x] == "1") {
-              return true;
-            }
-        }*/
+
+        // Test if it passes the reserve filter
+        var reserveBool = false;
+        if (activeReserveFilter == "true" && f.properties['reservable'] == true) {
+          reserveBool = true;
+        } else if (activeReserveFilter == "false") {
+          reserveBool = true;
+        }
+
+        // Test if it passes the walkin filter
+        var walkinBool = false;
+        if (activeWalkinFilter == "true" && f.properties['walkin'] == true) {
+          walkinBool = true;
+        } else if (activeWalkinFilter == "false") {
+          walkinBool = true;
+        }
+
+        // Show marker only if it meets the conditions
+        if (reserveBool && tribeBool && walkinBool) {
+          return true;
+        }
 
       });
-      //return false;
     }
-
+    
   javascript:
     // takes search parameters coded into html and resets the list of results
     function resetSearchList(params) {

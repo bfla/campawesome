@@ -42,20 +42,19 @@
 
   map = L.mapbox.map("resultsMap", "campawesome.h5d0p7ea").setView(center, zoom) # initialize the map
   map.zoomControl.setPosition('bottomright') # move the map zoom control
-  
-  map.markerLayer.setGeoJSON(geoJson) # set the markers
-  
-  map.markerLayer.on "click", (e) -> # set markerLayer click behaviors
+
+  # Set the markers
+  map.markerLayer.setGeoJSON(geoJson)
+
+  # set markerLayer click behaviors
+  map.markerLayer.on "click", (e) -> 
     e.layer.openPopup()
 
-  map.markerLayer.on "mouseover", (e) -> # set marker layer mouseover behavior
+  # set marker layer mouseover behavior
+  map.markerLayer.on "mouseover", (e) -> 
     e.layer.closePopup() # close open popups
     e.layer.openPopup() # activate tooltip
 
-  #map.on "move", (e) ->
-    #$('#searchReset').hide()
-  #map.on "resize", (e) ->
-    #$('#searchReset').hide()
   return map
 
 @toggleReservableFilter = ->
@@ -74,7 +73,7 @@
 @toggleWalkinsFilter = ->
   if $("#activeWalkinsFilter").val() is "false"
     $("#activeWalkinsFilter").val("true")
-    $("#searchWalkinsFilter").addClass('btn-success') #
+    $("#searchWalkinsFilter").addClass('btn-success')
     $("#searchWalkinsFilter").removeClass('btn-default')
   else 
     $("#activeWalkinsFilter").val("false")
@@ -83,4 +82,3 @@
 
 @changeTribeFilter = (filterId) ->
   $("#activeTribeId").val(filterId)
-

@@ -1,7 +1,7 @@
 class City < ActiveRecord::Base
   
   belongs_to :state
-  has_many :campsites
+  has_many :campsites, :order => 'avg_rating DESC'
   has_many :photos
   validates :name, :latitude, :longitude, :zoom, presence: true
   validates :latitude, numericality: {greater_than: 0}
@@ -21,11 +21,16 @@ class City < ActiveRecord::Base
   def self.to_s
     self.name
   end
-  def self.rerank
-    contenders = self.campsites.order('avg_rating DESC')
-    contenders.each do |campsite, index|
-      campsite.city_rank = index
-      campsite.save()
+  def rerank
+    contenders = self.campsites
+    if contenders.size > 1
+      contenders.each_with_index do |campsite, index|
+        campsite.city_rank = index + 1
+        campsite.save()
+      end
+    elsif contenders.length = 1
+      contenders.first.city_rank = 1
+      contenders.first.save()
     end
   end
 end
