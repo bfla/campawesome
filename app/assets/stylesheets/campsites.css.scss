@@ -33,6 +33,10 @@ $campsiteMapHeight: 200px;
   padding-bottom:0px;
 }
 
+.popupText {
+    padding-top:$smallPadding;
+}
+
 #results-container {
   min-height:100%;
   padding-top: $topNavbarHeight;

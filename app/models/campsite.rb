@@ -92,6 +92,8 @@ class Campsite < ActiveRecord::Base
         org: self.org,
         tribes: tribe_ids,
         url: "campsites/#{self.slug}",
+        popup_url: "/campsites/#{self.slug}",
+        tribe_img: self.primary_icon(:small),
         # Extra data for iOS search:
         phone: phone,
         reservable: self.reservable,

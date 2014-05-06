@@ -122,12 +122,37 @@ html.fill-height
     // Create the initial map
     var map = L.mapbox.map("resultsMap", "campawesome.h5d0p7ea").setView(gon.center, gon.zoom);
     map.zoomControl.setPosition('bottomright'); // move the map zoom control
-    map.markerLayer.setGeoJSON(gon.geoJson); // set the marker layer
-    var popupContent =  '<h2>' + feature.properties.title + '</h2>';
-    marker.bindPopup(popupContent,{
+    // OLD CODE
+    //map.markerLayer.setGeoJSON(gon.geoJson); // set the marker layer
+
+    /*var popupContent = "<a target=\"_blank\" class=\"popup\" href=\"" + feature.properties.url + "\">" + "<h2>" + feature.properties.title + "</h2></a>";
+    map.markerLayer.bindPopup(popupContent,{
             closeButton: false,
             minWidth: 320
+    });*/
+
+    // NEW CODE ---------------------------------------------------
+    var myLayer = L.mapbox.featureLayer().addTo(map);
+    myLayer.on('layeradd', function(e) {
+        var marker = e.layer;
+        var feature = marker.feature;
+
+        // Create custom popup content
+        var popupContent =  "<a target=\"_blank\" class=\"popup\" href=\"" + feature.properties.popup_url + "\">" + "<p class=\"lead popupText\">" + feature.properties.title + "</p></a>";
+
+        // http://leafletjs.com/reference.html#popup
+        marker.bindPopup(popupContent,{
+            closeButton: true,
+            minWidth: 0
         });
+    });
+
+    // Add features to the map
+    myLayer.setGeoJSON(gon.geoJson);
+
+    // END OF NEW CODE...
+    
+
 
   javascript:
     // Apply hover effect
@@ -191,7 +216,8 @@ html.fill-height
             //alert(data);
             $("#searchReset").hide(); // Hide the reset button
 
-            map.markerLayer.setGeoJSON(data); //Reset map markers
+            //map.markerLayer.setGeoJSON(data); //Reset map markers
+            myLayer.setGeoJSON(data);
             resetSearchList(params).done( function () { // Reset search list
               filterSearchResults(); // Refilter search list
             }); 
@@ -220,7 +246,7 @@ html.fill-height
       var activeReserveFilter = $("#activeReservableFilter").val();
       var activeWalkinFilter = $("#activeWalkinsFilter").val();
 
-      map.featureLayer.setFilter(function(f) { 
+      myLayer.setFilter(function(f) { 
         // Test if it passes the tribe filter
         var tribeBool = false;
         if (activeTribeId != 0) {
