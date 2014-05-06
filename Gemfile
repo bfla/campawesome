@@ -9,18 +9,19 @@ gem 'sqlite3', group: [:development, :test]
 # Use SLIM markup for html
 gem 'slim-rails'
 
-# Use SCSS and Compass for stylesheets
+# Use SCSS, Compass and Bootstrap for styling
 gem 'sass-rails', '~> 4.0.0'
 gem 'compass-rails'
 gem 'bootstrap-sass', '~> 3.0.3.0'
 
-# Use Friendly URLs
-gem 'friendly_id', '~> 5.0.0'
+# SEO
+gem 'friendly_id', '~> 5.0.0' #use friendly URLs
+gem "dynamic_sitemaps"
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 
-# Use CoffeeScript for .js.coffee assets and views
+# Javascript stuff
 gem 'coffee-rails', '~> 4.0.0'
 gem 'gon'
 
