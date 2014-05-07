@@ -1,5 +1,8 @@
 Blog::Application.routes.draw do
 
+  resources :sitemaps, :only => :show
+  get "sitemap" => "sitemaps#show"
+
   resources :reward_orders
 
   resources :products do
