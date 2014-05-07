@@ -16,7 +16,7 @@ gem 'bootstrap-sass', '~> 3.0.3.0'
 
 # SEO
 gem 'friendly_id', '~> 5.0.0' #use friendly URLs
-gem "dynamic_sitemaps"
+#gem "dynamic_sitemaps"
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
