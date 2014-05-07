@@ -52,6 +52,8 @@
             / Add form to let user add first_name
           - else
             = @user.first_name
+            - unless @user.last_name.blank?
+              |  #{@user.last_name[0]}.
             - unless @user.location.blank?
               small
                 small 

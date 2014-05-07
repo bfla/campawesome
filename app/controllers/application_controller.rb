@@ -11,6 +11,7 @@ class ApplicationController < ActionController::Base
         request.fullpath != "/users/sign_up" &&
         request.fullpath != "/users/password" &&
         request.fullpath != "/users/sign_out" &&
+        request.fullpath != "/users/"
         request.fullpath !=  new_tribal_membership_path && #"/tribal_memberships/new"
         request.fullpath !=  tribal_memberships_path &&
         request.fullpath != contrib_campsites_path &&

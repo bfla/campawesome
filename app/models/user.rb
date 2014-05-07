@@ -26,6 +26,7 @@ class User < ActiveRecord::Base
       user.email = auth.info.email
       user.password = Devise.friendly_token[0,20]
       user.first_name = auth.info.first_name
+      user.last_name = auth.info.last_name
       user.location = auth.info.location #from Facebook data
       user.fb_id = auth.uid
       user.fb_token = auth['credentials']['token']
@@ -45,6 +46,7 @@ class User < ActiveRecord::Base
       if data = session["devise.facebook_data"] && session["devise.facebook_data"]["extra"]["raw_info"]
         user.email = data["email"] if user.email.blank?
         user.first_name = data['first_name'] if user.first_name.blank?
+        user.last_name = data['last_name'] if user.last_name.blank?
         user.location = data['user_location'] if user.location.blank?
         user.fb_id = data['id'] if user.fb_id.blank?
         user.fb_token = data['credentials']['token'] if user.fb_token != data['credentials']['token']
