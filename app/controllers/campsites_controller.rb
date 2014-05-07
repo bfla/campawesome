@@ -11,7 +11,13 @@ class CampsitesController < ApplicationController
     @tribes = Tribe.all
     @tags = Tag.all
 
+    # If the location produces no campsites, try running a text search on the name
     if @campsites.blank?
+      @campsites = Campsite.name_search(params[:keywords])
+    end
+
+    # Position the map
+    if @campsites.blank? 
       @center = coordinates
     else
       @center = Geocoder::Calculations.geographic_center(@campsites)
