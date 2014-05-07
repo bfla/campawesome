@@ -91,6 +91,7 @@ Blog::Application.routes.draw do
   resources :users do
     collection do 
       get 'reward_like'
+      get 'friends_signup'
     end
   end
 

@@ -6,6 +6,10 @@ class UsersController < ApplicationController
     render(layout: "layouts/guide")
   end
 
+  def friends_signup
+    render(layout: "application")
+  end
+
   def reward_like
     unless current_user.likes_me
       current_user.likeify

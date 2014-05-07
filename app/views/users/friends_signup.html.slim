@@ -1,0 +1,42 @@
+div id="fb-root"></div>
+script
+  | (function(d, s, id) {
+  |var js, fjs = d.getElementsByTagName(s)[0];
+  |if (d.getElementById(id)) return;
+  |js = d.createElement(s); js.id = id;
+  |js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&appId=620716808019358&version=v2.0";
+  |fjs.parentNode.insertBefore(js, fjs);
+  |}(document, 'script', 'facebook-jssdk'));
+
+.container
+  .col-md-8.col-md-offset-2.background.pad-top-lg
+    .well.white
+      .row
+        h1.heading.col-md-12.text-center 
+          | Find sidekicks
+          hr
+        p.lead.text-center 
+          | Get recommendations from friends you can trust!
+          small
+            small 
+              br
+              | Tell your friends to add their favorite camping places so you can check them out:
+              .text-center
+                div class="fb-share-button" data-href="https://www.facebook.com/pages/CampHero/1412101645730094" data-type="button"
+              br
+              br
+
+        = form_tag registration_path(:user) do
+          .text-center
+            a.btn.btn-default.btn-lg href=omniauth_authorize_path(:user, 'facebook') 
+              = image_tag '/images/icons/FB-icon.png'
+              |   Sign up with Facebook
+            br
+            - if devise_mapping.rememberable?
+              .row
+                .form-inline.col-md-6.col-md-offset-3
+                  p
+                    = check_box_tag 'user[remember_me]'
+                    |  remember me
+
+          = hidden_field_tag params[:next_url], nil, class:'next-url'
