@@ -40,25 +40,40 @@ html.fill-height
         / Filters============================================
         .row
           / Vibe filters
-          .col-md-2
-            #allSearchFilter.searchFilterThumbnail.thumbnail data-tribe-id="0"
-              = image_tag 'icons/all120px.png', class:'img-circle img-responsive tribe-background'
-            p.no-spacing.text-center
-                small.no-spacing
-                  small.no-spacing Show all
-          - @tribes.first(3).each do |tribe|
+          - if !is_mobile_device?
             .col-md-2
-              .searchFilterThumbnail.thumbnail style="padding:5px;" data-tribe-id=tribe.id
-                = image_tag tribe.icon.url(:small), class:'img-circle img-responsive tribe-background'
+              #allSearchFilter.searchFilterThumbnail.thumbnail data-tribe-id="0"
+                = image_tag 'icons/all120px.png', class:'img-circle img-responsive tribe-background'
               p.no-spacing.text-center
                   small.no-spacing
-                    small.no-spacing = tribe.vibe
-          .col-md-4.pad-top-sm
-                /a href="#" data-toggle="modal" data-target="#filterModal"
-                  /p
-                    /small
-                      /| more filters
-                      /span.glyphicon.glyphicon-chevron-right
+                    small.no-spacing Show all
+            - @tribes.first(3).each do |tribe|
+              .col-md-2
+                .searchFilterThumbnail.thumbnail style="padding:5px;" data-tribe-id=tribe.id
+                  = image_tag tribe.icon.url(:small), class:'img-circle img-responsive tribe-background'
+                p.no-spacing.text-center
+                    small.no-spacing
+                      small.no-spacing = tribe.vibe
+            .col-md-4.pad-top-sm
+                  /a href="#" data-toggle="modal" data-target="#filterModal"
+                    /p
+                      /small
+                        /| more filters
+                        /span.glyphicon.glyphicon-chevron-right
+          - if is_mobile_device?
+            .col-xs-12.pad-bottom-sm
+              .col-xs-6
+                button.btn.btn-sm.btn-default.btn-block  List
+              .col-xs-6
+                a.btn.btn-sm.btn-success.btn-block href=@href Map
+              .col-md-12
+                hr
+
+            .col-xs-12
+              button#allSearchFilter.searchFilterThumbnail.btn.btn-default data-tribe-id="0" All
+              - @tribes.first(3).each do |tribe|
+                button.btn.btn-default.searchFilterThumbnail data-tribe-id=tribe.id 
+                  = tribe.vibe
 
           / Booking filters
           .col-md-12
@@ -99,21 +114,22 @@ html.fill-height
               = link_to 'Terms', terms_path
 
     / MapBox ===============================
-    .col-md-8.mapColumn.fill-height.no-spacing
-      script src='https://api.tiles.mapbox.com/mapbox.js/v1.6.1/mapbox.js'
-      / Map
-      #resultsMap
-      / Reset button
-      #map-ui style="position: absolute; top: 60px; left: 5px; z-index: 100; margin-left:5px; padding-left:5px;"
-        button#searchReset.thumbnail.add-tooltip data-toggle="tooltip" type="submit" title="Search this area" data-placement="right" style="background:rgba(0.1, 0.1, 0.1, .6);" 
-          span.glyphicon.glyphicon-repeat style="font-size:40px; color:#666666;"
-      - if @campsites.size >= 50
-        #map-notice style="position:absolute; top: 60px; right:5px; z-index:100;"
-          .well.black.white-text 
-            small
-              | Your mighty search resulted in more than 50 campsites.
-              br
-              | Narrow your search-area to see more campsites.
+    - unless is_mobile_device?
+      .col-md-8.mapColumn.fill-height.no-spacing.hidden-xs
+        script src='https://api.tiles.mapbox.com/mapbox.js/v1.6.1/mapbox.js'
+        / Map
+        #resultsMap
+        / Reset button
+        #map-ui style="position: absolute; top: 60px; left: 5px; z-index: 100; margin-left:5px; padding-left:5px;"
+          button#searchReset.thumbnail.add-tooltip data-toggle="tooltip" type="submit" title="Search this area" data-placement="right" style="background:rgba(0.1, 0.1, 0.1, .6);" 
+            span.glyphicon.glyphicon-repeat style="font-size:40px; color:#666666;"
+        - if @campsites.size >= 50
+          #map-notice style="position:absolute; top: 60px; right:5px; z-index:100;"
+            .well.black.white-text 
+              small
+                | Your mighty search resulted in more than 50 campsites.
+                br
+                | Narrow your search-area to see more campsites.
 
     == render 'layouts/bottomScripts'
 

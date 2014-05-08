@@ -23,6 +23,10 @@ class CampsitesController < ApplicationController
       @center = Geocoder::Calculations.geographic_center(@campsites)
     end
 
+    if is_mobile_device?
+      @href = search_map_campsites_path(params) #Link to corresponding mobile map
+    end
+
     @geojson = Array.new
     @campsites.each { |campsite| @geojson << campsite.geojsonify}
     gon.campsites = @campsites
@@ -36,6 +40,42 @@ class CampsitesController < ApplicationController
       format.json { render json: @geojson }  # respond with geoJSON object
     end
 
+  end
+
+  def search_map
+    zoom = params[:zoom] || 10
+    distance = params[:distance] || 30
+    coordinates = Geocoder.coordinates(params[:keywords])
+    @campsites = Campsite.near(coordinates, distance).includes(:tribes, :taggings).first(50)
+    @tribes = Tribe.all
+    @tags = Tag.all
+
+    # If the location produces no campsites, try running a text search on the name
+    if @campsites.blank?
+      @campsites = Campsite.name_search(params[:keywords])
+    end
+
+    # Position the map
+    if @campsites.blank? 
+      @center = coordinates
+    else
+      @center = Geocoder::Calculations.geographic_center(@campsites)
+    end
+
+    @geojson = Array.new
+    @campsites.each { |campsite| @geojson << campsite.geojsonify}
+    gon.campsites = @campsites
+    gon.geoJson = @geojson
+    gon.center = @center
+    gon.zoom = zoom
+    gon.initTribe = params[:tribe_id] || 0
+
+    @href = search_campsites_path(params) #path to the list results url
+
+    respond_to do |format|
+      format.html { render layout:"layouts/application", notice: 'I found 2 campsites that look perfect for you.' }
+      format.json { render json: @geojson }  # respond with geoJSON object
+    end
   end
 
   def resetSearch

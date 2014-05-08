@@ -1,0 +1,271 @@
+- content_for :head
+  link href='//api.tiles.mapbox.com/mapbox.js/v1.6.1/mapbox.css' rel='stylesheet'
+
+/ View List vs map========================
+.col-xs-12.pad-top-lg.pad-bottom-sm.black
+  .col-xs-6
+    a.btn.btn-sm.btn-default.btn-block href=@href List
+  .col-xs-6
+    button.btn.btn-sm.btn-success.btn-block Map
+/ MapBox ===============================
+.col-xs-12.mapColumn.fill-height.no-spacing
+  script src='https://api.tiles.mapbox.com/mapbox.js/v1.6.1/mapbox.js'
+  / Map
+  #resultsMap.mobileMap
+  / Reset button
+  #map-ui style="position: absolute; top: 60px; left: 5px; z-index: 100; margin-left:5px; padding-left:5px;"
+    button#searchReset.thumbnail.add-tooltip data-toggle="tooltip" type="submit" title="Search this area" data-placement="right" style="background:rgba(0.1, 0.1, 0.1, .6);" 
+      span.glyphicon.glyphicon-repeat style="font-size:40px; color:#666666;"
+  - if @campsites.size >= 50
+    #map-notice style="position:absolute; top: 60px; right:5px; z-index:100;"
+      .well.black.white-text 
+        small
+          | Your mighty search resulted in more than 50 campsites.
+          br
+          | Narrow your search-area to see more campsites.
+
+  == render 'layouts/bottomScripts'
+
+javascript:
+  highlightSearchThumbnail($('#allSearchFilter'));
+  // Create the initial map
+  var map = L.mapbox.map("resultsMap", "campawesome.h5d0p7ea").setView(gon.center, gon.zoom);
+  map.zoomControl.setPosition('bottomright'); // move the map zoom control
+  // OLD CODE
+  //map.markerLayer.setGeoJSON(gon.geoJson); // set the marker layer
+
+  /*var popupContent = "<a target=\"_blank\" class=\"popup\" href=\"" + feature.properties.url + "\">" + "<h2>" + feature.properties.title + "</h2></a>";
+  map.markerLayer.bindPopup(popupContent,{
+          closeButton: false,
+          minWidth: 320
+  });*/
+
+  // NEW CODE ---------------------------------------------------
+  var myLayer = L.mapbox.featureLayer().addTo(map);
+  myLayer.on('layeradd', function(e) {
+      var marker = e.layer;
+      var feature = marker.feature;
+
+      // Create custom popup content
+      var popupContent =  "<a target=\"_blank\" class=\"popup\" href=\"" + feature.properties.popup_url + "\">" + "<p class=\"lead popupText\">" + feature.properties.title + "</p></a>";
+
+      // http://leafletjs.com/reference.html#popup
+      marker.bindPopup(popupContent,{
+          closeButton: true,
+          minWidth: 0
+      });
+  });
+
+  // Add features to the map
+  myLayer.setGeoJSON(gon.geoJson);
+
+  // END OF NEW CODE...
+  
+
+
+javascript:
+  // Apply hover effect
+  $(".searchFilterThumbnail").hover( function(){
+    searchHoverEffect( $(this) );
+  });
+  $('.add-tooltip').tooltip();
+
+  // Set click behaviors for filter
+  $(".searchFilterThumbnail").click( function(){
+    highlightSearchThumbnail($(this));
+    var filterId = $(this).data('tribe-id');
+    changeTribeFilter(filterId);
+    filterSearchResults(); // Filter the list of search results
+    filterSearchMarkers(map); // Filter the search markers
+  });
+
+  // Filter results when reserve filter is clicked
+  $('#searchReservableFilter').click( function() {
+    toggleReservableFilter();
+    //alert( $('#activeTribeId').val() );
+    filterSearchResults();
+    filterSearchMarkers(map);
+
+  });
+
+  // Filter results when walkins filter is clicked
+  $('#searchWalkinsFilter').click( function() {
+    toggleWalkinsFilter();
+    filterSearchResults();
+    filterSearchMarkers(map);
+  });
+
+javascript:
+  $(document).ready( function() {
+    $('#searchReset').hide();
+    $('#searchReset').tooltip('hide');
+    // reset search based on current map frame...
+    $('#searchReset').click( function() {
+      //alert('clicked reset button...');
+      var currentCenter = map.getCenter(); // Current center of the map as Leaflet LatLng
+      //alert("...Got center:"+currentCenter);
+      var southWest = map.getBounds().getSouthWest(); // Returns the SW corner as LatLng
+      //alert("...Got SW corner:"+southWest);
+      var distanceInMeters = currentCenter.distanceTo(southWest); // Distance to edge of map
+      //alert("Distance in meters:"+distanceInMeters);
+      var distanceInMiles = distanceInMeters * .000621371;
+      //alert("Distance in miles:"+distanceInMiles);
+      var centerString = currentCenter['lat'].toString()+', '+currentCenter['lng'].toString(); // Reformat coordinates
+      //alert("centerString:" +centerString);
+      var params = $.param( { distance:distanceInMiles, keywords:centerString }); // HTML parameters for request
+      //alert("params: "+ params);
+      var url = "/campsites/search.json?" + params; // The request url
+      var stateObj = { search: "search" }; // Obj for replaceState function (see next line)
+      history.replaceState(stateObj, "", "search.html?"+params); // Add the proper url to the browser
+      //alert("url: "+url);
+
+      // Make ajax request for campsite JSON
+      $.getJSON(url, {})
+        .done( function(data) {
+          //alert(data);
+          $("#searchReset").hide(); // Hide the reset button
+
+          //map.markerLayer.setGeoJSON(data); //Reset map markers
+          myLayer.setGeoJSON(data);
+          resetSearchList(params).done( function () { // Reset search list
+            filterSearchResults(); // Refilter search list
+          }); 
+
+          filterId = $('#activeTribeId').val(); // Get active tribe Filter
+          filterSearchMarkers(map); // // Refilter map markers
+
+        })
+      ;
+
+    });
+  });
+  map.on( "moveend", function(e) { 
+    $('#searchReset').show();
+    $('#searchReset').tooltip('show');
+
+  });
+  map.on( "zoomend", function(e) {
+    $('#searchReset').show();
+    $('#searchReset').tooltip('show');
+  });
+
+javascript:
+  function filterSearchMarkers(map) {
+    var activeTribeId = $("#activeTribeId").val();
+    var activeReserveFilter = $("#activeReservableFilter").val();
+    var activeWalkinFilter = $("#activeWalkinsFilter").val();
+
+    myLayer.setFilter(function(f) { 
+      // Test if it passes the tribe filter
+      var tribeBool = false;
+      if (activeTribeId != 0) {
+        for (x in f.properties['tribes']) {
+          if (f.properties['tribes'][x] == activeTribeId) {
+            tribeBool = true;
+          }
+        }
+      } else {
+        tribeBool = true;
+      }
+
+      // Test if it passes the reserve filter
+      var reserveBool = false;
+      if (activeReserveFilter == "true" && f.properties['reservable'] == true) {
+        reserveBool = true;
+      } else if (activeReserveFilter == "false") {
+        reserveBool = true;
+      }
+
+      // Test if it passes the walkin filter
+      var walkinBool = false;
+      if (activeWalkinFilter == "true" && f.properties['walkin'] == true) {
+        walkinBool = true;
+      } else if (activeWalkinFilter == "false") {
+        walkinBool = true;
+      }
+
+      // Show marker only if it meets the conditions
+      if (reserveBool && tribeBool && walkinBool) {
+        return true;
+      }
+
+    });
+  }
+  
+javascript:
+  // takes search parameters coded into html and resets the list of results
+  function resetSearchList(params) {
+    $('.results').empty(); // Clear the result list
+    $('.results').html("<h3 class='greenify text-center'> Fetching new results...<br>Activating superspeed...<br>Defeating forces of evil... <br>Deploying X-Ray vision...</h3>");
+
+    // Make an ajax call to get the new html
+    // var targetUrl = "http://http://localhost:3000/campsites/resetSearch.html?"+params;
+    //var targetUrl = "http://http://gentle-ocean-6036.herokuapp.com/campsites/resetSearch.html?"+params;
+    var targetUrl = "/campsites/resetSearch.html?"+params;
+    targetUrl = targetUrl + params;
+    //alert('started fetching new search list...');
+    $.get( targetUrl, function( newHtml ) {
+      //alert('completed get for new html...');
+      $('.results').empty();
+      $( ".results" ).html( newHtml ); // Add the new results
+    });
+
+  }
+
+javascript:
+  // This should make the list scroll to a campsite when its marker is clicked.
+  /*$('#scrollMe').click( function() {
+    var container = $('#results-container');
+    var targetResult = $('[data-campsite-id="3"]');
+    container.scrollTop( targetResult.offset().top - 75);
+  });
+  $('.leaflet-marker-icon').click( function() {
+    var title = $(this).attr('title');
+    var container = $('#results-container');
+    var targetResult = $('.searchResult[data-title="'+title+'"]');
+    container.scrollTop( targetResult.offset().top + 200);
+    //container.scrollTop( targetResult.offset().top);
+  });*/
+  
+javascript:
+  function filterSearchResults() {
+    $(".searchResult").hide(); // Hide all search results
+
+    // Now we'll determine which results fit all the criteria and show only them
+    $(".searchResult").each( function() {
+      var targetResult = $(this);
+      var showMeBool = true;
+      var activeTribeId = $("#activeTribeId").val();
+
+      // First apply the active tribe filter, if any
+      if (activeTribeId != 0 && activeTribeId != "0") {
+        showMeBool = false;
+        var tribeIds = targetResult.data("tribes");
+        for (x in tribeIds) {
+          if (tribeIds[x] == activeTribeId) {
+            showMeBool = true;
+          }
+        }
+      }
+
+      // Now apply the reservable filter, if active...
+      if (showMeBool && ($("#activeReservableFilter").val() == "true") ) {
+        if (targetResult.data("reservable") == false) {
+          showMeBool = false;
+        }
+      }
+
+      // Now apply the walkin filter, if active...
+      if (showMeBool && ($("#activeWalkinsFilter").val() == "true") ) {
+        if (targetResult.data("walkins") == false) {
+          showMeBool = false;
+        }
+      }
+
+      // Show the result only if it passed all the tests
+      if (showMeBool) {
+        targetResult.show();
+      }
+
+    });
+  }

@@ -63,7 +63,7 @@
       p.subtle-text
         - if @campsite.res_phone?
           .col-md-6.subtle-text
-            span.glyphicon.glyphicon-earphone 
+            span.glyphicon.glyphicon-earphone
             | Reservations: #{number_to_phone(@campsite.res_phone)}
 
         - if @campsite.camp_phone? && @campsite.camp_phone != @campsite.res_phone
@@ -103,6 +103,7 @@
           strong
             span.col-md-12 itemprop="latitude"  #{ number_with_precision(@campsite.latitude, precision:5)} N
             span.col-md-12 itemprop="longitude"  #{ number_with_precision(-@campsite.longitude, precision:5)} W
+            br
           small.col-md-12.subtle-text #{number_with_precision(@campsite.latitude, precision:5)}, #{number_with_precision(@campsite.longitude, precision:5)}
 
         br
@@ -127,7 +128,7 @@
 / Reviews
 - unless @campsite.reviews.blank?
   hr
-  .row
+  .row.hidden-xs
     .col-md-12 
       p.lead
         span.glyphicon.glyphicon-pencil.subtle-text

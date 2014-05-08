@@ -1,6 +1,6 @@
 .white
   #main.container.white
-    .row
+    .row.hidden-sm.hidden-xs
       .col-md-4.text-center.pad-top-md
         .col-md-10.col-md-offset-1
           p.lead Get personalized campsite recommendations by joining a tribe
@@ -21,8 +21,14 @@
           p 
             | When you review campsites, it lets my superbrain learn what types of campsites you like.  Your reviews will also help other campers, & you'll earn points you can use to buy awesome stuff like gift cards.
           a.nextAction.btn.btn-success href="#" data-toggle="modal" data-target="#signupModal" data-next-url=new_tribal_membership_path Review some campsites
-    .row
+    .row.hidden-sm.hidden-xs
       p.lead.col-md-12.text-center.pad-top-md = link_to "Skeptical?  See 10 more reasons to sign up.", reasons_path
+    .row.visible-sm.visible-xs
+      .col-md-12.text-center
+        br
+        h2 Mobile App Coming Soon
+        p My iOS is almost ready.  Coming to iPhones and iPads in May 2014.
+
 .flush-footer.white
   .remove-bottom-margin
     == render 'layouts/footer'

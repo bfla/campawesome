@@ -6,13 +6,12 @@ gem 'rails', '4.0.0'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3', group: [:development, :test]
 
-# Use SLIM markup for html
-gem 'slim-rails'
-
-# Use SCSS, Compass and Bootstrap for styling
+# Styles and front-end stuff
 gem 'sass-rails', '~> 4.0.0'
 gem 'compass-rails'
 gem 'bootstrap-sass', '~> 3.0.3.0'
+gem 'slim-rails' #use SLIM markup instead of .erb
+gem 'mobile-fu' #use mobile-fu to detect mobile devices
 
 # SEO
 gem 'friendly_id', '~> 5.0.0' #use friendly URLs

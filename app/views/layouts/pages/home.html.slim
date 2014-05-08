@@ -15,8 +15,7 @@ html.fill-height class=(user_signed_in? ? 'background':'white')
           .row
             .col-md-8.col-md-offset-2
               h1.text-center style="color:white; padding-top:150px;" 
-                | Greetings citizen! I'm CampHero
-                br
+                .hidden-xs Greetings citizen! I'm CampHero
                 | I'll find you mighty awesome campsites
                 br
                 small style="color:white;" With recommendations from heroic campers like yourself
@@ -28,8 +27,10 @@ html.fill-height class=(user_signed_in? ? 'background':'white')
                     = text_field_tag :keywords, params[:keywords], class: "form-control input-lg", placeholder: "Enter location or campground name"
                     span.input-group-btn
                       button.btn.btn-success.btn-lg type='submit' 
-                        span.glyphicon.glyphicon-search 
-                        |  Find campsites!
+                        .hidden-xs
+                          span.glyphicon.glyphicon-search
+                          |  Find campsites!
+                        .visible-xs Go!
       </div>
         == yield :belowTheFold
         javascript:
