@@ -1,10 +1,12 @@
 / takes a place:@state (or @city or whatever)
-p.col-md-12
-  small 
-    strong.extra-subtle Description:&nbsp;
-    = truncate place.description, length:240, separator:' '
-    | &nbsp;
-    a href="#" data-toggle='modal' data-target='#descriptionModal' see more
+
+- unless place.description.blank?
+  p.col-md-12
+    small 
+      strong.extra-subtle Description:&nbsp;
+      = truncate place.description, length:240, separator:' '
+      | &nbsp;
+      a href="#" data-toggle='modal' data-target='#descriptionModal' see more
 hr
 .col-md-12
   a.thumbnail href=search_campsites_path(keywords:"#{place.latitude}, #{place.longitude}", distance:search_distance, zoom:search_zoom)

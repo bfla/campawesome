@@ -1,0 +1,24 @@
+- unless place.highlights.blank?
+  p.col-md-12
+    small 
+      strong.extra-subtle Highlights:&nbsp;
+      = place.highlights
+      br
+  .col-md-12
+    hr
+
+- unless place.camping_tips.blank?
+  p.col-md-12
+    small 
+      strong.extra-subtle Camping tips:&nbsp;
+      = place.camping_tips
+      br
+  .col-md-12
+    hr
+
+- unless place.things_to_do.blank?
+  p.col-md-12
+    small
+      strong.extra-subtle Things to do:&nbsp;
+      = place.things_to_do
+      br

@@ -29,7 +29,7 @@
   - content_for :bottom_left
     = render "destinationFeatured", place:@destination, campsites:@campsites
   - content_for :bottom_right
-    = render "destinationBottomRight"
+    = render "destinationBottomRight", place:@destination
   - content_for :licenses
     = render "layouts/guide/guideLicenses", place:@destination
 

@@ -102,6 +102,6 @@ class DestinationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def destination_params
-      params.require(:destination).permit(:name, :description, :latitude, :longitude, :zoom, :state_id)
+      params.require(:destination).permit(:name, :description, :latitude, :longitude, :zoom, :state_id, :highlights, :things_to_do, :camping_tips)
     end
 end
