@@ -7,6 +7,7 @@ class State < ActiveRecord::Base
   has_many :cities
   has_many :destinations
   has_many :campsites
+  has_many :top_destinations, :class_name => 'Destination', :limit => 10
   
   has_many :photos
   

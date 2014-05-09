@@ -60,7 +60,7 @@ html.fill-height
                       /small
                         /| more filters
                         /span.glyphicon.glyphicon-chevron-right
-          - if is_mobile_device?
+          /- if is_mobile_device?
             .col-xs-12.pad-bottom-sm
               .col-xs-6
                 button.btn.btn-sm.btn-default.btn-block  List
@@ -303,7 +303,7 @@ html.fill-height
     // takes search parameters coded into html and resets the list of results
     function resetSearchList(params) {
       $('.results').empty(); // Clear the result list
-      $('.results').html("<h3 class='greenify text-center'> Fetching new results...<br>Activating superspeed...<br>Defeating forces of evil... <br>Deploying X-Ray vision...</h3>");
+      $('.results').html("<h3 class='greenify text-center'> Activating Camp-Ray vision...<br>Defeating forces of evil... <br>Superspeeding...</h3>");
 
       // Make an ajax call to get the new html
       // var targetUrl = "http://http://localhost:3000/campsites/resetSearch.html?"+params;

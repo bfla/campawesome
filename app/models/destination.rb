@@ -1,4 +1,5 @@
 class Destination < ActiveRecord::Base
+  default_scope order('created_at DESC')
 
   belongs_to :state
   has_many :photos
@@ -14,6 +15,7 @@ class Destination < ActiveRecord::Base
   def slug_me_up
     "#{name} #{state.abbreviation} camping"
   end
+
   #Methods for accessing attributes
   def hashtag
     self.state.hashtag

@@ -21,9 +21,12 @@
     hr
   .col-md-3 = image_tag @tribes.find(1).icon.url(:medium), class:'tribe-subtle img-circle'
   ol.col-md-9
+    - index = 0
     - campsites.each do |campsite|
-      - if campsite.has_tribe(1)
-        li = link_to campsite.name, campsite
+      - if index < 3
+        - if campsite.has_tribe(1)
+          - index = index + 1
+          li = link_to campsite.name, campsite
     - unless set_has_tribe(campsites, 1)
       = render "layouts/guide/blankFeaturedSet", place:place, tribe:@tribes.find(1)
 .row
@@ -34,9 +37,12 @@
         = link_to ' see all', browse_destination_path(id:place, tribe_id:2)
     .col-md-3 = image_tag @tribes.find(2).icon.url(:medium), class:'tribe-subtle img-circle'
     ol.col-md-9
+      - index = 0
       - campsites.each do |campsite|
-        - if campsite.has_tribe(2)
-          li = link_to campsite.name, campsite
+        - if index < 3
+          - if campsite.has_tribe(2)
+            - index = index + 1
+            li = link_to campsite.name, campsite
       - unless set_has_tribe(campsites, 2)
         = render "layouts/guide/blankFeaturedSet", place:place, tribe:@tribes.find(2)
 .row
@@ -47,8 +53,11 @@
         = link_to ' see all', browse_destination_path(id:place, tribe_id:3)
     .col-md-3 = image_tag @tribes.find(3).icon.url(:medium), class:'tribe-subtle img-circle'
     ol.col-md-9
+      - index = 0
       - campsites.each do |campsite|
         - if campsite.has_tribe(3)
-          li = link_to campsite.name, campsite
+          - if index < 3
+            - index = index + 1
+            li = link_to campsite.name, campsite
       - unless set_has_tribe(campsites, 3)
         = render "layouts/guide/blankFeaturedSet", place:place, tribe:@tribes.find(3)

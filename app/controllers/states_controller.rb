@@ -16,7 +16,8 @@ class StatesController < ApplicationController
   # GET /states/1
   # GET /states/1.json
   def show
-    @destinations = @state.destinations.limit(20)
+    @state = State.includes(:top_destinations).friendly.find(params[:id])
+    @destinations = @state.destinations
     gon.zoom = @state.zoom
     gon.latitude = @state.latitude
     gon.longitude = @state.longitude
