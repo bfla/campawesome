@@ -9,12 +9,12 @@ class PagesController < ApplicationController
       if Rails.env.production?
         # Generate recommended campgrounds
         if !request.location.nil? # if request location is known, use it
-          @state = State.includes(:top_destinations).find_by(name: request.location.state) || @user.state.includes(:top_destinations) || nil
+          @state = State.find_by(name: request.location.state) || @user.state || nil
           location = request.location
           # set nearby campgrounds
           @nearbys = Campsite.near(location, radius = 50).first(4)
         elsif !@user.state.blank? # if request location isn't known, use user's state if available
-          @state = @user.state.includes(:top_destinations)
+          @state = @user.state
         end
       end
 
