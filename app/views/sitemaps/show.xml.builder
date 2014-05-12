@@ -10,10 +10,12 @@ xml.tag! 'urlset', 'xmlns' => 'http://www.sitemaps.org/schemas/sitemap/0.9' do
   end
 
   @campsites.each do |p|
-    xml.loc("#{@domain}/campsites/#{p.slug}")
-    xml.lastmod(p.updated_at.strftime("%F"))
-    xml.changefreq("weekly")
-    xml.priority(0.8)
+    xml.url {
+      xml.loc("#{@domain}/campsites/#{p.slug}")
+      xml.lastmod(p.updated_at.strftime("%F"))
+      xml.changefreq("weekly")
+      xml.priority(0.8)
+    }
   end
 
   @states.each do |p|
