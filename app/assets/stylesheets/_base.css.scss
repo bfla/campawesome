@@ -88,7 +88,9 @@ $brandFont: 'Monda';
 
 h1 {              font-family:$brandFont;}
 
-.greenify { color:#65b045;}
+.greenify { color:#65b045; }
+
+.unhide { display:"inline"; }
 
 // Banner styles=================================
 @import 'navbar';

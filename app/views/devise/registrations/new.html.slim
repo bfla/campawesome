@@ -1,3 +1,6 @@
+- content_for :head
+  title Sign Up | CampHero
+
 .background
   .container.background
     .col-md-8.col-md-offset-2.background.pad-top-lg
@@ -11,8 +14,7 @@
             br
               small
                 small
-                  | Sign up is free and has
-                  a  many benefits
+                  | Sign up is free and has many benefits
           
 
         = form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f|
@@ -33,29 +35,28 @@
               br
               = link_to "Already have an account?  Sign in.", new_session_path(resource_name), class:'col-md-12'
 
-            .row style="display:none;"
+            .row.nonsocial-signup style="display:none;"
               .nonsocial-content
                 hr
-                .form-group.col-md-4.col-md-offset-1
+                .form-group.col-md-4
                   = f.label :email, class: "control-label sr-only"
                   =f.email_field :email, autofocus: true, class: "form-control", placeholder:'your email'
                 .form-group.col-md-4
                   =f.label :password, class: "control-label sr-only"
                   =f.password_field :password, class: "form-control", placeholder:'your password'
-                .form-group 
-                  == f.label :password_confirmation, class: 'col-sm-2 control-label'
+                .form-group.col-md-4
+                  == f.label :password_confirmation, class: 'control-label sr-only'
                   == f.password_field :password_confirmation, class: 'form-control col-sm-10', placeholder: 'confirm password'
-                .col-md-2
-                  =f.submit "Sign up", class: "btn btn-success"
+                .col-md-12
+                  =f.submit "Sign up without Facebook", class: "btn btn-success"
                 br
               
 
   javascript:
     //$('.nonsocial-signin').hide();
     $('.reveal-nonsocial').click( function() {
-      alert('hi');
       $('.reveal-nonsocial').hide();
-      $('.nonsocial-signin').append( $('.nonsocial-content') );
+      $('.nonsocial-signup').show();
     });
 
       

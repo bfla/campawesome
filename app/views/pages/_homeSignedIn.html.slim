@@ -174,6 +174,22 @@
           p.lead.col-md-12 You recently viewed...
           .col-md-12
             hr
+  p.col-md-10.col-md-offset-1.subtle-text 
+    small
+      | Photo credits: Friday's Sunset in Pentwater @rkramer62 (header). "Best of #{@state.name}" photos:
+      - @best_of_state.each_with_index do |destination, index|
+        - if !destination.photos.blank? and destination.photos.first.license_text.present?
+          = destination.photos.first.license_text
+          - if index == 1
+            |  (left-most),&nbsp;
+          - elsif index == 2
+            |  (2nd from left),&nbsp;
+          - elsif index == 3
+            |  (3rd from letf),&nbsp;
+          - elsif index == 4
+            |  (4th from left),&nbsp;
+
+      a.subtle-text href="http://creativecommons.org/licenses/by/2.0/" Creative Commons Attribution License.
 .flush-footer
   == render 'layouts/footer'
 
