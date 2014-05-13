@@ -29,7 +29,7 @@
     
 - content_for :bottom_right
   .col-md-12
-    a.thumbnail href=search_campsites_path(keywords:"#{@destination.latitude}, #{@destination.longitude}", distance:@serarchRadius, zoom:10)
+    a.thumbnail href=search_campsites_path(keywords:"#{@destination.latitude}, #{@destination.longitude}", distance:@searchRadius, zoom:10)
       /#thumbMap style="height:150px; padding:0px; margin:0px;"
       img src="http://maps.googleapis.com/maps/api/staticmap?center=#{@destination.latitude}%2C+#{@destination.longitude}&zoom=#{@destination.zoom}&size=600x300&maptype=roadmap&sensor=false"
   p.col-md-12
