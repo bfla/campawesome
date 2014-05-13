@@ -19,11 +19,11 @@ nav.navbar.navbar-fixed-top.navbar-inverse.navbar-color.navbar-border role="navi
             a
               span.glyphicon.glyphicon-info-sign.nav-link.add-tooltip.hidden-xs title="Search for campsites near a location or using the name of the campground." data-toggle="tooltip" data-placement="bottom"
       ul.nav.navbar-nav
-        li = link_to "Best of Michigan", state_path(1), class:"nav-link"
+        li.navBarBestOfTracker = link_to "Best of Michigan", 'states/michigan-camping', class:"nav-link"
 
       
       / Navbar pulled right
-      ul.nav.navbar-nav.navbar-right
+      ul.nav.navbar-nav.navbar-right.navBarDropdownTracker
         - if user_signed_in?
           = render 'layouts/dropdown'
         - else
@@ -33,7 +33,24 @@ nav.navbar.navbar-fixed-top.navbar-inverse.navbar-color.navbar-border role="navi
           /li = link_to 'Sign in', new_user_session_path, class:"nav-link"
           li.nav-link
             a#signupTrigger href="#" data-toggle="modal" data-target="#signupModal" 
-              .nav-link Sign up
+              .nav-link.navBarSignupTracker Sign up
           li.nav-link
-            a#signinTrigger href="#" data-toggle="modal" data-target="#signinModal" 
+            a#signinTrigger.navBarSigninTracker href="#" data-toggle="modal" data-target="#signinModal" 
               .nav-link Sign in
+
+javascript:
+  $('.navBarDropdownTracker').on('click', function() {
+    ga('send', 'event', 'link', 'click', 'dropdown | navbar');
+  });
+  $('.navBarSigninTracker').on('click', function() {
+    ga('send', 'event', 'link', 'click', 'dropdown | navbar');
+  });
+  $('.navBarSignupTracker').on('click', function() {
+    ga('send', 'event', 'link', 'click', 'dropdown | navbar');
+  });
+  $('.navBarSearchTracker').on('click', function() {
+    ga('send', 'event', 'button', 'click', 'dropdown | navbar');
+  });
+  $('.navBarBestOfTracker').on('click', function() {
+    ga('send', 'event', 'link', 'click', 'dropdown | navbar');
+  });

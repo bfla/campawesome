@@ -1,26 +1,26 @@
 - if user_signed_in?  
   .btn-group
     - if campsite.beens.find_by_user_id(current_user).blank?
-      = link_to beens_path(campsite_id:campsite), method: :post, class:'btn btn-default btn-xs subtle-text enable-command-toggle', remote:true do
+      = link_to beens_path(campsite_id:campsite), method: :post, class:'btn btn-default btn-xs subtle-text enable-command-toggle beenBtnTracker', remote:true do
         span.glyphicon.glyphicon-ok
         |  Been here
     - else 
       /= link_to campsite.beens.find_by_user_id(current_user), method: :delete, class:'btn btn-default btn-xs enable-command-toggle', remote:true do
-      button.btn.btn-default.btn-xs.enable-command-toggle
+      button.btn.btn-default.btn-xs.enable-command-toggle.beenBtnTracker
         span.glyphicon.glyphicon-ok.greenify
         |  Been here
     - if campsite.wants.find_by_user_id(current_user).blank?
-      = link_to wants_path(campsite_id:campsite), method: :post, class:'btn btn-default btn-xs subtle-text enable-command-toggle', remote:true do
+      = link_to wants_path(campsite_id:campsite), method: :post, class:'btn btn-default btn-xs subtle-text enable-command-toggle wantBtnTracker', remote:true do
         span.glyphicon.glyphicon-plus-sign
         |  Want to go
     - else
       /= link_to campsite.wants.find_by_user_id(current_user), method: :delete, class:'btn btn-default btn-xs enable-command-toggle', remote:true do
-      button.btn.btn-default.btn-xs.enable-command-toggle
+      button.btn.btn-default.btn-xs.enable-command-toggle.wantBtnTracker
         span.glyphicon.glyphicon-plus-sign.greenify
         |  Want to go
 
     .btn-group
-      button.btn.btn-default.btn-xs.dropdown-toggle.subtle-text data-toggle="dropdown" type="button"
+      button.btn.btn-default.btn-xs.dropdown-toggle.subtle-text.listBtnTracker data-toggle="dropdown" type="button"
         span.glyphicon.glyphicon-bookmark
         |  Save
       ul.dropdown-menu id="listDropdown#{campsite.id}" role="menu" aria-labelledby="dropdownMenu#{campsite.id}"
@@ -39,23 +39,23 @@
           /a href="#" data-toggle='modal' data-target='#newListModal' Create new list
         li =link_to 'Manage lists', management_lists_path
 
-    a#reviewModal.btn.btn-default.btn-xs.subtle-text href="#" data-toggle='modal' data-target='##{campsite.id}'
+    a#reviewModal.btn.btn-default.btn-xs.subtle-text.reviewBtnTracker href="#" data-toggle='modal' data-target='##{campsite.id}'
       span.glyphicon.glyphicon-star
       |  Review it
 
 
 - else
   a.btn-group href="#" data-toggle="modal" data-target="#signupModal"
-    button.btn.btn-default.btn-xs.subtle-text
+    button.btn.btn-default.btn-xs.subtle-text.beenBtnTracker
       span.glyphicon.glyphicon-ok
       |  Been here
-    button.btn.btn-default.btn-xs.subtle-text
+    button.btn.btn-default.btn-xs.subtle-text.wantBtnTracker
       span.glyphicon.glyphicon-plus-sign
       |  Want to go
-    button.btn.btn-default.btn-xs.subtle-text
+    button.btn.btn-default.btn-xs.subtle-text.listBtnTracker
       span.glyphicon.glyphicon-bookmark
       |  Save
-    button.btn.btn-default.btn-xs.subtle-text
+    button.btn.btn-default.btn-xs.subtle-text.reviewBtnTracker
       span.glyphicon.glyphicon-star
       |  Review it
 
@@ -67,3 +67,16 @@ javascript:
   $('.listSavedModalTrigger').click( function() {
     $('#listSavedModal').modal();
   });
+  $('.beenBtnTracker').on('click', function() {
+    ga('send', 'event', 'button', 'click', 'been here btn');
+  });
+  $('.wantBtnTracker').on('click', function() {
+    ga('send', 'event', 'button', 'click', 'want to go btn');
+  });
+  $('.reviewBtnTracker').on('click', function() {
+    ga('send', 'event', 'button', 'click', 'review btn');
+  });
+  $('.listBtnTracker').on('click', function() {
+    ga('send', 'event', 'button', 'click', 'list btn');
+  });
+

@@ -31,11 +31,11 @@
     .pad-top-sm itemscope="itemscope" itemtype="http://schema.org/Photograph"
       = image_tag place.photos.fourth.photo_file.url(:small), class: "img img-thumbnail img-responsive", html: {title:"", alt:"", caption:"", description:""}
   - if user_signed_in?
-    a.btn.btn-default.btn-sm href="#" data-toggle="modal" data-target="#photoUploadModal"
+    a.btn.btn-default.btn-sm.photoBtnTracker href="#" data-toggle="modal" data-target="#photoUploadModal"
       span.glyphicon.glyphicon-camera
       |  Add photo
   - else
-    a.btn.btn-default.btn-sm.pad-top-sm href="#" data-toggle="modal" data-target="#signupModal"
+    a.btn.btn-default.btn-sm.pad-top-sm.photoBtnTracker href="#" data-toggle="modal" data-target="#signupModal"
       span.glyphicon.glyphicon-camera
       |  Add photo
 - if user_signed_in? 

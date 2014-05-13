@@ -25,7 +25,7 @@ html.fill-height class=(user_signed_in? ? 'background':'white')
                 .col-md-6.col-md-offset-3
                   .input-group
                     = text_field_tag :keywords, params[:keywords], class: "form-control input-lg", placeholder: "Enter location or campground name"
-                    span.input-group-btn
+                    span.input-group-btn.homeSearchBtnTracker
                       button.btn.btn-success.btn-lg type='submit' 
                         .hidden-xs
                           span.glyphicon.glyphicon-search
@@ -35,4 +35,7 @@ html.fill-height class=(user_signed_in? ? 'background':'white')
         == yield :belowTheFold
         javascript:
           $('.add-tooltip').tooltip();
+          $('.homeSearchBtnTracker').on('click', function() {
+            ga('send', 'event', 'button', 'click', 'search | home page search btn');
+          });
     == render 'layouts/bottomScripts'

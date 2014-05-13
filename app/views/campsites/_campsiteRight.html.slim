@@ -59,7 +59,7 @@
     h4 Nearby campsites
     p
       - @nearbys.each do |nearby_campsite|
-        = link_to nearby_campsite.name, nearby_campsite
+        = link_to nearby_campsite.name, nearby_campsite, class:"nearbyLinkTracker"
         br
       - unless @nearbys.blank?
         = link_to "see more", search_campsites_path(keywords:"#{@campsite.city.name}, #{@campsite.state.name}"), class:"subtle-text"

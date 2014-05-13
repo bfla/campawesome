@@ -133,7 +133,7 @@
                 br
                 br
                 a href=contrib_campsites_path 
-                  button.btn.btn-warning.btn-xs Review campsites 
+                  button.btn.btn-warning.btn-xs.signedInContribBtnTracker Review campsites 
                 |  to improve your recommendations, earn coins, & help other campers. 
             hr
         / Best of Michigan
@@ -192,5 +192,9 @@
       a.subtle-text href="http://creativecommons.org/licenses/by/2.0/" Creative Commons Attribution License.
 .flush-footer
   == render 'layouts/footer'
+javascript:
+  $('.signedInContribBtnTracker').on('click', function() {
+    ga('send', 'event', 'button', 'click', 'contrib | home signed in');
+  });
 
 

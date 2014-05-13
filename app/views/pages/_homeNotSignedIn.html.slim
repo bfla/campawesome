@@ -7,20 +7,20 @@
           p Different people prefer different camping styles.  Join a tribe that suits your style so I can better predict which campsites you'll love most and show you reviews by campers most like yourself.
           / This markup assumes only users who are not signed in see this page
           - if user_signed_in?
-            a.btn.btn-success href=new_tribal_membership_path Join a tribe
+            a.btn.btn-success.homeTribesButton href=new_tribal_membership_path Join a tribe
           - else
-            a.nextAction.btn.btn-success href="#" data-toggle="modal" data-target="#signupModal" data-next-url=new_tribal_membership_path Join a tribe
+            a.nextAction.btn.btn-success.homeTribesButton href="#" data-toggle="modal" data-target="#signupModal" data-next-url=new_tribal_membership_path Join a tribe
       .col-md-4.text-center.pad-top-md
         .col-md-10.col-md-offset-1
           p.lead Trade camping recommendations & tips with friends you trust
           p What good is a hero without sidekicks, guides, teachers, friends, and villians?  Connect with your Facebook friends to exchange camping advice with people you know.
-          a.btn.btn-success href=friends_signup_users_path Connect friends
+          a.btn.btn-success.homeFriendsButton href=friends_signup_users_path Connect friends
       .col-md-4.text-center.pad-top-md
         .col-md-10.col-md-offset-1
           p.lead Review campsites to get better recommendations, good karma & rewards
           p 
             | When you review campsites, it lets my superbrain learn what types of campsites you like.  Your reviews will also help other campers, & you'll earn points you can use to buy awesome stuff like gift cards.
-          a.nextAction.btn.btn-success href="#" data-toggle="modal" data-target="#signupModal" data-next-url=new_tribal_membership_path Review some campsites
+          a.nextAction.btn.btn-success.homeContribButton href="#" data-toggle="modal" data-target="#signupModal" data-next-url=new_tribal_membership_path Review some campsites
     .row.hidden-sm.hidden-xs
       p.lead.col-md-12.text-center.pad-top-md = link_to "Skeptical?  See 10 more reasons to sign up.", reasons_path
     .row.visible-sm.visible-xs
@@ -36,3 +36,15 @@
 .flush-footer.white
   .remove-bottom-margin
     == render 'layouts/footer'
+
+javascript:
+  $('.homeTribesButton').on('click', function() {
+    ga('send', 'event', 'button', 'click', 'join tribe | home page not signed in');
+  });
+  $('.homeFriendsButton').on('click', function() {
+    ga('send', 'event', 'button', 'click', 'find friends | home page not signed in');
+  });
+  $('.homeContribButton').on('click', function() {
+    ga('send', 'event', 'button', 'click', 'contrib | home page not signed in');
+  });
+

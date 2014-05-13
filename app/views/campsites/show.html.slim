@@ -64,7 +64,11 @@
       makeCampsiteMap(gon.initCenter, 9, gon.geoJson);
     });
 
-    /*$('.rateit').click( function() {
-      var rating = $(this).rateit('value');
-      $('.rating-value').val(rating);
-    });*/
+  javascript:
+    $('.nearbyLinkTracker').on('click', function() {
+      ga('send', 'event', 'link', 'click', 'nearby campsites | campsite detail page');
+    });
+    $('.photoBtnTracker').on('click', function() {
+      ga('send', 'event', 'button', 'click', 'add photo | campsite detail page');
+    });
+

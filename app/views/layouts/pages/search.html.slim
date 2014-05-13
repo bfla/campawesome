@@ -42,14 +42,14 @@ html.fill-height
           / Vibe filters
           - if !is_mobile_device?
             .col-md-2
-              #allSearchFilter.searchFilterThumbnail.thumbnail data-tribe-id="0"
+              #allSearchFilter.searchFilterThumbnail.thumbnail.searchTribeFilterTracker data-tribe-id="0"
                 = image_tag 'icons/all120px.png', class:'img-circle img-responsive tribe-background'
               p.no-spacing.text-center
                   small.no-spacing
                     small.no-spacing Show all
             - @tribes.first(3).each do |tribe|
               .col-md-2
-                .searchFilterThumbnail.thumbnail style="padding:5px;" data-tribe-id=tribe.id
+                .searchFilterThumbnail.thumbnail.searchTribeFilterTracker style="padding:5px;" data-tribe-id=tribe.id
                   = image_tag tribe.icon.url(:small), class:'img-circle img-responsive tribe-background'
                 p.no-spacing.text-center
                     small.no-spacing
@@ -70,7 +70,7 @@ html.fill-height
                 hr
 
             .col-xs-12
-              button#allSearchFilter.searchFilterThumbnail.btn.btn-default data-tribe-id="0" All
+              button#allSearchFilter.searchFilterThumbnail.btn.btn-default.searchTribeFilterTracker data-tribe-id="0" All
               - @tribes.first(3).each do |tribe|
                 button.btn.btn-default.searchFilterThumbnail data-tribe-id=tribe.id 
                   = tribe.vibe
@@ -78,9 +78,9 @@ html.fill-height
           / Booking filters
           .col-md-12
           p.col-md-12.subtle-text
-            button#searchReservableFilter.btn.btn-default.btn-xs Takes reservations
+            button#searchReservableFilter.btn.btn-default.btn-xs.searchBookingFilterTracker Takes reservations
             | &nbsp;
-            button#searchWalkinsFilter.btn.btn-default.btn-xs Allows walkins
+            button#searchWalkinsFilter.btn.btn-default.btn-xs.searchBookingFilterTracker Allows walkins
             /button#scrollMe.btn.btn-default Scroll me
           .col-md-12
             hr
@@ -121,7 +121,7 @@ html.fill-height
         #resultsMap
         / Reset button
         #map-ui style="position: absolute; top: 60px; left: 5px; z-index: 100; margin-left:5px; padding-left:5px;"
-          button#searchReset.thumbnail.add-tooltip data-toggle="tooltip" type="submit" title="Search this area" data-placement="right" style="background:rgba(0.1, 0.1, 0.1, .6);" 
+          button#searchReset.thumbnail.add-tooltip.searchMapResetTracker data-toggle="tooltip" type="submit" title="Search this area" data-placement="right" style="background:rgba(0.1, 0.1, 0.1, .6);" 
             span.glyphicon.glyphicon-repeat style="font-size:40px; color:#666666;"
         - if @campsites.size >= 50
           #map-notice style="position:absolute; top: 60px; right:5px; z-index:100;"
@@ -154,7 +154,7 @@ html.fill-height
         var feature = marker.feature;
 
         // Create custom popup content
-        var popupContent =  "<a target=\"_blank\" class=\"popup\" href=\"" + feature.properties.popup_url + "\">" + "<p class=\"lead popupText\">" + feature.properties.title + "</p></a>";
+        var popupContent =  "<a target=\"_blank\" class=\"popup searchTooltipLinkTracker\" href=\"" + feature.properties.popup_url + "\">" + "<p class=\"lead popupText\">" + feature.properties.title + "</p></a>";
 
         // http://leafletjs.com/reference.html#popup
         marker.bindPopup(popupContent,{
@@ -376,3 +376,21 @@ html.fill-height
 
       });
     }
+
+  javascript:
+    // Google Analytics event trackers
+    $('.searchTribeFilterTracker').on('click', function() {
+      ga('send', 'event', 'button', 'click', 'tribe filter | search page');
+    });
+    $('.searchBookingFilterTracker').on('click', function() {
+      ga('send', 'event', 'button', 'click', 'booking filter | search page');
+    });
+    $('.searchMapResetTracker').on('click', function() {
+      ga('send', 'event', 'button', 'click', 'map reset | search page');
+    });
+    $('.searchCampsiteResultLink').on('click', function() {
+      ga('send', 'event', 'link', 'click', 'campsite result link | search page');
+    });
+    $('.searchTooltipLinkTracker').on('click', function() {
+      ga('send', 'event', 'link', 'click', 'campsite tooltip link | search page');
+    });
