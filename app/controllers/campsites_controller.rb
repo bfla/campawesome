@@ -1,4 +1,5 @@
 class CampsitesController < ApplicationController
+  require 'net/http'
   before_action :set_campsite, only: [ :edit, :update, :destroy]
   before_action :admin_only, only: [:new, :create, :import, :edit, :update, :destroy ]
   after_action :set_access_control_headers, only: [:search, :resetSearch]
@@ -118,6 +119,42 @@ class CampsitesController < ApplicationController
     @nearbys = @campsite.nearbys.limit(5)
     gon.initCenter = [@campsite.latitude, @campsite.longitude]
     gon.geoJson = @campsite.geojsonify
+    
+    # Try to get google image if the campsite has no photo
+    if @campsite.photos.blank?
+      gplaces_key = "AIzaSyB9mHzeQJxtkMkn_UkKAOs00Hkg2Y9qKds"
+      # run a Google Places search
+      gplace_url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=#{@campsite.latitude},#{@campsite.longitude}&radius=700&sensor=false&key=#{gplaces_key}"
+      @place_urlness = gplace_url
+      gplace_response = Net::HTTP.get_response(URI.parse(gplace_url))
+      gplaces = JSON.parse(gplace_response.body)
+      puts gplaces
+
+      # test if Google has any photos and if so fetch it
+      @goog_photo_bool = false
+      @photo_license = nil
+      gplaces["results"].each do |gplace|
+        if gplace["photos"] and gplace["types"]
+          acceptable_types = ["park", "rv_park", "campground", "locality", "point_of_interest", "natural_feature"]
+          gplace["types"].each do |type|
+            if acceptable_types.include? type
+              @goog_photo_bool = true
+              photo = gplace["photos"].first
+              @photo_license = photo["html_attributions"] if photo["html_attributions"]
+              photo_ref = photo["photo_reference"]
+              target_url = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=#{photo_ref}&sensor=true&key=#{gplaces_key}"
+              @url = target_url
+              response = Net::HTTP.get_response(URI.parse(target_url))
+              @goog_img = response.body
+              break # since we now have a photo, break the loop
+            end
+          end
+        end
+      end
+    else
+      @goog_photo_bool = false
+    end
+
     render(layout: "layouts/normal")
   end
 

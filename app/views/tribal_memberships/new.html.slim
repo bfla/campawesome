@@ -27,18 +27,19 @@
       / tribe thumbnails
       .row
       - @tribes.each do |tribe|
-        .col-md-4 
-          .thumbnail.tribe-thumb data-tribe-id=tribe.id
-            = image_tag tribe.join_pic, class:'img'
-            p.lead.tribe-caption.col-md-offset-1.pad-top-md
-              = image_tag tribe.icon.url(:small), class:'img-circle tribe-background'
-              small 
-                |   #{tribe.name}
-            p.col-md-offset-1 
-              = tribe.description
-              br
-              .text-center
-                button.joinButton.btn.btn-default Pick this tribe
+        - unless tribe.id == 4
+          .col-md-4 
+            .thumbnail.tribe-thumb data-tribe-id=tribe.id
+              = image_tag tribe.join_pic, class:'img'
+              p.lead.tribe-caption.col-md-offset-1.pad-top-md
+                = image_tag tribe.icon.url(:small), class:'img-circle tribe-background'
+                small 
+                  |   #{tribe.name}
+              p.col-md-offset-1 
+                = tribe.description
+                br
+                .text-center
+                  button.joinButton.btn.btn-default Pick this tribe
       .col-md-12
         p.subtle-text.pad-top-lg
           small
