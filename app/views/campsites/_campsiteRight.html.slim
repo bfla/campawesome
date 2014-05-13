@@ -64,13 +64,14 @@
       - unless @nearbys.blank?
         = link_to "see more", search_campsites_path(keywords:"#{@campsite.city.name}, #{@campsite.state.name}"), class:"subtle-text"
 / Description =====================================
-.row
-  .col-md-12
-    hr
-    p
-      small
-        .extra-subtle 
-          | Camping Description:
-        span itemprop="description" = truncate @campsite.description, length:250, separator:' '
-        - if @campsite.description.length > 250
-          a data-toggle="modal" data-target="#descriptionModal" (more)
+- unless @campsite.description.blank?
+  .row
+    .col-md-12
+      hr
+      p
+        small
+          .extra-subtle 
+            | Camping Description:
+          span itemprop="description" = truncate @campsite.description, length:250, separator:' '
+          - if @campsite.description.length > 250
+            a data-toggle="modal" data-target="#descriptionModal" (more)

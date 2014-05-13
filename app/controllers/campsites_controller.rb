@@ -124,7 +124,7 @@ class CampsitesController < ApplicationController
     if @campsite.photos.blank?
       gplaces_key = "AIzaSyB9mHzeQJxtkMkn_UkKAOs00Hkg2Y9qKds"
       # run a Google Places search
-      gplace_url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=#{@campsite.latitude},#{@campsite.longitude}&radius=700&sensor=false&key=#{gplaces_key}"
+      gplace_url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=#{@campsite.latitude},#{@campsite.longitude}&radius=8000&sensor=false&key=#{gplaces_key}"
       @place_urlness = gplace_url
       gplace_response = Net::HTTP.get_response(URI.parse(gplace_url))
       gplaces = JSON.parse(gplace_response.body)
@@ -135,7 +135,7 @@ class CampsitesController < ApplicationController
       @photo_license = nil
       gplaces["results"].each do |gplace|
         if gplace["photos"] and gplace["types"]
-          acceptable_types = ["park", "rv_park", "campground", "locality", "point_of_interest", "natural_feature"]
+          acceptable_types = ["park", "campground", "natural_feature", "rv_park", "locality", "point_of_interest"]
           gplace["types"].each do |type|
             if acceptable_types.include? type
               @goog_photo_bool = true
