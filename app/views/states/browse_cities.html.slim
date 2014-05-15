@@ -19,7 +19,7 @@
     p.col-md-10.col-md-offset-1.lead 
       small Click a link below to see the camping guide for the city.
     p.col-md-10.col-md-offset-1
-      - @state.cities.each_with_index do |city, index|
+      - @state.cities.order('name').each_with_index do |city, index|
         = link_to city.name, city_path(city)
         br
   - content_for :top_right

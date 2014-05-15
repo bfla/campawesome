@@ -5,3 +5,4 @@ Disallow: http://getcamphero.com/campsites/search
 Disallow: http://getcamphero.com/*/edit
 Disallow: http://getcamphero.com/*/new
 Disallow: http://gentle-ocean-6036.herokuapp.com
+Disallow: http://getcamphero.com/states/1
