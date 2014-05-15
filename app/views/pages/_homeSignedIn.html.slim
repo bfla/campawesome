@@ -180,13 +180,13 @@
       - @best_of_state.each_with_index do |destination, index|
         - if !destination.photos.blank? and destination.photos.first.license_text.present?
           = destination.photos.first.license_text
-          - if index == 1
+          - if index == 0
             |  (left-most),&nbsp;
-          - elsif index == 2
+          - elsif index == 1
             |  (2nd from left),&nbsp;
-          - elsif index == 3
+          - elsif index == 2
             |  (3rd from letf),&nbsp;
-          - elsif index == 4
+          - elsif index == 3
             |  (4th from left),&nbsp;
 
       a.subtle-text href="http://creativecommons.org/licenses/by/2.0/" Creative Commons Attribution License.
