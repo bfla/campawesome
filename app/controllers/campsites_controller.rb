@@ -43,7 +43,7 @@ class CampsitesController < ApplicationController
 
   end
 
-  def search_map
+  def search_map # for mobile devices
     zoom = params[:zoom] || 10
     distance = params[:distance] || 30
     coordinates = Geocoder.coordinates(params[:keywords])
@@ -91,6 +91,7 @@ class CampsitesController < ApplicationController
 
   def contrib
     @campsites = Campsite.name_search(params[:keywords])
+    @campsites = Campsite.near( Geocoder.coordinates(params[:keywords])) if @campsites.blank?
     @previous_url = session[:previous_url]
   end
   

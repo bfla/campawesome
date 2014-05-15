@@ -52,13 +52,35 @@
           span.glyphicon.glyphicon-globe 
           |  Official site
         br
+/ Personalized recommendations =====================================
+.row
+  .col-md-12
+    hr
+    h4 
+      | Recommended nearby
+    - if user_signed_in?
+      - if current_user.tribe.blank?
+        a.btn.btn-warning.btn-sm.homeTribesButton href=new_tribal_membership_path Join a tribe
+        span.subtle-text  and see which camping sites near #{@campsite.name} are recommended for you.
+      - else
+        - @nearbys.each_with_index do |nearby_campsite, index|
+          - if index < 5
+            - if nearby_campsite.tribes.include? current_user.tribe
+              = link_to nearby_campsite.name, nearby_campsite, class:"recommendedLinkTracker"
+              br
+          - else
+            break
+    - else
+      p
+        a.btn.btn-warning.btn-xs data-target="#signupModal" data-toggle="modal" Sign up 
+        span.subtle-text  and see which camping sites near #{@campsite.name} are recommended for you.
 / Nearby campsites =====================================
 .row
   .col-md-12
     hr
     h4 Nearby campsites
     p
-      - @nearbys.each do |nearby_campsite|
+      - @nearbys.first(5).each do |nearby_campsite|
         = link_to nearby_campsite.name, nearby_campsite, class:"nearbyLinkTracker"
         br
       - unless @nearbys.blank?

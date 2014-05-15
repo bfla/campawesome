@@ -134,7 +134,7 @@ class Campsite < ActiveRecord::Base
 
   def self.name_search(keywords)
     if keywords
-      where('name LIKE ?', "%#{keywords}%") || Campsite.none
+      where('LOWER(name) LIKE ?', "%#{keywords.downcase}%") || Campsite.none
     else
       Campsite.none
     end
