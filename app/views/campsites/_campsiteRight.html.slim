@@ -22,13 +22,13 @@
         button.btn.btn-success.btn-sm data-toggle="modal" data-target="#reserveModal" Check Availability
     ul.col-md-12
       - if @campsite.reservable
-        li This campsite allows reservations.
+        li #{@campsite.name} allows reservations.
       - else
-        li This campsite doesn't allow reservations.
+        li #{@campsite.name} doesn't allow reservations.
       - if @campsite.walkin
-        li This campsite allows walkins
+        li #{@campsite.name} allows walkins
       - else
-        li This campsite doesn't allow walkins
+        li #{@campsite.name} doesn't allow walkins
       - @campsite.fees.each do |fee|
         li = fee.description
     p.subtle-text.col-md-12
