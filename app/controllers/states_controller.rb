@@ -13,6 +13,11 @@ class StatesController < ApplicationController
     render(layout: "layouts/guide")
   end
 
+  def browse_cities
+    @state = State.includes(:cities).friendly.find(params[:id])
+    render(layout: "layouts/guide")
+  end
+
   # GET /states/1
   # GET /states/1.json
   def show

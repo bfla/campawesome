@@ -11,7 +11,7 @@
   / Breadcrumbs
   ol.breadcrumb.white
     li = link_to "#{@campsite.state_name} Camping", state_path(@campsite.state)
-    li = link_to @campsite.city.name, @campsite.city
+    li = link_to @campsite.city.name, city_path(@campsite.city)
     li.active = @campsite.name
 - content_for :heading
     / Modals first 

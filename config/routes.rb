@@ -70,6 +70,7 @@ Blog::Application.routes.draw do
   resources :states do
     collection do
       get 'browse_destinations'
+      get 'browse_cities'
     end
   end
 

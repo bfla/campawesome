@@ -13,6 +13,8 @@ class SitemapsController < ApplicationController
       '/reasons',
       '/sign_up',
       '/sign_in',
+      '/states/browse_destinations?id=michigan-camping',
+      '/states/browse_cities?id=michigan-camping',
     ]
 
     @campsites = Campsite.all()

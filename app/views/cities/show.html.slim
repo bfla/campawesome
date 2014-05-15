@@ -6,7 +6,7 @@
 
 - content_for :breadcrumb
   ol.breadcrumb.white
-    li = link_to "#{@city.state.name} camping", @city.state
+    li = link_to "#{@city.state.name} camping", "states/#{@city.state.slug}"
     li.active = @city.name
 
   - content_for :heading
