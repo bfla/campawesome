@@ -121,6 +121,14 @@ class Campsite < ActiveRecord::Base
     end
   end
 
+  def resave_avg_rating #calculate new avg_rating when a new rating is saved
+    if !self.ratings.blank?
+      sum = 0
+      self.ratings.each {|rating| sum = sum + rating.value}
+      self.avg_rating = sum / self.ratings.size
+    end
+  end
+
   # This takes a search query and distance, codes it into a coordinates, 
   # and returns nearby campgrounds
   def self.search(search, distance)
@@ -174,14 +182,6 @@ class Campsite < ActiveRecord::Base
           campsite.city_id = city.id
         end
 
-      end
-    end
-
-    def resave_avg_rating
-      if !self.ratings.blank?
-        sum = 0
-        self.ratings.each {|rating| sum = sum + rating.value}
-        self.avg_rating = sum / self.ratings.size
       end
     end
 

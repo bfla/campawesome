@@ -1,4 +1,4 @@
-div itemprop="review" itemscope="itemscope" itemtype="http://schema.org/Review"
+div.col-md-12 itemprop="review" itemscope="itemscope" itemtype="http://schema.org/Review"
   / Schema data
   meta itemprop="timeRequired" content="P1M"
   meta itemprop="typicalAgeRange" content="17-55"
@@ -28,11 +28,10 @@ div itemprop="review" itemscope="itemscope" itemtype="http://schema.org/Review"
         /br
         /| 5 Helpful votes
 
-  p.col-md-9 
+  .col-md-9
     - unless review.title.blank?
-      .lead
-        small = review.title
-    .subtle-text
+      h5 = review.title
+    p.subtle-text
       - if review.user.first_name.blank?
         | Review by Anonymous camper
       - else
@@ -42,17 +41,18 @@ div itemprop="review" itemscope="itemscope" itemtype="http://schema.org/Review"
         small
           | , of the #{review.user.tribe.name}&nbsp;
           span.glyphicon.glyphicon-info-sign.add-tooltip data-toggle="tooltip" data-placement="right" title=review.user.tribe.description
-    - unless review.rating.blank? || review.rating.value.blank?
-      = render "reviewRating", rating:review.rating
-      small.subtle-text itemprop="reviewRating" itemscope="itemscope" itemtype="http://schema.org/AggregateRating"
-        span itemprop="ratingValue" #{review.rating.value} out of 5.0
-        meta itemprop="bestRating" content="5"
-        meta itemprop="worstRating" content="1"
-    br  
-    span itemprop="reviewBody" = review.body
-    br
-    small.subtle-text
-      |  reviewed on 
-      span  itemprop="datePublished" #{review.created_at.to_formatted_s(:short)}
-  .col-md-12
-    hr
+        br
+      - unless review.rating.blank? || review.rating.value.blank? 
+        = render "reviewRating", rating:review.rating
+        | #{review.rating.value} out of 5
+        div itemprop="reviewRating" itemscope="itemscope" itemtype="http://schema.org/AggregateRating"
+          meta itemprop="ratingValue" content=review.rating.value
+          meta itemprop="bestRating" content="5"
+          meta itemprop="worstRating" content="1"  
+    p itemprop="reviewBody" = review.body
+      br
+      small.subtle-text
+        |  reviewed on 
+        span  itemprop="datePublished" #{review.created_at.to_formatted_s(:short)}
+    .col-md-12
+      hr
