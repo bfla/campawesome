@@ -25,8 +25,8 @@
     = render 'layouts/modals/submitSuccessModal'
 
     / Heading
-    h1.col-md-12 itemprop="name"
-      = @campsite.name
+    h1.col-md-12 
+      span itemprop="name" = @campsite.name
       small
         small
           span.hashtag &nbsp;##{@campsite.hashtag}&nbsp;

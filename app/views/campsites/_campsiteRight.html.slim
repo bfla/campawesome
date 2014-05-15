@@ -38,9 +38,10 @@
           | Reservations: #{number_to_phone(@campsite.res_phone)}
           br
       - if @campsite.camp_phone?
-        .subtle-text itemprop="telephone"
+        .subtle-text
           span.glyphicon.glyphicon-earphone 
-          |  Campground: #{number_to_phone(@campsite.camp_phone)}
+          |  Campground: 
+          span itemprop="telephone" #{number_to_phone(@campsite.camp_phone)}
           br
       - if @campsite.res_url?
         a href=@campsite.res_url 
