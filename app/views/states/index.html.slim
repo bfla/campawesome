@@ -1,23 +1,22 @@
 - content_for :head
-  title States Admin
+  title States Index
+  meta name="keywords" content="camping, camping in U.S.A., camping travel, places to camp, RV parks, rustic campsites, backcountry camping, backpacking, CampHero, Camp Hero"
+  meta name="description" content="A list of all the states covered by CampHero. Click on a state to see CampHero's campsite listings, maps, rankings, and guides for that state."
 
 #main.container
-  h1 States Admin
-  .row
+  .row.pad-top-lg
       h1.heading.col-md-12 Listing states
 
       table.table
         tr
           th Name
-          th
           - if current_user && current_user.is_admin
             th
             th
 
         - @states.each do |state|
           tr
-            td = state.name
-            td = link_to 'Show', state
+            td = link_to state.name, state
             - if current_user && current_user.is_admin
               td = link_to 'Edit', edit_state_path(state)
               td = link_to 'Destroy', state, data: {:confirm => 'Are you sure?'}, :method => :delete

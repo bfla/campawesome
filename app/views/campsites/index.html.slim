@@ -1,8 +1,10 @@
 - content_for :head
-  title Campsite admin
+  title All campsites | CampHero
+  meta name="keywords" content=""
+  meta name="description" content=""
 #main.container
   .row
-      h1.heading.col-md-12 Listing all campsites
+      h1.heading.col-md-12.pad-top-lg Listing all campsites
 
       table.table
         tr
@@ -10,7 +12,6 @@
             th id
           th Name
           th Org
-          th
           - if current_user && current_user.is_admin
             th
             th
@@ -19,9 +20,8 @@
           tr
             - if current_user && current_user.is_admin
               td = campsite.id
-            td = campsite.name
+            td = link_to campsite.name, campsite
             td = campsite.org
-            td = link_to 'Show', campsite
             - if current_user && current_user.is_admin
               td = link_to 'Edit', edit_campsite_path(campsite)
               td = link_to 'Destroy', campsite, data: {:confirm => 'Are you sure?'}, :method => :delete

@@ -1,20 +1,23 @@
 - content_for :head
-  title Campsite admin
+  title All camping destinations | CampHero
+  meta name="keywords" content=""
+  meta name="description" content=""
 #main.container
-  .row
-    h1 Listing destinations
+  .row.pad-top-lg
+    h1 Listing all camping destinations
 
   table.table
     tr
       - if current_user && current_user.is_admin
         th id
       th Name
-      th Description
-      th Latitude
-      th Longitude
-      th Zoom
+      - if current_user && current_user.is_admin
+        th Description
+        th Latitude
+        th Longitude
+        th Zoom
+        th state_id
       th State
-      th
       - if current_user && current_user.is_admin
         th
         th
@@ -23,13 +26,14 @@
       tr
         - if current_user && current_user.is_admin
           td = destination.id
-        td = destination.name
-        td = destination.description
-        td = destination.latitude
-        td = destination.longitude
-        td = destination.zoom
-        td = destination.state_id
-        td = link_to 'Show', destination
+        td = link_to destination.name, destination
+        - if current_user && current_user.is_admin
+          td = destination.description
+          td = destination.latitude
+          td = destination.longitude
+          td = destination.zoom
+          td = destination.state_id
+        td = destination.state.name
         - if current_user && current_user.is_admin
           td = link_to 'Edit', edit_destination_path(destination)
           td = link_to 'Destroy', destination, data: {:confirm => 'Are you sure?'}, :method => :delete

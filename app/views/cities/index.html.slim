@@ -1,20 +1,21 @@
 - content_for :head
-  title City admin
+  title All cities
+  meta name="keywords" content="Camping, cities with camping, camping travel, RV parks, rustic camping sites, backcountry camping, CampHero, Camp Hero"
+  meta name="description" content="See all the cities on CampHero that have places to camp.  Click on a city to see which campsites are within that city."
 #main.container
-  .row
-      h1.heading.col-md-12 Listing cities
+  .row.pad-top-lg
+      h1.heading.col-md-12 Listing all cities
 
   table.table
     tr
       - if current_user && current_user.is_admin
         th id
       th Name
-      th Description
-      th Latitude
-      th Longitude
-      th Zoom
+      /th Description
+      /th Latitude
+      /th Longitude
+      /th Zoom
       th State
-      th
       - if current_user && current_user.is_admin
         th
         th
@@ -23,13 +24,12 @@
       tr
         - if current_user && current_user.is_admin
           td = city.id
-        td = city.name
-        td = city.description
-        td = city.latitude
-        td = city.longitude
-        td = city.zoom
-        td = city.state_id
-        td = link_to 'Show', city
+        td = link_to city.name, city
+        /td = city.description
+        /td = city.latitude
+        /td = city.longitude
+        /td = city.zoom
+        td = city.state.name
         - if current_user && current_user.is_admin
           td = link_to 'Edit', edit_city_path(city)
           td = link_to 'Destroy', city, data: {:confirm => 'Are you sure?'}, :method => :delete
