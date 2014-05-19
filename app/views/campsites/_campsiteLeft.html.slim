@@ -38,7 +38,7 @@
             br
             - @campsite.tags.where(category:"Rules").each do |tag|
               = tag.name
-            br
+              br
       - unless @campsite.tags.where(category:"Other").blank?
         .col-md-3
           p 
