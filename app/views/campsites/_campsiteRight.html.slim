@@ -105,3 +105,38 @@
           span itemprop="description" = truncate @campsite.description, length:250, separator:' '
           - if @campsite.description.length > 250
             a data-toggle="modal" data-target="#descriptionModal" (more)
+- if @campsite.description.blank?
+  .row
+    .col-md-12
+      hr
+      p
+        small
+          .extra-subtle 
+            | Camping Description:
+          span itemprop="description"
+            |  #{@campsite.name} is a #{@campsite.tribes.first.vibe.downcase} 
+            - unless @campsite.tribes.second.blank?
+              |  and #{@campsite.tribes.second.vibe.downcase}
+            | campground in #{@campsite.city.name}, #{@campsite.state.abbreviation}.
+            - if @campsite.reservable
+              |  #{@campsite.name} takes reservations
+            - else
+              |  #@{campsite.name} does not take reservations
+            - if @campsite.walkin
+              |  and allows first-come first-serve camping. 
+            - else
+              |  and does not allow first-come first-serve camping.
+            - if @campsite.avg_rating > 4.5
+              |  Most people who camp at #{@campsite.name} say it is awesome.
+            - elsif @campsite.avg_rating > 4.0
+              |  Campers who stay at #{@campsite.name} usually say it is good.
+            - elsif @campsite.avg_rating > 3.3
+              |  #{@campsite.name} is just okay (not awesome but not awful).
+            - elsif @campsite.avg_rating > 0.0
+              |  People who camped at #{@campsite.name} say it is crummy!
+            - if @campsite.org == "State"
+              |  It is a public campground run by the state of Michigan.
+            - elsif @campsite.org == "Federal"
+              |  It is a public campground run by the federal government.
+            - elsif @campsite.org == "Private"
+              |  It is a private campground.
