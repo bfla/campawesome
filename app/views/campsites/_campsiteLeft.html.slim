@@ -1,45 +1,52 @@
 / Photos
 = render 'layouts/guide/campsitePhotos', place:@campsite
 / Highlights
-.row
-  .col-md-12
-    hr
-    p.lead  
-      span.glyphicon.glyphicon-certificate.subtle-text
-      |  Highlights
-  .col-md-12
-    .col-md-3
-      p
-        strong.subtle-text Facilities
-        br
-        - @campsite.tags.where(category:"Facilities").each do |tag|
-          = tag.name
-          br
-        
-    .col-md-3
-      p
-        strong.subtle-text Things to do
-        br
-        - @activity_types.each do |activity_type|
-          - @campsite.activities.each do |activity|
-            - if activity_type == activity.activity_type
-              = activity_type.name
+- if @campsite.tags.blank?
+  .row
+    .col-md-12
+- unless @campsite.tags.blank?
+  .row
+    .col-md-12
+      hr
+      p.lead  
+        span.glyphicon.glyphicon-certificate.subtle-text
+        |  Highlights
+    .col-md-12
+      - unless @campsite.tags.where(category:"Facilities").blank?
+        .col-md-3
+          p
+            strong.subtle-text Facilities
+            br
+            - @campsite.tags.where(category:"Facilities").each do |tag|
+              = tag.name
               br
+      - unless @campsite.activities.blank?
+        .col-md-3
+          p
+            strong.subtle-text Things to do
+            br
+            - @activity_types.each do |activity_type|
+              - @campsite.activities.each do |activity|
+                - if activity_type == activity.activity_type
+                  = activity_type.name
+                  br
 
-    .col-md-3
-      p
-        strong.subtle-text Rules
-        br
-        - @campsite.tags.where(category:"Rules").each do |tag|
-          = tag.name
-          br
-    .col-md-3
-      p 
-        strong.subtle-text Tags
-        br
-        - @campsite.tags.where(category:"Other").each do |tag|
-          = tag.name
-          br
+      - unless @campsite.tags.where(category:"Rules").blank?
+        .col-md-3
+          p
+            strong.subtle-text Rules
+            br
+            - @campsite.tags.where(category:"Rules").each do |tag|
+              = tag.name
+            br
+      - unless @campsite.tags.where(category:"Other").blank?
+        .col-md-3
+          p 
+            strong.subtle-text Tags
+            br
+            - @campsite.tags.where(category:"Other").each do |tag|
+              = tag.name
+              br
 
 / Booking information 
 /
@@ -86,10 +93,10 @@
 / Location
 .row
   hr
-  p.lead.col-md-12 
+  p.lead.col-md-12
     span.glyphicon.glyphicon-map-marker.subtle-text
     |  Location
-    #mapRow.col-md-5
+    #mapRow.col-md-5.margin-bottom-md
         #campsiteMap
     .col-md-6.col-md-offset-1
       div itemprop="containedIn" itemscope="itemscope" itemtype="http://schema.org/Place"

@@ -58,6 +58,8 @@ $brandFont: 'Monda';
 
 .margin-top-sm {  margin-top:$smallPadding; }
 
+.margin-bottom-md { margin-bottom:$mediumPadding;}
+
 .add-margin-bottom-sm { margin-bottom:$smallPadding; }
 
 .remove-margin-top {margin-top:0px;}
@@ -73,6 +75,10 @@ $brandFont: 'Monda';
 .pad-top-lg {     padding-top: $mainPadding; }
 
 .pad-bottom-sm {  padding-bottom:$smallPadding; }
+
+.pad-bottom-md { padding-bottom: $mediumPadding; }
+
+.pad-bottom-lg { padding-bottom:$mainPadding; }
 
 .pad-bottom-huge { padding-bottom:200px;}
 

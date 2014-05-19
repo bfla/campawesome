@@ -1,6 +1,6 @@
 |  Ranked ##{campsite.city_rank} of #{campsite.city.campsites.size}&nbsp;
 small
-  small = link_to "campsites in #{campsite.city.name}, #{campsite.state_name}", campsite.city
+  small = link_to "campsites in #{campsite.city.name}, #{campsite.state.abbreviation}", campsite.city
 br
 - if campsite.ratings.blank?
   - 4.times

@@ -29,8 +29,6 @@
         li #{@campsite.name} allows walkins
       - else
         li #{@campsite.name} doesn't allow walkins
-      - @campsite.fees.each do |fee|
-        li = fee.description
     p.subtle-text.col-md-12
       - if @campsite.res_phone?
         .subtle-text
@@ -53,6 +51,15 @@
           span.glyphicon.glyphicon-globe 
           |  Official site
         br
+- unless @campsite.fees.blank?
+  .row
+    .col-md-12
+      hr
+      h4
+        | Fees
+      ul.col-md-12
+        - @campsite.fees.each do |fee|
+          li = fee.description
 / Personalized recommendations =====================================
 .row
   .col-md-12

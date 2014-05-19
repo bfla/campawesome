@@ -1,6 +1,10 @@
 / takes a place:@state (or @city or whatever)
 
-- unless place.description.blank?
+- if place.description.blank?
+  small 
+    strong.extra-subtle Description:&nbsp;
+    | #{place.name} in #{place.state.name} has #{pluralize(place.campsites.size, 'places')} to camp inside the city.  
+- else
   p.col-md-12
     small 
       strong.extra-subtle Description:&nbsp;
