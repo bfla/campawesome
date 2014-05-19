@@ -11,9 +11,9 @@
             small = @photo_license
       - else
         = image_tag '/images/dummies/blankPhoto.jpg', class:'img img-thumbnail img-responsive'
-  - else place.photos.first.blank?
+  - else
     div itemscope="itemscope" itemtype="http://schema.org/Photograph"
-      = image_tag place.photos.first.photo_file.url(:large), class: "img-thumbnail img-responsive", html: {title:"", alt:"", caption:"", description:""}
+      = image_tag place.photos.first.photo_file.url(:large), class: "img-thumbnail img-responsive add-tooltip", title:"#{place.photos.first.title}", alt:"Photo of #{place.name} in #{place.city.name}, #{place.state.abbreviation}", caption:"#{place.photos.first.caption}", data:{toggle:"tooltip"}
       - unless place.photos.first.title.blank?
         meta itemprop="name" content="#{place.photos.first.title}"
       - unless place.photos.first.caption.blank?

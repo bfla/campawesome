@@ -3,9 +3,9 @@
   - if place.photos.first.blank?
     div itemscope="itemscope" itemtype="http://schema.org/Photograph"
      = image_tag '/images/dummies/blankPhoto.jpg', class:"img-thumbnail img-responsive"
-  - else place.photos.first.blank?
+  - else
     div itemscope="itemscope" itemtype="http://schema.org/Photograph"
-      = image_tag place.photos.first.photo_file.url(:large), class: "img-thumbnail img-responsive", html: {title:"", alt:"", caption:"", description:""}
+      = image_tag place.photos.first.photo_file.url(:large), class: "img-thumbnail img-responsive", alt:"Photo of camping in #{place.name}", title:"#{place.photos.first.title}", alt:"", caption:"#{place.photos.first.caption}"
 .col-md-3.hidden-xs
   - unless place.photos.second.blank?
     div itemscope="itemscope" itemtype="http://schema.org/Photograph"
