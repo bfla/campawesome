@@ -6,7 +6,9 @@ li.dropdown.hidden-xs
       - if current_user.first_name?
         = current_user.first_name
       - else
-        = current_user.email
+        <!--email_off-->
+          = current_user.email
+        <!--/email_off-->
       b.caret
   ul.dropdown-menu
     li = link_to "Your Home Page", home_path
