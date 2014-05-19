@@ -11,8 +11,8 @@ class SitemapsController < ApplicationController
       '/smallbiz',
       '/bloggers',
       '/reasons',
-      '/sign_up',
-      '/sign_in',
+      '/users/sign_up',
+      '/users/sign_in',
       '/states/browse_destinations?id=michigan-camping',
       '/states/browse_cities?id=michigan-camping',
     ]
