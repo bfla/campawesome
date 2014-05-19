@@ -185,7 +185,7 @@ class Campsite < ActiveRecord::Base
       end
     end
 
-    #def check_ranking BAD TRIGGERS ENDLESS LOOP
+    #def check_ranking
       #self.city.rerank if self.avg_rating_changed?
     #end
 

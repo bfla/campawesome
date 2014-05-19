@@ -117,7 +117,13 @@ class CampsitesController < ApplicationController
   def show
     @campsite = Campsite.includes(:photos, :tags, :fees, :beens, :wants, :listeds, reviews: [:rating]).friendly.find(params[:id])
     @activity_types = ActivityType.all
-    @nearbys = @campsite.nearbys.limit(5)
+    @nearbys = @campsite.nearbys.limit(10)
+    @recommended = Array.new
+    @nearbys.each do |nearby_campsite|
+      if nearby_campsite.tribes.include? current_user.tribe
+        @recommended << nearby_campsite
+      end
+    end
     gon.initCenter = [@campsite.latitude, @campsite.longitude]
     gon.geoJson = @campsite.geojsonify
     
