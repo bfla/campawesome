@@ -45,7 +45,7 @@ div.col-md-12 itemprop="review" itemscope="itemscope" itemtype="http://schema.or
       - unless review.rating.blank? || review.rating.value.blank? 
         = render "reviewRating", rating:review.rating
         | #{review.rating.value} out of 5
-        div itemprop="reviewRating" itemscope="itemscope" itemtype="http://schema.org/AggregateRating"
+        div itemprop="reviewRating" itemscope="itemscope" itemtype="http://schema.org/Rating"
           meta itemprop="ratingValue" content=review.rating.value
           meta itemprop="bestRating" content="5"
           meta itemprop="worstRating" content="1"  
