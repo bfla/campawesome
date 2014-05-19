@@ -18,19 +18,21 @@ class City < ActiveRecord::Base
   def hashtag
     self.state.hashtag
   end
+
   def self.to_s
     self.name
   end
+
   def rerank
-    contenders = self.campsites
-    if contenders.size > 1
-      contenders.each_with_index do |campsite, index|
-        campsite.city_rank = index + 1
-        campsite.save()
-      end
-    elsif contenders.length = 1
-      contenders.first.city_rank = 1
-      contenders.first.save()
+    self.campsites.each_with_index do |c, index|
+      c.city_rank = index + 1
+      c.save()
     end
+    #elsif contenders.count = 1
+      #contenders.first.city_rank = 1
+      #campsite = contenders.first
+      #campsite.save()
+    #end
   end
+
 end
