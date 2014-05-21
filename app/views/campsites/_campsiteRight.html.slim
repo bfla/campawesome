@@ -117,9 +117,9 @@
               |  and #{@campsite.tribes.second.vibe.downcase}
             | campground in #{@campsite.city.name}, #{@campsite.state.abbreviation}.
             - if @campsite.reservable
-              |  #{@campsite.name} takes reservations
+              |  It takes reservations
             - else
-              |  #@{campsite.name} does not take reservations
+              |  It does not take reservations
             - if @campsite.walkin
               |  and allows first-come first-serve camping. 
             - else

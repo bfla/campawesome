@@ -18,7 +18,7 @@ html.fill-height class=(user_signed_in? ? 'background':'white')
                 .hidden-xs Greetings citizen! I'm CampHero
                 | I'll find you mighty good campsites in Michigan
                 br
-                small style="color:white;" With recommendations from heroic campers like yourself
+                small style="color:white;" With recommendations from savvy campers like yourself
           .row
               = form_tag search_campsites_path, method: "get", class: "form", role: "search" do
                 = label_tag :keywords, 'Find campgrounds near', class: 'sr-only'
