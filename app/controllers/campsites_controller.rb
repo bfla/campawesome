@@ -119,9 +119,11 @@ class CampsitesController < ApplicationController
     @activity_types = ActivityType.all
     @nearbys = @campsite.nearbys.limit(10)
     @recommended = Array.new
-    @nearbys.each do |nearby_campsite|
-      if nearby_campsite.tribes.include? current_user.tribe
-        @recommended << nearby_campsite
+    if user_signed_in?
+      @nearbys.each do |nearby_campsite|
+        if nearby_campsite.tribes.include? current_user.tribe
+          @recommended << nearby_campsite
+        end
       end
     end
     gon.initCenter = [@campsite.latitude, @campsite.longitude]
