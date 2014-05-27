@@ -13,13 +13,13 @@
       a href="#" data-toggle='modal' data-target='#descriptionModal' see more
 hr
 .col-md-12
-  a.thumbnail href=search_campsites_path(keywords:"#{place.latitude}, #{place.longitude}", distance:search_distance, zoom:search_zoom)
+  a.thumbnail href=search_campsites_path(keywords:"#{place.latitude}, #{place.longitude}", distance:search_distance, zoom:search_zoom) rel="nofollow"
     /#thumbMap style="height:150px; padding:0px; margin:0px;"
-    img src="http://maps.googleapis.com/maps/api/staticmap?center=#{place.latitude}%2C+#{place.longitude}&zoom=#{place.zoom}&size=600x300&maptype=roadmap&sensor=false"
+    img src="http://maps.googleapis.com/maps/api/staticmap?center=#{place.latitude}%2C+#{place.longitude}&zoom=#{place.zoom}&size=600x300&maptype=roadmap&sensor=false" rel="Map of campsites near #{place.zoom}"
 p.col-md-12
   small
     <div data-no-turbolink>
-      a itemprop='map' href=search_campsites_path(keywords:"#{place.latitude}, #{place.longitude}", distance:search_distance, zoom:search_zoom)
+      a itemprop='map' href=search_campsites_path(keywords:"#{place.latitude}, #{place.longitude}", distance:search_distance, zoom:search_zoom) rel="nofollow"
         span.glyphicon.glyphicon-zoom-in
         | Explore map of all #{place.name} camping places
     </div>

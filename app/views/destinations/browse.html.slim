@@ -1,6 +1,6 @@
 - content_for :head
   title #{@destination.name} campsites
-  meta name="description" content=""
+  meta name="description" content="A list and map of all the campsites near #{@destination.name}"
   script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB9mHzeQJxtkMkn_UkKAOs00Hkg2Y9qKds&sensor=false"
 
 - content_for :breadcrumb
@@ -29,13 +29,13 @@
     
 - content_for :bottom_right
   .col-md-12
-    a.thumbnail href=search_campsites_path(keywords:"#{@destination.latitude}, #{@destination.longitude}", distance:@searchRadius, zoom:10)
+    a.thumbnail href=search_campsites_path(keywords:"#{@destination.latitude}, #{@destination.longitude}", distance:@searchRadius, zoom:10) rel="nofollow"
       /#thumbMap style="height:150px; padding:0px; margin:0px;"
-      img src="http://maps.googleapis.com/maps/api/staticmap?center=#{@destination.latitude}%2C+#{@destination.longitude}&zoom=#{@destination.zoom}&size=600x300&maptype=roadmap&sensor=false"
+      img src="http://maps.googleapis.com/maps/api/staticmap?center=#{@destination.latitude}%2C+#{@destination.longitude}&zoom=#{@destination.zoom}&size=600x300&maptype=roadmap&sensor=false" rel="Map of #{@destination} camping"
   p.col-md-12
     small
       <div data-no-turbolink>
-        a itemprop='map' href=search_campsites_path(keywords:"#{@destination.latitude}, #{@destination.longitude}", distance:@searchRadius, zoom:10)
+        a itemprop='map' href=search_campsites_path(keywords:"#{@destination.latitude}, #{@destination.longitude}", distance:@searchRadius, zoom:10) rel="nofollow"
           span.glyphicon.glyphicon-zoom-in
           | Explore map of all #{@destination.name} camping places
       </div>

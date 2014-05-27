@@ -1,6 +1,6 @@
 - content_for :head
   title #{@state.name} Camping by City
-  meta name="description" content="Michigan camping categorized by city. Find out which campgrounds are located in each city. Or, if you prefer, search for Michigan campgrounds on CampHero's interactive map."
+  meta name="description" content="#{@state.name} camping and campgrounds categorized by city. Find out which campgrounds are located in each city. Or, if you prefer, search for Michigan campgrounds on CampHero's interactive map."
 
 - content_for :breadcrumb
   ol.breadcrumb.white
@@ -24,13 +24,13 @@
         br
   - content_for :top_right
     .col-md-12
-      a.thumbnail href=search_campsites_path(keywords:"#{@state.latitude}, #{@state.longitude}", distance:500, zoom:6)
+      a.thumbnail href=search_campsites_path(keywords:"#{@state.latitude}, #{@state.longitude}", distance:500, zoom:6) rel="nofollow"
         /#thumbMap style="height:150px; padding:0px; margin:0px;"
         img src="http://maps.googleapis.com/maps/api/staticmap?center=#{@state.latitude}%2C+#{@state.longitude}&zoom=#{@state.zoom}&size=600x300&maptype=roadmap&sensor=false"
     p.col-md-12
       small
         <div data-no-turbolink>
-          a itemprop='map' href=search_campsites_path(keywords:"#{@state.latitude}, #{@state.longitude}", distance:500, zoom:6)
+          a itemprop='map' href=search_campsites_path(keywords:"#{@state.latitude}, #{@state.longitude}", distance:500, zoom:6) rel="nofollow"
             span.glyphicon.glyphicon-zoom-in
             | Explore map of all #{@state.name} camping places
         </div>

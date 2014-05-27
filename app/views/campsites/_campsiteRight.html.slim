@@ -61,7 +61,11 @@
         - @campsite.fees.each do |fee|
           li = fee.description
 / Personalized recommendations =====================================
-- unless @recommended.blank?
+- if @recommended.blank?
+  p
+    a.btn.btn-warning.btn-xs data-target="#signupModal" data-toggle="modal" Sign up 
+    span.subtle-text  and see which camping sites near #{@campsite.name} are recommended for you.
+- else
   .row
     .col-md-12
       hr
@@ -75,10 +79,6 @@
           - @recommended.each do |nearby_campsite|
             = link_to nearby_campsite.name, nearby_campsite, class:"recommendedLinkTracker"
             br
-      - else
-        p
-          a.btn.btn-warning.btn-xs data-target="#signupModal" data-toggle="modal" Sign up 
-          span.subtle-text  and see which camping sites near #{@campsite.name} are recommended for you.
 / Nearby campsites =====================================
 - unless @nearbys.blank?
   .row
@@ -90,7 +90,7 @@
           = link_to nearby_campsite.name, nearby_campsite, class:"nearbyLinkTracker"
           br
         - unless @nearbys.blank?
-          = link_to "see more", search_campsites_path(keywords:"#{@campsite.city.name}, #{@campsite.state.name}"), class:"subtle-text"
+          = link_to "see more", search_campsites_path(keywords:"#{@campsite.city.name}, #{@campsite.state.name}"), class:"subtle-text", rel:"nofollow"
 / Description =====================================
 - unless @campsite.description.blank?
   .row

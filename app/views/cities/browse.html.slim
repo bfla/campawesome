@@ -1,6 +1,6 @@
 - content_for :head
   title #{@city.name} campsites
-  meta name="description" content=""
+  meta name="description" content="A list of all the campgrounds and camping areas in #{@city.name}, #{@city.state.abbreviation}."
   script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB9mHzeQJxtkMkn_UkKAOs00Hkg2Y9qKds&sensor=false"
 
 - content_for :breadcrumb
@@ -29,14 +29,14 @@
     
 - content_for :bottom_right
   .col-md-12
-    a.thumbnail href=search_campsites_path(keywords:"#{@city.latitude}, #{@city.longitude}", distance:30, zoom:10)
+    a.thumbnail href=search_campsites_path(keywords:"#{@city.latitude}, #{@city.longitude}", distance:30, zoom:10) rel="nofollow"
       /#thumbMap style="height:150px; padding:0px; margin:0px;"
-      img src="http://maps.googleapis.com/maps/api/staticmap?center=#{@city.latitude}%2C+#{@city.longitude}&zoom=#{@city.zoom}&size=600x300&maptype=roadmap&sensor=false"
+      img src="http://maps.googleapis.com/maps/api/staticmap?center=#{@city.latitude}%2C+#{@city.longitude}&zoom=#{@city.zoom}&size=600x300&maptype=roadmap&sensor=false" 
   p.col-md-12
     small
       <div data-no-turbolink>
         a itemprop='map' href=search_campsites_path(keywords:"#{@city.latitude}, #{@city.longitude}", distance:30, zoom:10)
-          span.glyphicon.glyphicon-zoom-in
+          span.glyphicon.glyphicon-zoom-in rel="nofollow"
           | Explore map of all #{@city.name} camping places
       </div>
 

@@ -1,5 +1,7 @@
 json.extract! @campsite, :id, :name, :org, :latitude, :longitude, :res_phone, :camp_phone, :res_url, :camp_url, :reservable, :walkin, :avg_rating, :city_rank
 
+json.city_count @campsite.city.campsites.size
+
 json.state @campsite.state, :name, :abbreviation
 
 json.city @campsite.city, :name
@@ -24,5 +26,10 @@ end
 json.reviews @campsite.reviews do |review|
   json.body review.body
   json.user_name review.user.first_name
-  json.rating_value review.rating.value
+  #json.rating_value review.rating.value #This triggers an error if the rating cannot be found...
+end
+
+json.tags @campsite.tags do |tag|
+  json.name tag.name
+  json.type tag.category
 end
