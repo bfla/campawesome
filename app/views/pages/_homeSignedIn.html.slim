@@ -140,7 +140,7 @@
         - unless @best_of_state.blank?
           p.lead.col-md-12 
             br
-            | Best Destinations for #{@state.name} Camping&nbsp;
+            | Best Camping Destinations in #{@state.name}&nbsp;
             small 
               small = link_to 'see more', @state
           .col-md-12
@@ -149,7 +149,7 @@
                 .col-md-3
                   a href=destinations_path(destination)
                     = image_tag destination.photos.first.photo_file.url(:small), class:"img-thumbnail img-responsive"
-                  h5 = link_to destination.name, destination
+                  h5.text-center = link_to destination.name, destination
 
           .col-md-12
             hr
