@@ -2,6 +2,7 @@
   title #{@destination.name} campsites
   meta name="description" content="A list and map of all the campsites near #{@destination.name}"
   script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB9mHzeQJxtkMkn_UkKAOs00Hkg2Y9qKds&sensor=false"
+  link rel="canonical" href=destination_url(@destination)
 
 - content_for :breadcrumb
   ol.breadcrumb.white

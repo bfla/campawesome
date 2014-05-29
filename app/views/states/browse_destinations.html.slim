@@ -1,6 +1,7 @@
 - content_for :head
   title #{@state.name} Camping Destinations
   meta name="description" content="The most popular camping destinations in #{@state.name}.  Choose one to see maps and lists of all the nearby campgrounds and advice for planning your vacation."
+  link rel="canonical" href=state_url(@state)
 
 - content_for :breadcrumb
   ol.breadcrumb.white

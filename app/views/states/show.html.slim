@@ -4,6 +4,7 @@
     |  camping | CampHero
   meta name="keywords" content="#{@state.name} camping, campsites in #{@state.name}, campgrounds, places to camp in #{@state.name}, RV Parks, backcountry camping, rustic camping, tent camping, camping sites, camp sites, tourism, travel, reviews"
   meta name="description" content="CampHero has maps and listings of virtually all of the camping in #{@state.name}, including rustic campgrounds, RV Parks, backcountry camping areas, modern campsites, and equestrian camping in #{@state.name}. CampHero also has camping reviews, photos, area guides, & more."
+  link rel="canonical" href=state_url(@state)
   script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB9mHzeQJxtkMkn_UkKAOs00Hkg2Y9qKds&sensor=false"
 
 - content_for :breadcrumb
