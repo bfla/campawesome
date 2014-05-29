@@ -12,7 +12,7 @@ p.subtle-text
       - unless place.photos.fourth.blank? || place.photos.fourth.license_text.blank?
         |  #{place.photos.fourth.license_text} (right bottom).
     |  Destination photos:
-    - place.destinations.first(4).each do |destination|
+    - place.destinations.first(10).each do |destination|
       - unless destination.photos.first.blank? || destination.photos.first.license_text.blank?
         | #{destination.name} photo: #{destination.photos.first.license_text}.
     |  Used under the&nbsp;
