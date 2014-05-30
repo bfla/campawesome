@@ -1,7 +1,7 @@
 - if user_signed_in?  
   .btn-group
     - if campsite.beens.find_by_user_id(current_user).blank?
-      = link_to beens_path(campsite_id:campsite), method: :post, class:'btn btn-default btn-xs subtle-text enable-command-toggle beenBtnTracker', remote:true do
+      = link_to beens_path(campsite_id:campsite.id), method: :post, class:'btn btn-default btn-xs subtle-text enable-command-toggle beenBtnTracker', remote:true do
         span.glyphicon.glyphicon-ok
         |  Been here
     - else 
@@ -10,7 +10,7 @@
         span.glyphicon.glyphicon-ok.greenify
         |  Been here
     - if campsite.wants.find_by_user_id(current_user).blank?
-      = link_to wants_path(campsite_id:campsite), method: :post, class:'btn btn-default btn-xs subtle-text enable-command-toggle wantBtnTracker', remote:true do
+      = link_to wants_path(campsite_id:campsite.id), method: :post, class:'btn btn-default btn-xs subtle-text enable-command-toggle wantBtnTracker', remote:true do
         span.glyphicon.glyphicon-plus-sign
         |  Want to go
     - else
@@ -67,7 +67,7 @@ javascript:
   $('.listSavedModalTrigger').click( function() {
     $('#listSavedModal').modal();
   });
-  $('.beenBtnTracker').on('click', function() {
+  /*$('.beenBtnTracker').on('click', function() {
     ga('send', 'event', 'button', 'click', 'been here btn');
   });
   $('.wantBtnTracker').on('click', function() {
@@ -78,5 +78,5 @@ javascript:
   });
   $('.listBtnTracker').on('click', function() {
     ga('send', 'event', 'button', 'click', 'list btn');
-  });
+  });*/
 
