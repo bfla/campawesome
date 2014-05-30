@@ -7,11 +7,21 @@
         small = link_to 'see more', browse_destinations_states_path(id:@state)
 - @destinations.each_with_index do |destination, index|
   - if destination.photos.any?
-    .col-md-4
-      = link_to destination_path(destination), class:'thumbnail'
-        = image_tag destination.photos.first.photo_file
-      p.text-center
-        span.label.label-info = index + 1
-        |&nbsp;&nbsp;
-        = link_to link_to destination.name, destination
+    - if (index+1) % 3 == 0
+      .row
+        .col-md-4.pad-top-sm
+          = link_to destination_path(destination), class:'thumbnail'
+            = image_tag destination.photos.first.photo_file
+          p.text-center
+            span.label.label-info = index + 1
+            |&nbsp;&nbsp;
+            = link_to link_to destination.name, destination
+    - else
+      .col-md-4.pad-top-sm
+        = link_to destination_path(destination), class:'thumbnail'
+          = image_tag destination.photos.first.photo_file
+        p.text-center
+          span.label.label-info = index + 1
+          |&nbsp;&nbsp;
+          = link_to link_to destination.name, destination
 
