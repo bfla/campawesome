@@ -20,3 +20,6 @@
 
 # Heroku says ignore .env. See https://devcenter.heroku.com/articles/getting-started-with-rails3
 .env
+
+# Ignore development database photos
+/public/system
