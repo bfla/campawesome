@@ -1,0 +1,44 @@
+/ Modal for full state description
+- if user_signed_in?
+  #saveToListModal.modal.modal-sm.fade.bs-modal-sm tabindex="-1" role="dialog" aria-labelledby="saveToListModalLabel" aria-hidden="true"
+    .modal-dialog
+      .modal-content
+        .modal-header
+          button.close type="button" data-dismiss="modal" aria-hidden="true" &times
+          h5#descriptionModalTitle.modal-title.text-center Save to lists
+        .modal-body.col-md-6.col-md-offset-3
+          = form_tag listeds_path, class:"saveToListForm", method: :post, remote:true do
+            = hidden_field_tag :campsite_id, value:"0", id:"campsiteToSave"
+            - current_user.lists.first(current_user.lists_count).each do |list|
+              p.col-md-12.checkbox
+                label
+                  input.listCheckbox type="checkbox" data-list-id=list.id value="0" =list.name 
+            p.col-md-12
+              small
+                a href="#" data-toggle="modal" data-target="#newListModal" Create new list
+        .modal-footer
+          button.btn.btn-lg.btn-default type="button" data-dismiss="modal" Close
+
+javascript:
+  $(".listCheckbox").click( function() {
+    if ($(this).prop("checked") == true) {
+      $.ajax({
+        type: "POST",
+        url: "/listeds",
+        data: { listed: { campsite_id: $("#campsiteToSave").val(), list_id: $(this).data("list-id") } },
+        success: function(data) {
+          alert(data.id);
+          return false;
+        },
+        error: function(data) {
+          return false;
+        }
+      });
+    }
+  });
+
+javascript:
+  $('#saveToListModal').on('hidden.bs.modal', function(e) {
+    $('.listCheckbox').val("0");
+    $('.listCheckbox').prop("checked", false);
+  )};

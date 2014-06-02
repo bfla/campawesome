@@ -20,10 +20,11 @@
         |  Want to go
 
     .btn-group
-      button.btn.btn-default.btn-xs.dropdown-toggle.subtle-text.listBtnTracker data-toggle="dropdown" type="button"
+      //button.btn.btn-default.btn-xs.dropdown-toggle.subtle-text.listBtnTracker data-toggle="dropdown" type="button"
+      button.btn.btn-default.btn-xs.subtle-text.listBtnTracker type="button" data-toggle="modal" data-target="#saveToListModal" data-campsite=campsite.id
         span.glyphicon.glyphicon-bookmark
         |  Save
-      ul.dropdown-menu id="listDropdown#{campsite.id}" role="menu" aria-labelledby="dropdownMenu#{campsite.id}"
+      //ul.dropdown-menu id="listDropdown#{campsite.id}" role="menu" aria-labelledby="dropdownMenu#{campsite.id}"
         - if current_user.lists.any?
           - current_user.lists.each do |list|
               li = link_to "#{list.name}", listeds_path(campsite_id:campsite.id, list_id:list.id), method: :post, role:"menuitem", tabindex:"-1"
@@ -67,7 +68,11 @@ javascript:
   $('.listSavedModalTrigger').click( function() {
     $('#listSavedModal').modal();
   });
-  /*$('.beenBtnTracker').on('click', function() {
+  // Save the campsite's id to the appropriate hidden input in the list saving modal
+  $('.saveButton').click( function () {
+    $('#campsiteToSave').val() = $(this).data("campsite");
+  });
+  $('.beenBtnTracker').on('click', function() {
     ga('send', 'event', 'button', 'click', 'been here btn');
   });
   $('.wantBtnTracker').on('click', function() {
@@ -78,5 +83,5 @@ javascript:
   });
   $('.listBtnTracker').on('click', function() {
     ga('send', 'event', 'button', 'click', 'list btn');
-  });*/
+  });
 

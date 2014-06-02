@@ -7,8 +7,11 @@
           li = message
 
   .field
-    = f.label :campsite_id
-    = f.number_field :campsite_id
+    = f.label :listable_id
+    = f.number_field :listable_id
+  .field
+    = f.label :listable_type
+    = f.text_field :listable_type
   .field
     = f.label :list_id
     = f.number_field :list_id

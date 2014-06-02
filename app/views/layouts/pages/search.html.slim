@@ -30,6 +30,7 @@ html.fill-height
       = render 'layouts/modals/filterModal', tribes:@tribes, tags:@tags
     - else
       = render 'layouts/modals/likeMeModal', user_signed_in:user_signed_in?, user:current_user
+    = render 'layouts/modals/saveToListModal'
 
     == render 'layouts/navbar'
     input#activeTribeId type="hidden" value="0"
