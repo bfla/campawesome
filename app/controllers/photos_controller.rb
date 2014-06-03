@@ -55,7 +55,13 @@ class PhotosController < ApplicationController
 
     respond_to do |format|
       if @photo.save
-        format.html { redirect_to session[:previous_url], notice: 'Photo was successfully added. You just earned some coins and helped your fellow campers.'}
+        if @photo.campsite.blank?
+          format.html { redirect_to session[:previous_url], notice: 'Photo was successfully added. You just earned some coins and helped your fellow campers.'}
+        elsif user_signed_in? && current_user.is_admin
+          format.html { redirect_to @photo.campsite }
+        else
+          format.html { redirect_to session[:previous_url] }
+        end
         #format.html { redirect_to @photo, notice: 'Photo was successfully added.' }
         format.json { render action: 'show', status: :created, location: @photo }
       else

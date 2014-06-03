@@ -32,6 +32,10 @@
         small
           span.hashtag &nbsp;##{@campsite.hashtag}&nbsp;
           span.glyphicon.glyphicon-info-sign.extra-subtle.add-tooltip  data-toggle="tooltip" data-placement="right" title="Tag your Twitter & Facebook posts with ##{@campsite.hashtag} Why?  Because it'll make them awesomer."
+      - if user_signed_in? && current_user.is_admin
+        br
+        a.btn.btn-warning.btn-lg href=new_photo_path New photo admin
+        small  ##{@campsite.id}
       br
       small 
         small #{@campsite.org} campground in #{@campsite.state_name}&nbsp;
