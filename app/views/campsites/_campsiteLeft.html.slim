@@ -123,12 +123,12 @@
         p
           .col-md-12
             br
-            a href="#" data-toggle="modal" data-target="#addressModal" Show address
+            a href="#" data-toggle="modal" data-target="#addressModal" Show campground address
             small.subtle-text  (not recommended)
             br
           .col-md-12
             span.subtle-text.glyphicon.glyphicon-exclamation-sign
-            small.subtle-text.add-tooltip  data-toggle="tooltip" data-placement="right" title="Sadly, campgrounds often don't have addresses.  Or the address is for a mailbox instead of where the campground itself is located. GPS is more trustworthy."  Campsite addresses are often inaccurate!
+            small.subtle-text.add-tooltip  data-toggle="tooltip" data-placement="right" title="Sadly, campgrounds often don't have addresses.  Or the address is for a mailbox instead of where the campground itself is located. GPS is more trustworthy."  Campground addresses are often inaccurate!
       - unless @campsite.activities.blank?
         p = link_to "Things to do nearby", activities_campsite_path(@campsite)
 

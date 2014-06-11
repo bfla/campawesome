@@ -1,8 +1,8 @@
 - content_for :head
   title Camping in #{@city.name} #{@city.state.abbreviation} on CampHero
-  meta name="keywords" content="Camping near #{@city.name} #{@city.state.abbreviation}, campsites near #{@city.name}, campgrounds, places to camp in #{@city.name}, RV Parks, backcountry camping, rustic camping, tent camping, camping sites, camp sites, tourism, travel, reviews"
-  meta name="description" content="Places to camp near #{@city.name} #{@city.state.abbreviation} including maps and listings of all the rustic campgrounds, RV Parks, backcountry camping areas, modern campsites, and equestrian camping in #{@city.name}. CampHero also has camping reviews, photos, area guides, & more."
-  link rel="canonical" href=city_url(@city)
+  meta name="keywords" content="Camping in #{@city.name} #{@city.state.abbreviation}, campsites near #{@city.name}, campgrounds, places to camp in #{@city.name}, RV Parks, backcountry camping, rustic camping, tent camping, camping sites, camp sites, tourism, travel, reviews"
+  meta name="description" content="Places to camp in #{@city.name} #{@city.state.abbreviation} including maps and listings of all the rustic campgrounds, RV Parks, backcountry camping areas, modern campsites, and equestrian camping in #{@city.name}. CampHero's supervision exposes all state and federal campgrounds (private and local campgrounds coming soon)."
+  link rel="canonical" href=state_url(@state)
   script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB9mHzeQJxtkMkn_UkKAOs00Hkg2Y9qKds&sensor=false"
 
 - content_for :breadcrumb
@@ -13,15 +13,15 @@
   - content_for :heading
     .headline
       h1.heading.guide-heading.col-md-12
-        | #{@city.name} camping
+        | Camping in #{@city.name} #{@city.state.abbreviation}
         small 
           small.hashtag  &nbsp;##{@city.hashtag}&nbsp;
         small
           small
               span.glyphicon.glyphicon-info-sign.extra-subtle.add-tooltip  data-toggle="tooltip" data-placement="right" title="Tag your Twitter & Facebook posts with ##{@city.hashtag} Why?  Because it'll make them awesomer."
     ul.nav.nav-tabs.guide-tabs
-      li.active = link_to @city.name, @city
-      li = link_to "Campsites near #{@city.name}", browse_city_path(@city)
+      li.active = link_to "Camping in #{@city.name} #{@city.state.abbreviation}", @city
+      li = link_to "All campsites in #{@city.name} #{@city.state.abbreviation}", browse_city_path(@city)
 
   - content_for :top_left
     = render 'layouts/guide/topLeft', place:@city
