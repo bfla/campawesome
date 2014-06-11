@@ -6,7 +6,7 @@
 
 - content_for :breadcrumb
   ol.breadcrumb.white
-    li = link_to "#{@city.state.name}", @city.state
+    li = link_to "#{@city.state.name} Camping", @city.state
     li.active = @city.name
 
 - content_for :heading
@@ -19,8 +19,8 @@
         small
             span.glyphicon.glyphicon-info-sign.extra-subtle.add-tooltip  data-toggle="tooltip" data-placement="right" title="Tag your Twitter & Facebook posts with ##{@city.hashtag} Why?  Because it'll make them awesomer."
   ul.nav.nav-tabs.guide-tabs
-    li = link_to @city.name, @city
-    li.active = link_to "Campsites near #{@city.name}", browse_city_path(@city)
+    li = link_to "Camping in #{@city.name} #{@city.state.abbreviation}", @city
+    li.active = link_to "All Campgrounds in #{@city.name} #{@city.state.abbreviation} (#{@city.campsites.size})", browse_city_path(@city)
 
   = render 'layouts/guide/browseFilter', place:@city, campsites:@city.campsites
         

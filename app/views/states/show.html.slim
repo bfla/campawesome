@@ -26,7 +26,7 @@
   ul.nav.nav-tabs.guide-tabs
     li.active = link_to "#{@state.name} home", @state
     li = link_to 'Camping destinations', browse_destinations_states_path(id:@state)
-    li = link_to 'Cities with campsites', browse_cities_states_path(id:@state)
+    li = link_to 'Cities with campgrounds', browse_cities_states_path(id:@state)
 
 - content_for :top_left
   = render 'layouts/guide/topLeft', place:@state

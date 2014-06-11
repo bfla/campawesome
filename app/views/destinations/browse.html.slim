@@ -6,21 +6,21 @@
 
 - content_for :breadcrumb
   ol.breadcrumb.white
-    li = link_to "#{@destination.state.name}", @destination.state
+    li = link_to "#{@destination.state.name} Camping", @destination.state
     li.active = @destination.name
 
 - content_for :heading
   .headline
     h1.heading.guide-heading.col-md-12
-      | #{@destination.name} campsites
+      | Campgrounds near #{@destination.name}
       small 
         small.hashtag  &nbsp;##{@destination.hashtag}&nbsp;
       small
         small
             span.glyphicon.glyphicon-info-sign.extra-subtle.add-tooltip  data-toggle="tooltip" data-placement="right" title="Tag your Twitter & Facebook posts with ##{@destination.hashtag} Why?  Because it'll make them awesomer."
   ul.nav.nav-tabs.guide-tabs
-    li = link_to @destination.name, @destination
-    li.active = link_to "Campsites near #{@destination.name}", browse_destination_path(id:@destination)
+    li = link_to "Camping near #{@destination.name} #{@destination.state.abbreviation}", @destination
+    li.active = link_to "All Campgrounds near #{@destination.name} #{@destination.state.abbreviation}", browse_destination_path(id:@destination)
 
   = render 'layouts/guide/browseFilter', place:@destination, campsites:@campsites
         
@@ -38,7 +38,7 @@
       <div data-no-turbolink>
         a itemprop='map' href=search_campsites_path(keywords:"#{@destination.latitude}, #{@destination.longitude}", distance:@searchRadius, zoom:10) rel="nofollow"
           span.glyphicon.glyphicon-zoom-in
-          | Explore map of all #{@destination.name} camping places
+          | Explore map of all #{@destination.name} campgrounds
       </div>
 
 - content_for :end

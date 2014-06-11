@@ -1,9 +1,6 @@
 / takes a place:@state (or @city or whatever)
 
-- if place.description.blank?
-  small 
-    strong.extra-subtle Description:&nbsp;
-    | #{place.name} in #{place.state.name} has #{pluralize(place.campsites.size, 'places')} to camp inside the city.  
+- if place.description.blank? 
 - else
   p.col-md-12
     small 
@@ -21,5 +18,5 @@ p.col-md-12
     <div data-no-turbolink>
       a itemprop='map' href=search_campsites_path(keywords:"#{place.latitude}, #{place.longitude}", distance:search_distance, zoom:search_zoom) rel="nofollow"
         span.glyphicon.glyphicon-zoom-in
-        | Explore map of all #{place.name} camping places
+        | Explore map of all #{place.name} campgrounds
     </div>

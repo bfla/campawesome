@@ -4,7 +4,7 @@ class Campsite < ActiveRecord::Base
   # res_phone:string, camp_phone:string, res_url:string, camp_url:string, 
   # reservable:boolean, walkin:boolean
   belongs_to :state
-  belongs_to :city
+  belongs_to :city, counter_cache: :campsites_count
   
   has_many :beens, as: :beenable, dependent: :destroy
   has_many :wants, as: :wantable, dependent: :destroy

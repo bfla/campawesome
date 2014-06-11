@@ -9,18 +9,19 @@
 - content_for :heading
   .headline
     h1.heading.guide-heading.col-md-12
-      | #{@state.name} Cities with Camping
+      | #{@state.name} Cities with Campgrounds
   ul.nav.nav-tabs.guide-tabs
     li = link_to "#{@state.name} home", @state
     li = link_to 'Camping destinations', browse_destinations_states_path(id:@state)
-    li.active = link_to 'Cities with campsites', browse_cities_states_path(id:@state)
+    li.active = link_to 'Cities with campgrounds', browse_cities_states_path(id:@state)
 
   - content_for :top_left
-    p.col-md-10.col-md-offset-1.lead 
-      small Click a link below to see the camping guide for the city.
+    p.col-md-10.col-md-offset-1.subtle-text 
+      | (Click a link to see campgrounds & camping info for any city in #{@state.abbreviation}.)
     p.col-md-10.col-md-offset-1
       - @state.cities.order('name').each_with_index do |city, index|
-        = link_to "#{city.name} campgrounds #{city.campsites.size}", city_path(city)
+        = link_to "#{city.name} campgrounds", city_path(city)
+        span.subtle-text = " (#{city.campsites.size})"
         br
   - content_for :top_right
     .col-md-12

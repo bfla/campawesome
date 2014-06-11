@@ -1,7 +1,7 @@
 / Needs a place like place:@city and campsites like campsites:@city.campsites
 .row
   p.lead.col-md-12 
-    | Top campsites near #{place.name}
+    | Top campgrounds near #{place.name}
     small.pull-right
       small
         = link_to ' see all', browse_destination_path(id:place)
@@ -13,7 +13,7 @@
         li = link_to campsite.name, campsite
 .row
   p.lead.col-md-12.pad-top-lg
-    | Best rustic camping near #{place.name}
+    | Best rustic campgrounds near #{place.name}
     small.pull-right
       small
         = link_to ' see all', browse_destination_path(id:place, tribe_id:1)
@@ -47,7 +47,7 @@
         = render "layouts/guide/blankFeaturedSet", place:place, tribe:@tribes.find(2)
 .row
   p.lead.col-md-12.pad-top-lg
-    | Best backcountry campsites near #{place.name}
+    | Best backcountry camping near #{place.name}
     small.pull-right
       small
         = link_to ' see all', browse_destination_path(id:place, tribe_id:3)

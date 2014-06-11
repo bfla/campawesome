@@ -1,27 +1,28 @@
 - content_for :head
   title Camping near #{@destination.name} | CampHero
   meta name="keywords" content="Camping near #{@destination.name} in #{@destination.state.abbreviation}, campsites near #{@destination}, campgrounds, places to camp in #{@destination}, RV Parks, backcountry camping, rustic camping, tent camping, camping sites, camp sites, tourism, travel, reviews, CampHero, Camp Hero"
-  meta name="description" content="Places to camp near #{@destination.name} in #{@destination.state.abbreviation}. CampHero has maps and listings of virtually all of the rustic campsites, RV Parks, backcountry camping areas, modern campsites, and equestrian camping near #{@destination.name}. CampHero also has camping reviews, photos, area guides, & more."
-  script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB9mHzeQJxtkMkn_UkKAOs00Hkg2Y9qKds&sensor=false"
+  meta name="description" content="Campgrounds near #{@destination.name} in #{@destination.state.abbreviation}. CampHero has maps and listings of virtually all state and federal campgrounds, including rustic campsites, RV Parks, backcountry camping areas, modern campsites, and equestrian camping near #{@destination.name}. CampHero also has camping reviews, photos, area guides, & more."
   link rel="canonical" href=destination_url(@destination)
+  script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB9mHzeQJxtkMkn_UkKAOs00Hkg2Y9qKds&sensor=false"
+  
 
 - content_for :breadcrumb
   ol.breadcrumb.white
-    li = link_to "#{@destination.state.name} camping", @destination.state
-    li.active = @destination.name+' camping'
+    li = link_to "#{@destination.state.name} Camping", @destination.state
+    li.active = @destination.name+' Camping'
 
   - content_for :heading
     .headline
       h1.heading.guide-heading.col-md-12
-        | #{@destination.name} camping
+        | Camping near #{@destination.name}
         small 
           small.hashtag  &nbsp;##{@destination.hashtag}&nbsp;
         small
           small
               span.glyphicon.glyphicon-info-sign.extra-subtle.add-tooltip  data-toggle="tooltip" data-placement="right" title="Tag your Twitter & Facebook posts with ##{@destination.hashtag} Why?  Because it'll make them awesomer."
     ul.nav.nav-tabs.guide-tabs
-      li.active = link_to @destination.name, @destination
-      li = link_to "Campsites near #{@destination.name}", browse_destination_path(@destination)
+      li.active = link_to "Camping near #{@destination.name} #{@destination.state.abbreviation}", @destination
+      li = link_to "All Campgrounds near #{@destination.name} #{@destination.state.abbreviation}", browse_destination_path(@destination)
 
   - content_for :top_left
     = render 'layouts/guide/topLeft', place:@destination

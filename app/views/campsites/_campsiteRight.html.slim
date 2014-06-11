@@ -64,7 +64,7 @@
 - if @recommended.blank?
   p
     a.btn.btn-warning.btn-xs data-target="#signupModal" data-toggle="modal" rel="nofollow" Sign up 
-    span.subtle-text  and see which camping sites near #{@campsite.name} are recommended for you.
+    span.subtle-text  and see which campgrounds near #{@campsite.name} are recommended for you.
 - else
   .row
     .col-md-12
@@ -74,7 +74,7 @@
       - if user_signed_in?
         - if current_user.tribe.blank?
           a.btn.btn-warning.btn-sm.homeTribesButton href=new_tribal_membership_path Join a tribe
-          span.subtle-text  and see which camping sites near #{@campsite.name} are recommended for you.
+          span.subtle-text  and see which campgrounds near #{@campsite.name} are recommended for you.
         - else
           - @recommended.each do |nearby_campsite|
             = link_to nearby_campsite.name, nearby_campsite, class:"recommendedLinkTracker"
