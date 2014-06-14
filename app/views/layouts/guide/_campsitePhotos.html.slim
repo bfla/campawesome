@@ -9,6 +9,8 @@
         - if !@photo_license.nil?
           p.subtle-text 
             small = @photo_license
+            br
+            small This photo was obtained from Google.  If the photo looks wrong, it probably is!
       - else
         = image_tag '/images/dummies/blankPhoto.jpg', class:'img img-thumbnail img-responsive'
   - else

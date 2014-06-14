@@ -56,4 +56,10 @@ class PagesController < ApplicationController
   def advertisers
   end
 
+  def support
+  end
+
+  def contact
+  end
+
 end
