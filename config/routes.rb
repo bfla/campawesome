@@ -112,7 +112,6 @@ Blog::Application.routes.draw do
   get :smallbiz, to:'pages#smallbiz', as: 'smallbiz'
   get :advertisers, to:'pages#advertisers', as:'advertisers'
   get :support, to:'pages#support', as:'support'
-  get :contact, to:'pages#contact', as:'contact'
 
   # Devise sign_out needs a special path because OmniAuth is now included:
   #devise_scope :user do
