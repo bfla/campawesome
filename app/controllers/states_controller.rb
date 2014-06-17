@@ -20,7 +20,7 @@ class StatesController < ApplicationController
 
   def browse_campgrounds
     @state = State.friendly.find(params[:id])
-    @campsites = @state.campsites.page(params[:page]).per(15)
+    @campsites = @state.campsites.order('name').page(params[:page]).per(15)
     render(layout: "layouts/guide")
   end
 

@@ -1,7 +1,6 @@
 - content_for :head
   title All #{@state.name} Campgrounds
   meta name="description" content="All public campgrounds in #{@state.name} are listed here. Browse the list or, if you prefer, search for Michigan campgrounds on CampHero's interactive map."
-  link rel="canonical" href=state_url(@state)
 
 - content_for :breadcrumb
   ol.breadcrumb.white
@@ -10,7 +9,7 @@
 - content_for :heading
   .headline
     h1.heading.guide-heading.col-md-12
-      | #{@state.name} Cities with Campgrounds
+      | All #{@state.name} Campgrounds
   ul.nav.nav-tabs.guide-tabs
     li = link_to "#{@state.name} home", @state
     li = link_to 'Camping destinations', browse_destinations_states_path(id:@state)
