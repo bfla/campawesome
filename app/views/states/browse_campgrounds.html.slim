@@ -1,0 +1,37 @@
+- content_for :head
+  title All #{@state.name} Campgrounds
+  meta name="description" content="All public campgrounds in #{@state.name} are listed here. Browse the list or, if you prefer, search for Michigan campgrounds on CampHero's interactive map."
+  link rel="canonical" href=state_url(@state)
+
+- content_for :breadcrumb
+  ol.breadcrumb.white
+    li.active = @state.name+' Camping'
+
+- content_for :heading
+  .headline
+    h1.heading.guide-heading.col-md-12
+      | #{@state.name} Cities with Campgrounds
+  ul.nav.nav-tabs.guide-tabs
+    li = link_to "#{@state.name} home", @state
+    li = link_to 'Camping destinations', browse_destinations_states_path(id:@state)
+    li = link_to 'Cities with campgrounds', browse_cities_states_path(id:@state)
+    li.active = link_to "All #{@state.abbreviation} Campgrounds", browse_campgrounds_states_path(id:@state)
+
+- content_for :top_left
+  - @campsites.each do |campsite|
+    = render 'layouts/guide/browseResult', campsite:campsite
+      br
+  .text-center
+    = paginate @campsites
+- content_for :top_right
+  .col-md-12
+    a.thumbnail href=search_campsites_path(keywords:"#{@state.latitude}, #{@state.longitude}", distance:500, zoom:6) rel="nofollow"
+      /#thumbMap style="height:150px; padding:0px; margin:0px;"
+      img src="http://maps.googleapis.com/maps/api/staticmap?center=#{@state.latitude}%2C+#{@state.longitude}&zoom=#{@state.zoom}&size=600x300&maptype=roadmap&sensor=false"
+  p.col-md-12
+    small
+      <div data-no-turbolink>
+        a itemprop='map' href=search_campsites_path(keywords:"#{@state.latitude}, #{@state.longitude}", distance:500, zoom:6) rel="nofollow"
+          span.glyphicon.glyphicon-zoom-in
+          | Explore map of all #{@state.name} campgrounds
+      </div>

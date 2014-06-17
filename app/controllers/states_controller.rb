@@ -18,6 +18,12 @@ class StatesController < ApplicationController
     render(layout: "layouts/guide")
   end
 
+  def browse_campgrounds
+    @state = State.friendly.find(params[:id])
+    @campsites = @state.campsites.page(params[:page]).per(15)
+    render(layout: "layouts/guide")
+  end
+
   # GET /states/1
   # GET /states/1.json
   def show

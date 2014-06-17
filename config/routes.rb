@@ -71,6 +71,7 @@ Blog::Application.routes.draw do
     collection do
       get 'browse_destinations'
       get 'browse_cities'
+      get 'browse_campgrounds'
     end
   end
 

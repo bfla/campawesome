@@ -52,6 +52,9 @@ gem 'merit'
 # Geocoding
 gem 'geocoder'
 
+# Pagination
+gem 'kaminari'
+
 # Image attachments
 gem "paperclip", "~> 3.0"
 
