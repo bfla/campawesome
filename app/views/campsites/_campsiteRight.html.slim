@@ -62,6 +62,8 @@
           li = fee.description
 / Personalized recommendations =====================================
 - if @recommended.blank?
+  hr
+  h4 Recommended nearby
   p
     a.btn.btn-warning.btn-xs data-target="#signupModal" data-toggle="modal" rel="nofollow" Sign up 
     span.subtle-text  and see which campgrounds near #{@campsite.name} are recommended for you.
@@ -69,8 +71,7 @@
   .row
     .col-md-12
       hr
-      h4 
-        | Recommended nearby
+      h4 Recommended nearby
       - if user_signed_in?
         - if current_user.tribe.blank?
           a.btn.btn-warning.btn-sm.homeTribesButton href=new_tribal_membership_path Join a tribe

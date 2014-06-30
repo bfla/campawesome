@@ -41,6 +41,7 @@
               a.reveal-nonsocial-in-signin-modal.col-md-12 Sign in without a social network
               br
               = link_to "Are you new?  Sign up.", new_registration_path(:user), class:'col-md-12', rel:"nofollow"
+              br
 
             /.row style="display:none;"
               .nonsocial-content
@@ -56,9 +57,6 @@
                   button.btn.btn-success type="submit" Sign in
                 br
 
-      .modal-footer
-        .text-center
-          button.btn.btn-default type="button" data-dismiss="modal" Close
 javascript:
   /*$('.nextAction').click( function () {
     nextAction = $(this).data('next');

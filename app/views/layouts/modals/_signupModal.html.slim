@@ -46,6 +46,7 @@
               a.reveal-nonsocial-in-signup-modal.col-md-12 Sign up without a social network
               br
               = link_to "Already have an account?  Sign in.", new_session_path(:user), class:'col-md-12'
+              br
 
             /.row style="display:none;"
               .nonsocial-signup-content
@@ -63,11 +64,6 @@
                   .col-md-2
                     button.btn.btn-success.btn-sm type="submit" Sign up
                 br
-                hr
-
-      .modal-footer
-        .text-center
-          button.btn.btn-default type="button" data-dismiss="modal" Close
 
 javascript:
   /*$('.nextAction').click( function () {

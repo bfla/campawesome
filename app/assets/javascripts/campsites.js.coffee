@@ -90,7 +90,7 @@ $ -> # Hide loading icons
 $ -> #When "Save button" is clicked, save the campsite id to the list Modal
   $('.listBtnTracker').click ->
     campsiteToSave = $(this).data("campsite")
-    alert("This button has campsite data:" + campsiteToSave)
+    #alert("This button has campsite data:" + campsiteToSave)
     $('.campsite-to-save').val(campsiteToSave)
 
 # Handle adding and removing campsites to a list using ajax.
@@ -114,7 +114,7 @@ $ ->
           return false
         error:(data) ->
           #alert('Oh snap!  Something went wrong.')
-          alert "Dastardly glitches!  Your request could not be processed. Please forgive me. I'm new to this superhero thing."
+          alert "Dastardly glitches!  Your request could not be processed. Please forgive me. I'm new to this superhero thing. This should be fixed soon."
           checkBox.parents('.add-to-list-par').find('.listed-post-loading').hide() # Hide load icon
           checkBox.prop("checked", false) # Uncheck the box
           checkBox.show()

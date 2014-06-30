@@ -12,6 +12,7 @@ $grassyGreen: rgb(71, 164, 71);
 $seaGreen: rgb(72,144,72);
 $darkCyan: rgb(0,143,170);
 $foursquareBackground: rgb(234, 232, 228);
+$grey: #474747;
 $lightGray: #b2b2b2;
 $extraLightGray: #E1E1E1;
 $orange: rgb(255,136,51);
@@ -51,9 +52,11 @@ $brandFont: 'Monda';
 
 .subtle-text {    color: $lightGray; }
 
-.white-text {     color: #ffffff; }
+.white-text {     color: $grey; }
 
 .extra-subtle {   color: $lightGray; }
+
+.grey-text { color: #474747; }
 
 .hashtag {        color: $hashtagColor; }
 

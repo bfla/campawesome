@@ -1,7 +1,7 @@
 - if user_signed_in?  
   .btn-group
     - if campsite.beens.find_by_user_id(current_user).blank?
-      = link_to beens_path(campsite_id:campsite.id), method: :post, class:'btn btn-default btn-xs subtle-text enable-command-toggle beenBtnTracker', remote:true do
+      = link_to beens_path(campsite_id:campsite.id), method: :post, class:'btn btn-default btn-xs grey-text enable-command-toggle beenBtnTracker', remote:true do
         span.glyphicon.glyphicon-ok
         |  Been here
     - else 
@@ -10,7 +10,7 @@
         span.glyphicon.glyphicon-ok.greenify
         |  Been here
     - if campsite.wants.find_by_user_id(current_user).blank?
-      = link_to wants_path(campsite_id:campsite.id), method: :post, class:'btn btn-default btn-xs subtle-text enable-command-toggle wantBtnTracker', remote:true do
+      = link_to wants_path(campsite_id:campsite.id), method: :post, class:'btn btn-default btn-xs grey-text enable-command-toggle wantBtnTracker', remote:true do
         span.glyphicon.glyphicon-plus-sign
         |  Want to go
     - else
@@ -21,7 +21,7 @@
 
     .btn-group
       //button.btn.btn-default.btn-xs.dropdown-toggle.subtle-text.listBtnTracker data-toggle="dropdown" type="button"
-      button.btn.btn-default.btn-xs.subtle-text.listBtnTracker type="button" data-toggle="modal" data-target="#saveToListModal" data-campsite=campsite.id
+      button.btn.btn-default.btn-xs.grey-text.listBtnTracker type="button" data-toggle="modal" data-target="#saveToListModal" data-campsite=campsite.id
         span.glyphicon.glyphicon-bookmark
         |  Save
       //ul.dropdown-menu id="listDropdown#{campsite.id}" role="menu" aria-labelledby="dropdownMenu#{campsite.id}"
@@ -40,23 +40,23 @@
           /a href="#" data-toggle='modal' data-target='#newListModal' Create new list
         li =link_to 'Manage lists', management_lists_path
 
-    a#reviewModal.btn.btn-default.btn-xs.subtle-text.reviewBtnTracker href="#" data-toggle='modal' data-target='##{campsite.id}' rel="nofollow"
+    a#reviewModal.btn.btn-default.btn-xs.grey-text.reviewBtnTracker href="#" data-toggle='modal' data-target='##{campsite.id}' rel="nofollow"
       span.glyphicon.glyphicon-star
       |  Review it
 
 
 - else
   a.btn-group href="#" data-toggle="modal" data-target="#signupModal" rel="nofollow"
-    button.btn.btn-default.btn-xs.subtle-text.beenBtnTracker
+    button.btn.btn-default.btn-xs.grey-text.beenBtnTracker
       span.glyphicon.glyphicon-ok
       |  Been here
-    button.btn.btn-default.btn-xs.subtle-text.wantBtnTracker
+    button.btn.btn-default.btn-xs.grey-text.wantBtnTracker
       span.glyphicon.glyphicon-plus-sign
       |  Want to go
-    button.btn.btn-default.btn-xs.subtle-text.listBtnTracker
+    button.btn.btn-default.btn-xs.grey-text.listBtnTracker
       span.glyphicon.glyphicon-bookmark
       |  Save
-    button.btn.btn-default.btn-xs.subtle-text.reviewBtnTracker
+    button.btn.btn-default.btn-xs.grey-text.reviewBtnTracker
       span.glyphicon.glyphicon-star
       |  Review it
 
