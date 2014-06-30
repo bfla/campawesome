@@ -20,17 +20,18 @@ class User < ActiveRecord::Base
   has_many :activities
 
   def self.find_for_facebook_oauth(auth)
+    puts "Running find_for_facebook_oauth..."
     where(auth.slice(:provider, :uid)).first_or_initialize.tap do |user|
       user.provider = auth.provider
       user.uid = auth.uid
       user.email = auth.info.email
       user.password = Devise.friendly_token[0,20]
-      user.first_name = auth.info.first_name
-      user.last_name = auth.info.last_name
-      user.location = auth.info.location #from Facebook data
+      user.first_name = auth.info.first_name if auth.info.first_name.present?
+      user.last_name = auth.info.last_name if auth.info.last_name.present?
+      user.location = auth.info.location if auth.info.location.present? #from Facebook data
       user.fb_id = auth.uid
       user.fb_token = auth['credentials']['token']
-      if user.state_id.blank?
+      if user.state_id.blank? && auth.info.location.present?
         parsed_location = user.location.split(', ') #try to split the location string into ["CITY", "STATE"]
         unless State.find_by_name(parsed_location[1]).blank?
           user.state_id = State.find_by_name(parsed_location[1]).id

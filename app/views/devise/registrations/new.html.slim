@@ -6,6 +6,21 @@
     .col-md-8.col-md-offset-2.background.pad-top-lg
       .well.white
         .row
+          - if notice
+            .panel.panel-success
+              .panel-heading 
+                | Notice
+                #panelClose.button.close type="button" data-dismiss="panel" aria-hidden="true" &times;
+              .panel-body
+                p#notice = notice
+          - if alert
+            .panel.panel-danger
+              .panel-heading 
+                | Alert
+                #panelClose.button.close type="button" data-dismiss="panel" aria-hidden="true" &times;
+              .panel-body
+                p#errors = alert
+          .panel.panel-heading
           h1.heading.col-md-12.text-center 
             | Sign Up
             hr

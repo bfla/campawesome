@@ -5,13 +5,13 @@
         button.close type="button" data-dismiss="modal" aria-hidden="true" &times
         h4#signinModalTitle.modal-title.text-center 
           | Sign In
-      .modal-body
+      /.modal-body
         .panel.panel-danger
           .panel-heading 
             h4.text-center Uh oh!  My glitch sense is tingling!
           p.panel-body Sign up is temporarily disabled due to a dastardly error that was affecting some users.  CampHero's sidekicks will soon restore order and vanquish this evil.  (You can still find campsites on CampHero - you just won't be able to save any favorites or add any reviews right now.)
 
-      /.modal-body
+      .modal-body
         / Form needs to go here
         = form_tag session_path(:user) do
           .text-center

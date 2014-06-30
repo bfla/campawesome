@@ -92,7 +92,7 @@ class CampsitesController < ApplicationController
   def contrib
     @campsites = Campsite.name_search(params[:keywords])
     @campsites = Campsite.near( Geocoder.coordinates(params[:keywords])) if @campsites.blank?
-    @previous_url = session[:previous_url]
+    @previous_url = session[:previous_url] || home_path
   end
   
   def activities

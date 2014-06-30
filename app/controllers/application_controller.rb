@@ -12,12 +12,18 @@ class ApplicationController < ActionController::Base
         request.fullpath != "/users/password" &&
         request.fullpath != "/users/sign_out" &&
         request.fullpath != "/users/" &&
+        !(request.fullpath.include? "callback") &&
+        !(request.fullpath.include? "json") &&
+        request.fullpath != new_registration_path(:user) &&
+        request.fullpath != new_session_path(:user) &&
         request.fullpath != photos_path &&
-        request.fullpath !=  new_tribal_membership_path && #"/tribal_memberships/new"
-        request.fullpath !=  tribal_memberships_path &&
+        request.fullpath != new_tribal_membership_path && #"/tribal_memberships/new"
+        request.fullpath != tribal_memberships_path &&
         request.fullpath != contrib_campsites_path &&
         !request.xhr?) # don't store ajax calls
       session[:previous_url] = request.fullpath
+    else
+      session[:previous_url] = home_path if session[:previous_url].blank?
     end
   end
   def store_token
@@ -25,14 +31,14 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_in_path_for(resource)
-    session[:previous_url] || root_path
+    session[:previous_url]
   end
   #def after_sign_up_path_for(resource)
     #session[:previous_url] = new_tribal_membership_path
     #session[:previous_url] || root_path
   #end
   def after_sign_out_path_for(resource)
-    session[:previous_url] || root_path
+    session[:previous_url]
   end
 
 end
