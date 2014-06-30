@@ -26,17 +26,24 @@ class ListedsController < ApplicationController
   # POST /listeds.json
   def create
     campsite = Campsite.find(params[:campsite_id])
-    # check that the list item doesn't already exist and check that the user owns the list
-    if Listed.find_by(list_id:params[:list_id], listable_id:campsite.id, listable_type:'Campsite').blank? && !current_user.lists.find(params[:list_id]).blank?
-      #if campsite.listeds.find_by(list_id:params[:list_id]).blank? && !current_user.lists.find_by(list_id:params[:list_id]).blank?
-      @listed = campsite.listeds.create(list_id:params[:list_id])
+    if user_signed_in? && current_user.lists.find(params[:list_id]).present? #verify ownership
+      unless campsite.listeds.present? && campsite.listeds.where(list_id:params[:list_id]).present?
+        #Listed.find_by(list_id:params[:list_id], listable_id:campsite.id, listable_type:'Campsite').blank?
+        # if it passes these hurdles, create the list
+        #if campsite.listeds.find_by(list_id:params[:list_id]).blank? && !current_user.lists.find_by(list_id:params[:list_id]).blank?
+        @listed = campsite.listeds.create(list_id:params[:list_id])
+      else
+        @listed = campsite.listeds.find_by(list_id:params[:list_id])
+      end
     end
 
     respond_to do |format|
       if @listed.save
+        puts "Campsite was added to list"
         format.html { redirect_to session[:previous_url], notice: 'Listed was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @listed }
+        format.json { render json: {message:"Created successfully"} }
       else
+        puts "Campsite was not added to list"
         format.html { render action: 'new' }
         format.json { render json: @listed.errors, status: :unprocessable_entity }
       end
@@ -54,6 +61,34 @@ class ListedsController < ApplicationController
         format.html { render action: 'edit' }
         format.json { render json: @listed.errors, status: :unprocessable_entity }
       end
+    end
+  end
+
+  def ajax_destroy
+    @list = List.find(params[:list_id])
+    puts "Got list (to remove the listed from)..."
+    if user_signed_in? && @list.user == current_user #verify ownership
+      puts "Verified ownership of listed..."
+      
+      @campsite = Campsite.includes(:listeds).find(params[:campsite_id])
+      @listed = @campsite.listeds.where(list_id:params[:list_id]).first
+      if @listed.present?
+        puts "Found list item object..."
+        @listed.destroy
+        puts "Destroyed list item..."
+
+        respond_to do |format|
+          puts "Sending JSON response..."
+          format.json { render json: {message:"Campsite was removed from list"} }
+        end
+      else
+        puts "Could not find list item object to destroy..."
+        respond_to do |format|
+          puts "Sending JSON response..."
+          format.json { render json: {message:"Campsite not removed"} }
+        end
+      end
+      
     end
   end
 

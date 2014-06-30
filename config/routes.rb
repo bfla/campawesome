@@ -37,7 +37,11 @@ Blog::Application.routes.draw do
   # Saved places: lists, beens, etc
   resources :beens
   resources :wants
-  resources :listeds
+  resources :listeds do
+    collection do
+      delete 'ajax_destroy'
+    end
+  end
   resources :lists do
     collection do
       get 'management'

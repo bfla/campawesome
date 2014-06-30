@@ -10,7 +10,6 @@
 #$(document).ready ->
   #makeCampsiteMap(gon.initCenter, 9, gon.geoJson)  #initialize map with gon data
 
-
 # Campsite show.html scripts =================================
 @makeCampsiteMap = (center, zoom, geoJson) ->
   map = L.mapbox.map("campsiteMap", "campawesome.h5d0p7ea").setView(center, zoom) # initialize the map
@@ -82,3 +81,63 @@
 
 @changeTribeFilter = (filterId) ->
   $("#activeTribeId").val(filterId)
+
+# CAMPSITE "ADD TO LIST" MODAL ======================================================================================
+$ -> # Hide loading icons
+  $('.listed-post-loading').hide() 
+
+
+$ -> #When "Save button" is clicked, save the campsite id to the list Modal
+  $('.listBtnTracker').click ->
+    campsiteToSave = $(this).data("campsite")
+    alert("This button has campsite data:" + campsiteToSave)
+    $('.campsite-to-save').val(campsiteToSave)
+
+# Handle adding and removing campsites to a list using ajax.
+$ ->
+  $(".listCheckbox").click ->
+    checkBox = $(this)
+    checkBox.parents('.add-to-list-par').find('.listed-post-loading').show()
+    checkBox.hide()
+    if checkBox.prop("checked") is true
+      # Ensure this campsite is added to the list
+      $.ajax({
+        type: "POST",
+        url: "/listeds",
+        data: { list_id: $(this).data("list-id"), campsite_id: $(".campsite-to-save").val() },
+        success:(data) ->
+          #alert(data.id)
+          checkBox.parents('.add-to-list-par').find('.listed-post-loading').hide() # Hide load icon
+          checkBox.prop("checked", true) # Check the box
+          checkBox.parents('.add-to-list-par').find('.list-add-feedback').text(' (added)')
+          checkBox.show()
+          return false
+        error:(data) ->
+          #alert('Oh snap!  Something went wrong.')
+          alert "Dastardly glitches!  Your request could not be processed. Please forgive me. I'm new to this superhero thing."
+          checkBox.parents('.add-to-list-par').find('.listed-post-loading').hide() # Hide load icon
+          checkBox.prop("checked", false) # Uncheck the box
+          checkBox.show()
+          return false
+      })
+    else
+      # Remove this campsite from the list
+      $.ajax({
+        type: "DELETE",
+        url: "/listeds/ajax_destroy",
+        data: { list_id: $(this).data("list-id"), campsite_id: $(".campsite-to-save").val() },
+        success:(data) ->
+          #alert(data.id)
+          checkBox.parents('.add-to-list-par').find('.listed-post-loading').hide() # Hide load icon
+          checkBox.prop("checked", false) # Uncheck the box
+          checkBox.parents('.add-to-list-par').find('.list-add-feedback').text(' (removed)')
+          checkBox.show()
+          return false
+        error:(data) ->
+          #alert('Oh snap!  Something went wrong.')
+          checkBox.parents('.add-to-list-par').find('.listed-post-loading').hide() # Hide load icon
+          checkBox.prop("checked", true) # Recheck the box
+          checkBox.show()
+          alert "Dastardly glitches!  Your request could not be processed. Please forgive me. I'm new to this superhero thing."
+          return false
+      })
