@@ -18,6 +18,8 @@ class User < ActiveRecord::Base
   has_many :ratings, dependent: :destroy
   has_many :reviews, dependent: :destroy
   has_many :activities
+  
+  after_create :create_favorites_list
 
   def self.find_for_facebook_oauth(auth)
     puts "Running find_for_facebook_oauth..."
@@ -73,5 +75,8 @@ class User < ActiveRecord::Base
       self.likes_me = true
       self.save
     end
+  end
+  def create_favorites_list
+    List.create(user_id:self.id, name:"Favorites") 
   end
 end

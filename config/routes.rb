@@ -107,7 +107,8 @@ Blog::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   #root 'welcome#index'
-  root to: 'pages#home', as: 'home'
+  root to: 'pages#home'
+  get :home, to:'pages#home', as: 'home'
   get :reasons, to:'pages#reasons', as:'reasons'
   get :terms, to:'pages#terms', as: 'terms'
   get :privacy, to:'pages#privacy', as: 'privacy'

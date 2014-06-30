@@ -25,14 +25,29 @@
                   p
                     = check_box_tag 'user[remember_me]'
                     |  remember me
-            hr
-            .nonsocial-signup-container.form-inline
+            /hr
+            /.nonsocial-signup-container.form-inline
+            .row.nonsocial-signup-modal-content.invisible    
+              .col-md-12
+                .form-group.col-md-4
+                  = hidden_field_tag params[:next_url], nil, class:'next-url'
+                  = label_tag 'user[email]', nil, class: "control-label sr-only"
+                  = email_field_tag 'user[email]', nil, class: "form-control input-sm", placeholder:'your email'
+                .form-group.col-md-3
+                  = label_tag 'user[password]', nil, class: "control-label sr-only"
+                  = password_field_tag 'user[password]', nil, class: "form-control input-sm", placeholder:'password'
+                .form-group.col-md-3
+                  = label_tag 'user[password_confirmation]', nil, class: "control-label sr-only"
+                  = password_field_tag 'user[password_confirmation]', nil, class: "form-control input-sm", placeholder:'password again'
+                .col-md-2
+                  button.btn.btn-success.btn-sm type="submit" Sign up
+              br
             small
-              a.reveal-nonsocial-signup.col-md-12 Sign up without a social network
+              a.reveal-nonsocial-in-signup-modal.col-md-12 Sign up without a social network
               br
               = link_to "Already have an account?  Sign in.", new_session_path(:user), class:'col-md-12'
 
-            .row style="display:none;"
+            /.row style="display:none;"
               .nonsocial-signup-content
                 .col-md-12
                   .form-group.col-md-3
@@ -50,12 +65,16 @@
                 br
                 hr
 
+      .modal-footer
+        .text-center
+          button.btn.btn-default type="button" data-dismiss="modal" Close
+
 javascript:
-  $('.nextAction').click( function () {
+  /*$('.nextAction').click( function () {
     nextAction = $(this).data('next-url');
     $('.next-url').val(nextAction);
   });
   $('.reveal-nonsocial-signup').click( function() {
     $('.reveal-nonsocial-signup').hide();
     $('.nonsocial-signup-container').append( $('.nonsocial-signup-content') );
-  });
+  });*/

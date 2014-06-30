@@ -40,7 +40,7 @@ class ListedsController < ApplicationController
     respond_to do |format|
       if @listed.save
         puts "Campsite was added to list"
-        format.html { redirect_to session[:previous_url], notice: 'Listed was successfully created.' }
+        format.html { redirect_to session[:previous_url], notice: 'List item was successfully created.' }
         format.json { render json: {message:"Created successfully"} }
       else
         puts "Campsite was not added to list"
@@ -55,7 +55,7 @@ class ListedsController < ApplicationController
   def update
     respond_to do |format|
       if @listed.update(listed_params)
-        format.html { redirect_to session[:previous_url], notice: 'Listed was successfully updated.' }
+        format.html { redirect_to session[:previous_url], notice: 'List item was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }

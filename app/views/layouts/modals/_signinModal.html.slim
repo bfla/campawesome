@@ -25,14 +25,24 @@
                   p
                     = check_box_tag 'user[remember_me]'
                     |  remember me
-            hr
-            .nonsocial-signin.form-inline
+            /hr
+            .row.nonsocial-signin-modal-content.form-inline.invisible
+                .form-group.col-md-4.col-md-offset-1
+                  = hidden_field_tag params[:next_action], nil, id:'next-action'
+                  = label_tag 'user[email]', nil, class: "control-label sr-only"
+                  = email_field_tag 'user[email]', nil, class: "form-control", placeholder:'your email'
+                .form-group.col-md-4
+                  = label_tag 'user[password]', nil, class: "control-label sr-only"
+                  = password_field_tag 'user[password]', nil, class: "form-control", placeholder:'your password'
+                .col-md-2
+                  button.btn.btn-success type="submit" Sign in
+                br
             small
-              a.reveal-nonsocial.col-md-12 Sign in without a social network
+              a.reveal-nonsocial-in-signin-modal.col-md-12 Sign in without a social network
               br
               = link_to "Are you new?  Sign up.", new_registration_path(:user), class:'col-md-12', rel:"nofollow"
 
-            .row style="display:none;"
+            /.row style="display:none;"
               .nonsocial-content
                 hr
                 .form-group.col-md-4.col-md-offset-1
@@ -47,13 +57,14 @@
                 br
 
       .modal-footer
-        button.btn.btn-default type="button" data-dismiss="modal" Close
+        .text-center
+          button.btn.btn-default type="button" data-dismiss="modal" Close
 javascript:
-  $('.nextAction').click( function () {
+  /*$('.nextAction').click( function () {
     nextAction = $(this).data('next');
     $('#next-action-input').val(nextAction);
   });
   $('.reveal-nonsocial').click( function() {
     $('.reveal-nonsocial').hide();
     $('.nonsocial-signin').append( $('.nonsocial-content') );
-  });
+  });*/

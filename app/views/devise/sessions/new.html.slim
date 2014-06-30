@@ -24,12 +24,12 @@
                     |  remember me
             .nonsocial-signin.form-inline
             small
-              a.reveal-nonsocial.col-md-12 Sign in without a social network
+              a.reveal-nonsocial-on-static-page.col-md-12 Sign in without a social network
               br
               = link_to "Are you new?  Sign up.", new_registration_path(resource_name), class:'col-md-12'
 
-            .row.nonsocial-signin style="display:none;"
-              .nonsocial-content
+            /.row.nonsocial-signin-on-static-page style="display:none;"
+            .row.nonsocial-content-on-static-page style="display:none;"
                 hr
                 .form-group.col-md-4.col-md-offset-1
                   = f.label :email, class: "control-label sr-only"
@@ -43,10 +43,9 @@
               
 
   javascript:
-    //$('.nonsocial-signin').hide();
+    /*
     $('.reveal-nonsocial').click( function() {
       $('.reveal-nonsocial').hide();
       $('.nonsocial-signin').show();
-      //$('.nonsocial-signin').append( $('.nonsocial-content') );
-    });
+    });*/
     

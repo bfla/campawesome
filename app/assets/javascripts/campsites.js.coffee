@@ -141,3 +141,10 @@ $ ->
           alert "Dastardly glitches!  Your request could not be processed. Please forgive me. I'm new to this superhero thing."
           return false
       })
+
+$ -> #When the save modal is closed, reset modal to blank state
+  $('#saveToListModal').on 'hidden.bs.modal', (e) ->
+    $('.listCheckbox').val("0")
+    $(".listCheckbox").prop("checked", false)
+    $(".list-add-feedback").text('')
+

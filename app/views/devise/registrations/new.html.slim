@@ -46,12 +46,11 @@
                     |  remember me
             .nonsocial-signin.form-inline
             small
-              a.reveal-nonsocial.col-md-12 Sign up without a social network
+              a.reveal-nonsocial-on-static-page.col-md-12 Sign up without a social network
               br
               = link_to "Already have an account?  Sign in.", new_session_path(resource_name), class:'col-md-12'
 
-            .row.nonsocial-signup style="display:none;"
-              .nonsocial-content
+            .row.nonsocial-signup.nonsocial-content-on-static-page style="display:none;"
                 hr
                 .form-group.col-md-4
                   = f.label :email, class: "control-label sr-only"
@@ -69,9 +68,9 @@
 
   javascript:
     //$('.nonsocial-signin').hide();
-    $('.reveal-nonsocial').click( function() {
+    /*$('.reveal-nonsocial').click( function() {
       $('.reveal-nonsocial').hide();
       $('.nonsocial-signup').show();
-    });
+    });*/
 
       
