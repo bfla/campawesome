@@ -14,12 +14,12 @@
               .rateit
               p
                 small.help-block
-                  | 1 = Awful, 2 = Bad, 3 = Nothing Special, 4 = Good, 5 = Insanely Awesome
+                  | 1 = Awful, 2 = Bad, 3 = Nothing Special, 4 = Great, 5 = Insanely Awesome
           .row
             .col-md-8.col-md-offset-2
               .input-group.col-md-12
                 = text_field_tag :title, params[:title], class:'form-control add-margin-bottom-sm', placeholder: "Optional title for your review"
-                = text_area_tag :body, params[:body], class:'form-control', placeholder:"What should other campers know about your experience?", rows:4
+                = text_area_tag :body, params[:body], class:'form-control', placeholder:"What should other campers know about your experience?", rows:10
           .row
             p.text-center.pad-top-md
               button.btn.btn-default type="button" data-dismiss="modal" Cancel

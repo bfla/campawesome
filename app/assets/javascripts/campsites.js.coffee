@@ -138,7 +138,7 @@ $ ->
           checkBox.parents('.add-to-list-par').find('.listed-post-loading').hide() # Hide load icon
           checkBox.prop("checked", true) # Recheck the box
           checkBox.show()
-          alert "Dastardly glitches!  Your request could not be processed. Please forgive me. I'm new to this superhero thing."
+          alert "Dastardly glitches!  Your request could not be processed. Please forgive me. I'm new to this superhero thing.  If you reload this page, it will usually fix the problem."
           return false
       })
 

@@ -9,7 +9,9 @@
       | Spend your coins here to earn cool rewards.
     hr
 - content_for :left
-  - @products.each do |product|
+  - @products.each_with_index do |product, index|
+    - if index == 0 || index % 2 == 0
+      .row
     .col-md-6
       .thumbnail.pad-top-md
         = image_tag product.image.url(:large), class:"img-responsive"

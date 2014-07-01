@@ -16,7 +16,7 @@
             | Manager's phone: #{number_to_phone(@campsite.camp_phone)}
             br
           - if @campsite.res_url
-            | Reservation url: #{@campsite.res_url}
+            a href="#{@campsite.res_url}" Reserve online 
             br
       .modal-footer
         button.btn.btn-default type="button" data-dismiss="modal" Close

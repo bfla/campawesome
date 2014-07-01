@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy]
-  before_action :admin_only
+  before_action :admin_only, only: [:index, :new, :edit, :create, :update, :destroy]
 
   def rewards
     @products = Product.all
