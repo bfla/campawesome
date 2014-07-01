@@ -1,6 +1,7 @@
 class ListedsController < ApplicationController
   before_action :set_listed, only: [:show, :edit, :update, :destroy]
   before_action :verify_user, only: [:destroy, :update]
+  before_action :admin_only, only: [:index, :show]
 
   # GET /listeds
   # GET /listeds.json
@@ -114,6 +115,9 @@ class ListedsController < ApplicationController
     end
 
     def verify_user
-      redirect_to forbidden_path unless user_signed_in? && @listed.list.user_id == current_user.id
+      redirect_to forbidden_path if !user_signed_in? || @listed.list.user_id != current_user.id
+    end
+    def admin_only
+      redirect_to forbidden_path unless current_user && current_user.is_admin
     end
 end

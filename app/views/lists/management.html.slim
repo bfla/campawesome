@@ -38,7 +38,8 @@
               = link_to listed.listable.name, listed.listable
               small
                 |&nbsp;&nbsp;&nbsp;
-                = link_to 'Remove from list', listed.listable, data: {:confirm => 'Are you sure?'}, :method => :delete, class:"subtle-text"
+                = link_to 'Remove from list', listed, data: {:confirm => 'Are you sure?'}, :method => :delete, class:"subtle-text"
+                /= link_to 'Remove from list', listed.listable, data: {:confirm => 'Are you sure?'}, :method => :delete, class:"subtle-text"
           - if list.listeds.size > 3
             .col-md-10.col-md-offset-2 = link_to "See entire list...", list
 
