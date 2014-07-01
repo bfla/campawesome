@@ -85,7 +85,7 @@
   .row
     .col-md-12
       hr
-      h4 Nearby campsites
+      h4 Nearby campgrounds
       p
         - @nearbys.first(5).each do |nearby_campsite|
           = link_to nearby_campsite.name, nearby_campsite, class:"nearbyLinkTracker"

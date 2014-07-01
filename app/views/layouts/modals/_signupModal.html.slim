@@ -45,7 +45,8 @@
             small
               a.reveal-nonsocial-in-signup-modal.col-md-12 Sign up without a social network
               br
-              = link_to "Already have an account?  Sign in.", new_session_path(:user), class:'col-md-12'
+              a#open-signin-modal.col-md-12 rel="nofollow" Already have an account?  Sign in.
+              /= link_to "Already have an account?  Sign in.", new_session_path(:user), id:"open-signin-modal", class:'col-md-12'
               br
 
             /.row style="display:none;"

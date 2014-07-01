@@ -40,7 +40,9 @@
             small
               a.reveal-nonsocial-in-signin-modal.col-md-12 Sign in without a social network
               br
-              = link_to "Are you new?  Sign up.", new_registration_path(:user), class:'col-md-12', rel:"nofollow"
+              a#open-signup-modal.col-md-12 rel="nofollow" Are you new?  Sign up.
+              /= link_to "Are you new?  Sign up.", "#", id:"open-signup-modal", class:'col-md-12', rel:"nofollow"
+              /= link_to "Are you new?  Sign up.", new_registration_path(:user), id:"open-signup-modal", class:'col-md-12', rel:"nofollow"
               br
 
             /.row style="display:none;"

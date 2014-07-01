@@ -36,3 +36,13 @@ $ -> # Store the "next url" value in the signup/signin form
   $('.nextAction').click ->
     nextAction = $(this).data('next-url')
     $('.next-url').val(nextAction)
+
+# Toggle between signup and signin modals...
+$ ->
+  $('#open-signup-modal').click ->
+    $('#signinModal').modal('hide')
+    $('#signupModal').modal('show')
+$ ->
+  $('#open-signin-modal').click ->
+    $("#signupModal").modal('hide')
+    $("#signinModal").modal('show')

@@ -16,10 +16,7 @@ li.dropdown.hidden-xs
     li = link_to "Places you want to go", wants_path
     li = link_to "Places you've been", beens_path
     li = link_to 'Your lists', management_lists_path
-    li.divider role="presentation"
     li = link_to 'Spend your coins', rewards_products_path
-    li = link_to 'Your photos', photos_path
-    li = link_to 'Your reviews', reviews_path
     li.divider role="presentation"
     li = link_to 'Sign out', destroy_user_session_path, :method => :delete
     - if user_signed_in? && current_user.is_admin
@@ -31,3 +28,5 @@ li.dropdown.hidden-xs
       li = link_to 'Cities', cities_path
       li = link_to 'Tribes', tribes_path
       li = link_to 'Join Tribe', new_tribal_membership_path
+      li = link_to 'Your photos', photos_path
+      li = link_to 'Your reviews', reviews_path
