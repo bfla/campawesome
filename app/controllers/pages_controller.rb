@@ -59,4 +59,9 @@ class PagesController < ApplicationController
   def support
   end
 
+  def mobile_teaser
+    @tribes = Tribe.limit(3)
+    render layout: false
+  end
+
 end

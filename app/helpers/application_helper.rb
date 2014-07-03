@@ -8,4 +8,7 @@ module ApplicationHelper
       place.photos.each {|photo| bool = true unless photo.license_text.blank? }
     end
   end
+  def app_store_url
+    "https://itunes.apple.com/us/app/camphero-michigan-campground/id889639762"
+  end
 end

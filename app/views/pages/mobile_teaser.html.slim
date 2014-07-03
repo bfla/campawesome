@@ -1,0 +1,56 @@
+doctype html
+html.fill-height.white
+  head
+  title CampHero Mobile
+  meta name="keywords" contents="CampHero, iOS, app, Michigan campground finder, camping superpowers"
+  meta name="description" content="Get camping superpowers for your iPhone or iPad by downloading CampHero's free iOS app. No Michigan campground can hide from CampHero.  Virtually all state, federal, private, and local campgrounds are all included.  It includes rustic campgrounds, RV parks, backcountry camping sites, and more."
+  == render 'layouts/headstyles'
+  == render 'layouts/headscripts'
+body.fill-height.white
+  == render 'layouts/modals/standardModals'
+  == render 'layouts/navbar'
+  #wrap.white
+    #mobile-teaser-header alt="An image of CampHero's iOS app. The background depicts camping-like scenery." title="Find Michigan Campgrounds with CampHero's iOS app" style='background-image:url("#{request.protocol}#{request.host_with_port}#{ asset_path "/images/landing/blurred-bg.png"}"); height:500px;'
+      .container
+        .row
+          .col-md-4
+            h1.white-text.promo-heading CampHero for iOS
+            p.lead.white-text Get camping superpowers on your iPhone. For Free. (Only in Michigan.)
+            p.col-md-offset-3
+              a href=app_store_url title="Get the iOS app"
+                = image_tag "/images/icons/AppStoreBadge.png", class:"img"
+          .col-md-offset-2.col-md-5
+            = image_tag "/images/landing/5s-with-iPod.png", class:"img img-responsive pad-top-lg"
+    .container
+      .row.pad-top-lg
+        .col-md-offset-1.col-md-4
+          = image_tag "/images/landing/5s-alone.png"
+        .col-md-offset-1.col-md-4
+          h3 Ultra Vision
+          p No campground can hide from me. I see them all with a database of more than 1000 campgrounds in Michigan -- virtually every campground in the state. I include state, federal, local, and private campgrounds. I include rustic campgrounds, RV parks, backcountry sites, and more. All of them are visible on an easy-to-use map.
+          h3.pad-top-md Super Senses
+          p Want to know which campsites are available right now or next weekend?  Coming soon, I will allow campgrounds to post their current vacancies in real-time.  I am also learning to predict which campgrounds are most likely to have openings. And I learn which campgrounds you like so I can easily find similar ones.
+      .row
+        hr.col-md-12
+      .row
+        .col-md-offset-1.col-md-4
+          h3 Mega Strength
+          p Powerful, simple filters make it easy to find exactly what you're looking for.  Looking for an RV campsite near Sleeping Bear Dunes?  I've got your covered.  These are filters that you'll actually want to use.
+        .col-md-offset-1.col-md-4
+          = image_tag "/images/landing/all-3-white.png", class:"img img-responsive col-md-12"
+      .row
+        hr.col-md-12
+      .row.pad-bottom-lg
+        .col-md-offset-1.col-md-4
+          p.lead.pad-top-md
+            a href=app_store_url title="Get the iOS app"
+              = image_tag "/images/icons/AppStoreBadge.png", class:"img"
+            br
+            |  Get your superpowers now (for free).
+        .col-md-offset-1.col-md-4
+          h3.pad-top-md What about Android & non-Michiganders?
+          p There are some top secret projects in motion.  I can't tell you yet.  But I will say this: the day of your liberation approaches!  In the meantime, Android users can <a href="#{home_path}"> find Michigan campgrounds on the website.</a>
+  .flush-footer.white
+    .remove-bottom-margin
+      == render 'layouts/footer'
+  == render 'layouts/bottomScripts'
