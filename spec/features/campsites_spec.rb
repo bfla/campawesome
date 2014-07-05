@@ -14,7 +14,9 @@ describe "public-facing campsite pages" do
   subject { page }
 
   describe "show page" do
+    let(:campsite) { FactoryGirl.create(:campsite) }
     #before visit {@campsite}
+
   end
 
   describe "search" do

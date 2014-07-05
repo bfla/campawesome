@@ -67,31 +67,6 @@ describe Campsite do
   # check validity
   it { expect be_valid }
 
-  describe "when name is not present" do
-    before {@campsite.name = ""}
-    it { should_not @campsite.save }
-  end
-
-  describe "when org is not present" do
-    before { @campsite.org = "" }
-    it { should_not be_valid }
-  end
-
-  describe "when latitude is not present" do
-    before { @campsite.latitude = nil }
-    it { should_not be_valid }
-  end
-
-  describe "when latitude is in the Southern hemisphere" do
-    before { @campsite.latitude = -44.56789 }
-    it { should_not be_valid }
-  end
-
-  describe "when longitude is in the Eastern hemisphere" do
-    before { @campsite.longitude = 88.91234 }
-    it { should_not be_valid }
-  end
-
   # Should probably add tests for...
   # (1) ensure phone numbers are in a valid format
   # (2) place restrictions on name length
