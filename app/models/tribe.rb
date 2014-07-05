@@ -3,7 +3,7 @@ class Tribe < ActiveRecord::Base
   has_many :users, through: :tribal_memberships
   has_many :vibes, dependent: :destroy
   has_many :campsites, through: :vibes
-  validates :name, :description, :vibe, presence: true
+  validates :name, :description, :adjective, presence: true
   has_attached_file :icon, 
                     :styles => { :large => "300x300>", :medium => "100x100>", :small => "50x50>" }, 
                     :default_url => "/images/:style/missing.png"

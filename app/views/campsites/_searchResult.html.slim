@@ -6,7 +6,7 @@
       p.no-spacing.text-center
           small.no-spacing
             small.no-spacing 
-              small.no-spacing.subtle-text = tribe.vibe
+              small.no-spacing.subtle-text = tribe.adjective
   p.lead.col-md-10
     - if user_signed_in? && !campsite.tribes.first.blank? 
       - if current_user.tribe && campsite.tribes.first.id == current_user.tribe.id && campsite.avg_rating > 4.0

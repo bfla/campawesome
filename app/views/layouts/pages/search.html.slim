@@ -54,7 +54,7 @@ html.fill-height
                   = image_tag tribe.icon.url(:small), class:'img-circle img-responsive tribe-background'
                 p.no-spacing.text-center
                     small.no-spacing
-                      small.no-spacing = tribe.vibe
+                      small.no-spacing = tribe.adjective
             .col-md-4.pad-top-sm
                   /a href="#" data-toggle="modal" data-target="#filterModal"
                     /p
@@ -74,7 +74,7 @@ html.fill-height
               button#allSearchFilter.searchFilterThumbnail.btn.btn-default.searchTribeFilterTracker data-tribe-id="0" All
               - @tribes.first(3).each do |tribe|
                 button.btn.btn-default.searchFilterThumbnail data-tribe-id=tribe.id 
-                  = tribe.vibe
+                  = tribe.adjective
 
           / Booking filters
           .col-md-12
