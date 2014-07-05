@@ -29,7 +29,7 @@ nav.navbar.navbar-fixed-top.navbar-inverse.navbar-color.navbar-border role="navi
         - else
           /li = link_to 'Sign up', new_user_registration_path, class:"nav-link"
           /a href=new_user_registration_path
-            button.btn.btn-success Sign Up
+            button.#signup-modal-link.btn.btn-success Sign Up
           /li = link_to 'Sign in', new_user_session_path, class:"nav-link"
           li.nav-link
             a#signupTrigger href="#" data-toggle="modal" data-target="#signupModal" rel="nofollow"

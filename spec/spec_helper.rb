@@ -15,7 +15,8 @@
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
-  config.include Devise::TestHelpers, type: :controller
+  #config.include Devise::TestHelpers, type: :controller
+  #config.include FactoryGirl::Syntax::Methods
 # The settings below are suggested to provide a good initial experience
 # with RSpec, but feel free to customize to your heart's content.
 =begin
