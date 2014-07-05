@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140611140806) do
+ActiveRecord::Schema.define(version: 20140705192003) do
 
   create_table "activities", force: true do |t|
     t.integer  "activity_type_id"
@@ -320,7 +320,7 @@ ActiveRecord::Schema.define(version: 20140611140806) do
   create_table "tribes", force: true do |t|
     t.string   "name"
     t.text     "description"
-    t.string   "vibe"
+    t.string   "adjective"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "icon_file_name"
