@@ -152,11 +152,16 @@ class Campsite < ActiveRecord::Base
     self.name
   end
 
+  # RF - Move this to private??
   # Use friendly ids for urls
   extend FriendlyId
   friendly_id :slug_me_up, use: :slugged
   def slug_me_up
-    "#{name} in #{city.name} #{state.abbreviation} camping"
+    if name
+      "#{name} in #{city.name} #{state.abbreviation} camping"
+    else
+      ""
+    end
   end
 
   private
