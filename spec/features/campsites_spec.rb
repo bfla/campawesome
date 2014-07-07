@@ -9,27 +9,34 @@ require 'rails_helper'
   #end
 #end
 describe "campsite pages" do
-  describe "show page" do
-    subject { page }
-    puts "trying to create campsite..."
-    let(:campsite) { FactoryGirl.create(:campsite) }
-    puts "campsite created..."
-    before { visit campsite_path(campsite) }
+  subject { page }
+  let(:campsite) { FactoryGirl.create(:campsite) }
 
-    describe "when user is not signed in" do
-      it { should have_content(campsite.name) }
-    end
-
-    describe "when user is signed in" do
-      before do
-        simulate_sign_in
-        visit campsite_path(campsite)
-      end
-      it { should have_content(campsite.name) }
-    end
-
+  describe "when user is not signed in" do
+    before { visit campsite_path(campsite.id) }
+    puts campsite.name
+    it { should have_content(campsite.name) }
   end
+
 end
 
 #describe "resetSearch"
+#end
+#describe "show page" do
+  #subject { page }
+  #let(:campsite) { FactoryGirl.create(:campsite) }
+  #before { visit campsite_path(campsite) }
+
+  #describe "when user is not signed in" do
+    #it { should have_content(campsite.name) }
+  #end
+
+  #describe "when user is signed in" do
+    #before do
+      #simulate_sign_in
+      #visit campsite_path(campsite)
+    #end
+    #it { should have_content(campsite.name) }
+  #end
+
 #end

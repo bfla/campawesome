@@ -1,5 +1,10 @@
 FactoryGirl.define do
   
+  factory :user do
+    sequence(:email)  { |n| "lovelyperson#{n}@getcamphero.com" }
+    password "whatever"
+    password_confirmation "whatever"
+  end
 
   factory :campsite do
     name        "Majestic Campground"
@@ -45,8 +50,8 @@ FactoryGirl.define do
   factory :tribe do
     name        "Justice League"
     description "Heroic tribe"
-    vibe       "Heroic"
-    association :vibe, factory: :vibe
+    adjective   "Heroic"
+    vibe
   end
 
   factory :vibe do
