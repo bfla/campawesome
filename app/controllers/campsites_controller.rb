@@ -37,7 +37,7 @@ class CampsitesController < ApplicationController
     gon.initTribe = params[:tribe_id] || 0
 
     respond_to do |format|
-      format.html { render layout:"layouts/pages/search", notice: 'I found 2 campsites that look perfect for you.' }
+      format.html { render layout:"layouts/pages/search" }
       format.json { render json: @geojson }  # respond with geoJSON object
     end
 
@@ -91,7 +91,7 @@ class CampsitesController < ApplicationController
 
   def contrib
     @campsites = Campsite.name_search(params[:keywords])
-    @campsites = Campsite.near( Geocoder.coordinates(params[:keywords])) if @campsites.blank?
+    @campsites ||= Campsite.near( Geocoder.coordinates(params[:keywords]))
     @previous_url = session[:previous_url] || home_path
   end
   

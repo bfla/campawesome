@@ -1,4 +1,7 @@
 class Campsite < ActiveRecord::Base
+  extend CampsiteFinders #lib/campsite_searchers.rb for scopes
+  extend CampsiteSearchers #lib/campsite_searchers.rb for searches
+  include CampsiteFormatters #lib/campsite_formatters.rb for formatting data
   # name:string, org:string, description:text, 
   # state_id:integer, latititude:float, longitude:float
   # res_phone:string, camp_phone:string, res_url:string, camp_url:string, 
@@ -35,82 +38,7 @@ class Campsite < ActiveRecord::Base
   #after_validation :reverse_geocode #auto-fetch address
   default_scope order('avg_rating DESC')
 
-  # This returns the name of the Campsite's state
-  def state_name
-    self.state.name if self.state.name?
-  end
-
-  def hashtag
-    self.state.hashtag if self.state.hashtag?
-  end
-
-  def tribes_json
-    tribe_ids = Array.new
-    self.vibes.each { |vibe| tribe_ids << vibe.tribe.id }
-    tribe_ids = tribe_ids.to_json
-  end
-
-  def primary_icon(style)
-    if self.tribes.first.blank? 
-      false 
-    else 
-      self.tribes.first.icon(style)
-    end
-  end
-
-  def has_tribe(tribe_id)
-    bool = false
-    self.tribes.each { |tribe| bool = true if tribe.id == tribe_id }
-    bool
-  end
-
-  def icons
-    self.vibes.each { |tribe| icons << tribe.icon }
-  end
-  #def avg_rating
-    #sum = 0
-    #self.ratings.each {|rating| sum = sum + rating.value}
-    #sum / self.ratings.size
-  #end
-  #def rank
-
-  #end
-  def geojsonify
-    tribe_ids = Array.new
-    self.vibes.each { |vibe| tribe_ids << vibe.tribe.id }
-    self.camp_phone.blank? ? phone = self.res_phone : phone = self.camp_phone
-
-    geojson = {
-      type: 'Feature',
-      geometry: {
-        type: 'Point',
-        coordinates: [self.longitude, self.latitude]
-      },
-      properties: {
-        title: self.name,
-        campsiteId:self.id,      
-        org: self.org,
-        tribes: tribe_ids,
-        url: "campsites/#{self.slug}",
-        popup_url: "/campsites/#{self.slug}",
-        tribe_img: self.primary_icon(:small),
-        # Extra data for iOS search:
-        phone: phone,
-        reservable: self.reservable,
-        walkin: self.walkin,
-        #reservable: self.reservable,
-        #walkins: self.walkins,
-        #avg_rating: self.avg_rating,
-        #ranking: self.rank,
-        #tribes_dict: self.tribes.each {|tribe| self.tribes << tribe.to_json },
-        #reviews_dict: self.reviews.each { |review| self.reviews << review.to_json },
-        :'marker-color' => "\#09b",
-        :'marker-symbol' => 'campsite',
-        :'marker-size' => 'large'
-      }
-    }
-
-  end
+  delegate :hashtag, to: :city, prefix: true
 
   # import CSV file
   def self.import(file)
@@ -129,46 +57,22 @@ class Campsite < ActiveRecord::Base
     end
   end
 
-  # This takes a search query and distance, codes it into a coordinates, 
-  # and returns nearby campgrounds
-  def self.search(search, distance)
-    if search
-      coordinates = Geocoder.coordinates(search)
-      campsites = Campsite.near(coordinates, distance)
-    else
-      find(:all)
-    end
-  end
-
-  def self.name_search(keywords)
-    if keywords
-      where('LOWER(name) LIKE ?', "%#{keywords.downcase}%") || Campsite.none
-    else
-      Campsite.none
-    end
-  end
-
-  def self.to_s
-    self.name
-  end
-
-  # RF - Move this to private??
-  # Use friendly ids for urls
-  extend FriendlyId
-  friendly_id :slug_me_up, use: :slugged
-  def slug_me_up
-    if name
-      "#{name} in #{city.name} #{state.abbreviation} camping"
-    else
-      ""
-    end
-  end
-
   private
 
     def seed_blanks
       self.avg_rating = rand(3.5..4.2).round(2) if self.ratings.blank? && self.avg_rating.blank?
       sum = 0
+    end
+
+    # Use friendly ids for urls
+    extend FriendlyId
+    friendly_id :slug_me_up, use: :slugged
+    def slug_me_up
+      if name
+        "#{name} in #{city.name} #{state.abbreviation} camping"
+      else
+        ""
+      end
     end
 
     # app/models/place.rb
