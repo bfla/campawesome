@@ -57,22 +57,22 @@ class Campsite < ActiveRecord::Base
     end
   end
 
+  # Use friendly ids for urls
+  extend FriendlyId
+  friendly_id :slug_me_up, use: :slugged
+  def slug_me_up
+    if name
+      "#{name} in #{city.name} #{state.abbreviation} camping"
+    else
+      ""
+    end
+  end
+
   private
 
     def seed_blanks
       self.avg_rating = rand(3.5..4.2).round(2) if self.ratings.blank? && self.avg_rating.blank?
       sum = 0
-    end
-
-    # Use friendly ids for urls
-    extend FriendlyId
-    friendly_id :slug_me_up, use: :slugged
-    def slug_me_up
-      if name
-        "#{name} in #{city.name} #{state.abbreviation} camping"
-      else
-        ""
-      end
     end
 
     # app/models/place.rb

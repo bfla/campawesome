@@ -101,7 +101,7 @@ class CampsitesController < ApplicationController
     @campsite = Campsite.includes(:photos, :tags, :fees, :beens, :wants, :listeds, reviews: [:rating]).friendly.find(params[:id])
     @activity_types = ActivityType.all
     @nearbys = @campsite.nearbys.limit(10)
-    @recommended = Campsite.recommended(@nearbys, current_user) if user_signed_in? && current_user.tribe
+    @recommended = Campsite.get_recommended(@nearbys, current_user) if user_signed_in? && current_user.tribe
     gon.initCenter = [@campsite.latitude, @campsite.longitude]
     gon.geoJson = @campsite.geojsonify
     
