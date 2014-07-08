@@ -15,4 +15,24 @@ module CampsiteSearchers
       Campsite.none
     end
   end
+
+  def map_search(keywords, zoom, distance)
+    zoom = zoom || 10
+    distance = distance || 30
+    coordinates = Geocoder.coordinates(keywords)
+    campsites = Campsite.near(coordinates, distance).includes(:tribes, :taggings, :city, :state).first(50)
+    campsites ||= Campsite.name_search(params[:keywords])
+    return campsites, zoom, distance, coordinates
+  end
+
+  def get_recommended(campsites, user)
+    recommended = Array.new
+    campsites.each do |campsite|
+      if campsite.tribes.include? user.tribe
+        recommended << campsite
+      end
+    end
+    return recommended
+  end
+
 end

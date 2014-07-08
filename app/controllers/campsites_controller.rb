@@ -5,29 +5,16 @@ class CampsitesController < ApplicationController
   after_action :set_access_control_headers, only: [:search, :resetSearch]
 
   def search
-    zoom = params[:zoom] || 10
-    distance = params[:distance] || 30
-    coordinates = Geocoder.coordinates(params[:keywords])
-    @campsites = Campsite.near(coordinates, distance).includes(:tribes, :taggings).first(50)
+    @campsites, zoom, distance, coordinates = Campsite.map_search(params[:keywords], params[:zoom], params[:distance])
     @tribes = Tribe.all
     @tags = Tag.all
 
-    # If the location produces no campsites, try running a text search on the name
-    if @campsites.blank?
-      @campsites = Campsite.name_search(params[:keywords])
-    end
-
     # Position the map
-    if @campsites.blank? 
-      @center = coordinates
-    else
-      @center = Geocoder::Calculations.geographic_center(@campsites)
-    end
-
-    if is_mobile_device?
+    @campsites.blank? ? @center = coordinates : @center = Geocoder::Calculations.geographic_center(@campsites)
+    if is_mobile_device? # Mobile device view needs a different url
       @href = search_map_campsites_path(params) #Link to corresponding mobile map
     end
-
+    # Create JSON data
     @geojson = Array.new
     @campsites.each { |campsite| @geojson << campsite.geojsonify}
     gon.campsites = @campsites
@@ -47,7 +34,7 @@ class CampsitesController < ApplicationController
     zoom = params[:zoom] || 10
     distance = params[:distance] || 30
     coordinates = Geocoder.coordinates(params[:keywords])
-    @campsites = Campsite.near(coordinates, distance).includes(:tribes, :taggings).first(50)
+    @campsites = Campsite.near(coordinates, distance).includes(:tribes, :taggings, :city, :state).first(50)
     @tribes = Tribe.all
     @tags = Tag.all
 
@@ -57,11 +44,7 @@ class CampsitesController < ApplicationController
     end
 
     # Position the map
-    if @campsites.blank? 
-      @center = coordinates
-    else
-      @center = Geocoder::Calculations.geographic_center(@campsites)
-    end
+    @campsites.blank? ? @center = coordinates : @center = Geocoder::Calculations.geographic_center(@campsites)
 
     @geojson = Array.new
     @campsites.each { |campsite| @geojson << campsite.geojsonify}
@@ -83,7 +66,7 @@ class CampsitesController < ApplicationController
     zoom = params[:zoom] || 10
     distance = params[:distance] || 30
     coordinates = Geocoder.coordinates(params[:keywords])
-    @campsites = Campsite.near(coordinates, distance).includes(:tribes, :taggings).first(50)
+    @campsites = Campsite.near(coordinates, distance).includes(:tribes, :taggings, :city, :state).first(50)
     @tribes = Tribe.all
     @tags = Tag.all
     render layout: "layouts/pages/none"
@@ -118,48 +101,13 @@ class CampsitesController < ApplicationController
     @campsite = Campsite.includes(:photos, :tags, :fees, :beens, :wants, :listeds, reviews: [:rating]).friendly.find(params[:id])
     @activity_types = ActivityType.all
     @nearbys = @campsite.nearbys.limit(10)
-    @recommended = Array.new
-    if user_signed_in?
-      @nearbys.each do |nearby_campsite|
-        if nearby_campsite.tribes.include? current_user.tribe
-          @recommended << nearby_campsite
-        end
-      end
-    end
+    @recommended = Campsite.recommended(@nearbys, current_user) if user_signed_in? && current_user.tribe
     gon.initCenter = [@campsite.latitude, @campsite.longitude]
     gon.geoJson = @campsite.geojsonify
     
     # Try to get google image if the campsite has no photo
     if @campsite.photos.blank?
-      gplaces_key = "AIzaSyB9mHzeQJxtkMkn_UkKAOs00Hkg2Y9qKds"
-      # run a Google Places search
-      gplace_url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=#{@campsite.latitude},#{@campsite.longitude}&radius=8000&sensor=false&key=#{gplaces_key}"
-      @place_urlness = gplace_url
-      gplace_response = Net::HTTP.get_response(URI.parse(gplace_url))
-      gplaces = JSON.parse(gplace_response.body)
-      puts gplaces
-
-      # test if Google has any photos and if so fetch it
-      @goog_photo_bool = false
-      @photo_license = nil
-      gplaces["results"].each do |gplace|
-        if gplace["photos"] and gplace["types"]
-          acceptable_types = ["park", "campground", "natural_feature", "rv_park", "locality", "point_of_interest"]
-          gplace["types"].each do |type|
-            if acceptable_types.include? type
-              @goog_photo_bool = true
-              photo = gplace["photos"].first
-              @photo_license = photo["html_attributions"] if photo["html_attributions"]
-              photo_ref = photo["photo_reference"]
-              target_url = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=#{photo_ref}&sensor=true&key=#{gplaces_key}"
-              @url = target_url
-              response = Net::HTTP.get_response(URI.parse(target_url))
-              @goog_img = response.body
-              break # since we now have a photo, break the loop
-            end
-          end
-        end
-      end
+      @goog_photo_bool, @photo_license, @goog_img_url = @campsite.get_google_image
     else
       @goog_photo_bool = false
     end

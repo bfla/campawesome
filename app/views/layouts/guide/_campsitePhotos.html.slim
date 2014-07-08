@@ -4,7 +4,7 @@
     .pad-top-sm
       /#placesPhoto
       - if @goog_photo_bool
-        img.img-thumbnail.img-responsive src=@url
+        img.img-thumbnail.img-responsive src=@goog_img_url
         = image_tag "/images/icons/poweredByGoogle.png"
         - if !@photo_license.nil?
           p.subtle-text 

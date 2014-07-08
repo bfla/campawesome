@@ -1,5 +1,5 @@
 class Campsite < ActiveRecord::Base
-  extend CampsiteFinders #lib/campsite_searchers.rb for scopes
+  include CampsiteFinders #lib/campsite_searchers.rb for scopes
   extend CampsiteSearchers #lib/campsite_searchers.rb for searches
   include CampsiteFormatters #lib/campsite_formatters.rb for formatting data
   # name:string, org:string, description:text, 
