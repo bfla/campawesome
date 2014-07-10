@@ -2,12 +2,6 @@ class CitiesController < ApplicationController
   before_action :set_city, only: [ :edit, :update, :destroy]
   before_action :admin_only, only: [:new, :create, :import, :edit, :update, :destroy ]
 
-  # GET /cities
-  # GET /cities.json
-  def index
-    @cities = City.all
-  end
-
   def browse
     @city = City.includes(campsites: [ :ratings, :tribes] ).friendly.find(params[:id])
     @tribes = Tribe.all
@@ -17,6 +11,17 @@ class CitiesController < ApplicationController
     gon.longitude = @city.longitude
     gon.initTribe = params[:tribe_id] || 0
     render(layout: "layouts/guide")
+  end
+
+
+  # GET /cities
+  # GET /cities.json
+  def index
+    @cities = City.all
+    respond_to do |format|
+      format.html
+      format.csv { render text: @cities.to_csv }
+    end
   end
 
   # GET /cities/1
