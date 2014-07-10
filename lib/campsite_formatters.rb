@@ -90,37 +90,39 @@ module CampsiteFormatters
   end
 
   def get_google_image
+    goog_photo_bool, goog_license, goog_img_url = false, nil, nil # initialize the output variables
     gplaces_key = "AIzaSyB9mHzeQJxtkMkn_UkKAOs00Hkg2Y9qKds"
-    # run a Google Places search
+    # run a Google Places search & parse it into a ruby object
     gplace_url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=#{self.latitude},#{self.longitude}&radius=8000&sensor=false&key=#{gplaces_key}"
-    place_urlness = gplace_url
+    puts "sending GPlaces request to #{gplace_url}"
     gplace_response = Net::HTTP.get_response(URI.parse(gplace_url))
+    puts "received a response from Google Places" if gplace_response
     gplaces = JSON.parse(gplace_response.body)
-    puts gplaces
 
     # test if Google has any photos and if so fetch it
-    goog_photo_bool = false
-    photo_license = nil
-    goog_img_url = nil
-    gplaces["results"].each do |gplace|
-      if gplace["photos"] and gplace["types"]
+    gplaces["results"].each do |gplace| # for each object returned from Google
+      if gplace["photos"] and gplace["types"] # if the object has photos and is categorized
+        puts "Google Places returned a photo"
         acceptable_types = ["park", "campground", "natural_feature", "rv_park", "locality", "point_of_interest"]
         gplace["types"].each do |type|
-          if acceptable_types.include? type
+          if acceptable_types.include? type # if the GPlaces object is in the right category
+            puts "Google Places returned a photo of an acceptable type"
             goog_photo_bool = true
-            photo = gplace["photos"].first
-            photo_license = photo["html_attributions"] if photo["html_attributions"]
-            photo_ref = photo["photo_reference"]
+            photo_obj = gplace["photos"].first
+            goog_license = photo_obj["html_attributions"] if photo_obj["html_attributions"]
+            photo_ref = photo_obj["photo_reference"]
+            # Create request to display the photo
             target_url = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=#{photo_ref}&sensor=true&key=#{gplaces_key}"
             goog_img_url = target_url
-            response = Net::HTTP.get_response(URI.parse(target_url))
-            goog_img = response.body
+            #response = Net::HTTP.get_response(URI.parse(target_url))
+            #goog_img = response.body
             break # since we now have a photo, break the loop
           end
         end
       end
     end
-    return goog_photo_bool, photo_license, goog_img_url
+    puts "GoogPhotoBool:#{goog_photo_bool}, GoogLic:#{goog_license}, GoogImgURL:#{goog_img_url}"
+    return goog_photo_bool, goog_license, goog_img_url
   end
 
 end

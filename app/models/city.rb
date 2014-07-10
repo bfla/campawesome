@@ -15,8 +15,16 @@ class City < ActiveRecord::Base
     "#{name} #{state.abbreviation} camping"
   end
 
+  def state_name
+    state.name
+  end
+
+  def state_abbreviation
+    state.abbreviation
+  end
+
   def hashtag
-    self.state.hashtag
+    state.hashtag
   end
 
   def self.to_s

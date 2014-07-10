@@ -110,6 +110,7 @@ class CampsitesController < ApplicationController
       @goog_photo_bool, @photo_license, @goog_img_url = @campsite.get_google_image
     else
       @goog_photo_bool = false
+      puts "campsite has photos"
     end
 
     render(layout: "layouts/normal")
