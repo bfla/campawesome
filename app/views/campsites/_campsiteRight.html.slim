@@ -113,9 +113,9 @@
           .extra-subtle 
             | Camping Description:
           span itemprop="description"
-            |  #{@campsite.name} is a #{@campsite.tribes.first.vibe.downcase} 
+            |  #{@campsite.name} is a #{@campsite.tribes.first.adjective.downcase} 
             - unless @campsite.tribes.second.blank?
-              |  and #{@campsite.tribes.second.vibe.downcase}
+              |  and #{@campsite.tribes.second.adjective.downcase}
             | campground in #{@campsite.city.name}, #{@campsite.state.abbreviation}.
             - if @campsite.reservable
               |  It takes reservations
