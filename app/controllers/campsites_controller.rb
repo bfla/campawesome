@@ -228,7 +228,7 @@ class CampsitesController < ApplicationController
     def campsite_params
       params.require(:campsite).permit(:name, :description, :org, 
         :res_phone, :camp_phone, :res_url, :camp_url, :reservable, 
-        :walkin, :latitude, :longitude, :state_id, :city_id)
+        :walkin, :latitude, :longitude, :state_id, :city_id, :email)
     end
 
     def set_access_control_headers
