@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140705192003) do
+ActiveRecord::Schema.define(version: 20140711173907) do
 
   create_table "activities", force: true do |t|
     t.integer  "activity_type_id"
@@ -85,6 +85,7 @@ ActiveRecord::Schema.define(version: 20140705192003) do
     t.integer  "city_rank"
     t.string   "slug"
     t.integer  "rv_length"
+    t.string   "email"
   end
 
   add_index "campsites", ["avg_rating"], name: "index_campsites_on_avg_rating"

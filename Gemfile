@@ -10,7 +10,6 @@ group :development, :test do
 end
 
 group :development do
-  gem 'rspec-rails', '~> 3.0.0'
   gem 'guard-rspec', require: false
 end
 
