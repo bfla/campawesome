@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140715173829) do
+ActiveRecord::Schema.define(version: 20140715190057) do
 
   create_table "activities", force: true do |t|
     t.integer  "activity_type_id"
@@ -118,7 +118,7 @@ ActiveRecord::Schema.define(version: 20140715173829) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "slug"
-    t.integer  "distance"
+    t.integer  "radius"
     t.text     "highlights"
     t.text     "things_to_do"
     t.text     "camping_tips"
