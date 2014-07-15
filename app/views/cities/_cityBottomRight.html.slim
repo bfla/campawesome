@@ -13,8 +13,9 @@
       - nearbys.each do |c|
         = link_to c.name, c
         br
-      - if nearbys.count > 5
+      - if nearbys.size > 5
         a href=search_campsites_path(keywords:"#{place.latitude}, #{place.longitude}") rel="nofollow" See more >
+        br
     hr
 - unless place.links.empty?
   .col-md-12
