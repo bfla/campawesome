@@ -50,14 +50,16 @@ br
     - 4.times
       span.glyphicon.glyphicon-fire.subtle-text
       | &nbsp;
-  br
-  .subtle-text itemprop="aggregateRating" itemscope="itemscope" itemtype="http://schema.org/AggregateRating"
-    meta itemprop="ratingCount" content="#{campsite.ratings.size}"
-    meta itemprop="reviewCount" content="#{campsite.reviews.size}"
-    meta itemprop="worstRating" content="1.0"
-    span itemprop="ratingValue" = campsite.avg_rating
+  span
     small
-      small  
-        |  average out of 
-        span itemprop="bestRating" 5.0 
-        | by #{pluralize(campsite.ratings.size, "camper")}
+      small
+        small.subtle-text
+          span itemprop="aggregateRating" itemscope="itemscope" itemtype="http://schema.org/AggregateRating"
+            meta itemprop="ratingCount" content="#{campsite.ratings.size}"
+            meta itemprop="reviewCount" content="#{campsite.reviews.size}"
+            meta itemprop="worstRating" content="1.0"
+            | rated &nbsp;
+            span itemprop="ratingValue" = campsite.avg_rating
+            |  out of 
+            span itemprop="bestRating" 5.0 
+            |  by #{pluralize(campsite.ratings.size, "camper")}

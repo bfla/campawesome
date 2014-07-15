@@ -44,7 +44,7 @@
       small.subtle-text
         span.glyphicon.glyphicon-earphone
         |  #{number_to_phone(campsite.res_phone)}&nbsp;&nbsp;
-    - else 
+    - elsif campsite.camp_phone?
       small.subtle-text
         span.glyphicon.glyphicon-earphone
         |  #{number_to_phone(campsite.camp_phone)}&nbsp;&nbsp;
