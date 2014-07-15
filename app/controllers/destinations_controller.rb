@@ -27,7 +27,7 @@ class DestinationsController < ApplicationController
     @destination = Destination.includes(:photos).friendly.find(params[:id])
     @searchRadius = @destination.radius || 30
     @campsites = Campsite.near([@destination.latitude, @destination.longitude], @searchRadius)
-    @cities = City.near([@destination.latitude, @destination.longitude], 35)
+    @cities = City.near([@destination.latitude, @destination.longitude], 35).first(5)
     @tribes = Tribe.all
     render(layout: "layouts/guide")
     gon.zoom = @destination.zoom
