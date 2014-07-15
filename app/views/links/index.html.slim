@@ -1,0 +1,29 @@
+h1 Listing links
+
+table
+  tr
+    th Anchor
+    th Href
+    th Title
+    th City
+    th Destination
+    th State
+    th
+    th
+    th
+
+  - @links.each do |link|
+    tr
+      td = link.anchor
+      td = link.href
+      td = link.title
+      td = link.city_id
+      td = link.destination_id
+      td = link.state_id
+      td = link_to 'Show', link
+      td = link_to 'Edit', edit_link_path(link)
+      td = link_to 'Destroy', link, data: {:confirm => 'Are you sure?'}, :method => :delete
+
+br
+
+= link_to 'New Link', new_link_path

@@ -1,0 +1,24 @@
+p#notice = notice
+
+p
+  strong Anchor:
+  = @link.anchor
+p
+  strong Href:
+  = @link.href
+p
+  strong Title:
+  = @link.title
+p
+  strong City:
+  = @link.city_id
+p
+  strong Destination:
+  = @link.destination_id
+p
+  strong State:
+  = @link.state_id
+
+= link_to 'Edit', edit_link_path(@link)
+'|
+= link_to 'Back', links_path

@@ -30,7 +30,7 @@
   - content_for :bottom_left
     = render "cityFeatured", place:@city, campsites:@city.campsites
   - content_for :bottom_right
-    = render "cityBottomRight"
+    = render "cityBottomRight", place:@city, destinations:@destinations, nearbys:@nearbys
   - content_for :licenses
     = render "layouts/guide/guideLicenses", place:@city
 

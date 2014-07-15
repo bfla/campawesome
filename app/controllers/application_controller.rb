@@ -41,4 +41,8 @@ class ApplicationController < ActionController::Base
     session[:previous_url] || home_path
   end
 
+  def admin_only
+    redirect_to forbidden_path unless current_user && current_user.is_admin
+  end
+
 end

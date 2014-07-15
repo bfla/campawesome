@@ -29,6 +29,8 @@ class CitiesController < ApplicationController
   def show
     @city = City.includes(:photos, campsites: [ :ratings, {vibes: :tribe}] ).friendly.find(params[:id])
     @tribes = Tribe.all
+    @destinations = Destination.near([@city.latitude, @city.longitude], 35)
+    @nearbys = Campsite.near([@city.latitude, @city.longitude], 30).not_in_city(@city)
     render(layout: "layouts/guide")
     gon.zoom = @city.zoom
     gon.latitude = @city.latitude

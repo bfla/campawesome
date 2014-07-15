@@ -1,0 +1,27 @@
+= form_for @link do |f|
+  - if @link.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@link.errors.count, "error")} prohibited this link from being saved:"
+      ul
+        - @link.errors.full_messages.each do |message|
+          li = message
+
+  .field
+    = f.label :anchor
+    = f.text_field :anchor
+  .field
+    = f.label :href
+    = f.text_field :href
+  .field
+    = f.label :title
+    = f.text_area :title
+  .field
+    = f.label :city_id
+    = f.collection_select :city_id, @cities, :id, :name, include_blank: true
+  .field
+    = f.label :destination_id
+    = f.collection_select :destination_id, @destinations, :id, :name, include_blank: true
+  .field
+    = f.label :state_id
+    = f.collection_select :state_id, @states, :id, :name, include_blank: true
+  .actions = f.submit 'Save'

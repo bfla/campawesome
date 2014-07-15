@@ -1,0 +1,24 @@
+- unless destinations.empty?
+  .col-md-12
+    h5.subtle-text Destinations near #{place.name}
+    p
+      - destinations.each do |d|
+        = link_to d.name, d
+        br
+    hr
+- unless nearbys.empty?
+  .col-md-12
+    h5.subtle-text Campgrounds in cities near #{place.name}
+    p
+      - nearbys.each do |c|
+        = link_to c.name, c
+        br
+    hr
+- unless place.links.empty?
+  .col-md-12
+    h5.subtle-text Related links for #{place.name} camping
+    p
+      - place.links.each do |link|
+        = link_to link.anchor, link.href
+        br
+    hr

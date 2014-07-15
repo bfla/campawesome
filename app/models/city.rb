@@ -3,10 +3,17 @@ class City < ActiveRecord::Base
   belongs_to :state
   has_many :campsites, :order => 'avg_rating DESC'
   has_many :photos
+  has_many :links
+  reverse_geocoded_by :latitude, :longitude
   validates :name, :latitude, :longitude, :zoom, presence: true
   validates :latitude, numericality: {greater_than: 0}
   validates :longitude, numericality: {less_than: 0}
   validates :zoom, numericality: true
+
+  #Scopes
+  def self.by_name
+    order('name ASC')
+  end
 
   # use friendly ids for urls
   extend FriendlyId

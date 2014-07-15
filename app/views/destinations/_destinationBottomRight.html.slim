@@ -22,3 +22,22 @@
       strong.extra-subtle Things to do:&nbsp;
       = place.things_to_do
       br
+  .col-md-12
+    hr
+
+- unless cities.empty?
+  .col-md-12
+    h5.subtle-text Cities near #{place.name}
+    p
+      - cities.each do |c|
+        = link_to "Campgrounds in #{c.name}", c
+        br
+    hr
+
+- unless place.links.empty?
+  .col-md-12
+    h5.subtle-text Related links for #{place.name}
+    p
+      - place.links.each do |link|
+        = link_to link.anchor, link.href
+        br

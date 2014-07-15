@@ -35,6 +35,10 @@ class Campsite < ActiveRecord::Base
   #after_validation :reverse_geocode #auto-fetch address
   default_scope order('avg_rating DESC')
 
+  def self.not_in_city(city)
+    where.not(city_id: city.id)
+  end
+
   # This returns the name of the Campsite's state
   def state_name
     self.state.name if self.state.name?

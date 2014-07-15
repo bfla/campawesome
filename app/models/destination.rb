@@ -3,11 +3,19 @@ class Destination < ActiveRecord::Base
 
   belongs_to :state
   has_many :photos
+  has_many :links
+  has_many :reviews, as: :reviewable, dependent: :destroy
+  reverse_geocoded_by :latitude, :longitude
   validates :name, :description, :latitude, :longitude, :zoom, presence: true
   validates :latitude, numericality: {greater_than: 0}
   validates :longitude, numericality: {less_than: 0}
   validates :zoom, numericality: true
-  has_many :reviews, as: :reviewable, dependent: :destroy
+  
+
+
+  def self.by_name
+    order('name ASC')
+  end
 
   # use friendly ids for urls
   extend FriendlyId
