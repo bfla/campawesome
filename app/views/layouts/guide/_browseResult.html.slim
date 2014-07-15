@@ -15,7 +15,7 @@
       small
         small.subtle-text
           | #{campsite.org} campground in #{campsite.state_name}
-      small.col-md-12 = render "campsites/campsiteRating", campsite:campsite
+      .col-md-12 = render "campsites/campsiteRating", campsite:campsite
     p.col-md-12 
       small
         strong.subtle-text Bookings:
@@ -33,7 +33,7 @@
         small.subtle-text
           span.glyphicon.glyphicon-earphone
           |  #{number_to_phone(campsite.res_phone)}&nbsp;&nbsp;
-      - else 
+      - elsif campsite.camp_phone?
         small.subtle-text
           span.glyphicon.glyphicon-earphone
           |  #{number_to_phone(campsite.camp_phone)}&nbsp;&nbsp;
