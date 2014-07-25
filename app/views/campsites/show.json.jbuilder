@@ -6,7 +6,10 @@ json.state @campsite.state, :name, :abbreviation
 
 json.city @campsite.city, :name
 
-json.tribes @campsite.tribes, :id, :vibe
+json.tribes @campsite.tribes do |tribe|
+  json.id tribe.id
+  json.vibe tribe.adjective
+end
 
 json.nearbys @nearbys do |nearby|
   json.id nearby.id
