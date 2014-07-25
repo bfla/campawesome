@@ -90,6 +90,7 @@ Blog::Application.routes.draw do
       get 'resetSearch'
       get 'contrib'
       post 'import'
+      get 'chlite_export'
     end
   end
 

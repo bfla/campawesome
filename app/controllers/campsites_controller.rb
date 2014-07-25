@@ -1,7 +1,7 @@
 class CampsitesController < ApplicationController
   require 'net/http'
   before_action :set_campsite, only: [ :edit, :update, :destroy]
-  before_action :admin_only, only: [:new, :create, :import, :edit, :update, :destroy ]
+  before_action :admin_only, only: [:new, :create, :import, :edit, :update, :destroy, :chlite_export ]
   after_action :set_access_control_headers, only: [:search, :resetSearch]
 
   def search
@@ -104,6 +104,14 @@ class CampsitesController < ApplicationController
   def import
     Campsite.import(params[:file])
     redirect_to root_url, notice:"imported!"
+  end
+
+  def chlite_export
+    @campsites = Campsite.includes(:taggings, :vibes).all
+    cg_csv = Campsite.to_chlite_csv(@campsites)
+    respond_to do |format|
+      format.csv {send_data cg_csv}
+    end 
   end
 
   # GET /campsites

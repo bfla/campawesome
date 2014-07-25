@@ -35,6 +35,29 @@ class Campsite < ActiveRecord::Base
   #after_validation :reverse_geocode #auto-fetch address
   default_scope order('avg_rating DESC')
 
+  def self.to_chlite_csv(campsites)
+    require 'csv'
+    CSV.generate do |csv|
+      keys = ["ch_id", "latitude", "longitude", "name", "owner", "camp_phone", "tribes", "tags", "url", "res_url"]
+      csv << keys
+      campsites.each do |c|
+        csv_dict = {
+          ch_id: c.id,
+          latitude: c.latitude,
+          longitude: c.longitude,
+          name: c.name,
+          owner: c.org,
+          camp_phone: c.camp_phone,
+          tribes: c.tribes.to_json,
+          tags: c.tags.to_json,
+          url: c.camp_url,
+          res_url: c.res_url,
+        }
+        csv << csv_dict.values
+      end
+    end
+  end
+
   def self.not_in_city(city)
     where.not(city_id: city.id)
   end
