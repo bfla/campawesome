@@ -2,13 +2,9 @@ class Campsite < ActiveRecord::Base
   include CampsiteFinders #lib/campsite_searchers.rb for scopes
   extend CampsiteSearchers #lib/campsite_searchers.rb for searches
   include CampsiteFormatters #lib/campsite_formatters.rb for formatting data
-  # name:string, org:string, description:text, 
-  # state_id:integer, latititude:float, longitude:float
-  # res_phone:string, camp_phone:string, res_url:string, camp_url:string, 
-  # reservable:boolean, walkin:boolean
+
   belongs_to :state
   belongs_to :city, counter_cache: :campsites_count
-  
   has_many :beens, as: :beenable, dependent: :destroy
   has_many :wants, as: :wantable, dependent: :destroy
   has_many :listeds, as: :listable, dependent: :destroy
@@ -16,7 +12,6 @@ class Campsite < ActiveRecord::Base
   has_many :ratings, as: :ratable, dependent: :destroy
   has_many :reviews, as: :reviewable, dependent: :destroy
   has_many :photos
-
   has_many :vibes, dependent: :destroy
   has_many :tribes, through: :vibes
   has_many :taggings
@@ -24,24 +19,17 @@ class Campsite < ActiveRecord::Base
   has_many :activities
   has_many :fees, dependent: :destroy
 
-  #has_many :tribes
   validates :name, :org, :state_id, :latitude, :longitude, presence: { message:'is required' }
-  #validates :res_phone, :camp_phone, numericality: { message:'must be a number', allow_blank:true }
   validates :latitude, numericality: { greater_than: 0, message:'must be a positive' }
   validates :longitude, numericality: { less_than: 0, message:'must be a negative number' }
-  reverse_geocoded_by :latitude, :longitude
-  
   before_validation :reverse_geocode #reverse geocode it before friendlyId needs the city
-  #before_save :check_ranking
   before_save :seed_blanks
-  #before_validation :fetch_city_and_state
-  #after_validation :reverse_geocode #auto-fetch address
+  reverse_geocoded_by :latitude, :longitude
+
   default_scope order('avg_rating DESC')
+  delegate :hashtag, to: :state, prefix: true
 
-  delegate :hashtag, to: :city, prefix: true
-
-  # import CSV file
-  def self.import(file)
+  def self.import(file) # import CSV file
     #CSV.foreach(file.path, headers:true) { |row| Campsite.create! row.to_hash }
     CSV.foreach(file.path, headers:true) do |row|
       Campsite.create! row.to_hash
@@ -49,7 +37,7 @@ class Campsite < ActiveRecord::Base
     end
   end
 
-  def resave_avg_rating #calculate new avg_rating when a new rating is saved
+  def resave_avg_rating #calculate new avg_rating (usually when a new rating is saved)
     if !self.ratings.blank?
       sum = 0
       self.ratings.each {|rating| sum = sum + rating.value}
@@ -70,12 +58,12 @@ class Campsite < ActiveRecord::Base
 
   private
 
-    def seed_blanks
+    def seed_blanks #autogenerate an avg_rating if there are none
       self.avg_rating = rand(3.5..4.2).round(2) if self.ratings.blank? && self.avg_rating.blank?
       sum = 0
     end
 
-    # app/models/place.rb
+    #custom reverse geocoding method stores city and address in the campsite model
     reverse_geocoded_by :latitude, :longitude do |campsite, results|
       if geo = results.first
         campsite.address = geo.address
@@ -93,9 +81,5 @@ class Campsite < ActiveRecord::Base
 
       end
     end
-
-    #def check_ranking
-      #self.city.rerank if self.avg_rating_changed?
-    #end
 
 end

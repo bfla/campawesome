@@ -7,6 +7,7 @@ class City < ActiveRecord::Base
   validates :latitude, numericality: {greater_than: 0}
   validates :longitude, numericality: {less_than: 0}
   validates :zoom, numericality: true
+  delegate :hashtag, to: :state, prefix: false
 
   # use friendly ids for urls
   extend FriendlyId
@@ -23,9 +24,9 @@ class City < ActiveRecord::Base
     state.abbreviation
   end
 
-  def hashtag
-    state.hashtag
-  end
+  #def hashtag
+    #state.hashtag
+  #end
 
   def self.to_s
     self.name
@@ -36,11 +37,6 @@ class City < ActiveRecord::Base
       c.city_rank = index + 1
       c.save()
     end
-    #elsif contenders.count = 1
-      #contenders.first.city_rank = 1
-      #campsite = contenders.first
-      #campsite.save()
-    #end
   end
 
 end
