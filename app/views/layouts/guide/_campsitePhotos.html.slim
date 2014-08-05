@@ -4,13 +4,15 @@
     .pad-top-sm
       /#placesPhoto
       - if @goog_photo_bool
-        img.img-thumbnail.img-responsive src=@url
+        img.img-thumbnail.img-responsive src=@goog_img_url
         = image_tag "/images/icons/poweredByGoogle.png"
-        - if !@photo_license.nil?
+        - unless @goog_license.nil?
           p.subtle-text 
-            small = @photo_license
+            small = @goog_license
             br
             small This photo was obtained from Google.  Usually these photos are relevant, but sometimes they're a bit weird.
+        p
+          small This photo was obtained from Google.  Usually these photos are relevant, but sometimes they're a bit weird.
       - else
         = image_tag '/images/dummies/blankPhoto.jpg', class:'img img-thumbnail img-responsive'
   - else

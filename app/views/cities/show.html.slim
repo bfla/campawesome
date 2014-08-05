@@ -1,27 +1,27 @@
 - content_for :head
-  title Camping in #{@city.name} #{@city.state.abbreviation} on CampHero
-  meta name="keywords" content="Campgrounds in #{@city.name} #{@city.state.abbreviation}, camping near #{@city.name}, campgrounds, places to camp in #{@city.name}, RV Parks, backcountry camping, rustic camping, tent camping, camping sites, camp sites, tourism, travel, reviews"
-  meta name="description" content="Places to camp in #{@city.name} #{@city.state.abbreviation} including maps and listings of all the rustic campgrounds, RV Parks, backcountry camping areas, modern campsites, and equestrian camping in #{@city.name}. CampHero's supervision exposes all state and federal campgrounds (private and local campgrounds coming soon)."
+  title Camping in #{@city.name} #{@city.state_abbreviation} on CampHero
+  meta name="keywords" content="Campgrounds in #{@city.name} #{@city.state_abbreviation}, camping near #{@city.name}, campgrounds, places to camp in #{@city.name}, RV Parks, backcountry camping, rustic camping, tent camping, camping sites, camp sites, tourism, travel, reviews"
+  meta name="description" content="Places to camp in #{@city.name} #{@city.state_abbreviation} including maps and listings of all the rustic campgrounds, RV Parks, backcountry camping areas, modern campsites, and equestrian camping in #{@city.name}. CampHero's supervision exposes all state and federal campgrounds (private and local campgrounds coming soon)."
   link rel="canonical" href=city_url(@city)
   script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB9mHzeQJxtkMkn_UkKAOs00Hkg2Y9qKds&sensor=false"
 
 - content_for :breadcrumb
   ol.breadcrumb.white
-    li = link_to "#{@city.state.name} Camping", @city.state
+    li = link_to "#{@city.state_name} Camping", @city.state
     li.active = @city.name
 
   - content_for :heading
     .headline
       h1.heading.guide-heading.col-md-12
-        | Camping in #{@city.name} #{@city.state.abbreviation}
+        | Camping in #{@city.name} #{@city.state_abbreviation}
         small 
           small.hashtag  &nbsp;##{@city.hashtag}&nbsp;
         small
           small
               span.glyphicon.glyphicon-info-sign.extra-subtle.add-tooltip  data-toggle="tooltip" data-placement="right" title="Tag your Twitter & Facebook posts with ##{@city.hashtag} Why?  Because it'll make them awesomer."
     ul.nav.nav-tabs.guide-tabs
-      li.active = link_to "Camping in #{@city.name} #{@city.state.abbreviation}", @city
-      li = link_to "All Campgrounds in #{@city.name} #{@city.state.abbreviation} (#{@city.campsites.size})", browse_city_path(@city)
+      li.active = link_to "Camping in #{@city.name} #{@city.state_abbreviation}", @city
+      li = link_to "All Campgrounds in #{@city.name} #{@city.state_abbreviation} (#{@city.campsites.size})", browse_city_path(@city)
 
   - content_for :top_left
     = render 'layouts/guide/topLeft', place:@city
